@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "InstructorView";
+    Layout = "~/Views/Layout_MainLogin.cshtml";
+}
+@using Assignment1.Models
+<nav class="navbar navbar-dark">
+    <span class="navbar-brand mb-0 h1"><img src="~/Styles/GDS_LOGO.png" id="gds_title" /></span>
+    <div class="btnNotification" onclick="myFunction()">
+        <img src="~/Styles/bell.png" class="bell" />
+        <span class="popUpText" id="popUp">
+            Due Tonight at 11:59 PM 
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <br />
+            CS 3100 <br />
+            Textbook Participation 1 
+            <br />
+            <br />
+            Due Tonight at 11:59 PM 
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <br />
+            CS 4119 <br />
+            Textbook Participation 1
+            
+            <br />
+
+        </span>
+        
+    </div>
+</nav>
+    <script>
+        function myFunction() {
+            // var popup = document.getElementById("popUp"); 
+            var popup = document.querySelector("#popUp");
+            popup.classList.toggle("show");
+        }
+    </script>
+<aside>
+    <p>ASIDE</p>
+</aside>
+<div class="container">
+    <h2>Welcome @Name.role, @Name.first_name @Name.last_name!</h2>
+</div>
+

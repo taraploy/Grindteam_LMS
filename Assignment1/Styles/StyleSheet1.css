@@ -1,0 +1,162 @@
+﻿@charset "utf-8";
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: #f6f5f5;
+}
+
+.navbar {
+    background-color: #276678;
+}
+
+#gds_title {
+    margin: 0;
+    padding: 0;
+    height: 100px;
+}
+
+.login-box {
+    margin: 5%;
+    display: flex;
+}
+
+.container {
+    margin: 30px auto;
+    width: 100%;
+}
+
+.form-block {
+    background: #fff;
+    padding: 40px;
+    max-width: 400px;
+    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+}
+
+form {
+    padding: 10px;
+}
+
+.fields, .additional {
+    margin: 10px;
+}
+
+input {
+    margin: 0 auto;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+.body {
+    color: yellow;
+}
+
+.btn {
+    background-color: #1687a7;
+    border: solid 1px #1687a7;
+    transition: 300ms ease-in-out;
+}
+.btn:hover {
+    background-color: #276678;
+    border: solid 1px #276678;
+}
+
+a {
+    color: #276678;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #1687a7;
+}
+
+.nav_title {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav_title {
+    margin-bottom: 10px;
+}
+
+li a {
+    display: block;
+    text-decoration: none;
+}
+/*                           Styles for Student and Instructor views                           */
+
+.dashboard {
+    margin: 5px 15px;
+}
+
+/* Styling for left nav on user dashboard */
+.dashboard-nav {
+    list-style-type: none;
+}
+
+.bell {
+    height: 30px;
+    width: auto;
+    margin-right: 50px;
+}
+
+/* Bell Notification - POP UP*/
+.btnNotification {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.btnNotification .popUpText {
+    visibility: hidden;
+    width: 300px;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    right: 75%;
+}
+
+.btnNotification .show {
+    visibility: visible;
+}
+
+/* Course cards styling */
+.course-list {
+    border: 1px solid #276678;
+    width: 250px;
+    height: 220px;
+    margin: 10px;
+}
+.vl {
+    border: 1px solid #276678;
+    height: auto;
+}
+
+
+@media (max-width: 767.98px) {
+    .form-block {
+        padding: 25px;
+    }
+}
