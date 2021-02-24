@@ -1,4 +1,28 @@
-﻿<!DOCTYPE html>
+﻿@*@using System.Web.Optimization
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        <link href="~/Styles/bootstrap/bootstrap.css" rel="stylesheet" />
+        <link href="~/Styles/StyleSheet1.css" rel="stylesheet" />
+        <link href="~/FullCalendar/main.css" rel="stylesheet" />
+        @Scripts.Render("~/FullCalendar/main.js")
+    </head>
+    <body>
+        <div>
+            @RenderBody()
+        </div>
+        @RenderSection("scripts", required: false)
+
+    </body>
+    </html>*@
+
+
+@using System.Web.Optimization
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -6,11 +30,14 @@
     <title>@ViewBag.Title</title>
     <link href="~/Styles/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="~/Styles/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/FullCalendar/main.css" rel="stylesheet" />
+    @Scripts.Render("~/FullCalendar/main.js")
 </head>
 <body>
     <div>
         @RenderBody()
     </div>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>
-

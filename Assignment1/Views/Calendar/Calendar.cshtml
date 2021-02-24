@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout_MainLogin.cshtml";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth'
+            });
+            var date = new Date('2021-02-28' + 'T00:00:00');
+            calendar.addEvent({
+                title: 'Textbook Participation 1',
+                start: date,
+                allDay: true
+            });
+            var date2 = new Date('2021-03-05' + 'T11:59:00');
+            calendar.addEvent({
+                title: 'Assignment 3',
+                start: date2,
+                allDay: true,
+                url: '@Url.Action("GoToEvent", "UserAccount", null)'
+            });
+            calendar.render();
+        });
+    </script>
+}
+<div class="nav-pageview">
+    <nav class="navbar navbar-dark">
+        <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
+        <div class="btnNotification" onclick="myFunction()">
+            <img src="~/Images/bell.png" class="bell" />
+            <span class="popUpText" id="popUp">
+                Due Tonight at 11:59 PM <br />
+                CS 3100 <br />
+                Textbook Participation 1 <br />
+            </span>
+        </div>
+    </nav>
+    <script>
+        function myFunction() {
+            var popup = document.getElementById("popUp");
+            popup.classList.toggle("show");
+        }
+    </script>
+</div>
+<div class="dashboard">
+    <div class="row">
+        <aside class="col-2 left-nav float-left">
+            <p>
+                <ul class="dashboard-nav">
+                    <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
+
+                    <li><a href="#"><h5 class="nav_title">Courses</h5></a></li>
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
+                </ul>
+            </p>
+        </aside>
+        <div class="vl" style="border: 1px solid #276678; height: auto"></div>
+        <div class="col-9">
+            <div id="calendar"></div>
+        </div>
+    </div>
+</div>

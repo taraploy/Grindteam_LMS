@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LMS_GRINDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ulUser">
+    <Key>
+      <PropertyRef Name="ulUser_id" />
+    </Key>
+    <Property Name="ulUser_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email_address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="street_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bio" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="link1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="link2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="link3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="profileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="LMS_GRINDEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ulUsers" EntityType="Self.ulUser" />
+  </EntityContainer>
+</Schema>

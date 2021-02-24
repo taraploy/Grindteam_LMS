@@ -1,4 +1,5 @@
 ﻿
+
 @model Assignment1.Models.User
 
 @{
@@ -7,7 +8,7 @@
 }
 
 <nav class="navbar navbar-dark">
-    <span class="navbar-brand mb-0 h1"><img src="~/Styles/GDS_LOGO.png" id="gds_title" /></span>
+    <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
 </nav>
 <div class="contents login-box">
     <div class="container">
@@ -27,7 +28,7 @@
                         </div>
                         <div class="fields">
                             <label style="color: gray">Enter your date of birth</label>
-                            <input type="date" name="birthdate" class="info"/>
+                            <input type="date" name="birthdate" class="info" />
                         </div>
                         <div class="fields">
                             <input type="password" name="password" placeholder="Enter a password" class="info" required />
@@ -51,3 +52,58 @@
         </div>
     </div>
 </div>
+
+
+
+@*@model Assignment1.Models.User
+
+    @{
+        ViewBag.Title = "SignUp";
+        Layout = "~/Views/Layout_MainLogin.cshtml";
+    }
+
+    <nav class="navbar navbar-dark">
+        <span class="navbar-brand mb-0 h1"><img src="~/Styles/GDS_LOGO.png" id="gds_title" /></span>
+    </nav>
+    <div class="contents login-box">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+                    <div class="form-block mx-auto">
+                        <h1>Sign Up</h1>
+                        <form action="@Url.Action("SignUp", "UserAccount")" method="post">
+                            <div class="fields">
+                                <input type="text" name="email" placeholder="Enter your e-mail address" class="info" required />
+                            </div>
+                            <div class="fields">
+                                <input type="text" name="first_name" placeholder="Enter your first name" class="info" required />
+                            </div>
+                            <div class="fields">
+                                <input type="text" name="last_name" placeholder="Enter your last name" class="info" required />
+                            </div>
+                            <div class="fields">
+                                <label style="color: gray">Enter your date of birth</label>
+                                <input type="date" name="birthdate" class="info"/>
+                            </div>
+                            <div class="fields">
+                                <input type="password" name="password" placeholder="Enter a password" class="info" required />
+                            </div>
+                            <div class="fields">
+                                <label>
+                                    Student
+                                    @Html.RadioButtonFor(model => model.Role, "Student")
+                                </label>
+                                <label>
+                                    Instructor
+                                    @Html.RadioButtonFor(model => model.Role, "Instructor")
+                                </label>
+                            </div>
+                            <div class="fields">
+                                <input type="submit" value="Sign Up" class="btn btn-block btn-primary" id="btnSubmitAccnt" required />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@

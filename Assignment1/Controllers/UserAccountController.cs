@@ -1,9 +1,12 @@
-﻿using Assignment1.Models;
-using System;
+﻿using System;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 using System.Collections;
 using System.Linq;
+using Assignment1.Models;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Core.Objects;
 
 namespace Assignment1.Controllers
 {
@@ -13,7 +16,7 @@ namespace Assignment1.Controllers
         /// <summary>
         /// LMS_GRINDEntities object
         /// </summary>
-        LMS_GRINDEntities gds;
+        LMS_GRINDEntities1 gds;
 
 
         [HttpGet]
@@ -42,7 +45,7 @@ namespace Assignment1.Controllers
             data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             String hash = System.Text.Encoding.ASCII.GetString(data);
 
-            gds = new LMS_GRINDEntities();
+            gds = new LMS_GRINDEntities1();
             var query = gds.ulUsers.Where(x => x.email_address == u.Email && x.user_password == hash);
 
             if (query.Any())
@@ -70,9 +73,22 @@ namespace Assignment1.Controllers
             }
         }
 
+        /// <summary>
+        /// Redirects to Sign Up page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View("SignUp");
+        }
+
+        /// <summary>
+        /// Redirects to the home page
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ReturnToView()
+        {
+            return (Name.role == "Student") ? View("StudentView") : View("InstructorView");
         }
 
         /// <summary>
@@ -88,7 +104,7 @@ namespace Assignment1.Controllers
             data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             String hash = System.Text.Encoding.ASCII.GetString(data);
 
-            gds = new LMS_GRINDEntities();
+            gds = new LMS_GRINDEntities1();
             var query = gds.ulUsers.Where(x => x.email_address == u.Email);
 
             // If the query returns any results, then that
@@ -128,6 +144,10 @@ namespace Assignment1.Controllers
                     return View("StudentView");
                 }
             }
+        }
+        public ActionResult GoToEvent()
+        {
+            return View("dummyView");
         }
     }
 }

@@ -21,5 +21,12 @@ namespace Assignment1
         public string email_address { get; set; }
         public System.DateTime birthdate { get; set; }
         public string role { get; set; }
+        public string street_address { get; set; }
+        public string phone_num { get; set; }
+        public string bio { get; set; }
+        public string link1 { get; set; }
+        public string link2 { get; set; }
+        public string link3 { get; set; }
+        public string profileImage { get; set; }
     }
 }

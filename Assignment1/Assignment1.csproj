@@ -96,27 +96,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FullCalendar\main.css" />
+    <Content Include="FullCalendar\main.js" />
     <Content Include="Global.asax" />
-    <Content Include="Styles\bell.png" />
+    <Content Include="Images\bell.png" />
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Styles\bootstrap\bootstrap.css" />
-    <Content Include="Styles\GDS_LOGO.png" />
+    <Content Include="Images\GDS_LOGO.png" />
     <Content Include="Styles\owl.carousel.min.css" />
     <Content Include="Styles\StyleSheet1.css" />
-    <Content Include="UserLogin.Context.tt">
+    <Content Include="ulUsers.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>UserLogin.Context.cs</LastGenOutput>
-      <DependentUpon>UserLogin.edmx</DependentUpon>
+      <DependentUpon>ulUsers.edmx</DependentUpon>
+      <LastGenOutput>ulUsers.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="UserLogin.tt">
+    <Content Include="ulUsers.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserLogin.edmx</DependentUpon>
-      <LastGenOutput>UserLogin.cs</LastGenOutput>
+      <DependentUpon>ulUsers.edmx</DependentUpon>
+      <LastGenOutput>ulUsers.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\PopUpController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -129,22 +134,22 @@
     <Compile Include="Models\UserSecurityQuestion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ulUser.cs">
-      <DependentUpon>UserLogin.tt</DependentUpon>
+      <DependentUpon>ulUsers.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserLogin.Context.cs">
+    <Compile Include="ulUsers.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UserLogin.Context.tt</DependentUpon>
+      <DependentUpon>ulUsers.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserLogin.cs">
+    <Compile Include="ulUsers.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UserLogin.tt</DependentUpon>
+      <DependentUpon>ulUsers.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserLogin.Designer.cs">
+    <Compile Include="ulUsers.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UserLogin.edmx</DependentUpon>
+      <DependentUpon>ulUsers.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -157,12 +162,16 @@
     <Content Include="Views\UserAccount\SignUp.cshtml" />
     <Content Include="Views\UserAccount\InstructorView.cshtml" />
     <Content Include="Views\UserAccount\StudentView.cshtml" />
-    <EntityDeploy Include="UserLogin.edmx">
+    <Content Include="Views\UserAccount\dummyView.cshtml" />
+    <Content Include="Views\Profile\EditProfilePage.cshtml" />
+    <Content Include="Views\Profile\ProfilePage.cshtml" />
+    <Content Include="Views\Calendar\Calendar.cshtml" />
+    <EntityDeploy Include="ulUsers.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UserLogin.Designer.cs</LastGenOutput>
+      <LastGenOutput>ulUsers.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="UserLogin.edmx.diagram">
-      <DependentUpon>UserLogin.edmx</DependentUpon>
+    <Content Include="ulUsers.edmx.diagram">
+      <DependentUpon>ulUsers.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -173,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\PopUp\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
