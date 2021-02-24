@@ -1,8 +1,13 @@
 ﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Web;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 using System.Collections;
 using System.Linq;
+using Assignment1;
 using Assignment1.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -14,7 +19,7 @@ namespace Assignment1.Controllers
     public class ProfileController : Controller
     {
         LMS_GRINDEntities1 gds;
-        // GET: Profile
+
         public ActionResult Index()
         {
             return View("ProfilePage");
@@ -41,8 +46,6 @@ namespace Assignment1.Controllers
                 Name.last_name = user.last_name;
                 user.bio = u.bio;
                 Name.bio = user.bio;
-                //user.email_address = u.email_address;
-                //Name.email = user.email_address;
                 user.street_address = u.street_address;
                 Name.streetAddress = user.street_address;
                 user.phone_num = u.phone_num;
@@ -54,9 +57,18 @@ namespace Assignment1.Controllers
                 user.link3 = u.link3;
                 Name.link3 = user.link3;
 
-                //TODO profile image functionality
-                //user.profileImage = Name.profileImage;
-                //gds.Update(user);
+                if (u.File != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(u.File.FileName) +
+                                        DateTime.Now.ToString("yymmssfff") +
+                                        Path.GetExtension(u.File.FileName);
+                    u.profileImage = "~/ProfileImages/" + fileName;
+                    Name.profileImage = u.profileImage;
+                    user.profileImage = u.profileImage;
+                    fileName = Path.Combine(Server.MapPath("~/ProfileImages/"), fileName);
+                    u.File.SaveAs(fileName);
+                }
+
                 gds.SaveChanges();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)

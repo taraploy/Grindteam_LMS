@@ -305,6 +305,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ProfileImages\" />
     <Folder Include="Views\PopUp\" />
   </ItemGroup>
   <ItemGroup>

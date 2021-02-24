@@ -1,33 +1,27 @@
-﻿@*@{
-        ViewBag.Title = "EditProfilePage";
-        Layout = "~/Views/Layout_MainLogin.cshtml";
-    }
-
-    <h2>EditProfilePage</h2>*@
-
-
-@{
+﻿@{
     ViewBag.Title = "EditProfilePage";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
 @using Assignment1.Models
-
+@{
+    string path = Url.Content(Name.profileImage);
+}
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
     </nav>
     <script>
-            function myFunction() {
-                // var popup = document.getElementById("popUp");
-                var popup = document.querySelector("#popUp");
-                popup.classList.toggle("show");
-            }
-            function closeX() {
-                var popup = window.self
-                popup.open = window.self;
-                popup.close();
-            }
+        function myFunction() {
+            // var popup = document.getElementById("popUp");
+            var popup = document.querySelector("#popUp");
+            popup.classList.toggle("show");
+        }
+        function closeX() {
+            var popup = window.self
+            popup.open = window.self;
+            popup.close();
+        }
     </script>
 </div>
 <div class="row">
@@ -55,12 +49,13 @@
         <div class="row align-items-center">
             <div class="col-9">
                 <div class="editField mx-auto">
-                    <form action="@Url.Action("SaveChanges", "Profile")" method="post">
+                    <form action="@Url.Action("SaveChanges", "Profile")" method="post" enctype="multipart/form-data">
                         <div class="profile-info">
                             <h2>Edit Profile</h2>
+                            @*-------------- Profile Image ------------*@
                             <div class="profile-container">
-                                Picture image field (TODO)
-                                @*<img src="#" alt="Alternate Text" /> class="profile-image" src="" alt="" />*@
+                                <img src="@path" alt="Profile Image" class="profile-img" />
+                                <input type="file" name="File" accept="image/gif, image/jpeg, image/png" />
                             </div>
                             <div class="profile-description">
                                 <div class="fields">

@@ -11,7 +11,8 @@ namespace Assignment1
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class ulUser
     {
         public int ulUser_id { get; set; }
@@ -28,5 +29,6 @@ namespace Assignment1
         public string link2 { get; set; }
         public string link3 { get; set; }
         public string profileImage { get; set; }
+        public HttpPostedFileBase File { get; set; }
     }
 }

@@ -1,18 +1,13 @@
-﻿@*@{
-        ViewBag.Title = "ProfilePage";
-        Layout = "~/Views/Layout_MainLogin.cshtml";
-    }
-
-    <h2>ProfilePage</h2>*@
-
-
-
-@{
+﻿@{
     ViewBag.Title = "ProfilePage";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
 @using Assignment1.Models
+@using Assignment1.Models
+@{
+    string path = Url.Content(Name.profileImage);
+}
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -43,7 +38,10 @@
     <div class="container align-items-center">
         <div class="col-9">
             <h1>Profile</h1>
-            <p>PROFILE IMAGE</p>
+            @*-------------- Profile Image ------------*@ 
+            <div class="profile-container">
+                <img src="@path" alt="Profile Image" class="profile-img" />
+            </div>
             <h4>@Name.first_name @Name.last_name</h4>
             <h4>@Name.role Contact Information</h4>
             <label>Email:</label>@Name.email
