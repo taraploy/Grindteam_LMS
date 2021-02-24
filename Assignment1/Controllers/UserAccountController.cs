@@ -53,9 +53,19 @@ namespace Assignment1.Controllers
                 foreach (ulUser user in query)
                 {
                     // Set static name variables
+                    Name.user_id = user.ulUser_id;
                     Name.first_name = user.first_name;
                     Name.last_name = user.last_name;
                     Name.role = user.role;
+                    Name.email = user.email_address;
+                    Name.birthdate = user.birthdate;
+                    Name.streetAddress = user.street_address;
+                    Name.phoneNum = user.phone_num;
+                    Name.bio = user.bio;
+                    Name.link1 = user.link1;
+                    Name.link2 = user.link2;
+                    Name.link3 = user.link3;
+                    Name.profileImage = user.profileImage;
                 }
 
                 if (Name.role == "Instructor")
@@ -134,6 +144,14 @@ namespace Assignment1.Controllers
                 Name.first_name = u.First_Name;
                 Name.last_name = u.Last_Name;
                 Name.role = u.Role;
+                Name.email = user.email_address;
+                Name.bio = user.bio;
+                Name.link1 = user.link1;
+                Name.link2 = user.link2;
+                Name.link3 = user.link3;
+                Name.streetAddress = user.street_address;
+                Name.phoneNum = user.phone_num;
+                Name.profileImage = user.profileImage;
 
                 if (Name.role == "Instructor")
                 {
