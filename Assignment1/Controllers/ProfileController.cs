@@ -34,7 +34,7 @@ namespace Assignment1.Controllers
         public ActionResult SaveChanges(ulUser u)
         {
             gds = new LMS_GRINDEntities1();
-            var user = gds.ulUsers.Where(x => x.ulUser_id == Name.user_id).First();
+            var user = gds.ulUsers.First(x => x.email_address == Name.email);
             //ulUser user = new ulUser();
             
             try
