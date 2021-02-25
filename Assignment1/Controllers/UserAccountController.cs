@@ -135,6 +135,7 @@ namespace Assignment1.Controllers
                 user.email_address = u.Email;
                 user.user_password = hash;
                 user.role = u.Role;
+                user.profileImage = "~/ProfileImages/defaultAvatar.png";
 
                 // add new user to database
                 gds.ulUsers.Add(user);
