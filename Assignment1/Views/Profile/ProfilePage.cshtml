@@ -3,7 +3,7 @@
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
-@using Assignment1.Models
+@*@using Assignment1.Models*@
 @using Assignment1.Models
 @{
     string path = Url.Content(Name.profileImage);
@@ -34,15 +34,15 @@
             </ul>
         </p>
     </aside>
-    <div class="vl" style="border: 1px solid #276678; height: auto"></div>
-    <div class="container align-items-center">
-        <div class="col-9">
+    <div class="vl"></div>
+    <div class="container">
+        <div class="col-9 profile-block">
             <h1>Profile</h1>
             @*-------------- Profile Image ------------*@ 
             <div class="profile-container">
-                <img src="@path" alt="Profile Image" class="profile-img" />
+                <img src="@path" alt="Profile Image" class="profile-img" height="150" />
             </div>
-            <h4>@Name.first_name @Name.last_name</h4>
+            <p class="profile-name">@Name.first_name @Name.last_name</p>
             <h4>@Name.role Contact Information</h4>
             <label>Email:</label>@Name.email
             <br />
@@ -59,11 +59,11 @@
                     @Name.link1
                 </a>
                 <br />
-                <a>
+                <a href="@Name.link2">
                     @Name.link2
                 </a>
                 <br />
-                <a>
+                <a href="@Name.link3">
                     @Name.link3
                 </a>
             </p>

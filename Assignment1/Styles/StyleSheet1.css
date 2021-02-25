@@ -155,6 +155,18 @@ li a {
 }
 
 /*                          Profile Page Style                           */
+.profile-name {
+    font-weight: bold;
+}
+
+/*      Profile Image       */
+.profile-block {
+    border: 1px solid #000;
+}
+.profile-img {
+    margin: 0 auto;
+    width: auto;
+}
 .editProfileBtn {
     color: #fff;
 }
