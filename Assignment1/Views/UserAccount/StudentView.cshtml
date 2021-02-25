@@ -5,51 +5,50 @@
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
-
 @using Assignment1.Models
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
+        <span class="navbar-brand mb-0 h1"><img src="~/Styles/GDS_LOGO.png" id="gds_title" /></span>
+        <div class="btnNotification ">
+            <img src="~/Styles/bell.png" class="bell" onclick="myFunction()" />
+            <div id="notifications" hidden="hidden">
+                <div class="task">
+                    <h4>Task 1</h4>
+                    <button onclick="closeX(count - 2)" class="btn btn-danger" style="float:right;">X</button>
+                    <p>Due on a date</p>
 
-        <div class="dropdown">
-            <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-                <i class="glyphicon glyphicon-bell"></i>
-            </a>
-
-            @*<ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
-
-                <div class="notification-heading">
-                    <h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
                 </div>
-                <li class="divider"></li>
-                <div class="notifications-wrapper">
-                    <a class="content" href="#">
+                <div class="task">
+                    <h4>Task 2</h4>
+                    <button onclick="closeX(count - 1)" class="btn btn-danger" style="float:right;">X</button>
+                    <p>Due on a date</p>
 
-                        <div class="notification-item">
-                            <h4 class="item-title">CS 3100</h4>
-                            <p class="item-info">Textbook Participation 1</p>
-                            <p>Due Tonight at 11:59 PM</p>
-                        </div>
-
-                    </a>
-                <li class="divider"></li>
-                <div class="notification-footer"><h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
-            </ul>*@
+                </div>
+            </div>
         </div>
+
     </nav>
     <script>
+        var count = 2;
+        var notifShow = 0;
+
         function myFunction() {
             // var popup = document.getElementById("popUp");
-            var popup = document.querySelector("#popUp");
-            popup.classList.toggle("show");
-            var popup1 = document.querySelector("#popUp1");
-            popup1.classList.toggle("show");
+            if (notifShow == 0) {
+                document.getElementById("notifications").hidden = false;
+                notifShow = 1;
+            }
+            else {
+                document.getElementById("notifications").hidden = true;
+                notifShow = 0;
+            }
 
-            event.stopPropogation();
         }
-        function closeX() {
-            var popup = window.self
-            popup.open = window.self;
-            popup.close();
+        function closeX(index) {
+            console.log("deleting");
+            var elem = document.getElementsByClassName("task");
+            elem[index].remove();
+            count--;
         }
     </script>
 </div>
