@@ -24,6 +24,19 @@ body {
     height: 100px;
 }
 
+a.click-here {
+    font-weight:bold;
+}
+
+#notifications {
+    position: absolute;
+    right: 5em;
+    background-color: white;
+    z-index: 1;
+    width: 200px;
+    padding: 10px;
+}
+
 .login-box {
     margin: 5%;
     display: flex;
@@ -156,29 +169,65 @@ li a {
 
 /*                          Profile Page Style                           */
 .profile-name {
+    text-align: center;
+    margin: 10px;
     font-weight: bold;
 }
 
 /*      Profile Image       */
 .profile-block {
-    border: 1px solid #000;
+    display: block;
+    margin: 20px auto;
 }
 .profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center right;
+    display: block;
     margin: 0 auto;
-    width: auto;
-}
-.editProfileBtn {
-    color: #fff;
 }
 
-.editField {
+.editProfileBlock {
+    display: block;
+    text-align: center;
+}
+.editProfileBtn, .saveProfileBtn, .cancelSaveProfileBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: solid 1px #1687a7;
+    border-radius: 5px;
+    background-color: #1687a7;
+    color: white;
+    transition: 300ms ease-in-out;
+    cursor: pointer;
+}
+.editProfileBtn:hover, .saveProfileBtn:hover, .cancelSaveProfileBtn:hover {
+    color: white;
+    background-color: #276678;
+    border: solid 1px #276678;
+}
+
+/*      Edit Profile Page       */
+.chooseFileBtn {
+    margin: 15px 0;
+}
+
+
+/*.editField {
     background: #fff;
     padding: 40px;
     max-width: 400px;
     -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
 }
-
+*/
 
 @media (max-width: 767.98px) {
     .form-block {

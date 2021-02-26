@@ -222,6 +222,7 @@
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Styles\bootstrap\bootstrap.css" />
     <Content Include="Images\GDS_LOGO.png" />
+    <Content Include="Styles\bs\bootstrap.css" />
     <Content Include="Styles\owl.carousel.min.css" />
     <Content Include="Styles\StyleSheet1.css" />
     <Content Include="ulUsers.Context.tt">

@@ -11,18 +11,6 @@
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
     </nav>
-    <script>
-        function myFunction() {
-            // var popup = document.getElementById("popUp");
-            var popup = document.querySelector("#popUp");
-            popup.classList.toggle("show");
-        }
-        function closeX() {
-            var popup = window.self
-            popup.open = window.self;
-            popup.close();
-        }
-    </script>
 </div>
 <div class="row">
     <aside class="col-2 left-nav float-left">
@@ -84,7 +72,8 @@
                                 </div>
                                 <div class="fields">
                                     <label for="bio">Biography:</label>
-                                    <input type="text" id="bio" name="bio" value="@Name.bio" />
+                                    @*<textarea id="bio">@Name.bio</textarea>*@
+                                    <input type="text" id="bio" name="bio" value="@Name.bio"/>
                                 </div>
                                 <hr />
                                 <div class="fields">
@@ -93,11 +82,9 @@
                                     <input type="url" id="social-link" name="link2" value="@Name.link2" />
                                     <input type="url" id="social-link" name="link3" value="@Name.link3" />
                                 </div>
-                            </div>
-                            <button type="submit" class="profile-button" id="save-button">Save Changes</button>
-                            @*<input type="submit" value="Save Changes" class="profile-button" id="save-button"/>*@
-                            @*<button class="profile-button" id="cancel-button" type="button" onclick="cancelButtonClicked()">Cancel</button>*@
-                            <button>@Html.ActionLink("Cancel", "Index", "Profile")</button>
+                            </div>  
+                            <button type="submit" class="saveProfileBtn" id="save-button">Save Changes</button>
+                            @Html.ActionLink("Cancel", "Index", "Profile", new { @class = "cancelSaveProfileBtn" })
                         </div>
                     </form>
                 </div>

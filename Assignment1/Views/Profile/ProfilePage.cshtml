@@ -37,23 +37,22 @@
     <div class="vl"></div>
     <div class="container">
         <div class="col-9 profile-block">
-            <h1>Profile</h1>
             @*-------------- Profile Image ------------*@ 
             <div class="profile-container">
                 <img src="@path" alt="Profile Image" class="profile-img" height="150" />
             </div>
-            <p class="profile-name">@Name.first_name @Name.last_name</p>
-            <h4>@Name.role Contact Information</h4>
-            <label>Email:</label>@Name.email
+            <h4 class="profile-name">@Name.first_name @Name.last_name</h4>
+            <h5><strong>@Name.role Contact Information</strong></h5>
+            <label>Email:</label>     @Name.email
             <br />
-            <label>Phone Number:</label>@Name.phoneNum
+            <label>Phone Number:</label>     @Name.phoneNum
             <br />
-            <label>Address: </label>@Name.streetAddress
-            <h4>Biography</h4>
+            <label>Address: </label>     @Name.streetAddress
+            <h5><strong>Biography</strong></h5>
             <p>
                 @Name.bio
             </p>
-            <h4>Links</h4>
+            <h5><strong>Links</strong></h5>
             <p>
                 <a href="@Name.link1">
                     @Name.link1
@@ -67,8 +66,9 @@
                     @Name.link3
                 </a>
             </p>
-            <div class="editProfileBtn">
-                @Html.ActionLink("Edit Profile", "Edit", "Profile")
+            <div class="editProfileBlock">
+                @*@Html.ActionLink("Edit Profile", "Edit", "Profile")*@
+                @Html.ActionLink("Edit Profile", "Edit", "Profile", new { @class = "editProfileBtn" })
                 @*<button class="btn btn-primary editProfileBtn">@Html.ActionLink("Edit Profile", "Edit", "EditProfilePage")</button>*@
             </div>
         </div>
