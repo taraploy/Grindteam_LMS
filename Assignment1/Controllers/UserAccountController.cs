@@ -66,6 +66,9 @@ namespace Assignment1.Controllers
                     Name.link2 = user.link2;
                     Name.link3 = user.link3;
                     Name.profileImage = user.profileImage;
+                    Name.linkTitle1 = user.linkTitle1;
+                    Name.linkTitle2 = user.linkTitle2;
+                    Name.linkTitle3 = user.linkTitle3;
                 }
 
                 if (Name.role == "Instructor")
@@ -153,6 +156,7 @@ namespace Assignment1.Controllers
                 Name.streetAddress = user.street_address;
                 Name.phoneNum = user.phone_num;
                 Name.profileImage = user.profileImage;
+                Name.user_id = user.ulUser_id;
 
                 if (Name.role == "Instructor")
                 {

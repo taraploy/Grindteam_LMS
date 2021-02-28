@@ -24,5 +24,8 @@ namespace Assignment1.Models
         public static string link2;
         public static string link3;
         public static string profileImage;
+        public static string linkTitle1;
+        public static string linkTitle2;
+        public static string linkTitle3;
     }
 }

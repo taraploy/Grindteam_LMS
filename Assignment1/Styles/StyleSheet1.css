@@ -193,7 +193,7 @@ li a {
     display: block;
     text-align: center;
 }
-.editProfileBtn, .saveProfileBtn, .cancelSaveProfileBtn {
+.editProfileBtn, .saveProfileBtn, .cancelSaveProfileBtn, .addCourseBtn {
     display: block;
     margin: 20px auto;
     padding: 10px 15px;
@@ -208,7 +208,7 @@ li a {
     transition: 300ms ease-in-out;
     cursor: pointer;
 }
-.editProfileBtn:hover, .saveProfileBtn:hover, .cancelSaveProfileBtn:hover {
+.editProfileBtn:hover, .saveProfileBtn:hover, .cancelSaveProfileBtn:hover, .addCourseBtn:hover {
     color: white;
     background-color: #276678;
     border: solid 1px #276678;

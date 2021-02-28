@@ -6,6 +6,15 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d17f2f52fc9f4d28be96f2268e6fba41" Name="Diagram1">
         <EntityTypeShape EntityType="LMS_GRINDModel.ulUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMS_GRINDModel.Cours" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="LMS_GRINDModel.Department" Width="1.5" PointX="5.375" PointY="2.375" />
+        <EntityTypeShape EntityType="LMS_GRINDModel.InstructorCours" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="LMS_GRINDModel.StudentCours" Width="1.5" PointX="3" PointY="3.625" />
+        <AssociationConnector Association="LMS_GRINDModel.FK_InstructorCourses_Courses" />
+        <AssociationConnector Association="LMS_GRINDModel.FK_StudentCourses_Courses" />
+        <AssociationConnector Association="LMS_GRINDModel.FK_InstructorCourses_ulUser" />
+        <AssociationConnector Association="LMS_GRINDModel.FK_StudentCourses_ulUser" />
+        <AssociationConnector Association="LMS_GRINDModel.FK_Courses_Departments" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

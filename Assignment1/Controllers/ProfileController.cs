@@ -56,6 +56,12 @@ namespace Assignment1.Controllers
                 Name.link2 = user.link2;
                 user.link3 = u.link3;
                 Name.link3 = user.link3;
+                user.linkTitle1 = u.linkTitle1;
+                Name.linkTitle1 = user.linkTitle1;
+                user.linkTitle2 = u.linkTitle2;
+                Name.linkTitle2 = u.linkTitle2;
+                user.linkTitle3 = u.linkTitle3;
+                Name.linkTitle3 = u.linkTitle3;
 
                 if (u.File != null)
                 {

@@ -4,7 +4,49 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LMS_GRINDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LMS_GRINDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dept_id" Type="int" Nullable="false" />
+          <Property Name="course_name" Type="varchar" MaxLength="50" />
+          <Property Name="course_desc" Type="varchar" MaxLength="500" />
+          <Property Name="num_credits" Type="int" />
+          <Property Name="max_capacity" Type="int" />
+          <Property Name="days_of_week" Type="varchar" MaxLength="50" />
+          <Property Name="start_time" Type="time" Precision="7" />
+          <Property Name="end_time" Type="time" Precision="7" />
+          <Property Name="building" Type="varchar" MaxLength="50" />
+          <Property Name="room_no" Type="int" />
+          <Property Name="course_num" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="dept_id" />
+          </Key>
+          <Property Name="dept_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dept_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="InstructorCourses">
+          <Key>
+            <PropertyRef Name="instructor_course_id" />
+          </Key>
+          <Property Name="instructor_course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="instructor_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentCourses">
+          <Key>
+            <PropertyRef Name="student_course_id" />
+          </Key>
+          <Property Name="student_course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="student_id" Type="int" Nullable="false" />
+          <Property Name="letter_grade" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="ulUser">
           <Key>
             <PropertyRef Name="ulUser_id" />
@@ -23,12 +65,98 @@
           <Property Name="link2" Type="nvarchar" MaxLength="50" />
           <Property Name="link3" Type="nvarchar" MaxLength="50" />
           <Property Name="profileImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="linkTitle1" Type="nvarchar" MaxLength="200" />
+          <Property Name="linkTitle2" Type="nvarchar" MaxLength="200" />
+          <Property Name="linkTitle3" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <Association Name="FK_Courses_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="dept_id" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="dept_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstructorCourses_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="InstructorCourses" Type="Self.InstructorCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="InstructorCourses">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstructorCourses_ulUser">
+          <End Role="ulUser" Type="Self.ulUser" Multiplicity="1" />
+          <End Role="InstructorCourses" Type="Self.InstructorCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ulUser">
+              <PropertyRef Name="ulUser_id" />
+            </Principal>
+            <Dependent Role="InstructorCourses">
+              <PropertyRef Name="instructor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourses_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="StudentCourses" Type="Self.StudentCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="StudentCourses">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourses_ulUser">
+          <End Role="ulUser" Type="Self.ulUser" Multiplicity="1" />
+          <End Role="StudentCourses" Type="Self.StudentCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ulUser">
+              <PropertyRef Name="ulUser_id" />
+            </Principal>
+            <Dependent Role="StudentCourses">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="LMS_GRINDModelStoreContainer">
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstructorCourses" EntityType="Self.InstructorCourses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentCourses" EntityType="Self.StudentCourses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ulUser" EntityType="Self.ulUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Courses_Departments" Association="Self.FK_Courses_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstructorCourses_Courses" Association="Self.FK_InstructorCourses_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="InstructorCourses" EntitySet="InstructorCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstructorCourses_ulUser" Association="Self.FK_InstructorCourses_ulUser">
+            <End Role="ulUser" EntitySet="ulUser" />
+            <End Role="InstructorCourses" EntitySet="InstructorCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourses_Courses" Association="Self.FK_StudentCourses_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="StudentCourses" EntitySet="StudentCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourses_ulUser" Association="Self.FK_StudentCourses_ulUser">
+            <End Role="ulUser" EntitySet="ulUser" />
+            <End Role="StudentCourses" EntitySet="StudentCourses" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LMS_GRINDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -50,10 +178,149 @@
           <Property Name="link2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="link3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="profileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="linkTitle1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="linkTitle2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="linkTitle3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InstructorCourses" Relationship="LMS_GRINDModel.FK_InstructorCourses_ulUser" FromRole="ulUser" ToRole="InstructorCours" />
+          <NavigationProperty Name="StudentCourses" Relationship="LMS_GRINDModel.FK_StudentCourses_ulUser" FromRole="ulUser" ToRole="StudentCours" />
         </EntityType>
         <EntityContainer Name="LMS_GRINDEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ulUsers" EntityType="Self.ulUser" />
+          <EntitySet Name="Courses" EntityType="LMS_GRINDModel.Cours" />
+          <EntitySet Name="Departments" EntityType="LMS_GRINDModel.Department" />
+          <EntitySet Name="InstructorCourses" EntityType="LMS_GRINDModel.InstructorCours" />
+          <EntitySet Name="StudentCourses" EntityType="LMS_GRINDModel.StudentCours" />
+          <AssociationSet Name="FK_InstructorCourses_Courses" Association="LMS_GRINDModel.FK_InstructorCourses_Courses">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="InstructorCours" EntitySet="InstructorCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourses_Courses" Association="LMS_GRINDModel.FK_StudentCourses_Courses">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="StudentCours" EntitySet="StudentCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstructorCourses_ulUser" Association="LMS_GRINDModel.FK_InstructorCourses_ulUser">
+            <End Role="ulUser" EntitySet="ulUsers" />
+            <End Role="InstructorCours" EntitySet="InstructorCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourses_ulUser" Association="LMS_GRINDModel.FK_StudentCourses_ulUser">
+            <End Role="ulUser" EntitySet="ulUsers" />
+            <End Role="StudentCours" EntitySet="StudentCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Departments" Association="LMS_GRINDModel.FK_Courses_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Cours" EntitySet="Courses" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dept_id" Type="Int32" Nullable="false" />
+          <Property Name="course_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="course_desc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="num_credits" Type="Int32" />
+          <Property Name="max_capacity" Type="Int32" />
+          <Property Name="days_of_week" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="start_time" Type="Time" Precision="7" />
+          <Property Name="end_time" Type="Time" Precision="7" />
+          <Property Name="building" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="room_no" Type="Int32" />
+          <NavigationProperty Name="InstructorCourses" Relationship="LMS_GRINDModel.FK_InstructorCourses_Courses" FromRole="Cours" ToRole="InstructorCours" />
+          <NavigationProperty Name="StudentCourses" Relationship="LMS_GRINDModel.FK_StudentCourses_Courses" FromRole="Cours" ToRole="StudentCours" />
+          <NavigationProperty Name="Department" Relationship="LMS_GRINDModel.FK_Courses_Departments" FromRole="Cours" ToRole="Department" />
+          <Property Name="course_num" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="dept_id" />
+          </Key>
+          <Property Name="dept_id" Type="Int32" Nullable="false" />
+          <Property Name="dept_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Courses" Relationship="LMS_GRINDModel.FK_Courses_Departments" FromRole="Department" ToRole="Cours" />
+        </EntityType>
+        <EntityType Name="InstructorCours">
+          <Key>
+            <PropertyRef Name="instructor_course_id" />
+          </Key>
+          <Property Name="instructor_course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="instructor_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cours" Relationship="LMS_GRINDModel.FK_InstructorCourses_Courses" FromRole="InstructorCours" ToRole="Cours" />
+          <NavigationProperty Name="ulUser" Relationship="LMS_GRINDModel.FK_InstructorCourses_ulUser" FromRole="InstructorCours" ToRole="ulUser" />
+        </EntityType>
+        <EntityType Name="StudentCours">
+          <Key>
+            <PropertyRef Name="student_course_id" />
+          </Key>
+          <Property Name="student_course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="student_id" Type="Int32" Nullable="false" />
+          <Property Name="letter_grade" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cours" Relationship="LMS_GRINDModel.FK_StudentCourses_Courses" FromRole="StudentCours" ToRole="Cours" />
+          <NavigationProperty Name="ulUser" Relationship="LMS_GRINDModel.FK_StudentCourses_ulUser" FromRole="StudentCours" ToRole="ulUser" />
+        </EntityType>
+        <Association Name="FK_InstructorCourses_Courses">
+          <End Type="LMS_GRINDModel.Cours" Role="Cours" Multiplicity="1" />
+          <End Type="LMS_GRINDModel.InstructorCours" Role="InstructorCours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="InstructorCours">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourses_Courses">
+          <End Type="LMS_GRINDModel.Cours" Role="Cours" Multiplicity="1" />
+          <End Type="LMS_GRINDModel.StudentCours" Role="StudentCours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="StudentCours">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstructorCourses_ulUser">
+          <End Type="LMS_GRINDModel.ulUser" Role="ulUser" Multiplicity="1" />
+          <End Type="LMS_GRINDModel.InstructorCours" Role="InstructorCours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ulUser">
+              <PropertyRef Name="ulUser_id" />
+            </Principal>
+            <Dependent Role="InstructorCours">
+              <PropertyRef Name="instructor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourses_ulUser">
+          <End Type="LMS_GRINDModel.ulUser" Role="ulUser" Multiplicity="1" />
+          <End Type="LMS_GRINDModel.StudentCours" Role="StudentCours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ulUser">
+              <PropertyRef Name="ulUser_id" />
+            </Principal>
+            <Dependent Role="StudentCours">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Departments">
+          <End Type="LMS_GRINDModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="LMS_GRINDModel.Cours" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="dept_id" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="dept_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -63,6 +330,9 @@
           <EntitySetMapping Name="ulUsers">
             <EntityTypeMapping TypeName="LMS_GRINDModel.ulUser">
               <MappingFragment StoreEntitySet="ulUser">
+                <ScalarProperty Name="linkTitle3" ColumnName="linkTitle3" />
+                <ScalarProperty Name="linkTitle2" ColumnName="linkTitle2" />
+                <ScalarProperty Name="linkTitle1" ColumnName="linkTitle1" />
                 <ScalarProperty Name="ulUser_id" ColumnName="ulUser_id" />
                 <ScalarProperty Name="user_password" ColumnName="user_password" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
@@ -77,6 +347,52 @@
                 <ScalarProperty Name="link2" ColumnName="link2" />
                 <ScalarProperty Name="link3" ColumnName="link3" />
                 <ScalarProperty Name="profileImage" ColumnName="profileImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="LMS_GRINDModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="course_num" ColumnName="course_num" />
+                <ScalarProperty Name="room_no" ColumnName="room_no" />
+                <ScalarProperty Name="building" ColumnName="building" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="days_of_week" ColumnName="days_of_week" />
+                <ScalarProperty Name="max_capacity" ColumnName="max_capacity" />
+                <ScalarProperty Name="num_credits" ColumnName="num_credits" />
+                <ScalarProperty Name="course_desc" ColumnName="course_desc" />
+                <ScalarProperty Name="course_name" ColumnName="course_name" />
+                <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="LMS_GRINDModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+                <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstructorCourses">
+            <EntityTypeMapping TypeName="LMS_GRINDModel.InstructorCours">
+              <MappingFragment StoreEntitySet="InstructorCourses">
+                <ScalarProperty Name="instructor_id" ColumnName="instructor_id" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="instructor_course_id" ColumnName="instructor_course_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentCourses">
+            <EntityTypeMapping TypeName="LMS_GRINDModel.StudentCours">
+              <MappingFragment StoreEntitySet="StudentCourses">
+                <ScalarProperty Name="letter_grade" ColumnName="letter_grade" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="student_course_id" ColumnName="student_course_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

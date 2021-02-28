@@ -22,7 +22,9 @@ namespace Assignment1.Models
         public string Link2 { get; set; }
         public string Link3 { get; set; }
         public string ProfileImage { get; set; }
-
+        public string LinkTitle1 { get; set; }
+        public string LinkTitle2 { get; set; }
+        public string LinkTitle3 { get; set; }
 
         public override string ToString()
         {

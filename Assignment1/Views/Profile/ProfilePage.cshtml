@@ -7,6 +7,7 @@
 @using Assignment1.Models
 @{
     string path = Url.Content(Name.profileImage);
+    //string pathLink1 = Url.Content(Name.link1);
 }
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
@@ -54,21 +55,21 @@
             </p>
             <h5><strong>Links</strong></h5>
             <p>
-                <a href="@Name.link1">
-                    @Name.link1
+                <a href="@Name.link1" target="_blank">
+                    @Name.linkTitle1
                 </a>
                 <br />
-                <a href="@Name.link2">
-                    @Name.link2
+                <a href="@Name.link2" target="_blank">
+                    @Name.linkTitle2
                 </a>
                 <br />
-                <a href="@Name.link3">
-                    @Name.link3
+                <a href="@Name.link3" target="_blank">
+                    @Name.linkTitle3
                 </a>
             </p>
             <div class="editProfileBlock">
-                @*@Html.ActionLink("Edit Profile", "Edit", "Profile")*@
                 @Html.ActionLink("Edit Profile", "Edit", "Profile", new { @class = "editProfileBtn" })
+                @*@Html.ActionLink("Edit Profile", "Edit", "Profile")*@
                 @*<button class="btn btn-primary editProfileBtn">@Html.ActionLink("Edit Profile", "Edit", "EditProfilePage")</button>*@
             </div>
         </div>

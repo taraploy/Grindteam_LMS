@@ -1,4 +1,4 @@
-﻿@{
+﻿ @{
     ViewBag.Title = "EditProfilePage";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
@@ -78,9 +78,50 @@
                                 <hr />
                                 <div class="fields">
                                     <label for="social-link">Social Networking Links</label>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th></th>
+                                                <th>URL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    <input type="text" name="linkTitle1" value="@Name.linkTitle1" />
+                                                </th>
+                                                <td>&#8594;</td>
+                                                <td>
+                                                    <input type="url" id="social-link" name="link1" value="@Name.link1" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <input type="text" name="linkTitle2" value="@Name.linkTitle2"/>
+                                                </th>
+                                                <td>&#8594;</td>
+                                                <td>
+                                                    <input type="url" id="social-link" name="link2" value="@Name.link2" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <input type="text" name="linkTitle3" value="@Name.linkTitle3" />
+                                                </th>
+                                                <td>&#8594;</td>
+                                                <td>
+                                                    <input type="url" id="social-link" name="link3" value="@Name.link3" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    @*<input type="text" id="social-link" name="linkTitle1" value="@Name.linkTitle1" />
                                     <input type="url" id="social-link" name="link1" value="@Name.link1" />
+                                    <br />
                                     <input type="url" id="social-link" name="link2" value="@Name.link2" />
-                                    <input type="url" id="social-link" name="link3" value="@Name.link3" />
+                                    <br/>
+                                    <input type="url" id="social-link" name="link3" value="@Name.link3" />*@
                                 </div>
                             </div>  
                             <button type="submit" class="saveProfileBtn" id="save-button">Save Changes</button>

@@ -18,8 +18,147 @@
     <Property Name="link2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="link3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="profileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="linkTitle1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="linkTitle2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="linkTitle3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InstructorCourses" Relationship="LMS_GRINDModel.FK_InstructorCourses_ulUser" FromRole="ulUser" ToRole="InstructorCours" />
+    <NavigationProperty Name="StudentCourses" Relationship="LMS_GRINDModel.FK_StudentCourses_ulUser" FromRole="ulUser" ToRole="StudentCours" />
   </EntityType>
   <EntityContainer Name="LMS_GRINDEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ulUsers" EntityType="Self.ulUser" />
+    <EntitySet Name="Courses" EntityType="LMS_GRINDModel.Cours" />
+    <EntitySet Name="Departments" EntityType="LMS_GRINDModel.Department" />
+    <EntitySet Name="InstructorCourses" EntityType="LMS_GRINDModel.InstructorCours" />
+    <EntitySet Name="StudentCourses" EntityType="LMS_GRINDModel.StudentCours" />
+    <AssociationSet Name="FK_InstructorCourses_Courses" Association="LMS_GRINDModel.FK_InstructorCourses_Courses">
+      <End Role="Cours" EntitySet="Courses" />
+      <End Role="InstructorCours" EntitySet="InstructorCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourses_Courses" Association="LMS_GRINDModel.FK_StudentCourses_Courses">
+      <End Role="Cours" EntitySet="Courses" />
+      <End Role="StudentCours" EntitySet="StudentCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InstructorCourses_ulUser" Association="LMS_GRINDModel.FK_InstructorCourses_ulUser">
+      <End Role="ulUser" EntitySet="ulUsers" />
+      <End Role="InstructorCours" EntitySet="InstructorCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourses_ulUser" Association="LMS_GRINDModel.FK_StudentCourses_ulUser">
+      <End Role="ulUser" EntitySet="ulUsers" />
+      <End Role="StudentCours" EntitySet="StudentCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Courses_Departments" Association="LMS_GRINDModel.FK_Courses_Departments">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Cours" EntitySet="Courses" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Cours">
+    <Key>
+      <PropertyRef Name="course_id" />
+    </Key>
+    <Property Name="course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dept_id" Type="Int32" Nullable="false" />
+    <Property Name="course_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="course_desc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="num_credits" Type="Int32" />
+    <Property Name="max_capacity" Type="Int32" />
+    <Property Name="days_of_week" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="start_time" Type="Time" Precision="7" />
+    <Property Name="end_time" Type="Time" Precision="7" />
+    <Property Name="building" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="room_no" Type="Int32" />
+    <NavigationProperty Name="InstructorCourses" Relationship="LMS_GRINDModel.FK_InstructorCourses_Courses" FromRole="Cours" ToRole="InstructorCours" />
+    <NavigationProperty Name="StudentCourses" Relationship="LMS_GRINDModel.FK_StudentCourses_Courses" FromRole="Cours" ToRole="StudentCours" />
+    <NavigationProperty Name="Department" Relationship="LMS_GRINDModel.FK_Courses_Departments" FromRole="Cours" ToRole="Department" />
+    <Property Name="course_num" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="dept_id" />
+    </Key>
+    <Property Name="dept_id" Type="Int32" Nullable="false" />
+    <Property Name="dept_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="location" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Courses" Relationship="LMS_GRINDModel.FK_Courses_Departments" FromRole="Department" ToRole="Cours" />
+  </EntityType>
+  <EntityType Name="InstructorCours">
+    <Key>
+      <PropertyRef Name="instructor_course_id" />
+    </Key>
+    <Property Name="instructor_course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="course_id" Type="Int32" Nullable="false" />
+    <Property Name="instructor_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cours" Relationship="LMS_GRINDModel.FK_InstructorCourses_Courses" FromRole="InstructorCours" ToRole="Cours" />
+    <NavigationProperty Name="ulUser" Relationship="LMS_GRINDModel.FK_InstructorCourses_ulUser" FromRole="InstructorCours" ToRole="ulUser" />
+  </EntityType>
+  <EntityType Name="StudentCours">
+    <Key>
+      <PropertyRef Name="student_course_id" />
+    </Key>
+    <Property Name="student_course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="course_id" Type="Int32" Nullable="false" />
+    <Property Name="student_id" Type="Int32" Nullable="false" />
+    <Property Name="letter_grade" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cours" Relationship="LMS_GRINDModel.FK_StudentCourses_Courses" FromRole="StudentCours" ToRole="Cours" />
+    <NavigationProperty Name="ulUser" Relationship="LMS_GRINDModel.FK_StudentCourses_ulUser" FromRole="StudentCours" ToRole="ulUser" />
+  </EntityType>
+  <Association Name="FK_InstructorCourses_Courses">
+    <End Type="LMS_GRINDModel.Cours" Role="Cours" Multiplicity="1" />
+    <End Type="LMS_GRINDModel.InstructorCours" Role="InstructorCours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cours">
+        <PropertyRef Name="course_id" />
+      </Principal>
+      <Dependent Role="InstructorCours">
+        <PropertyRef Name="course_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourses_Courses">
+    <End Type="LMS_GRINDModel.Cours" Role="Cours" Multiplicity="1" />
+    <End Type="LMS_GRINDModel.StudentCours" Role="StudentCours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cours">
+        <PropertyRef Name="course_id" />
+      </Principal>
+      <Dependent Role="StudentCours">
+        <PropertyRef Name="course_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstructorCourses_ulUser">
+    <End Type="LMS_GRINDModel.ulUser" Role="ulUser" Multiplicity="1" />
+    <End Type="LMS_GRINDModel.InstructorCours" Role="InstructorCours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ulUser">
+        <PropertyRef Name="ulUser_id" />
+      </Principal>
+      <Dependent Role="InstructorCours">
+        <PropertyRef Name="instructor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourses_ulUser">
+    <End Type="LMS_GRINDModel.ulUser" Role="ulUser" Multiplicity="1" />
+    <End Type="LMS_GRINDModel.StudentCours" Role="StudentCours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ulUser">
+        <PropertyRef Name="ulUser_id" />
+      </Principal>
+      <Dependent Role="StudentCours">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Courses_Departments">
+    <End Type="LMS_GRINDModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="LMS_GRINDModel.Cours" Role="Cours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="dept_id" />
+      </Principal>
+      <Dependent Role="Cours">
+        <PropertyRef Name="dept_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
