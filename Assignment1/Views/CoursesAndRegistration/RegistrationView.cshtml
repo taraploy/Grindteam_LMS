@@ -2,10 +2,6 @@
 @{
     ViewBag.Title = "RegistrationsView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
-    @*List<SelectListItem> l1 = new List<SelectListItem>();
-    l1.Add(new SelectListItem() { Text = "stuff", Value = "0"});
-    l1.Add(new SelectListItem() { Text = "stuff1", Value = "1"});
-    l1.Add(new SelectListItem() { Text = "stuff2", Value = "2"});*@
 }
 
 @using Assignment1.Models
@@ -39,17 +35,34 @@
         <div class="col-7">
             <div class="row justify-content-center">
                 <form method="post">
-                    <div>
-                        @* Dropdown of all courses in database *@
-                        @*@Html.DropDownListFor(a => a.course_name, Model.Cours, NULL, new { @class = "Cours" })*@
+                    <div class="container">
 
-                       
-                        @Html.DropDownList("CourseList", ViewBag.courselistname as SelectList, "Please Select a Course")
+                        @* Dropdown of all courses in database *@
+                        <div class="fields">
+                            @Html.DropDownList("CourseList", ViewBag.courselistname as SelectList, "Please Select a Course",
+                           htmlAttributes: new { required = "Required", @class = "" })
+                        </div>
 
                         @* Register Button *@
-                        <input type="submit" name="register" value="Register" formaction="@Url.Action("Register")" formmethod="post" />
+                        <button type="submit"
+                                name="register"
+                                value="Register"
+                                class="btn btn-group btn-primary"
+                                formaction="@Url.Action("AddRegistration")"
+                                formmethod="post">
+                            Register
+                        </button>
+
                         @* Unregister Button *@
-                        <input type="submit" name="unregister" value="Unregister" formaction="@Url.Action("Unregister")" formmethod="post" />
+                        <button type="submit"
+                                name="unregister"
+                                value="Unregister"
+                                class="btn btn-group btn-primary"
+                                formaction="@Url.Action("Unregister")"
+                                formmethod="post">
+                            Unregister
+                        </button>
+
                     </div>
                 </form>
 

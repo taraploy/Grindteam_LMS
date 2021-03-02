@@ -71,13 +71,15 @@ namespace Assignment1.Controllers
                     Name.linkTitle3 = user.linkTitle3;
                 }
 
-                if (Name.role == "Instructor")
+                if (Name.role == "Student")
                 {
-                    return View("InstructorView");
+                    CourseCardList.GenerateStudentCourseList();
+                    return View("StudentView");
                 }
                 else
                 {
-                    return View("StudentView");
+                    CourseCardList.GenerateInstructorCourseList();
+                    return View("InstructorView");
                 }
             }
             else
@@ -101,7 +103,8 @@ namespace Assignment1.Controllers
         /// <returns></returns>
         public ActionResult ReturnToView()
         {
-            return (Name.role == "Student") ? View("StudentView") : View("InstructorView");
+            //return (Name.role == "Student") ? View("StudentView") : View("InstructorView");
+            return (Name.role == "Student") ? View("StudentView") : View(from c in gds.Courses join i in gds.InstructorCourses on c.course_id equals i.course_id  where @Name.user_id == i.instructor_id select new { c.course_num, c.course_name, c.course_desc, i.instructor_id, c.num_credits, c.days_of_week, c.start_time, c.end_time, c.building, c.room_no, c.max_capacity });
         }
 
         /// <summary>
@@ -161,6 +164,8 @@ namespace Assignment1.Controllers
                 if (Name.role == "Instructor")
                 {
                     return View("InstructorView");
+                    //return View(from c in gds.Courses join i in gds.InstructorCourses on c.course_id equals i.course_id where @Name.user_id == i.instructor_id select new { c.course_num, c.course_name, c.course_desc, i.instructor_id, c.num_credits, c.days_of_week, c.start_time, c.end_time, c.building, c.room_no, c.max_capacity });
+
                 }
                 else
                 {

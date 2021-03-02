@@ -48,10 +48,10 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -257,9 +257,13 @@
       <DependentUpon>ulUsers.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseCard.cs" />
+    <Compile Include="Models\CourseCardList.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\InstructorCourseContext.cs" />
     <Compile Include="Models\Name.cs" />
     <Compile Include="Models\SecurityQuestion.cs" />
+    <Compile Include="Models\StudentCourseContext.cs" />
     <Compile Include="Models\TodoList.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserSecurityQuestion.cs" />
@@ -314,6 +318,7 @@
     <Content Include="Views\CoursesAndRegistration\CoursesView.cshtml" />
     <Content Include="Views\CoursesAndRegistration\AddCourseView.cshtml" />
     <Content Include="Views\CoursesAndRegistration\RegistrationView.cshtml" />
+    <Content Include="Views\CoursesAndRegistration\InstructorCview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

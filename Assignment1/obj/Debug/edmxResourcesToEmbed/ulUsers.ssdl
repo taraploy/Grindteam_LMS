@@ -65,7 +65,9 @@
     <Property Name="linkTitle3" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <Association Name="FK_Courses_Departments">
-    <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+    <End Role="Departments" Type="Self.Departments" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Departments">
@@ -73,30 +75,6 @@
       </Principal>
       <Dependent Role="Courses">
         <PropertyRef Name="dept_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_InstructorCourses_Courses">
-    <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
-    <End Role="InstructorCourses" Type="Self.InstructorCourses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Courses">
-        <PropertyRef Name="course_id" />
-      </Principal>
-      <Dependent Role="InstructorCourses">
-        <PropertyRef Name="course_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_InstructorCourses_ulUser">
-    <End Role="ulUser" Type="Self.ulUser" Multiplicity="1" />
-    <End Role="InstructorCourses" Type="Self.InstructorCourses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ulUser">
-        <PropertyRef Name="ulUser_id" />
-      </Principal>
-      <Dependent Role="InstructorCourses">
-        <PropertyRef Name="instructor_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -133,14 +111,6 @@
     <AssociationSet Name="FK_Courses_Departments" Association="Self.FK_Courses_Departments">
       <End Role="Departments" EntitySet="Departments" />
       <End Role="Courses" EntitySet="Courses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_InstructorCourses_Courses" Association="Self.FK_InstructorCourses_Courses">
-      <End Role="Courses" EntitySet="Courses" />
-      <End Role="InstructorCourses" EntitySet="InstructorCourses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_InstructorCourses_ulUser" Association="Self.FK_InstructorCourses_ulUser">
-      <End Role="ulUser" EntitySet="ulUser" />
-      <End Role="InstructorCourses" EntitySet="InstructorCourses" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentCourses_Courses" Association="Self.FK_StudentCourses_Courses">
       <End Role="Courses" EntitySet="Courses" />

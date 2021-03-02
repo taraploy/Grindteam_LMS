@@ -17,7 +17,7 @@
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Courses", "ViewCourses", "CoursesAndRegistration")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
@@ -35,50 +35,36 @@
         <div class="col-9">
             <div class="container">
                 <div class="row align-items-center">
-                    @using (Html.BeginForm())
-                    {
-                        <p>
-                            Search by Department: @Html.TextBox("SearchDepartment")
-                            <input type="submit" value="Search" />
-                        </p>
-                    }
-                    <form class="form-inline">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </form>
+                    <div>
+                        @Html.ActionLink("Cancel", "InstructorCview", "CoursesAndRegistration", new { @class = "addCourseBtn" })
+
+                    </div>                    
                     <form action="@Url.Action("SaveCourse", "CoursesAndRegistration")" method="post" @*enctype="multipart/form-data"*@>
                         <div class="course-form">
                             <h2>AddCourseView</h2>
                             @*Course Information*@
                             <label for="course-num">Course id:</label>
-                            <input id="course-num" name="course-num" type="text" />
-                            
+                            <input id="course-num" name="courseNum" type="text" />
+
                             <label for="course-name">Course name:</label>
-                            <input id="course-name" name="course-name" type="text" />
+                            <input id="course-name" name="courseName" type="text" />
 
                             <label for="course-desc">Course description:</label>
-                            <textarea id="course-desc" name="course-desc" rows="3" cols="50"></textarea>
+                            <textarea id="course-desc" name="courseDesc" rows="3" cols="50"></textarea>
 
                             <label for="course-credits">Number of credits:</label>
-                            <input id="course-credits" name="course-credits" type="number" min="1" max="6" />
+                            <input id="course-credits" name="courseCredits" type="number" min="1" max="6" />
 
                             <label for="course-capacity">Capacity:</label>
-                            <input id="course-capacity" name="max-capacity" type="number" min="0" max="30" />
+                            <input id="course-capacity" name="maxCapacity" type="number" min="0" max="30" />
 
                             <label for="course-location">Location:</label>
-                            <input id="course-location" name="course-location" type="text" />
+                            <input id="course-location" name="courseLocation" type="text" />
 
                             <label for="course-room">Room Number:</label>
-                            <input id="course-room" name="course-room" type="text" />
+                            <input id="course-room" name="courseRoom" type="text" />
 
-                            @*Department Dropdown*@
-                            <!--<div>
-                                <p>Department: htmlDropdown</p>
-                                Html.DropDownList("Department", new List<SelectListItem>
-                                {
-                                    new SelectListItem { Text = "Computer Science"}
-                                })
-                            </div>-->
+                            @*Department Dropdown*@                            
                             <div class="form-group">
                                 <label for="departments">Department:</label>
                                 <select name="departments" id="departments">
@@ -95,37 +81,38 @@
                             @*Meeting time*@
                             <label>Meeting time:</label>
                             <div class="form-check">
-                                <input type="checkbox" name="monday" id="monday" class="form-check-input">
+                                <input type="checkbox" name="monday" value="M" id="monday" class="form-check-input">
                                 <label for="monday" class="form-check-label">Monday</label>
                             </div>
                             <div>
-                                <input type="checkbox" name="tuesday" id="tuesday" />
+                                <input type="checkbox" name="tuesday" value="T" id="tuesday" />
                                 <label for="tuesday">Tuesday</label>
                             </div>
                             <div>
-                                <input type="checkbox" name="wednesday" id="wednesday" />
+                                <input type="checkbox" name="wednesday" value="W" id="wednesday" />
                                 <label for="wednesday">Wednesday</label>
                             </div>
                             <div>
-                                <input type="checkbox" name="thursday" id="thursday" />
+                                <input type="checkbox" name="thursday" value="R" id="thursday" />
                                 <label for="thursday">Thursday</label>
                             </div>
                             <div>
-                                <input type="checkbox" name="friday" id="friday" />
+                                <input type="checkbox" name="friday" value="F" id="friday" />
                                 <label for="friday">Friday</label>
                             </div>
                             <br />
 
-                            <label for="course-start-time">Start time:</label>
-                            <input type="time" id="course-start-time" name="course-start-time" min="07:00" max="21:00" />
+                            <label for="startTime">Start time:</label>
+                            <input type="time" id="course-start-time" name="startTime" min="07:00" max="21:00" />
 
-                            <label for="course-end-time">End time:</label>
-                            <input type="time" id="course-end-time" name="course-end-time" min="07:00" max="21:00" />
+                            <label for="endTime">End time:</label>
+                            <input type="time" id="course-end-time" name="endTime" min="07:00" max="21:00" />
 
 
                         </div>
                         <div>
-                            <button type="submit">Add Course</button>
+                            <button type="submit" class="saveProfileBtn" id="save-button" value="Add Course">Add Course</button>
+                            @*@Html.ActionLink("Add Course", "SaveCourse", "CoursesAndRegistration", new { new Course("course-name" })*@
                         </div>
                     </form>
                 </div>

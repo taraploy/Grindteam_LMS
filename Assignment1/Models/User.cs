@@ -26,6 +26,9 @@ namespace Assignment1.Models
         public string LinkTitle2 { get; set; }
         public string LinkTitle3 { get; set; }
 
+        public virtual ICollection<InstructorCours> InstructorCours { get; set; }
+        public virtual ICollection<StudentCours> StudentCours { get; set; }
+        
         public override string ToString()
         {
             return base.ToString();

@@ -40,9 +40,4 @@ namespace Assignment1
         public virtual ICollection<StudentCours> StudentCourses { get; set; }
         public virtual Department Department { get; set; }
     }
-
-    public class ListCourseViewModel
-    {
-        public List<Cours> Courses { get; set; }
-    }
 }

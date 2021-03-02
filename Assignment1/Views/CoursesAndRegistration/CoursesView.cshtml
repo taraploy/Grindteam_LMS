@@ -1,14 +1,14 @@
-﻿
-@*@model IEnumerable<Insert_Multiple_Rows_EF_MVC.Cours>*@
-@*@model IEnumerable<LMS_GRINDEntities1.Courses>*@
-
-@{
+﻿@*@model IEnumerable<Insert_Multiple_Rows_EF_MVC.Cours>*@
+@*@model IEnumerable<Assignment1.Models.Course>*@
+<!--model IEnumerable<Assignment1.Cours>
+using Assignment1.Models
+{
     ViewBag.Title = "CoursesView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
 
-@using Assignment1.Models
+using Assignment1.Models
 
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
@@ -20,13 +20,13 @@
         <aside class="col-2 left-nav float-left">
             <p>
                 <ul class="dashboard-nav">
-                    <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
+                    <li><h5 class="nav_title">Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Courses", "ViewCourses", "CoursesAndRegistration")</h5></li>
+                    <li><h5 class="nav_title">Html.ActionLink("Courses", "ViewCourses", "CoursesAndRegistration")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
+                    <li><h5 class="nav_title">Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
+                    <li><h5 class="nav_title">Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
                     <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
 
@@ -48,7 +48,7 @@
                         <label for="search-keyword">Search: </label>
                         <input type="text" id="search-keyword" asp-for="SearchString" />
                         <input type="submit" value="Filter" />
-                        <br/>
+                        <br />
                         <label for="departments">Department:</label>
                         <select name="departments" id="departments" onselect="deptFilter()">
                             <option value="1">Comptuer Science</option>
@@ -62,42 +62,69 @@
                         </select>
                     </p>
                 </form>
-                @Html.ActionLink("Add Course", "AddCourse", "CoursesAndRegistration", new { @class = "addCourseBtn" })
+                Html.ActionLink("Add Course", "AddCourse", "CoursesAndRegistration", new { class = "addCourseBtn" })
             </div>
-            <!--<table class="table">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Course Number</th>
                         <th>Course Name</th>
                         <th>Course Description</th>
                         <th>Instructor</th>
-                        <th>Credits</th>
+                        <th>Number of Credits</th>
                         <th>Department</th>
                         <th>Meeting Days</th>
-                        <th>Meeting Times</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
                         <th>Location</th>
-                        <th>Max Capacity</th>
+                        <th>Room Number</th>
+                        <th>Capacity</th>
                     </tr>
                 </thead>
                 <tbody>
-                    foreach (Course row in Model)
+                    {
+                        foreach (Cours c in (dynamic)Model)
+                        {
+                            <tr>
+                                <td>Html.DisplayFor(modelItem => c.course_num)</td>
+                                <td@Html.DisplayFor(modelItem => c.course_name)</td>
+                                <td>Html.DisplayFor(modelItem => c.course_desc)</td>
+                                <td>Html.DisplayFor(modelItem => c.course_desc)</td>
+                            </tr>
+                        }
+                    }
+
+                    <!--foreach (var
+                     c in Model)
                     {
                         <tr>
-                            <td>row.course_num</td>
-                            <td>row.course_name</td>
-                            <td>row.course_desc</td>-->
-                            @*<td>@row.first_name @row.last_name</td>*@
-                            <!--<td>row.num_credits</td>
-                            <td>row.dept_id</td>
-                            <td>row.days_of_week</td>
-                            <td>row.start_time - row.end_time</td>
-                            <td>row.building : row.room_no</td>
-                            <td>row.max_capacity</td>
+                            <td>Html.DisplayFor(modelItem => c.courseNum)</td>
                         </tr>
                     }
-                </tbody>
-            </table>-->
+                    <tr>
+                        <td>Course.courseName</td>
+                    </tr>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td value="
+                    item.courseNum"></td>
+                            <td>item.courseName</td>
+                            <td>item.courseDesc</td>-->-->
+                    <!--@*<td>Html.DisplayFor(item => item.instructorFullName)</td>
+                        <td>Html.DisplayFor(item => item.numCredits)</td>
+                        <td>Html.DisplayFor(item => item.department)</td>
+                        <td>Html.DisplayFor(item => item.meetingDays)</td>
+                        <td>Html.DisplayFor(item => item.startTime)</td>
+                        <td>Html.DisplayFor(item => item.endTime)</td>
+                        <td>Html.DisplayFor(item => item.location)</td>
+                        <td>Html.DisplayFor(item => item.roomNum)</td>
+                        <td>Html.Displayfor(item => item.maxCapacity)</td>*@-->
+                    <!--</tr>
+                    }-->
+                <!--</tbody>
+            </table>
 
         </div>
     </div>
-</div>
+</div>-->
