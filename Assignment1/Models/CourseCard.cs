@@ -7,6 +7,7 @@ namespace Assignment1.Models
 {
     public class CourseCard
     {
+        public int CourseId;
         public string CourseName;
         public string CourseNum;
         public string InstructorFirstName;

@@ -158,10 +158,11 @@ li a {
 /* Course cards styling */
 .course-list {
     border: 1px solid #276678;
-    width: 250px;
-    height: 220px;
+    width: 275px;
+    height: 215px;
     margin: 10px;
 }
+
 .vl {
     border: 1px solid #276678;
     height: auto;
@@ -193,7 +194,8 @@ li a {
     display: block;
     text-align: center;
 }
-.editProfileBtn, .saveProfileBtn, .cancelSaveProfileBtn, .addCourseBtn {
+.editProfileBtn, .saveProfileBtn, .cancelSaveProfileBtn,
+.addCourseBtn, .detailCourseBtn, .editCourseBtn, .cancelEditCoursebtn {
     display: block;
     margin: 20px auto;
     padding: 10px 15px;
@@ -208,11 +210,13 @@ li a {
     transition: 300ms ease-in-out;
     cursor: pointer;
 }
-.editProfileBtn:hover, .saveProfileBtn:hover, .cancelSaveProfileBtn:hover, .addCourseBtn:hover {
-    color: white;
-    background-color: #276678;
-    border: solid 1px #276678;
-}
+    .editProfileBtn:hover, .saveProfileBtn:hover,
+    .cancelSaveProfileBtn:hover, .addCourseBtn:hover,
+    .detailCourseBtn:hover, .editCourseBtn:hover, .cancelEditCoursebtn:hover {
+        color: white;
+        background-color: #276678;
+        border: solid 1px #276678;
+    }
 
 /*      Edit Profile Page       */
 .chooseFileBtn {
@@ -228,6 +232,39 @@ li a {
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
 }
 */
+
+
+/*      Add Course View         */
+.course-view {
+    margin: 0 30px;
+}
+.detailCardBtn {
+    margin: 10px;
+}
+
+.instructor-course-list {
+    border: 1px solid #276678;
+    width: 300px;
+    height: 250px;
+    margin: 10px;
+}
+
+
+/*      Course Detail View      */
+.courseNumD {
+    text-align: center;
+}
+.editCourseBtn, .addCourseBtn {
+    margin: 15px 0;
+    margin-right: 10px;
+}
+.courseDetail-list {
+    font-size: 20px;
+    margin: 5px;
+}
+
+
+
 
 @media (max-width: 767.98px) {
     .form-block {

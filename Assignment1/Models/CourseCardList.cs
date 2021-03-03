@@ -36,6 +36,7 @@ namespace Assignment1.Models
                          where cid.student_id == Name.user_id
                          select new
                          {
+                             CourseId = c.course_id,
                              CourseName = c.course_name,
                              CourseNum = c.course_num,
                              InstructorFirstName = u.first_name,
@@ -57,6 +58,7 @@ namespace Assignment1.Models
                 sEnd = dtEndTime.ToString("hh:mm tt");
 
                 CourseList.Add(new CourseCard());
+                CourseList[i].CourseId = item.CourseId;
                 CourseList[i].CourseName = item.CourseName;
                 CourseList[i].CourseNum = item.CourseNum;
                 CourseList[i].InstructorFirstName = item.InstructorFirstName;
@@ -92,6 +94,7 @@ namespace Assignment1.Models
                          where iid.instructor_id == Name.user_id
                          select new
                          {
+                             CourseId = c.course_id,
                              CourseName = c.course_name,
                              CourseNum = c.course_num,
                              InstructorFirstName = u.first_name,
@@ -113,6 +116,7 @@ namespace Assignment1.Models
                 sEnd = dtEndTime.ToString("hh:mm tt");
 
                 CourseList.Add(new CourseCard());
+                CourseList[i].CourseId = item.CourseId;
                 CourseList[i].CourseName = item.CourseName;
                 CourseList[i].CourseNum = item.CourseNum;
                 CourseList[i].InstructorFirstName = item.InstructorFirstName;

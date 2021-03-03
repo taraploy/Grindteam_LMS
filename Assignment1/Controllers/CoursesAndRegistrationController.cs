@@ -20,79 +20,51 @@ namespace Assignment1.Controllers
 
     {
         LMS_GRINDEntities1 gds;
-        List<Cours> allCourses = new List<Cours>();
+       // List<Cours> allCourses = new List<Cours>();
         // GET: CoursesAndRegistration
-        public ActionResult Index()
-        {
-            gds = new LMS_GRINDEntities1();
-            return View(from course in gds.Courses.Take(10) select course);
-        }
+        //public ActionResult Index()
+        //{
+        //    gds = new LMS_GRINDEntities1();
+        //    return View(from course in gds.Courses.Take(10) select course);
+        //}
 
         public ActionResult InstructorCview()
         {
             gds = new LMS_GRINDEntities1();
-
-            return View(from course in gds.Courses.Take(100) select course);
-            //return View(from c in gds.Courses join i in gds.InstructorCourses on c.course_id equals i.course_id  where @Name.user_id = c.instructor_id select new { c.course_num, c.course_name. c.course_desc, i.instructor_id, c.num_credits, c.days_of_week, c.start_time, c.end_time, c.building, c.room_no, c.max_capacity });
-
-
-
-            //try
-            //{
-            //    return View(from course in gds.Courses.Take(100) where searchDepartment == course.dept_id && searchKeyword == course.course_name select course);
-            //}
-            //catch (Exception e)
-            //{
-            //    //Console.WriteLine("Error");
-            //}
-
-            //if (searchDepartment.ToString() != "" && searchKeyword != "")
-            //{
-            //    return View(from course in gds.Courses.Take(100) where searchDepartment == course.dept_id && searchKeyword == course.course_name select course);
-            //}
-            //else if (searchKeyword == "")
-            //{
-            //    return View(from course in gds.Courses.Take(100) where searchDepartment == course.dept_id select course);
-
-            //}
-            //else if (searchDepartment.ToString() == "")
-            //{
-            //    return View(from course in gds.Courses.Take(100) where searchKeyword == course.course_name select course);
-            //}
-            //else
-            //{
-            //    
-            //}
-            //return View((from course in gds.Courses.Take(100) select course, (from user in gds.ulUsers.Take(100) select user)));
-            //return View(from Course, Departments, InstructorCourses, ulUser  in gds.Courses.Take(25) select course);
-
-
-            //using (gds)
-            //{
-            //    var query = (from c in Courses join d in Departments on c.dept_id equals d.dept_id join i in InstructorCourses on c.instructor_id equals i.instructor_id join u in ulUser on i.instructor_id equals u.ulUser_id select new { c.course_num, c.course_name, c.course_desc, u.first_name, u.last_name, d.department });
-            //}
-
+            CourseCardList.GenerateInstructorCourseList();
+            return View("InstructorCview");
         }
 
-
-        public ActionResult ViewCourses()
-        {
-            return View("CoursesView");
-        }
+        //public ActionResult ViewCourses()
+        //{
+        //    return View("CoursesView");
+        //}
         public ActionResult AddCourse()
         {
             return View("AddCourseView");
         }
 
-        //public ActionResult Register()
-        //{
-        //    return View("RegistrationView");
-        //}
+        public ActionResult EditCourse(int id)
+        {
+            gds = new LMS_GRINDEntities1();
+            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
+            Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
+            ViewBag.selectedCourse = course;
+            ViewBag.courseDepartment = department;
+            return View("EditCourseView");
+        }
 
-        /// <summary>
-        /// Generates list for dropdown and returns RegistrationView
-        /// </summary>
-        /// <returns></returns>
+        
+        public ActionResult InstructorCourseDetail(int id)
+        {
+            gds = new LMS_GRINDEntities1();
+            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
+            Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
+            ViewBag.selectedCourse = course;
+            ViewBag.courseDepartment = department;
+            return View("InstructorCourseDetailView");
+        }
+
         public ActionResult ViewRegistration()
         {
             // for dropdown list on Registration View
@@ -129,90 +101,73 @@ namespace Assignment1.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AddRegistration(FormCollection form) // TO DO: verify that user has not already added course
+        public ActionResult AddRegistration(FormCollection form) // TODO: Prevent user from registering for the same course twice
         {
-
             StudentCours sc = new StudentCours();
-            List<string> displayList = new List<string>();
+            List<string> displayList = GetDisplayList();
             gds = new LMS_GRINDEntities1();
             string selectedItem = form[0].ToString();
             var courseList = gds.Courses.ToList();
-            int index = 0;
-            string sStart;
-            string sEnd;
-            DateTime dtStartTime;
-            DateTime dtEndTime;
-
-            foreach (var course in courseList)
-            {
-                if (course.course_name != null)
-                {
-                    // convert time format
-                    dtStartTime = DateTime.Today.Add((TimeSpan)course.start_time);
-                    sStart = dtStartTime.ToString("hh:mm tt");
-                    dtEndTime = DateTime.Today.Add((TimeSpan)course.end_time);
-                    sEnd = dtEndTime.ToString("hh:mm tt");
-
-                    displayList.Add(course.course_name + " " + sStart + " - " + sEnd + " " + course.days_of_week);
-                }
-            }
-
-            foreach (var item in displayList)
-            {
-                if (selectedItem == item)
-                {
-                    break;
-                }
-
-                index++;
-            }
+            int index = GetSelectedIndex(displayList, selectedItem);
 
             sc.course_id = courseList[index].course_id;
             sc.student_id = Name.user_id;
 
-            //gds.StudentCourses.Add(sc);
-            //gds.SaveChanges();
+            gds.StudentCourses.Add(sc);
+            gds.SaveChanges();
+            CourseCardList.GenerateStudentCourseList();
+
             return RedirectToAction("ReturnToView", "UserAccount", null);
         }
 
+
+        /// <summary>
+        /// Removes a StudentCourse from db
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Unregister(FormCollection form)
+        public ActionResult Unregister(FormCollection form) // TODO: Validation - verify user is enrolled in class before removing
         {
-            StudentCours sc = new StudentCours();
-            List<string> displayList = new List<string>();
             gds = new LMS_GRINDEntities1();
+            List<string> displayList = GetDisplayList();
             var courseList = gds.Courses.ToList();
-            string selectedItem = form[0].ToString();
+            string selectedItem = form[0].ToString(); // Item selected from dropdown
             int index = 0;
 
             try
             {
-                foreach (var item in displayList)
+                // determine index of selected item
+                index = GetSelectedIndex(displayList, selectedItem);
+
+                // create a list of StudentCourses sc
+                var sc = gds.StudentCourses.ToList();
+
+                // query sc for the course to be unregistered and store in id
+                var id = sc.First(x => x.student_id == Name.user_id && x.course_id == courseList[index].course_id);
+
+                // loop through sc to find the StudentCourse to be deleted
+                foreach (var item in sc)
                 {
-                    if (selectedItem == item)
+                    if (item.student_course_id == id.student_course_id)
                     {
-                        break;
+                        // delete ("unregister") course
+                        gds.StudentCourses.Remove(item);
                     }
-
-                    index++;
                 }
-
-                sc.course_id = courseList[index].course_id;
-                sc.student_id = Name.user_id;
-
-
-                //Try to remove it
-                gds.StudentCourses.Remove(sc);
 
                 //Save the changes
                 gds.SaveChanges();
+
+                // update list and return to StudentView
+                CourseCardList.GenerateStudentCourseList();
+                return RedirectToAction("ReturnToView", "UserAccount", null);
             }
             catch
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                return View("RegistrationView");
             }
-
-            return View();
         }
 
 
@@ -236,7 +191,6 @@ namespace Assignment1.Controllers
             gds = new LMS_GRINDEntities1();
             Cours course = new Cours();
 
-            
             course.course_name = courseName;
             Course.courseName = courseName;
             course.course_desc = courseDesc;
@@ -278,11 +232,113 @@ namespace Assignment1.Controllers
             gds.SaveChanges();
 
             InstructorCourseContext.instructorCourseId = insCourse.instructor_course_id;
-            allCourses.Add(course);
-            return View("CoursesView");
+
+            CourseCardList.GenerateInstructorCourseList();
+            return View("InstructorCView");
         }
 
-       
+        [HttpPost]
+        public ActionResult UpdateCourse(int id, string courseNum, string courseName, string courseDesc,
+            int courseCredits, int maxCapacity, string courseLocation,
+            int courseRoom, int departments, string monday, string tuesday, string wednesday,
+            string thursday, string friday, TimeSpan startTime, TimeSpan endTime)
+        {
+            gds = new LMS_GRINDEntities1();
+            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
+            try
+            {
+                course.course_name = courseName;
+                course.course_desc = courseDesc;
+                course.course_num = courseNum;
+                course.max_capacity = maxCapacity;
+                course.dept_id = departments;
+                course.num_credits = courseCredits;
+                course.days_of_week = monday + tuesday + wednesday + thursday + friday;
+                course.start_time = startTime;
+                course.end_time = endTime;
+                course.building = courseLocation;
+                course.room_no = courseRoom;
+
+                ViewBag.selectedCourse = course;
+                Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
+                ViewBag.courseDepartment = department;
+                gds.SaveChanges();
+                CourseCardList.GenerateInstructorCourseList();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        System.Console.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("EditCourseView");
+            }
+
+            return View("InstructorCourseDetailView");
+        }
+
+
+        /// <summary>
+        /// Returns a list of strings used for dropdown
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetDisplayList()
+        {
+            List<string> displayList = new List<string>();
+            gds = new LMS_GRINDEntities1();
+            var courseList = gds.Courses.ToList();
+            string sStart;
+            string sEnd;
+            DateTime dtStartTime;
+            DateTime dtEndTime;
+
+            foreach (var course in courseList)
+            {
+                if (course.course_name != null)
+                {
+                    // convert time format
+                    dtStartTime = DateTime.Today.Add((TimeSpan)course.start_time);
+                    sStart = dtStartTime.ToString("hh:mm tt");
+                    dtEndTime = DateTime.Today.Add((TimeSpan)course.end_time);
+                    sEnd = dtEndTime.ToString("hh:mm tt");
+
+                    displayList.Add(course.course_num + " " + course.course_name + " " + sStart + " - " + sEnd + " " + course.days_of_week);
+                }
+            }
+
+            return displayList;
+
+        }
+
+        /// <summary>
+        /// Returns the index of the selected item from dropdown
+        /// </summary>
+        /// <param name="displayList"></param>
+        /// <param name="selectedItem"></param>
+        /// <returns></returns>
+        public int GetSelectedIndex(List<string> displayList, string selectedItem)
+        {
+            int index = 0;
+
+            foreach (var item in displayList)
+            {
+                if (selectedItem == item)
+                {
+                    break;
+                }
+
+                index++;
+            }
+
+            return index;
+        }
+
 
     }
 
@@ -322,3 +378,50 @@ namespace Assignment1.Controllers
 //};
 // return View(viewModel);
 //}
+
+
+//try
+//{
+//    return View(from course in gds.Courses.Take(100) where searchDepartment == course.dept_id && searchKeyword == course.course_name select course);
+//}
+//catch (Exception e)
+//{
+//    //Console.WriteLine("Error");
+//}
+
+//if (searchDepartment.ToString() != "" && searchKeyword != "")
+//{
+//    return View(from course in gds.Courses.Take(100) where searchDepartment == course.dept_id && searchKeyword == course.course_name select course);
+//}
+//else if (searchKeyword == "")
+//{
+//    return View(from course in gds.Courses.Take(100) where searchDepartment == course.dept_id select course);
+
+//}
+//else if (searchDepartment.ToString() == "")
+//{
+//    return View(from course in gds.Courses.Take(100) where searchKeyword == course.course_name select course);
+//}
+//else
+//{
+//    
+//}
+//return View((from course in gds.Courses.Take(100) select course, (from user in gds.ulUsers.Take(100) select user)));
+//return View(from Course, Departments, InstructorCourses, ulUser  in gds.Courses.Take(25) select course);
+
+
+//using (gds)
+//{
+//    var query = (from c in Courses join d in Departments on c.dept_id equals d.dept_id join i in InstructorCourses on c.instructor_id equals i.instructor_id join u in ulUser on i.instructor_id equals u.ulUser_id select new { c.course_num, c.course_name, c.course_desc, u.first_name, u.last_name, d.department });
+//}
+
+
+//public ActionResult Register()
+//{
+//    return View("RegistrationView");
+//}
+
+/// <summary>
+/// Generates list for dropdown and returns RegistrationView
+/// </summary>
+/// <returns></returns>

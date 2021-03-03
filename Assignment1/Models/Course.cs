@@ -6,11 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Assignment1.Models
 {
-    //[Table("Course")]
     public class Course
     {
-        //public SelectList DropDownList { get; set; }
-
         public static int courseId { get; set; }
         public static string courseName { get; set; }
         public static string instructor { get; set; }
@@ -30,9 +27,5 @@ namespace Assignment1.Models
         public static string instructorLastName { get; set; }
         public static int deptId { get; set; }
         public static string department { get; set; }
-
-        public List<Cours> allCourses { get; set; }
-        //public ICollection<InstructorCours> InstructorCourses { get; set; }     //Teaches
-        //public ICollection<StudentCours> StudentCourses { get; set; }           //Enrollments
     }
 }
