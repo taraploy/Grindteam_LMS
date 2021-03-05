@@ -1,11 +1,15 @@
-﻿
+﻿@model IEnumerable<Assignment1.Cours>
 @{
-    ViewBag.Title = "RegistrationsView";
+    ViewBag.Title = "RegistrationView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
-
+@{
+    string sStart;
+    string sEnd;
+    DateTime dtStartTime;
+    DateTime dtEndTime;
+}
 @using Assignment1.Models
-
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -33,41 +37,71 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="col-7">
-            <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="justify-content-center">
                 <form method="post">
                     <div class="container">
 
-                        @* Dropdown of all courses in database *@
-                        <div class="fields">
-                            @Html.DropDownList("CourseList", ViewBag.courselistname as SelectList, "Please Select a Course",
-                           htmlAttributes: new { required = "Required", @class = "" })
+                        <div class="row">
+                            @* Search Bar *@
+                            <div class="col-10">
+                                @Html.TextBox("search", null, new { @class = "form-control rounded" })
+                            </div>
+
+                            @* Search Button *@
+                            <div class="col-1">
+                                <button type="submit"
+                                        formaction="ViewRegistration"
+                                        formmethod="get"
+                                        class="btn btn-primary">
+                                    Search
+                                </button>
+                            </div>
                         </div>
 
-                        @* Register Button *@
-                        <button type="submit"
-                                name="register"
-                                value="Register"
-                                class="btn btn-group btn-primary"
-                                formaction="@Url.Action("AddRegistration")"
-                                formmethod="post">
-                            Register
-                        </button>
+                        @*Dropdown of courses*@
+                        <div class="row mb-3 mt-1">
+                            <select name="ddCourses" class="form-control rounded m-3">
+                                @foreach (var item in Model)
+                                {
+                                    dtStartTime = DateTime.Today.Add((TimeSpan)item.start_time);
+                                    sStart = dtStartTime.ToString("hh:mm tt");
+                                    dtEndTime = DateTime.Today.Add((TimeSpan)item.end_time);
+                                    sEnd = dtEndTime.ToString("hh:mm tt");
 
-                        @* Unregister Button *@
-                        <button type="submit"
-                                name="unregister"
-                                value="Unregister"
-                                class="btn btn-group btn-primary"
-                                formaction="@Url.Action("Unregister")"
-                                formmethod="post">
-                            Unregister
-                        </button>
+                                    <option class="">@Html.DisplayFor(modelItem => item.course_num) @Html.DisplayFor(modelItem => item.course_name) @sStart - @sEnd @Html.DisplayFor(modelItem => item.days_of_week)</option>
+                                }
+                            </select>
+                        </div>
 
+                        <div class="row">
+                            @* Unregister Button *@
+                            <div class="ml-3 mr-4">
+                                <button type="submit"
+                                        name="unregister"
+                                        value="Unregister"
+                                        class="btn btn-primary danger"
+                                        formaction="@Url.Action("Unregister")"
+                                        formmethod="post">
+                                    Unregister
+                                </button>
+                            </div>
+
+                            @* Register Button *@
+                            <div class="ml">
+                                <button type="submit"
+                                        name="register"
+                                        value="Register"
+                                        class="btn btn-group btn-primary"
+                                        formaction="@Url.Action("AddRegistration")"
+                                        formmethod="post">
+                                    Register
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
                 </form>
-
-                
             </div>
         </div>
     </div>

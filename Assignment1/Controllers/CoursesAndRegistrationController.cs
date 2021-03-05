@@ -101,35 +101,45 @@ namespace Assignment1.Controllers
             return View("InstructorCourseDetailView");
         }
 
-        public ActionResult ViewRegistration()
+        public ActionResult ViewRegistration(string search)
         {
             // for dropdown list on Registration View
             LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
-            List<string> displayList = new List<string>();
-            var courseList = gds.Courses.ToList();
-            string sStart;
-            string sEnd;
-            DateTime dtStartTime;
-            DateTime dtEndTime;
 
-            foreach (var course in courseList)
+            var courses = (from c in gds.Courses
+                          select c);
+
+            if (!String.IsNullOrEmpty(search))
             {
-                if (course.course_name != null)
-                {
-                    // convert time format
-                    dtStartTime = DateTime.Today.Add((TimeSpan)course.start_time);
-                    sStart = dtStartTime.ToString("hh:mm tt");
-                    dtEndTime = DateTime.Today.Add((TimeSpan)course.end_time);
-                    sEnd = dtEndTime.ToString("hh:mm tt");
-
-                    displayList.Add(course.course_name + " " + sStart + " - " + sEnd + " " + course.days_of_week);
-                }
+                courses = courses.Where(x => x.course_num.Contains(search) ||
+                                        x.course_name.Contains(search));
             }
 
-            SelectList list = new SelectList(displayList);
-            ViewBag.courselistname = list;
+            //List<string> displayList = new List<string>();
+            //var courseList = gds.Courses.ToList();
+            //string sStart;
+            //string sEnd;
+            //DateTime dtStartTime;
+            //DateTime dtEndTime;
 
-            return View("RegistrationView");
+            //foreach (var course in courseList)
+            //{
+            //    if (course.course_name != null)
+            //    {
+            //        // convert time format
+            //        dtStartTime = DateTime.Today.Add((TimeSpan)course.start_time);
+            //        sStart = dtStartTime.ToString("hh:mm tt");
+            //        dtEndTime = DateTime.Today.Add((TimeSpan)course.end_time);
+            //        sEnd = dtEndTime.ToString("hh:mm tt");
+
+            //        displayList.Add(course.course_name + " " + sStart + " - " + sEnd + " " + course.days_of_week);
+            //    }
+            //}
+
+            //SelectList list = new SelectList(displayList);
+            //ViewBag.courselistname = list;
+
+            return View("RegistrationView", courses.ToList());
         }
 
         /// <summary>
@@ -142,7 +152,7 @@ namespace Assignment1.Controllers
             StudentCours sc = new StudentCours();
             List<string> displayList = GetDisplayList();
             gds = new LMS_GRINDEntities1();
-            string selectedItem = form[0].ToString();
+            string selectedItem = form["ddCourses"].ToString();
             var courseList = gds.Courses.ToList();
             int index = GetSelectedIndex(displayList, selectedItem);
 

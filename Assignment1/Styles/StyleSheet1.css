@@ -294,6 +294,16 @@ li a {
     width: 300px;
 }
 
+/* Unregister */
+.danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.danger:hover {
+    background-color: #981b27;
+    border-color: #981b27;
+}
+
 
 
 @media (max-width: 767.98px) {
