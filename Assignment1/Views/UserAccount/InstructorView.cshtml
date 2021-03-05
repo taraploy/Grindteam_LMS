@@ -60,14 +60,12 @@
     </script>
 </div>
 <div class="dashboard">
-    <h2>Welcome @Name.role, @Name.first_name @Name.last_name!</h2>
     <div class="row">
         <aside class="col-2 left-nav float-left">
             <p>
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
-                    @*<li><h5 class="nav_title">@Html.ActionLink("Courses", "ViewCourses", "CoursesAndRegistration")</h5></li>*@
                     <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>

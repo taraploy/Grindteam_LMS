@@ -317,9 +317,9 @@
     <Content Include="Scripts\moment-with-locales.min.js.map" />
     <Content Include="Views\CoursesAndRegistration\AddCourseView.cshtml" />
     <Content Include="Views\CoursesAndRegistration\RegistrationView.cshtml" />
-    <Content Include="Views\CoursesAndRegistration\InstructorCview.cshtml" />
     <Content Include="Views\CoursesAndRegistration\InstructorCourseDetailView.cshtml" />
     <Content Include="Views\CoursesAndRegistration\EditCourseView.cshtml" />
+    <Content Include="Views\CoursesAndRegistration\InstructorCview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

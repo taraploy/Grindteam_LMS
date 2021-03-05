@@ -28,11 +28,20 @@ namespace Assignment1.Controllers
         //    return View(from course in gds.Courses.Take(10) select course);
         //}
 
-        public ActionResult InstructorCview()
+        public ActionResult InstructorCview(string search)
         {
             gds = new LMS_GRINDEntities1();
+            var departments = (from d in gds.Departments    // select all departments
+                               select d);
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                departments = departments.Where(x => x.dept_name.Contains(search)); // filter based on search
+            }
+
             CourseCardList.GenerateInstructorCourseList();
-            return View("InstructorCview");
+
+            return View("InstructorCview", departments.ToList().OrderBy(x=>x.dept_name));
         }
 
         //public ActionResult ViewCourses()
@@ -101,10 +110,16 @@ namespace Assignment1.Controllers
             return View("InstructorCourseDetailView");
         }
 
+        /// <summary>
+        /// Generates a list of courses and filters based on 
+        /// search criteria
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns>RegistrationView and a list of courses</returns>
         public ActionResult ViewRegistration(string search)
         {
             // for dropdown list on Registration View
-            LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
+            gds = new LMS_GRINDEntities1();
 
             var courses = (from c in gds.Courses
                           select c);
@@ -115,37 +130,13 @@ namespace Assignment1.Controllers
                                         x.course_name.Contains(search));
             }
 
-            //List<string> displayList = new List<string>();
-            //var courseList = gds.Courses.ToList();
-            //string sStart;
-            //string sEnd;
-            //DateTime dtStartTime;
-            //DateTime dtEndTime;
-
-            //foreach (var course in courseList)
-            //{
-            //    if (course.course_name != null)
-            //    {
-            //        // convert time format
-            //        dtStartTime = DateTime.Today.Add((TimeSpan)course.start_time);
-            //        sStart = dtStartTime.ToString("hh:mm tt");
-            //        dtEndTime = DateTime.Today.Add((TimeSpan)course.end_time);
-            //        sEnd = dtEndTime.ToString("hh:mm tt");
-
-            //        displayList.Add(course.course_name + " " + sStart + " - " + sEnd + " " + course.days_of_week);
-            //    }
-            //}
-
-            //SelectList list = new SelectList(displayList);
-            //ViewBag.courselistname = list;
-
             return View("RegistrationView", courses.ToList());
         }
 
         /// <summary>
         /// Adds a StudentCourse to the db
         /// </summary>
-        /// <returns></returns>
+        /// <returns>StudentView</returns>
         [HttpPost]
         public ActionResult AddRegistration(FormCollection form) // TODO: Prevent user from registering for the same course twice
         {
@@ -178,7 +169,7 @@ namespace Assignment1.Controllers
             gds = new LMS_GRINDEntities1();
             List<string> displayList = GetDisplayList();
             var courseList = gds.Courses.ToList();
-            string selectedItem = form[0].ToString(); // Item selected from dropdown
+            string selectedItem = form["ddCourses"].ToString(); // Item selected from dropdown
             int index = 0;
 
             try
@@ -351,7 +342,7 @@ namespace Assignment1.Controllers
         }
 
         /// <summary>
-        /// Returns a list of strings used for dropdown
+        /// Returns a list of strings used for registration dropdown
         /// </summary>
         /// <returns></returns>
         public List<string> GetDisplayList()

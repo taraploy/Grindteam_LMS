@@ -37,27 +37,30 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="col-5">
+        <div class="col-9">
             <div class="justify-content-center">
+                <h1>Registration</h1>
+                <br/>
                 <form method="post">
-                    <div class="container">
 
-                        <div class="row">
-                            @* Search Bar *@
-                            <div class="col-10">
-                                @Html.TextBox("search", null, new { @class = "form-control rounded" })
-                            </div>
-
-                            @* Search Button *@
-                            <div class="col-1">
-                                <button type="submit"
-                                        formaction="ViewRegistration"
-                                        formmethod="get"
-                                        class="btn btn-primary">
-                                    Search
-                                </button>
-                            </div>
+                    <div class="row">
+                        @* Search Bar *@
+                        <div class="col-10">
+                            @Html.TextBox("search", null, new {placeholder="Search by keyword", @class = "form-control rounded" })
                         </div>
+
+                        @* Search Button *@
+                        <div class="col-1">
+                            <button type="submit"
+                                    formaction="ViewRegistration"
+                                    formmethod="get"
+                                    class="btn btn-primary">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="col-6 text-left pl-0">
 
                         @*Dropdown of courses*@
                         <div class="row mb-3 mt-1">
