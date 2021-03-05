@@ -1,0 +1,308 @@
+﻿
+@{
+    ViewBag.Title = "StudentsView";
+    Layout = "~/Views/Layout_MainLogin.cshtml";
+}
+
+@*<style>
+        #notifications {
+            position: absolute;
+            right: 5em;
+            background-color: white;
+            z-index: 1;
+            width: 200px;
+            padding: 10px;
+        }
+    </style>*@
+
+@using Assignment1.Models
+<div class="nav-pageview">
+    <nav class="navbar navbar-dark">
+        <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
+        <div class="btnNotification ">
+            <img src="~/Images/bell.png" class="bell" onclick="myFunction()" />
+            <div id="notifications" hidden="hidden">
+                <div class="task">
+                    <h4>Task 1</h4>
+                    <button onclick="closeX(count - 2)" class="btn btn-danger" style="float:right;">X</button>
+                    <p>Due on a date</p>
+
+                </div>
+                <div class="task">
+                    <h4>Task 2</h4>
+                    <button onclick="closeX(count - 1)" class="btn btn-danger" style="float:right;">X</button>
+                    <p>Due on a date</p>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script>
+        var count = 2;
+        var notifShow = 0;
+
+        function myFunction() {
+            // var popup = document.getElementById("popUp");
+            if (notifShow == 0) {
+                document.getElementById("notifications").hidden = false;
+                notifShow = 1;
+            }
+            else {
+                document.getElementById("notifications").hidden = true;
+                notifShow = 0;
+            }
+
+        }
+        function closeX(index) {
+            console.log("deleting");
+            var elem = document.getElementsByClassName("task");
+            elem[index].remove();
+            count--;
+        }
+    </script>
+</div>
+<div class="dashboard">
+    <h2>Welcome @Name.role, @Name.first_name @Name.last_name!</h2>
+    <div class="row">
+        <aside class="col-2 left-nav float-left">
+            <p>
+                <ul class="dashboard-nav">
+                    <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
+
+                    <li><a href="#"><h5 class="nav_title">Courses</h5></a></li>
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
+                </ul>
+            </p>
+        </aside>
+        <div class="vl"></div>
+        <div class="col-7">
+            <div class="row justify-content-center">
+                <a href="#">
+                    <div class="card course-list">
+                        <div class="card-body">
+                            <h5 class="card-title">CS 3750</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Software Engineering II</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Arpit Christi</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Davis Campus Room 411</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">9:30 AM - 11:20 AM MW</h6>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="card course-list">
+                        <div class="card-body">
+                            <h5 class="card-title">CS 3100</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Operating System</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Mark Hudson</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Ogden Campus Room 325</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">7:30 AM - 9:30 AM TTH</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="row justify-content-center">
+                <a href="#">
+                    <div class="card course-list">
+                        <div class="card-body">
+                            <h5 class="card-title">CS 3550</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Advanced Database</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Drew Weidman</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Davis Campus Room 116</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">11:30 AM - 1:20 PM MW</h6>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="card course-list">
+                        <div class="card-body">
+                            <h5 class="card-title">CS 4110</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Formal Language & Algorithms</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Yong Zhang</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Davis Campus Room 226</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">5:30 PM - 7:20 PM MW</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="vl"></div>
+        <aside class="col-2 float-right">
+            <h3>To-do List</h3>
+            <p>
+                <a href="#">
+                    <div class="list-group-item">
+                        <h5>CS 3750</h5>
+                        <h6 class="todo-subtitle text-muted">Assignment 1</h6>
+                        <h6 class="todo-due-date text-muted">February 12, 11:59 PM</h6>
+                    </div>
+                </a>
+            </p>
+            <p>
+                <a href="#">
+                    <div class="list-group-item">
+                        <h5>CS 3100</h5>
+                        <h6 class="todo-subtitle text-muted">Assignment 3</h6>
+                        <h6 class="todo-due-date text-muted">February 17, 11:59 PM</h6>
+                    </div>
+                </a>
+            </p>
+        </aside>
+    </div>
+</div>
+
+
+
+@*@{
+        ViewBag.Title = "StudentView";
+        Layout = "~/Views/Layout_MainLogin.cshtml";
+    }
+
+    @section Scripts {
+        <script>
+            function myFunction() {
+                var popup = document.getElementById("myPopup");
+                popup.classList.toggle("show");
+            }
+        </script>
+    }
+
+    @using Assignment1.Models
+        <div class="nav-pageview">
+            <nav class="navbar navbar-dark">
+                <span class="navbar-brand mb-0 h1"><img src="~/Styles/GDS_LOGO.png" id="gds_title" /></span>
+                <div class="btnNotification" onclick="myFunction()">
+                    <img src="~/Styles/bell.png" class="bell" />
+                    <span class="popUpText" id="popUp">
+                        Due Tonight at 11:59 PM
+                        <button class="xButton" onclick="closeX">X</button>
+                        <br />
+                        CS 3100 <br />
+                        Textbook Participation 1 <br />
+                        <br />
+                        Due Tonight at 11:59 PM
+                        <button>X</button>
+                        <br />
+                        CS 4119 <br />
+                        Textbook Participation 1 <br />
+                    </span>
+                </div>
+            </nav>
+            <script>
+                function myFunction() {
+                    // var popup = document.getElementById("popUp");
+                    var popup = document.querySelector("#popUp");
+                    popup.classList.toggle("show");
+                }
+                function closeX() {
+                    var popup = window.self
+                    popup.open = window.self;
+                    popup.close();
+                }
+            </script>
+        </div>
+    <div class="dashboard">
+        <h2>Welcome @Name.role, @Name.first_name @Name.last_name!</h2>
+        <div class="row">
+            <aside class="col-2 left-nav float-left">
+                <p>
+                    <ul class="dashboard-nav">
+                        <li><a href="#"><h5 class="nav_title">Home</h5></a></li>
+
+                        <li><a href="#"><h5 class="nav_title">Courses</h5></a></li>
+
+                        <li><a href="#"><h5 class="nav_title">Calendar</h5></a></li>
+
+                        <li><a href="#"><h5 class="nav_title">Profile</h5></a></li>
+
+                        <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
+
+                        <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
+
+                        <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
+                    </ul>
+                </p>
+            </aside>
+            <div class="vl" style="border: 1px solid #276678; height: auto"></div>
+            <div class="col-7">
+                <div class="row justify-content-center">
+                    <a href="#">
+                        <div class="card course-list">
+                            <div class="card-body">
+                                <h5 class="card-title">CS 3750</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Software Engineering II</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Arpit Christi</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Davis Campus Room 411</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">9:30 AM - 11:20 AM MW</h6>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="card course-list">
+                            <div class="card-body">
+                                <h5 class="card-title">CS 3100</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Operating System</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Mark Hudson</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Ogden Campus Room 325</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">7:30 AM - 9:30 AM TTH</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="row justify-content-center">
+                    <a href="#">
+                        <div class="card course-list">
+                            <div class="card-body">
+                                <h5 class="card-title">CS 3550</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Advanced Database</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Drew Weidman</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Davis Campus Room 116</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">11:30 AM - 1:20 PM MW</h6>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="card course-list">
+                            <div class="card-body">
+                                <h5 class="card-title">CS 4110</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Formal Language & Algorithms</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Yong Zhang</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Davis Campus Room 226</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">5:30 PM - 7:20 PM MW</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="vl" style="border: 1px solid #276678; height: auto"></div>
+            <aside class="col-2 float-right">
+                <h3>To-do List</h3>
+                <p>
+                    <a href="#">
+                        <div class="list-group-item">
+                            <h5>CS 3750</h5>
+                            <h6 class="todo-subtitle text-muted">Assignment 1</h6>
+                            <h6 class="todo-due-date text-muted">February 12, 11:59 PM</h6>
+                        </div>
+                    </a>
+                </p>
+                <p>
+                    <a href="#">
+                        <div class="list-group-item">
+                            <h5>CS 3100</h5>
+                            <h6 class="todo-subtitle text-muted">Assignment 3</h6>
+                            <h6 class="todo-due-date text-muted">February 17, 11:59 PM</h6>
+                        </div>
+                    </a>
+                </p>
+            </aside>
+        </div>
+    </div>*@

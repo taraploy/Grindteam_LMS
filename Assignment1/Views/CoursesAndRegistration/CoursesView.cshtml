@@ -1,0 +1,130 @@
+﻿@*@model IEnumerable<Insert_Multiple_Rows_EF_MVC.Cours>*@
+@*@model IEnumerable<Assignment1.Models.Course>*@
+<!--model IEnumerable<Assignment1.Cours>
+using Assignment1.Models
+{
+    ViewBag.Title = "CoursesView";
+    Layout = "~/Views/Layout_MainLogin.cshtml";
+}
+
+
+using Assignment1.Models
+
+<div class="nav-pageview">
+    <nav class="navbar navbar-dark">
+        <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
+    </nav>
+</div>
+<div class="dashboard">
+    <div class="row">
+        <aside class="col-2 left-nav float-left">
+            <p>
+                <ul class="dashboard-nav">
+                    <li><h5 class="nav_title">Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
+
+                    <li><h5 class="nav_title">Html.ActionLink("Courses", "ViewCourses", "CoursesAndRegistration")</h5></li>
+
+                    <li><h5 class="nav_title">Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
+
+                    <li><h5 class="nav_title">Html.ActionLink("Profile", "Index", "Profile")</h5></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
+                </ul>
+            </p>
+        </aside>
+        <div class="vl"></div>
+        <div class="col-9">
+            <div class="justify-content-center">
+                <h1>Courses</h1>
+                <br />
+                <h2>Need search bar with "Search" button</h2>
+                <hr />
+                <form>
+                    <p>
+                        <label for="search-keyword">Search: </label>
+                        <input type="text" id="search-keyword" asp-for="SearchString" />
+                        <input type="submit" value="Filter" />
+                        <br />
+                        <label for="departments">Department:</label>
+                        <select name="departments" id="departments" onselect="deptFilter()">
+                            <option value="1">Comptuer Science</option>
+                            <option value="2">Business and Economics</option>
+                            <option value="3">Education</option>
+                            <option value="4">Dental</option>
+                            <option value="5">Mathematics</option>
+                            <option value="6">Chemistry</option>
+                            <option value="7">Physics</option>
+                            <option value="8">Criminal Justice</option>
+                        </select>
+                    </p>
+                </form>
+                Html.ActionLink("Add Course", "AddCourse", "CoursesAndRegistration", new { class = "addCourseBtn" })
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Course Number</th>
+                        <th>Course Name</th>
+                        <th>Course Description</th>
+                        <th>Instructor</th>
+                        <th>Number of Credits</th>
+                        <th>Department</th>
+                        <th>Meeting Days</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Location</th>
+                        <th>Room Number</th>
+                        <th>Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        foreach (Cours c in (dynamic)Model)
+                        {
+                            <tr>
+                                <td>Html.DisplayFor(modelItem => c.course_num)</td>
+                                <td@Html.DisplayFor(modelItem => c.course_name)</td>
+                                <td>Html.DisplayFor(modelItem => c.course_desc)</td>
+                                <td>Html.DisplayFor(modelItem => c.course_desc)</td>
+                            </tr>
+                        }
+                    }
+
+                    <!--foreach (var
+                     c in Model)
+                    {
+                        <tr>
+                            <td>Html.DisplayFor(modelItem => c.courseNum)</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>Course.courseName</td>
+                    </tr>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td value="
+                    item.courseNum"></td>
+                            <td>item.courseName</td>
+                            <td>item.courseDesc</td>-->-->
+                    <!--@*<td>Html.DisplayFor(item => item.instructorFullName)</td>
+                        <td>Html.DisplayFor(item => item.numCredits)</td>
+                        <td>Html.DisplayFor(item => item.department)</td>
+                        <td>Html.DisplayFor(item => item.meetingDays)</td>
+                        <td>Html.DisplayFor(item => item.startTime)</td>
+                        <td>Html.DisplayFor(item => item.endTime)</td>
+                        <td>Html.DisplayFor(item => item.location)</td>
+                        <td>Html.DisplayFor(item => item.roomNum)</td>
+                        <td>Html.Displayfor(item => item.maxCapacity)</td>*@-->
+                    <!--</tr>
+                    }-->
+                <!--</tbody>
+            </table>
+
+        </div>
+    </div>
+</div>-->

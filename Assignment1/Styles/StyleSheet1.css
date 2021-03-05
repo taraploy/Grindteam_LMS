@@ -254,7 +254,7 @@ li a {
 .courseNumD {
     text-align: center;
 }
-.editCourseBtn, .addCourseBtn {
+.editCourseBtn, .addCourseBtn, .deleteCourseBtn {
     margin: 15px 0;
     margin-right: 10px;
 }
@@ -262,10 +262,36 @@ li a {
     font-size: 20px;
     margin: 5px;
 }
+.btnFields {
+    display: inline-flex;
+}
+.deleteCourseBtn a {
+    display: inline;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: solid 1px #8d0101;
+    border-radius: 5px;
+    background-color: #8d0101;
+    color: white;
+    transition: 300ms ease-in-out;
+    cursor: pointer;
+}
+
+    .deleteCourseBtn a:hover {
+        color: white;
+        background-color: #680101;
+        border: solid 1px #680101;
+    }
 
 /*      Edit Course View */
 .course-form {
     align-content: center;
+}
+.dropDownDepartment {
+    width: 300px;
 }
 
 

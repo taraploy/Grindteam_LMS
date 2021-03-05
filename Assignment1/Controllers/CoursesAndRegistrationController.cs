@@ -48,9 +48,45 @@ namespace Assignment1.Controllers
         {
             gds = new LMS_GRINDEntities1();
             Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
-            Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
+            int department = gds.Departments.Where(x => x.dept_id == course.dept_id).Select(x => x.dept_id).FirstOrDefault();
+            string daysOfWeek = gds.Courses.Where(x => x.course_id == id).Select(x => x.days_of_week).FirstOrDefault();
             ViewBag.selectedCourse = course;
-            ViewBag.courseDepartment = department;
+            bool[] selectedDept = new bool[9];
+
+            for (int i = 0; i < 9; i++)
+            {
+                if (i == department)
+                {
+                    selectedDept[i] = true;
+                }
+                else
+                {
+                    selectedDept[i] = false;
+                }
+            }
+
+            ViewBag.deptArray = selectedDept;
+
+            if (daysOfWeek.Contains("M"))
+            {
+                ViewBag.monday = true;
+            }
+            if (daysOfWeek.Contains("T"))
+            {
+                ViewBag.tuesday = true;
+            }
+            if (daysOfWeek.Contains("W"))
+            {
+                ViewBag.wednesday = true;
+            }
+            if (daysOfWeek.Contains("R"))
+            {
+                ViewBag.thursday = true;
+            }
+            if (daysOfWeek.Contains("F"))
+            {
+                ViewBag.friday = true;
+            }
             return View("EditCourseView");
         }
 
@@ -231,8 +267,6 @@ namespace Assignment1.Controllers
             gds.InstructorCourses.Add(insCourse);
             gds.SaveChanges();
 
-            InstructorCourseContext.instructorCourseId = insCourse.instructor_course_id;
-
             CourseCardList.GenerateInstructorCourseList();
             return View("InstructorCView");
         }
@@ -283,6 +317,28 @@ namespace Assignment1.Controllers
             return View("InstructorCourseDetailView");
         }
 
+        public ActionResult DeleteCourse(int id)
+        {
+            gds = new LMS_GRINDEntities1();
+            
+            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
+            InstructorCours insCourse = gds.InstructorCourses.Where(x => x.course_id == id).FirstOrDefault();
+            //StudentCours[] enrolledStudents = new StudentCours[32];
+            var count = gds.StudentCourses.Where(x => x.course_id == id).Count();
+            for (int i = 0; i < count; i++)
+            {
+                //remove existing enrollments to the class
+                StudentCours stdCourse = gds.StudentCourses.Where(x => x.course_id == id).FirstOrDefault();
+                gds.StudentCourses.Remove(stdCourse);
+                gds.SaveChanges();
+            }
+
+            gds.InstructorCourses.Remove(insCourse);
+            gds.Courses.Remove(course);
+            gds.SaveChanges();
+            CourseCardList.GenerateInstructorCourseList();
+            return RedirectToAction("InstructorCView");
+        }
 
         /// <summary>
         /// Returns a list of strings used for dropdown

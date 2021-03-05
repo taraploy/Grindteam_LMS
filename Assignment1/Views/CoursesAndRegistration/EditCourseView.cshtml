@@ -5,24 +5,10 @@
 }
 @using Assignment1.Models
 <script>
-    function daysOfWeek() {
-        //TODO: FIX SCRIPT
-        if (@ViewBag.selectedCourse.days_of_week.Contains("M")) {
-            document.getElementById("monday").checked = true;
-        }
-        if (@ViewBag.selectedCourse.days_of_week.Contains("T")) {
-            document.getElementById("tuesday").checked = true;
-        }
-        if (@ViewBag.selectedCourse.days_of_week.Contains("W")) {
-            document.getElementById("wednesday").checked = true;
-        }
-        if (@ViewBag.selectedCourse.days_of_week.Contains("R")) {
-            document.getElementById("thursday").checked = true;
-        }
-        if (@ViewBag.selectedCourse.days_of_week.Contains("F")) {
-            document.getElementById("friday").checked = true;
-        }
-    }
+    //function selectIndex(s, i) {
+    //    s.options[i].selected = true;
+    //    return;
+    //}
 </script>
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
@@ -58,89 +44,88 @@
                         <h1>Edit Course</h1>
                         @*Course Information*@
                         <div class="fields">
-                            <label for="course-num">Course number</label>
+                            <label for="course-num"><strong>Course number</strong></label>
                             <input id="course-num" name="courseNum" type="text" value="@ViewBag.selectedCourse.course_num" />
                         </div>
                         <div class="fields">
-                            <label for="course-name">Course name</label>
+                            <label for="course-name"><strong>Course name</strong></label>
                             <input id="course-name" name="courseName" type="text" value="@ViewBag.selectedCourse.course_name" />
                         </div>
                         <div class="fields">
-                            <label for="course-desc">Course description</label>
+                            <label for="course-desc"><strong>Course description</strong></label>
                             <br />
                             <textarea id="course-desc" name="courseDesc" rows="5" cols="50">@ViewBag.selectedCourse.course_desc</textarea>
                         </div>
                         <div class="fields">
-                            <label for="course-credits">Number of credits</label>
+                            <label for="course-credits"><strong>Number of credits</strong></label>
                             <input id="course-credits" name="courseCredits" type="number" value="@ViewBag.selectedCourse.num_credits" min="1" max="6" />
                         </div>
                         <div class="fields">
-                            <label for="course-capacity">Capacity</label>
+                            <label for="course-capacity"><strong>Capacity</strong></label>
                             <input id="course-capacity" name="maxCapacity" type="number" value="@ViewBag.selectedCourse.max_capacity" min="0" max="30" />
                         </div>
                         <div class="fields">
-                            <label for="course-location">Location</label>
+                            <label for="course-location"><strong>Location</strong></label>
                             <input id="course-location" name="courseLocation" value="@ViewBag.selectedCourse.building" type="text" />
                         </div>
                         <div class="fields">
-                            <label for="course-room">Room Number</label>
+                            <label for="course-room"><strong>Room Number</strong></label>
                             <input id="course-room" name="courseRoom" value="@ViewBag.selectedCourse.room_no" type="text" />
                         </div>
                         <div class="fields">
-                            @*Department Dropdown -- TODO: NEED TO DEFAULT WHICH DEPARTMENT BASED ON DB INFO*@
+                            @*Department Dropdown*@
                             <div class="form-group">
-                                <label for="departments">Department</label>
+                                <label for="departments"><strong>Department</strong></label>
                                 <br />
-                                <select name="departments" id="departments">
-                                    <option value="1">Comptuer Science</option>
-                                    <option value="2">Business and Economics</option>
-                                    <option value="3">Education</option>
-                                    <option value="4">Dental</option>
-                                    <option value="5">Mathematics</option>
-                                    <option value="6">Chemistry</option>
-                                    <option value="7">Physics</option>
-                                    <option value="8">Criminal Justice</option>
+                                <select name="departments" id="departments" class="dropDownDepartment">
+                                    @*onload="selectIndex("departments", @ViewBag.deptID)*@
+                                    <option value="1" selected="@ViewBag.deptArray[1]">Comptuer Science</option>
+                                    <option value="2" selected="@ViewBag.deptArray[2]">Business and Economics</option>
+                                    <option value="3" selected="@ViewBag.deptArray[3]">Education</option>
+                                    <option value="4" selected="@ViewBag.deptArray[4]">Dental</option>
+                                    <option value="5" selected="@ViewBag.deptArray[5]">Mathematics</option>
+                                    <option value="6" selected="@ViewBag.deptArray[6]">Chemistry</option>
+                                    <option value="7" selected="@ViewBag.deptArray[7]">Physics</option>
+                                    <option value="8" selected="@ViewBag.deptArray[8]">Criminal Justice</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="fields" onload="daysOfWeek">
+                        <div class="fields">
                             @*Meeting time*@
-                            <label>Meeting time</label>
+                            <label><strong>Meeting time</strong></label>
                             <div class="form-check">
-                                <input type="checkbox" name="monday" value="M" id="monday" class="form-check-input">
+                                <input type="checkbox" name="monday" value="M" id="monday" class="form-check-input" checked="@ViewBag.monday">
                                 <label for="monday" class="form-check-label">Monday</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" name="tuesday" value="T" id="tuesday" class="form-check-input">
-                                <label for="tuesday">Tuesday</label>
+                                <input type="checkbox" name="tuesday" value="T" id="tuesday" class="form-check-input" checked="@ViewBag.tuesday">
+                                <label for="tuesday" class="form-check-label">Tuesday</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" name="wednesday" value="W" id="wednesday" class="form-check-input">
-                                <label for="wednesday">Wednesday</label>
+                                <input type="checkbox" name="wednesday" value="W" id="wednesday" class="form-check-input" checked="@ViewBag.wednesday">
+                                <label for="wednesday" class="form-check-label">Wednesday</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" name="thursday" value="R" id="thursday" class="form-check-input">
-                                <label for="thursday">Thursday</label>
+                                <input type="checkbox" name="thursday" value="R" id="thursday" class="form-check-input" checked="@ViewBag.thursday">
+                                <label for="thursday" class="form-check-label">Thursday</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" name="friday" value="F" id="friday" class="form-check-input">
-                                <label for="friday">Friday</label>
+                                <input type="checkbox" name="friday" value="F" id="friday" class="form-check-input" checked="@ViewBag.friday">
+                                <label for="friday" class="form-check-label">Friday</label>
                             </div>
                         </div>
                         <div class="fields">
-                            <label for="startTime">Start time</label>
+                            <label for="startTime"><strong>Start time</strong></label>
                             <input type="time" id="course-start-time" name="startTime" min="07:00" max="21:00" value="@ViewBag.selectedCourse.start_time" />
                         </div>
                         <div class="fields">
-                            <label for="endTime">End time</label>
+                            <label for="endTime"><strong>End time</strong></label>
                             <input type="time" id="course-end-time" name="endTime" min="07:00" max="21:00" value="@ViewBag.selectedCourse.end_time" />
                         </div>
 
                         <div>
                             <button type="submit" class="saveProfileBtn" id="save-button" value="Save Course">Save Course</button>
-                            @Html.ActionLink("Cancel", "InstructorCview", "CoursesAndRegistration", new { @class = "cancelEditCoursebtn" })
-
-                            @*@Html.ActionLink("Add Course", "SaveCourse", "CoursesAndRegistration", new { new Course("course-name" })*@
+                            @Html.ActionLink("Cancel", "InstructorCview", "CoursesAndRegistration", new { @class = "cancelEditCoursebtn" })                          
                         </div>
                     </div>
                 </form>
