@@ -44,62 +44,18 @@ namespace Assignment1.Controllers
             return View("InstructorCview", departments.ToList().OrderBy(x=>x.dept_name));
         }
 
-        //public ActionResult ViewCourses()
-        //{
-        //    return View("CoursesView");
-        //}
         public ActionResult AddCourse()
         {
             return View("AddCourseView");
         }
 
-        public ActionResult EditCourse(int id)
-        {
-            gds = new LMS_GRINDEntities1();
-            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
-            int department = gds.Departments.Where(x => x.dept_id == course.dept_id).Select(x => x.dept_id).FirstOrDefault();
-            string daysOfWeek = gds.Courses.Where(x => x.course_id == id).Select(x => x.days_of_week).FirstOrDefault();
-            ViewBag.selectedCourse = course;
-            bool[] selectedDept = new bool[9];
-
-            for (int i = 0; i < 9; i++)
-            {
-                if (i == department)
-                {
-                    selectedDept[i] = true;
-                }
-                else
-                {
-                    selectedDept[i] = false;
-                }
-            }
-
-            ViewBag.deptArray = selectedDept;
-
-            if (daysOfWeek.Contains("M"))
-            {
-                ViewBag.monday = true;
-            }
-            if (daysOfWeek.Contains("T"))
-            {
-                ViewBag.tuesday = true;
-            }
-            if (daysOfWeek.Contains("W"))
-            {
-                ViewBag.wednesday = true;
-            }
-            if (daysOfWeek.Contains("R"))
-            {
-                ViewBag.thursday = true;
-            }
-            if (daysOfWeek.Contains("F"))
-            {
-                ViewBag.friday = true;
-            }
-            return View("EditCourseView");
-        }
-
         
+
+        /// <summary>
+        /// Display course details for instructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Display details of the selected course</returns>
         public ActionResult InstructorCourseDetail(int id)
         {
             gds = new LMS_GRINDEntities1();
@@ -316,6 +272,57 @@ namespace Assignment1.Controllers
             }
 
             return View("InstructorCourseDetailView");
+        }
+
+        /// <summary>
+        /// HTML controller method
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditCourse(int id)
+        {
+            gds = new LMS_GRINDEntities1();
+            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
+            int department = gds.Departments.Where(x => x.dept_id == course.dept_id).Select(x => x.dept_id).FirstOrDefault();
+            string daysOfWeek = gds.Courses.Where(x => x.course_id == id).Select(x => x.days_of_week).FirstOrDefault();
+            ViewBag.selectedCourse = course;
+            bool[] selectedDept = new bool[9];
+
+            for (int i = 0; i < 9; i++)
+            {
+                if (i == department)
+                {
+                    selectedDept[i] = true;
+                }
+                else
+                {
+                    selectedDept[i] = false;
+                }
+            }
+
+            ViewBag.deptArray = selectedDept;
+
+            if (daysOfWeek.Contains("M"))
+            {
+                ViewBag.monday = true;
+            }
+            if (daysOfWeek.Contains("T"))
+            {
+                ViewBag.tuesday = true;
+            }
+            if (daysOfWeek.Contains("W"))
+            {
+                ViewBag.wednesday = true;
+            }
+            if (daysOfWeek.Contains("R"))
+            {
+                ViewBag.thursday = true;
+            }
+            if (daysOfWeek.Contains("F"))
+            {
+                ViewBag.friday = true;
+            }
+            return View("EditCourseView");
         }
 
         public ActionResult DeleteCourse(int id)

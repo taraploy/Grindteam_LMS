@@ -3,9 +3,6 @@
     ViewBag.Title = "InstructorCview";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
-@{
-    int i = 1;
-}
 
 @using Assignment1.Models
 
@@ -59,22 +56,25 @@
                     </div>
                     <hr />
 
-                    <label for="departments">Filter by Department:</label>
-                    <select name="departments" id="departments" onselect="deptFilter()">
-                        @foreach (var item in Model)
-                        {
-                            <option value="@i">@item.dept_name</option>
-                            i++;
-                        }
-                        @*<option value="1">Comptuer Science</option>
-                <option value="2">Business and Economics</option>
-                <option value="3">Education</option>
-                <option value="4">Dental</option>
-                <option value="5">Mathematics</option>
-                <option value="6">Chemistry</option>
-                <option value="7">Physics</option>
-                <option value="8">Criminal Justice</option>*@
-                    </select>
+                    @*<label for="departments">Filter by Department:</label>
+        <select name="departments" id="departments" onselect="deptFilter()">
+            @foreach (var item in Model)
+            {
+                <option value="@i">@item.dept_name</option>
+                i++;
+            }
+        </select>
+                    *@
+
+
+                    @*<option value="1">Comptuer Science</option>
+        <option value="2">Business and Economics</option>
+        <option value="3">Education</option>
+        <option value="4">Dental</option>
+        <option value="5">Mathematics</option>
+        <option value="6">Chemistry</option>
+        <option value="7">Physics</option>
+        <option value="8">Criminal Justice</option>*@
 
                 </form>
                 @Html.ActionLink("Add Course", "AddCourse", "CoursesAndRegistration", new { @class = "addCourseBtn" })

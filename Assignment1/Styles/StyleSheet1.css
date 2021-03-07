@@ -11,7 +11,7 @@ html {
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 0;
-    background: #f6f5f5;
+    background: #edf2f4;
 }
 
 .navbar {
@@ -166,6 +166,7 @@ li a {
 .vl {
     border: 1px solid #276678;
     height: auto;
+    margin: 0 1px;
 }
 
 /*                          Profile Page Style                           */
@@ -195,7 +196,8 @@ li a {
     text-align: center;
 }
 .editProfileBtn, .saveProfileBtn, .cancelSaveProfileBtn,
-.addCourseBtn, .detailCourseBtn, .editCourseBtn, .cancelEditCoursebtn {
+.addCourseBtn, .detailCourseBtn, .editCourseBtn, .cancelEditCoursebtn,
+.paymentBtn, .addAssignmentBtn {
     display: block;
     margin: 20px auto;
     padding: 10px 15px;
@@ -212,7 +214,8 @@ li a {
 }
     .editProfileBtn:hover, .saveProfileBtn:hover,
     .cancelSaveProfileBtn:hover, .addCourseBtn:hover,
-    .detailCourseBtn:hover, .editCourseBtn:hover, .cancelEditCoursebtn:hover {
+    .detailCourseBtn:hover, .editCourseBtn:hover, .cancelEditCoursebtn:hover,
+    .paymentBtn:hover, .addAssignmentBtn:hover {
         color: white;
         background-color: #276678;
         border: solid 1px #276678;
@@ -304,6 +307,20 @@ li a {
     border-color: #981b27;
 }
 
+/*      Instructor Assignment View      */  
+
+.assignment-list {
+    padding: 0 8px;
+}
+
+.assignment-list-item {
+    padding: 5px;
+    margin-top: 7px;
+}
+
+.hr-assignment-list {
+    margin: 0 auto;
+}
 
 
 @media (max-width: 767.98px) {

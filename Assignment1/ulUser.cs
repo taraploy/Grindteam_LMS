@@ -6,12 +6,13 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.Web;
+
 namespace Assignment1
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class ulUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +21,7 @@ namespace Assignment1
             this.InstructorCourses = new HashSet<InstructorCours>();
             this.StudentCourses = new HashSet<StudentCours>();
         }
-    
+
         public int ulUser_id { get; set; }
         public string user_password { get; set; }
         public string first_name { get; set; }
@@ -39,6 +40,7 @@ namespace Assignment1
         public string linkTitle2 { get; set; }
         public string linkTitle3 { get; set; }
         public HttpPostedFileBase File { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InstructorCours> InstructorCourses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

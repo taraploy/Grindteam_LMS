@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="LMS_GRINDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Assignments">
+    <Key>
+      <PropertyRef Name="assignment_id" />
+    </Key>
+    <Property Name="assignment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="instructor_course_id" Type="int" Nullable="false" />
+    <Property Name="assignment_name" Type="varchar" MaxLength="50" />
+    <Property Name="assignment_desc" Type="varchar" MaxLength="200" />
+    <Property Name="assignment_type" Type="varchar" MaxLength="50" />
+    <Property Name="max_points" Type="int" />
+    <Property Name="due_date" Type="date" />
+  </EntityType>
   <EntityType Name="Courses">
     <Key>
       <PropertyRef Name="course_id" />
@@ -32,6 +44,19 @@
     <Property Name="instructor_course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="course_id" Type="int" Nullable="false" />
     <Property Name="instructor_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentAssignments">
+    <Key>
+      <PropertyRef Name="assignment_grade_id" />
+    </Key>
+    <Property Name="assignment_grade_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="assignment_id" Type="int" Nullable="false" />
+    <Property Name="student_course_id" Type="int" />
+    <Property Name="student_id" Type="int" Nullable="false" />
+    <Property Name="grade" Type="int" />
+    <Property Name="submission_date" Type="date" />
+    <Property Name="text_submission" Type="varchar" MaxLength="500" />
+    <Property Name="file_submission" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="StudentCourses">
     <Key>
@@ -91,9 +116,11 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="LMS_GRINDModelStoreContainer">
+    <EntitySet Name="Assignments" EntityType="Self.Assignments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InstructorCourses" EntityType="Self.InstructorCourses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentAssignments" EntityType="Self.StudentAssignments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentCourses" EntityType="Self.StudentCourses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ulUser" EntityType="Self.ulUser" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Courses_Departments" Association="Self.FK_Courses_Departments">

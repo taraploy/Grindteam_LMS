@@ -70,5 +70,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Assignments">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.Assignment">
+        <MappingFragment StoreEntitySet="Assignments">
+          <ScalarProperty Name="due_date" ColumnName="due_date" />
+          <ScalarProperty Name="max_points" ColumnName="max_points" />
+          <ScalarProperty Name="assignment_type" ColumnName="assignment_type" />
+          <ScalarProperty Name="assignment_desc" ColumnName="assignment_desc" />
+          <ScalarProperty Name="assignment_name" ColumnName="assignment_name" />
+          <ScalarProperty Name="instructor_course_id" ColumnName="instructor_course_id" />
+          <ScalarProperty Name="assignment_id" ColumnName="assignment_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentAssignments">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.StudentAssignment">
+        <MappingFragment StoreEntitySet="StudentAssignments">
+          <ScalarProperty Name="file_submission" ColumnName="file_submission" />
+          <ScalarProperty Name="text_submission" ColumnName="text_submission" />
+          <ScalarProperty Name="submission_date" ColumnName="submission_date" />
+          <ScalarProperty Name="grade" ColumnName="grade" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="student_course_id" ColumnName="student_course_id" />
+          <ScalarProperty Name="assignment_id" ColumnName="assignment_id" />
+          <ScalarProperty Name="assignment_grade_id" ColumnName="assignment_grade_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

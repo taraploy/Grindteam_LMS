@@ -50,6 +50,8 @@
       <End Role="Department" EntitySet="Departments" />
       <End Role="Cours" EntitySet="Courses" />
     </AssociationSet>
+    <EntitySet Name="Assignments" EntityType="LMS_GRINDModel.Assignment" />
+    <EntitySet Name="StudentAssignments" EntityType="LMS_GRINDModel.StudentAssignment" />
   </EntityContainer>
   <EntityType Name="Cours">
     <Key>
@@ -161,4 +163,29 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Assignment">
+    <Key>
+      <PropertyRef Name="assignment_id" />
+    </Key>
+    <Property Name="assignment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="instructor_course_id" Type="Int32" Nullable="false" />
+    <Property Name="assignment_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="assignment_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="assignment_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="max_points" Type="Int32" />
+    <Property Name="due_date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="StudentAssignment">
+    <Key>
+      <PropertyRef Name="assignment_grade_id" />
+    </Key>
+    <Property Name="assignment_grade_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="assignment_id" Type="Int32" Nullable="false" />
+    <Property Name="student_course_id" Type="Int32" />
+    <Property Name="student_id" Type="Int32" Nullable="false" />
+    <Property Name="grade" Type="Int32" />
+    <Property Name="submission_date" Type="DateTime" Precision="0" />
+    <Property Name="text_submission" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="file_submission" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>
