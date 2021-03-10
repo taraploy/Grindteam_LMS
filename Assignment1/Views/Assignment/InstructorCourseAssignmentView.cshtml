@@ -1,10 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "InstructorAssignmentView";
+    ViewBag.Title = "InstructorCourseAssignmentView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
 @using Assignment1.Models
+
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -22,7 +23,7 @@
 
                 <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
-                <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
+                <li><h5 class="nav_title">@Html.ActionLink("Assignments", "InstructorAssignment", "Assignment")</h5></li>
 
                 <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
 
@@ -35,21 +36,17 @@
         <div class="container">
             <div class="justify-content-center row">
                 <div class="col-md-12">
-                    <h2 class="text-center">@ViewBag.CourseNum @ViewBag.CourseName</h2>
-                    <div class="addAssignmentDiv">@Html.ActionLink("Back to Course list", "CourseAssignmentList", "Assignment", new { @class = "addAssignmentBtn" })</div>
-                    <div class="addAssignmentDiv float-right">@Html.ActionLink("Add Assignment", "AddAssignment", new { id = @ViewBag.CourseId }, new { @class = "addAssignmentBtn" })</div>
+                    <h2 class="text-center">Course List</h2>
                     <div class="card assignment-list">
                         @*for loop*@
                         @{
-                            foreach(var item in AssignmentList.AssignmentItemList) {
+                            foreach(var item in CourseCardList.CourseList) {
                             <div class="assignment-list-item">
-                                <div class="float-left">
-                                    <h6><strong>@item.AssignmentName</strong> - @item.AssignmentType</h6>
-                                    <p>Due date: @item.DueDate</p>
+                                <div class="float-left courselist">
+                                    <h6>@item.CourseNum @item.CourseName</h6>
                                 </div>
-                                <div class="float-right">                               
-                                    @Html.ActionLink("Edit", "EditAssignment", "Assignment", new { id = @item.AssignmentId }, null) | 
-                                    @Html.ActionLink("Delete", "DeleteAssignment", "Assignment", new { id = @item.AssignmentId },  null)
+                                <div class="float-right">
+                                    @Html.ActionLink("Assignments", "InstructorAssignment", "Assignment", new { id = @item.CourseId }, new { @class = "assignmentBtn"} )
                                 </div>
                             </div>
                             <hr class="hr-assignment-list" />

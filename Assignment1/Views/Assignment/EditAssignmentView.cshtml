@@ -1,13 +1,9 @@
-﻿
-@model IEnumerable<Assignment1.Cours>
+﻿@model IEnumerable<Assignment1.Cours>
 
 @{
-    ViewBag.Title = "AddAssignmentView";
+    ViewBag.Title = "EditAssignmentView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
-
-@*@using Assignment1.Models*@
-<h2>AddAssignmentView</h2>
 
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
@@ -38,50 +34,50 @@
     </aside>
     <div class="vl"></div>
     <div class="container">
-        <form action="@Url.Action("SaveAssignment", "Assignment", new { id = @ViewBag.CourseId }, null)" method="post" @*enctype="multipart/form-data"*@>
+        <form action="@Url.Action("UpdateAssignment", "Assignment", new { id = @ViewBag.selectedAssignment.assignment_id }, null)" method="post" @*enctype="multipart/form-data"*@>
             <div class="course-form">
-                <h2><strong>@ViewBag.CourseNum @ViewBag.CourseName - Add Assignment</strong></h2>
+                <h2><strong>@ViewBag.CourseNum @ViewBag.CourseName - Edit Assignment</strong></h2>
                 <hr />
                 @*Assignment Information*@
                 <div hidden class="form-group">
                     <label for="course-num"><strong>Course Number:</strong></label>
-                    <h1  name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
-                    <h1  name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
+                    <h1 name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
+                    <h1 name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
                     <h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>
                 </div>
                 <div class="form-group">
-                    <label for="assignment-name"><strong>Assignment Name:</strong></label>
-                    <input id="assignment-name" name="assignmentName" type="text" />
+                    <label for="assignment-name"><strong>Assignment Name: </strong></label>
+                    <input id="assignment-name" name="assignmentName" type="text" value="@ViewBag.selectedAssignment.assignment_name"/>
                 </div>
                 <div class="form-group">
                     <label for="assignment-desc"><strong>Assignment Description:</strong></label>
-                    <textarea id="assignment-desc" name="assignmentDesc" rows="3" cols="50" class="form-control"></textarea>
+                    <textarea id="assignment-desc" name="assignmentDesc" rows="3" cols="50" class="form-control">@ViewBag.selectedAssignment.assignment_desc</textarea>
                 </div>
                 <div class="form-group">
                     <label for="max-points"><strong>Maximum Points:</strong></label>
-                    <input id="max-points" name="maxPoints" type="number" min="0" max="100" />
+                    <input id="max-points" name="maxPoints" type="number" min="0" max="100" value="@ViewBag.selectedAssignment.max_points" />
                 </div>
                 <div class="form-group">
+                    @* TODO: Fix default value for due date *@
                     <label for="due-date"><strong>Due Date:</strong></label>
-                    <input id="due-date" name="dueDate" type="datetime-local" />
+                    <input id="due-date" value="@Convert.ToDateTime(ViewBag.DueDate)" name="dueDate" type="datetime-local"/>
                 </div>
                 <div class="form-group">
                     @*Assignment Type*@
                     <label for="assignment-type"><strong>Assignment Type:</strong></label>
                     <select name="assignmentType" id="assignment-type">
-                        <option value="Quiz">Quiz</option>
-                        <option value="Test">Test</option>
-                        <option value="Project">Project</option>
-                        <option value="Homework">Homework</option>
-                        <option value="Participation">Participation</option>
-                        <option value="Presentation">Presentation</option>
-                        <option value="Discussion">Discussion</option>
+                        <option value="Quiz" selected="@ViewBag.assignmentType[0]">Quiz</option>
+                        <option value="Test" selected="@ViewBag.assignmentType[1]">Test</option>
+                        <option value="Project" selected="@ViewBag.assignmentType[2]">Project</option>
+                        <option value="Homework" selected="@ViewBag.assignmentType[3]">Homework</option>
+                        <option value="Participation" selected="@ViewBag.assignmentType[4]">Participation</option>
+                        <option value="Presentation" selected="@ViewBag.assignmentType[5]">Presentation</option>
+                        <option value="Discussion" selected="@ViewBag.assignmentType[6]">Discussion</option>
                     </select>
                 </div>
-
                 <div>
-                    <button type="submit" class="saveAssignmentBtn" id="save-button" value="Add Assignment">Add Assignment</button>
-                    @Html.ActionLink("Cancel", "InstructorAssignment", "Assignment", new { @class = "addCourseBtn" }, null)
+                    <button type="submit" class="saveAssignmentBtn" id="save-button" value="Update Assignment">Update Assignment</button>
+                    @Html.ActionLink("Cancel", "InstructorAssignment", "Assignment", new { @class = "addCourseBtn" })
 
                 </div>
             </div>

@@ -11,13 +11,13 @@ namespace Assignment1.Models
         public static List<AssignmentItem> AssignmentItemList;
         public static List<StudentAssignmentItem> StudentAssignments;
 
-        public static void GenerateInstructorAssignmentList()
+        public static void GenerateInstructorAssignmentList(int? id)
         {
             AssignmentItemList = new List<AssignmentItem>();
             LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
             var query = (from a in gds.Assignments
                         join ic in gds.InstructorCourses on a.instructor_course_id equals ic.instructor_course_id
-                        where ic.instructor_id == Name.user_id
+                        where ic.instructor_id == Name.user_id && ic.course_id == id
                         select new
                         {
                             AssignmentId = a.assignment_id,

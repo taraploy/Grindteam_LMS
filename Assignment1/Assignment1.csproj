@@ -335,6 +335,8 @@
     <Content Include="Views\Assignment\AddAssignmentView.cshtml" />
     <Content Include="Views\Payment\PaymentInfoView.cshtml" />
     <Content Include="Views\Assignment\InstructorAssignmentView.cshtml" />
+    <Content Include="Views\Assignment\InstructorCourseAssignmentView.cshtml" />
+    <Content Include="Views\Assignment\EditAssignmentView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

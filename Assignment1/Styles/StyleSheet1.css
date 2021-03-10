@@ -11,7 +11,7 @@ html {
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 0;
-    background: #edf2f4;
+    background: #FFFFFE;
 }
 
 .navbar {
@@ -196,8 +196,9 @@ li a {
     text-align: center;
 }
 .editProfileBtn, .saveProfileBtn, .cancelSaveProfileBtn,
-.addCourseBtn, .detailCourseBtn, .editCourseBtn, .cancelEditCoursebtn,
-.paymentBtn, .addAssignmentBtn {
+.addCourseBtn, .detailCourseBtn, .saveCourseBtn, .editCourseBtn, .cancelEditCoursebtn,
+.paymentBtn, .addAssignmentBtn, .assignmentBtn, .deleteAssignmentBtn, .saveAssignmentBtn,
+.cancelPaymentBtn, .makePaymentBtn {
     display: block;
     margin: 20px auto;
     padding: 10px 15px;
@@ -214,8 +215,9 @@ li a {
 }
     .editProfileBtn:hover, .saveProfileBtn:hover,
     .cancelSaveProfileBtn:hover, .addCourseBtn:hover,
-    .detailCourseBtn:hover, .editCourseBtn:hover, .cancelEditCoursebtn:hover,
-    .paymentBtn:hover, .addAssignmentBtn:hover {
+    .detailCourseBtn:hover, .saveCourseBtn:hover, .editCourseBtn:hover, .cancelEditCoursebtn:hover,
+    .paymentBtn:hover, .addAssignmentBtn:hover, .assignmentBtn:hover, .deleteAssignmentBtn:hover,
+    .saveAssignmentBtn:hover, .cancelPaymentBtn:hover, .makePaymentBtn:hover {
         color: white;
         background-color: #276678;
         border: solid 1px #276678;
@@ -322,6 +324,25 @@ li a {
     margin: 0 auto;
 }
 
+.courselist {
+    
+    /*display: block;
+    margin-top: auto;
+    margin-bottom: auto;*/
+}
+
+.addAssignmentDiv {
+    display: inline-block;
+}
+
+/*      Payment Info View       */
+.balance-card {
+    padding: 15px;
+}
+
+.p-info {
+    padding-top: 5px;
+}
 
 @media (max-width: 767.98px) {
     .form-block {

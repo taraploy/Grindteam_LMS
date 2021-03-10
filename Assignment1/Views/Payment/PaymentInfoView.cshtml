@@ -73,12 +73,88 @@
         <div class="vl"></div>
         <div class="col-md-7">
             <div class="container">
-                <h2 class="text-center">Payment</h2>
-                <div class="row">
-                    <div class="col-md-5">
-                        <h6>Billing Address</h6>
+                <main>
+                    <h2 class="text-center">Payment</h2>
+                    <div class="row">
+                        <div class="col-md-5 col-lg-4 order-md-last">
+                            <h6 class="mb-3"><strong>Payment Summary</strong></h6>
+                            <div class="card balance-card">
+                                <div>
+                                    <h6>
+                                        <strong>Balance Due</strong>
+                                        <span class="text-muted float-right">$2000</span>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-lg-8">
+                            <form action="/" method="post">
+                                @*<h6><strong>Amount to pay</strong></h6>*@
+                                <div class="row">
+                                    <div class="col-sm-6 p-info">
+                                        <label for="amount"><strong>Amount to pay</strong></label>
+                                        <input type="number" class="form-control" id="amount" name="" value="" />
+                                    </div>
+                                </div>
+                                <hr />
+                                <h6 class="mb-3"><strong>Card Information</strong></h6>
+                                <div class="row">
+                                    <div class="col-sm-6 p-info">
+                                        <label for="nameOnCard" class="form-label">Name on card</label>
+                                        <input type="text" class="form-control" id="nameOnCard" name="" value="" />
+                                    </div>
+                                    <div class="col-sm-6 p-info">
+                                        <label for="cardNumber">Credit card number</label>
+                                        <input type="text" class="form-control" id="cardNumber" pattern="[0-9]{16}" name="" value=""/>
+                                    </div>
+                                    <div class="col-sm-3 p-info">
+                                        <label for="cardExp">Expiration</label>
+                                        <input type="text" class="form-control" id="cardExp" name="" value="" />
+                                    </div>
+                                    <div class="col-md-3 p-info">
+                                        <label for="cardCVV">CVV</label>
+                                        <input type="number" class="form-control" min="000" max="999" id="cardCVV" name="" value="" />
+                                    </div>
+                                </div>
+                                <hr />
+                                <h6 class="mb-3"><strong>Billing Address</strong></h6>
+                                <div class="row">
+                                    <div class="col-sm-6 p-info">
+                                        <label for="firstname" class="form-label">First name</label>
+                                        <input type="text" class="form-control" id="firstname" name="" value="" />
+                                    </div>
+                                    <div class="col-sm-6 p-info">
+                                        <label for="lastname" class="form-label">Last name</label>
+                                        <input type="text" class="form-control" id="lastname" name="" value="" />
+                                    </div>
+                                    <div class="col-12 p-info">
+                                        <label for="address1" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="address1" name="" value="" />
+                                    </div>
+                                    <div class="col-12 p-info">
+                                        <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
+                                        <input type="text" class="form-control" id="address2" name="" value="" />
+                                    </div>
+                                    <div class="col-md-5 p-info">
+                                        <label for="country" class="form-label">Country</label>
+                                        <input type="text" class="form-control" id="country" name="" value="" />
+                                    </div>
+                                    <div class="col-md-4 p-info">
+                                        <label for="state" class="form-label">State</label>
+                                        <input type="text" class="form-control" id="state" name="" value="" />
+                                    </div>
+                                    <div class="col-md-3 p-info">
+                                        <label for="zipcode" class="form-label">Zipcode</label>
+                                        <input type="number" class="form-control" id="zipcode" name="" value="" />
+                                    </div>
+                                </div>
+                                <hr />
+                                <button type="submit" class="makePaymentBtn">Make a payment</button>
+                                @Html.ActionLink("Cancel", "Balance", "Payment", new { @class= "cancelPaymentBtn"})
+                            </form>
+                        </div>
                     </div>
-                </div>
+                </main>
             </div>
         </div>
     </div>
