@@ -1,9 +1,19 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "BalanceView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
-
+@using Assignment1.Models
+@model IEnumerable<Assignment1.Cours>
+@{ 
+    double dSemesterTotal = 0;
+    double dAmountPaid = 0;
+    double dSemesterBalance;
+    foreach(var course in Model)
+    {
+        dSemesterTotal += ((double)course.num_credits * 100);
+    }
+    dSemesterBalance = dSemesterTotal - dAmountPaid;
+}
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -71,8 +81,47 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div>
-            @Html.ActionLink("Payment", "PaymentInfo", "Payment", new { @class = "paymentBtn"})
+        <div class="col-9 text-center">
+            <h1>Student Balance</h1>
+            <hr/>
+            <div class="ml-auto mr-auto w-75 border rounded-lg">
+                <table class="w-100">
+                    <thead>
+                        <tr>
+                            <th class="text-left p-2">
+                                <h4>Semester Bill</h4>
+                            </th>
+                            <th class="text-right p-2">
+                                <h4>@Name.last_name, @Name.first_name</h4>
+                            </th>
+                        </tr>
+                        <tr class="border-top">
+                            <th class="text-left p-2">Description</th>
+                            <th class="text-right p-2">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-left p-2">Semester Total</td>
+                            <td class="text-right p-2">@dSemesterTotal.ToString("C")</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left p-2">Amount Paid</td>
+                            <td class="text-right p-2">@dAmountPaid.ToString("C")</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left p-2 font-weight-bold">Balance Due</td>
+                            <td class="text-right p-2">@dSemesterBalance.ToString("C")</td>
+                        </tr>
+                        <tr class="border-top">
+                            <td colspan="100" class="text-right pt-0">
+                                @Html.ActionLink("Make Payment", "PaymentInfo", "Payment", new { @class = "paymentBtn mr-3" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 </div>
