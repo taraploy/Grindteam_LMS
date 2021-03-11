@@ -53,45 +53,47 @@ namespace Assignment1.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveAssignment(int? courseId, string courseNum, string courseName, string assignmentName,
+        public ActionResult SaveAssignment(string assignmentName,
             string assignmentDesc, int maxPoints, DateTime dueDate, string assignmentType)
         {
-            if (courseId != null)
+            var courseId = int.Parse(Request.Form["CourseId"]);
+            var courseNum = Request.Form["CourseNum"];
+            var courseName = Request.Form["CourseName"];
+
+           
+            gds = new LMS_GRINDEntities1();
+            Assignment newAssignment = new Assignment();
+
+            var query = from course in gds.Courses
+                        join insCourse in gds.InstructorCourses
+                        on course.course_id equals insCourse.course_id
+                        where course.course_id == courseId
+                        select new
+                        {
+                            instructorCourseID = insCourse.instructor_course_id
+                        };
+
+            foreach (var insCourse in query)
             {
-                gds = new LMS_GRINDEntities1();
-                Assignment newAssignment = new Assignment();
-
-                var query = from course in gds.Courses
-                            join insCourse in gds.InstructorCourses
-                            on course.course_id equals insCourse.course_id
-                            where course.course_id == courseId
-                            select new
-                            {
-                                instructorCourseID = insCourse.instructor_course_id
-                            };
-
-                foreach (var insCourse in query)
-                {
-                    newAssignment.instructor_course_id = insCourse.instructorCourseID;
-                }
-
-                newAssignment.assignment_name = assignmentName;
-                newAssignment.assignment_desc = assignmentDesc;
-                newAssignment.max_points = maxPoints;
-                newAssignment.due_date = dueDate;
-                newAssignment.assignment_type = assignmentType;
-                gds.Assignments.Add(newAssignment);
-                gds.SaveChanges();
-
-
-                AssignmentList.GenerateInstructorAssignmentList(courseId);
-                CourseCardList.GenerateInstructorCourseList();
-                //List<Cours> displayCourseList = GetCourseList();   // Display instructor's course list
-                //@ViewBag.courseList = displayCourseList;
-                @ViewBag.CourseNum = courseNum;
-                @ViewBag.CourseName = courseName;
-                @ViewBag.CourseId = courseId;
+                newAssignment.instructor_course_id = insCourse.instructorCourseID;
             }
+
+            newAssignment.assignment_name = assignmentName;
+            newAssignment.assignment_desc = assignmentDesc;
+            newAssignment.max_points = maxPoints;
+            newAssignment.due_date = dueDate;
+            newAssignment.assignment_type = assignmentType;
+            gds.Assignments.Add(newAssignment);
+            gds.SaveChanges();
+
+
+            AssignmentList.GenerateInstructorAssignmentList(courseId);
+            CourseCardList.GenerateInstructorCourseList();
+            //List<Cours> displayCourseList = GetCourseList();   // Display instructor's course list
+            //@ViewBag.courseList = displayCourseList;
+            @ViewBag.CourseNum = courseNum;
+            @ViewBag.CourseName = courseName;
+            @ViewBag.CourseId = courseId;
             return View("InstructorAssignmentView");
         }
 
@@ -149,26 +151,30 @@ namespace Assignment1.Controllers
             return index;
         }
         
-        public ActionResult DeleteAssignment(int? id)
+        
+        public ActionResult DeleteAssignment(int id)
         {
             gds = new LMS_GRINDEntities1();
-
             Assignment assignment = gds.Assignments.Where(x => x.assignment_id == id).FirstOrDefault();
             int insCourse = gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.instructor_course_id).FirstOrDefault();
             int courseId = gds.InstructorCourses.Where(x => x.instructor_course_id == insCourse).Select(x => x.course_id).FirstOrDefault();
-
+            var courseNum = gds.Courses.Where(x => x.course_id == courseId).Select(x => x.course_num).FirstOrDefault();
+            var courseName = gds.Courses.Where(x => x.course_id == courseId).Select(x => x.course_name).FirstOrDefault();
             gds.Assignments.Remove(assignment);
             gds.SaveChanges();
 
             //Delete from assignments table, and student assignments table
             //TODO: implement delete from studentAssignments table'
+            ViewBag.CourseNum = courseNum;
+            ViewBag.CourseName = courseName;
+            ViewBag.CourseId = courseId;
             AssignmentList.GenerateInstructorAssignmentList(courseId);
             CourseCardList.GenerateInstructorCourseList();
             return View("InstructorAssignmentView");
         }
 
         [HttpPost]
-        public ActionResult UpdateAssignment(int? id, string assignmentName, string assignmentDesc, int maxPoints, 
+        public ActionResult UpdateAssignment(int id, string assignmentName, string assignmentDesc, int maxPoints, 
             DateTime dueDate, string assignmentType)
         {
             gds = new LMS_GRINDEntities1();
@@ -204,8 +210,11 @@ namespace Assignment1.Controllers
             return View("InstructorAssignmentView");
         }
 
-        public ActionResult EditAssignment(int? id)
+        public ActionResult EditAssignment(int id)
         {
+            //var id = int.Parse(Request.Form["CourseId"]);
+            //var courseNum = Request.Form["CourseNum"];
+            //var courseName = Request.Form["CourseName"];
             gds = new LMS_GRINDEntities1();
             Assignment assignment = gds.Assignments.Where(x => x.assignment_id == id).FirstOrDefault(); 
             int insCourse = gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.instructor_course_id).FirstOrDefault();
@@ -249,9 +258,10 @@ namespace Assignment1.Controllers
             ViewBag.assignmentType = assignmentType;
             ViewBag.CourseNum = courseNum;
             ViewBag.CourseName = courseName;
+            ViewBag.CourseId = courseId;
             //DateTime dueDate = DateTime.Parse(assignment.due_date);
             ViewBag.DueDate = assignment.due_date;
-            AssignmentList.GenerateInstructorAssignmentList(courseId);
+            AssignmentList.GenerateInstructorAssignmentList(id);
             return View("EditAssignmentView");
         }
     }

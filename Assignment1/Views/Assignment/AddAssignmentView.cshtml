@@ -1,14 +1,13 @@
 ﻿
 @model IEnumerable<Assignment1.Cours>
 
+
 @{
     ViewBag.Title = "AddAssignmentView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
-@*@using Assignment1.Models*@
-<h2>AddAssignmentView</h2>
-
+@using Assignment1.Models
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -38,16 +37,19 @@
     </aside>
     <div class="vl"></div>
     <div class="container">
-        <form action="@Url.Action("SaveAssignment", "Assignment", new { id = @ViewBag.CourseId }, null)" method="post" @*enctype="multipart/form-data"*@>
+        <form action="@Url.Action("SaveAssignment", "Assignment")" method="post" @*enctype="multipart/form-data"*@>
             <div class="course-form">
                 <h2><strong>@ViewBag.CourseNum @ViewBag.CourseName - Add Assignment</strong></h2>
                 <hr />
                 @*Assignment Information*@
                 <div hidden class="form-group">
                     <label for="course-num"><strong>Course Number:</strong></label>
+                    @Html.Hidden("CourseId", (object)ViewBag.CourseId)
+                    @Html.Hidden("CourseNum", (object)ViewBag.CourseNum)
+                    @Html.Hidden("CourseName", (object)ViewBag.CourseName)
                     <h1  name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
                     <h1  name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
-                    <h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>
+                    @*<h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>*@
                 </div>
                 <div class="form-group">
                     <label for="assignment-name"><strong>Assignment Name:</strong></label>

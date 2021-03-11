@@ -11,12 +11,13 @@ namespace Assignment1.Models
         public static List<AssignmentItem> AssignmentItemList;
         public static List<StudentAssignmentItem> StudentAssignments;
 
-        public static void GenerateInstructorAssignmentList(int? id)
+        public static void GenerateInstructorAssignmentList(int id)
         {
             AssignmentItemList = new List<AssignmentItem>();
             LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
             var query = (from a in gds.Assignments
                         join ic in gds.InstructorCourses on a.instructor_course_id equals ic.instructor_course_id
+                        join c in gds.Courses on ic.course_id equals c.course_id
                         where ic.instructor_id == Name.user_id && ic.course_id == id
                         select new
                         {
@@ -26,8 +27,10 @@ namespace Assignment1.Models
                             AssignmentDesc = a.assignment_desc,
                             AssignmentType = a.assignment_type,
                             MaxPoints = a.max_points,
-                            DueDate = a.due_date
-
+                            DueDate = a.due_date,
+                            CourseId = c.course_id,
+                            CourseNum = c.course_num,
+                            CourseName = c.course_name
                         }).ToList();
 
             int i = 0;
@@ -41,7 +44,9 @@ namespace Assignment1.Models
                 AssignmentItemList[i].AssignmentType = item.AssignmentType;
                 AssignmentItemList[i].MaxPoints = item.MaxPoints;
                 AssignmentItemList[i].DueDate = item.DueDate;
-
+                AssignmentItemList[i].CourseId = item.CourseId;
+                AssignmentItemList[i].CourseNum = item.CourseNum;
+                AssignmentItemList[i].CourseName = item.CourseName;
                 i++;
             }
     }

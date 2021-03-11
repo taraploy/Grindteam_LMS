@@ -14,5 +14,8 @@ namespace Assignment1.Models
         public string AssignmentType;
         public Nullable<int> MaxPoints;
         public Nullable<System.DateTime> DueDate;
+        public int CourseId;
+        public string CourseName;
+        public string CourseNum;
     }
 }
