@@ -89,7 +89,7 @@
                         <a href="#">
                             <div class="card course-list">
                                 <div class="card-body">
-                                    <h5 class="card-title">@item.CourseNum</h5>
+                                    <h5 class="card-title">@Html.ActionLink(item.CourseNum.ToString(), "InstructorCourseDetail", "CoursesAndRegistration", new { @id = item.CourseId }, null)</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">@item.CourseName</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">@item.InstructorFirstName @item.InstructorLastName</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">@item.Building Room @item.RoomNumber</h6>
@@ -100,54 +100,6 @@
                     }
                 }
             </div>
-            @*<div class="row justify-content-center">
-                    <a href="#">
-                        <div class="card course-list">
-                            <div class="card-body">
-                                <h5 class="card-title">CS 3750</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Software Engineering II</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Arpit Christi</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Davis Campus Room 411</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">9:30 AM - 11:20 AM MW</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="card course-list">
-                            <div class="card-body">
-                                <h5 class="card-title">CS 3100</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Operating System</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Mark Hudson</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Ogden Campus Room 325</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">7:30 AM - 9:30 AM TTH</h6>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="row justify-content-center">
-                    <a href="#">
-                        <div class="card course-list">
-                            <div class="card-body">
-                                <h5 class="card-title">CS 3550</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Advanced Database</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Drew Weidman</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Davis Campus Room 116</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">11:30 AM - 1:20 PM MW</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="card course-list">
-                            <div class="card-body">
-                                <h5 class="card-title">CS 4110</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Formal Language & Algorithms</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Yong Zhang</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Davis Campus Room 226</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">5:30 PM - 7:20 PM MW</h6>
-                            </div>
-                        </div>
-                    </a>
-                </div>*@
         </div>
         <div class="vl"></div>
         <aside class="col-2 float-right">
