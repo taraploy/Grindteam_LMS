@@ -4,7 +4,6 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
-
 <nav class="navbar navbar-dark">
     <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
 </nav>
@@ -14,7 +13,10 @@
             <div class="col-md-12">
                 <div class="form-block mx-auto">
                     <h1>Login</h1>
-                    <form action="Verify" method="post">
+                    <form action="Verify" method="post" >
+                        <div class="errorMessage">
+                            <p >@ViewBag.ErrorMessage</p>
+                        </div>
                         <div class="fields">
                             <input type="text" name="email" placeholder="Enter E-mail Address" required="" class="info" />
                         </div>

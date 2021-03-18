@@ -73,17 +73,20 @@ namespace Assignment1.Controllers
 
                 if (Name.role == "Student")
                 {
+                    ViewBag.ErrorMessage = "";
                     CourseCardList.GenerateStudentCourseList();
                     return View("StudentView");
                 }
                 else
                 {
+                    ViewBag.ErrorMessage = "";
                     CourseCardList.GenerateInstructorCourseList();
                     return View("InstructorView");
                 }
             }
             else
             {
+                ViewBag.ErrorMessage = "Incorrect user credentials or account not yet created";
                 return View("Login");
             }
         }

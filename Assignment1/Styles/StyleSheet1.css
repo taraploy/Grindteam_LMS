@@ -109,11 +109,17 @@ li a {
     display: block;
     text-decoration: none;
 }
+
+/*Error message styles*/
+.errorMessage {
+    color: #ff0000;
+}
 /*                           Styles for Student and Instructor views                           */
 
 .dashboard {
     margin: 5px 15px;
 }
+
 
 /* Styling for left nav on user dashboard */
 .dashboard-nav {
