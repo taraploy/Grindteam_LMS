@@ -21,5 +21,6 @@ namespace Assignment1
         public string assignment_type { get; set; }
         public Nullable<int> max_points { get; set; }
         public Nullable<System.DateTime> due_date { get; set; }
+        public string submission_type { get; set; }
     }
 }

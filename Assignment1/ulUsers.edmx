@@ -16,6 +16,7 @@
           <Property Name="assignment_type" Type="varchar" MaxLength="50" />
           <Property Name="max_points" Type="int" />
           <Property Name="due_date" Type="date" />
+          <Property Name="submission_type" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Courses">
           <Key>
@@ -315,6 +316,7 @@
           <Property Name="assignment_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="max_points" Type="Int32" />
           <Property Name="due_date" Type="DateTime" Precision="0" />
+          <Property Name="submission_type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="StudentAssignment">
           <Key>
@@ -407,6 +409,7 @@
           <EntitySetMapping Name="Assignments">
             <EntityTypeMapping TypeName="LMS_GRINDModel.Assignment">
               <MappingFragment StoreEntitySet="Assignments">
+                <ScalarProperty Name="submission_type" ColumnName="submission_type" />
                 <ScalarProperty Name="due_date" ColumnName="due_date" />
                 <ScalarProperty Name="max_points" ColumnName="max_points" />
                 <ScalarProperty Name="assignment_type" ColumnName="assignment_type" />

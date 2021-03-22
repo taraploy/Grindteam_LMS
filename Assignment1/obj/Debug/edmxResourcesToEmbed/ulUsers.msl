@@ -73,6 +73,7 @@
     <EntitySetMapping Name="Assignments">
       <EntityTypeMapping TypeName="LMS_GRINDModel.Assignment">
         <MappingFragment StoreEntitySet="Assignments">
+          <ScalarProperty Name="submission_type" ColumnName="submission_type" />
           <ScalarProperty Name="due_date" ColumnName="due_date" />
           <ScalarProperty Name="max_points" ColumnName="max_points" />
           <ScalarProperty Name="assignment_type" ColumnName="assignment_type" />
