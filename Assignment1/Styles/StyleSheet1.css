@@ -2,6 +2,7 @@
 
 html {
     box-sizing: border-box;
+    width: 100%;
 }
 
 *, *::before, *::after {
@@ -204,7 +205,7 @@ li a {
 .editProfileBtn, .saveProfileBtn, .cancelSaveProfileBtn,
 .addCourseBtn, .detailCourseBtn, .saveCourseBtn, .editCourseBtn, .cancelEditCoursebtn,
 .paymentBtn, .addAssignmentBtn, .assignmentBtn, .deleteAssignmentBtn, .saveAssignmentBtn,
-.cancelPaymentBtn, .makePaymentBtn {
+.cancelPaymentBtn, .makePaymentBtn, .cancelAssignmentBtn {
     display: block;
     margin: 20px auto;
     padding: 10px 15px;
@@ -223,7 +224,7 @@ li a {
     .cancelSaveProfileBtn:hover, .addCourseBtn:hover,
     .detailCourseBtn:hover, .saveCourseBtn:hover, .editCourseBtn:hover, .cancelEditCoursebtn:hover,
     .paymentBtn:hover, .addAssignmentBtn:hover, .assignmentBtn:hover, .deleteAssignmentBtn:hover,
-    .saveAssignmentBtn:hover, .cancelPaymentBtn:hover, .makePaymentBtn:hover {
+    .saveAssignmentBtn:hover, .cancelPaymentBtn:hover, .makePaymentBtn:hover, .cancelAssignmentBtn:hover {
         color: white;
         background-color: #276678;
         border: solid 1px #276678;
@@ -291,11 +292,16 @@ li a {
     cursor: pointer;
 }
 
-    .deleteCourseBtn a:hover {
-        color: white;
-        background-color: #680101;
-        border: solid 1px #680101;
-    }
+.cancelAssignmentBtn a {
+    color: white;
+}
+
+.deleteCourseBtn a:hover {
+    color: white;
+    background-color: #680101;
+    border: solid 1px #680101;
+}
+
 
 /*      Edit Course View */
 .course-form {
@@ -348,6 +354,15 @@ li a {
 
 .p-info {
     padding-top: 5px;
+}
+
+.centerHeader {
+    display: block;
+    margin: 10px auto;
+    width: 90%;
+    /*display: flex;
+    align-items: center;
+    justify-content: center;*/
 }
 
 @media (max-width: 767.98px) {

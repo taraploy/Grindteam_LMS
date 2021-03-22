@@ -13,80 +13,80 @@
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
     </nav>
 </div>
-<div class="row">
-    <aside class="col-2 left-nav float-left">
-        <p>
-            <ul class="dashboard-nav">
-                <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
+<div class="dashboard col-md-12">
+    <div class="row">
+        <aside class="col-md-2 left-nav float-left">
+            <p>
+                <ul class="dashboard-nav">
+                    <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
-                <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
 
-                <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
-                <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
-                <li><h5 class="nav_title">@Html.ActionLink("Assignments", "InstructorAssignment", "Assignment")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "InstructorAssignment", "Assignment")</h5></li>
 
-                <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
+                    <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
 
-                <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
+                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
 
-                <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
-            </ul>
-        </p>
-    </aside>
-    <div class="vl"></div>
-    <div class="container">
-        <form action="@Url.Action("SaveAssignment", "Assignment")" method="post" @*enctype="multipart/form-data"*@>
-            <div class="course-form">
-                <h2><strong>@ViewBag.CourseNum @ViewBag.CourseName - Add Assignment</strong></h2>
-                <hr />
-                @*Assignment Information*@
-                <div hidden class="form-group">
-                    <label for="course-num"><strong>Course Number:</strong></label>
-                    @Html.Hidden("CourseId", (object)ViewBag.CourseId)
-                    @Html.Hidden("CourseNum", (object)ViewBag.CourseNum)
-                    @Html.Hidden("CourseName", (object)ViewBag.CourseName)
-                    <h1  name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
-                    <h1  name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
-                    @*<h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>*@
+                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
+                </ul>
+            </p>
+        </aside>
+        <div class="vl"></div>
+        <div class="container">
+            <form action="@Url.Action("SaveAssignment", "Assignment")" method="post" @*enctype="multipart/form-data"*@>
+                <div class="course-form">
+                    <h2><strong>@ViewBag.CourseNum @ViewBag.CourseName - Add Assignment</strong></h2>
+                    <hr />
+                    @*Assignment Information*@
+                    <div hidden class="form-group">
+                        <label for="course-num"><strong>Course Number:</strong></label>
+                        @Html.Hidden("CourseId", (object)ViewBag.CourseId)
+                        @Html.Hidden("CourseNum", (object)ViewBag.CourseNum)
+                        @Html.Hidden("CourseName", (object)ViewBag.CourseName)
+                        <h1 name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
+                        <h1 name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
+                        @*<h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>*@
+                    </div>
+                    <div class="form-group">
+                        <label for="assignment-name"><strong>Assignment Name:</strong></label>
+                        <input id="assignment-name" name="assignmentName" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="assignment-desc"><strong>Assignment Description:</strong></label>
+                        <textarea id="assignment-desc" name="assignmentDesc" rows="3" cols="50" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="max-points"><strong>Maximum Points:</strong></label>
+                        <input id="max-points" name="maxPoints" type="number" min="0" max="100" />
+                    </div>
+                    <div class="form-group">
+                        <label for="due-date"><strong>Due Date:</strong></label>
+                        <input id="due-date" name="dueDate" type="datetime-local" />
+                    </div>
+                    <div class="form-group">
+                        @*Assignment Type*@
+                        <label for="assignment-type"><strong>Assignment Type:</strong></label>
+                        <select name="assignmentType" id="assignment-type">
+                            <option value="Quiz">Quiz</option>
+                            <option value="Test">Test</option>
+                            <option value="Project">Project</option>
+                            <option value="Homework">Homework</option>
+                            <option value="Participation">Participation</option>
+                            <option value="Presentation">Presentation</option>
+                            <option value="Discussion">Discussion</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="saveAssignmentBtn" id="save-button" value="Add Assignment">Add Assignment</button>
+                        <div class="cancelAssignmentBtn">@Html.ActionLink(" Cancel", "InstructorAssignment" , "Assignment" , new { @class="addCourseBtn" }, null)</div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="assignment-name"><strong>Assignment Name:</strong></label>
-                    <input id="assignment-name" name="assignmentName" type="text" />
-                </div>
-                <div class="form-group">
-                    <label for="assignment-desc"><strong>Assignment Description:</strong></label>
-                    <textarea id="assignment-desc" name="assignmentDesc" rows="3" cols="50" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="max-points"><strong>Maximum Points:</strong></label>
-                    <input id="max-points" name="maxPoints" type="number" min="0" max="100" />
-                </div>
-                <div class="form-group">
-                    <label for="due-date"><strong>Due Date:</strong></label>
-                    <input id="due-date" name="dueDate" type="datetime-local" />
-                </div>
-                <div class="form-group">
-                    @*Assignment Type*@
-                    <label for="assignment-type"><strong>Assignment Type:</strong></label>
-                    <select name="assignmentType" id="assignment-type">
-                        <option value="Quiz">Quiz</option>
-                        <option value="Test">Test</option>
-                        <option value="Project">Project</option>
-                        <option value="Homework">Homework</option>
-                        <option value="Participation">Participation</option>
-                        <option value="Presentation">Presentation</option>
-                        <option value="Discussion">Discussion</option>
-                    </select>
-                </div>
-
-                <div>
-                    <button type="submit" class="saveAssignmentBtn" id="save-button" value="Add Assignment">Add Assignment</button>
-                    @Html.ActionLink("Cancel", "InstructorAssignment", "Assignment", new { @class = "addCourseBtn" }, null)
-
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>

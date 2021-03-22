@@ -61,6 +61,8 @@ namespace Assignment1.Controllers
             gds = new LMS_GRINDEntities1();
             Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
             Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
+            CourseCardList.GenerateInstructorCourseList();
+            AssignmentList.GenerateInstructorAssignmentList(id);
             ViewBag.selectedCourse = course;
             ViewBag.courseDepartment = department;
             return View("InstructorCourseDetailView");

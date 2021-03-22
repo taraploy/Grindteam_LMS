@@ -11,9 +11,9 @@
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
     </nav>
 </div>
-<div class="dashboard">
+<div class="dashboard col-md-12">
     <div class="row">
-        <aside class="col-2 left-nav float-left">
+        <aside class="col-md-2 left-nav float-left">
             <p>
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
@@ -33,12 +33,13 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="col-9 course-view">
+        <div class="col-md-8 course-view">
             <div class="justify-content-center">
-                <h1>Courses</h1>
-                <br />
-                <form>
-                    <div class="row">
+                <div class="centerHeader">
+                    <h1>Courses</h1>
+                </div>                
+                @*<form>
+                    <div class="row">*@
                         @* Search Bar *@
                         @*<div class="col-10">
                             @Html.TextBox("search", null, new { placeholder = "Search by keyword", @class = "form-control rounded" })
@@ -53,7 +54,7 @@
                                 Search
                             </button>
                         </div>*@
-                    </div>
+                    @*</div>*@
                     <hr />
 
                     @*<label for="departments">Filter by Department:</label>
@@ -76,7 +77,7 @@
         <option value="7">Physics</option>
         <option value="8">Criminal Justice</option>*@
 
-                </form>
+                @*</form>*@
                 @Html.ActionLink("Add Course", "AddCourse", "CoursesAndRegistration", new { @class = "addCourseBtn" })
 
             </div>

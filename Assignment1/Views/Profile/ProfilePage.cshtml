@@ -15,78 +15,80 @@
     </nav>
 </div>
 
-<div class="row">
-    <aside class="col-2 left-nav float-left">
-        <p>
-            <ul class="dashboard-nav">
-                <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
+<div class="dashboard col-md-12">
 
-                @if (Name.role == "Instructor")
-                {
-                    <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
-                }
-                else
-                {
-                    <li><h5 class="nav_title">@Html.ActionLink("Registration", "ViewRegistration", "CoursesAndRegistration")</h5></li>
-                }
-
-                <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
-
-                <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
-
-                @if (Name.role == "Instructor")
-                {
-                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
-                }
-                else
-                {
-                    <li><h5 class="nav_title">@Html.ActionLink("Balance", "Balance", "Payment")</h5></li>
-                }
-
-                <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
-
-                <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
-            </ul>
-        </p>
-    </aside>
-    <div class="vl"></div>
-    <div class="container">
-        <div class="col-9 profile-block">
-            @*-------------- Profile Image ------------*@ 
-            <div class="profile-container">
-                <img src="@path" alt="Profile Image" class="profile-img" height="150" />
-            </div>
-            <h4 class="profile-name">@Name.first_name @Name.last_name</h4>
-            <h5><strong>@Name.role Contact Information</strong></h5>
-            <label>Email:</label>     @Name.email
-            <br />
-            <label>Phone Number:</label>     @Name.phoneNum
-            <br />
-            <label>Address: </label>     @Name.streetAddress
-            <h5><strong>Biography</strong></h5>
+    <div class="row">
+        <aside class="col-md-2 left-nav float-left">
             <p>
-                @Name.bio
+                <ul class="dashboard-nav">
+                    <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
+
+                    @if (Name.role == "Instructor")
+                    {
+                        <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
+                    }
+                    else
+                    {
+                        <li><h5 class="nav_title">@Html.ActionLink("Registration", "ViewRegistration", "CoursesAndRegistration")</h5></li>
+                    }
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
+
+                    @if (Name.role == "Instructor")
+                    {
+                        <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
+                    }
+                    else
+                    {
+                        <li><h5 class="nav_title">@Html.ActionLink("Balance", "Balance", "Payment")</h5></li>
+                    }
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
+
+                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
+                </ul>
             </p>
-            <h5><strong>Links</strong></h5>
-            <p>
-                <a href="@Name.link1" target="_blank">
-                    @Name.linkTitle1
-                </a>
+        </aside>
+        <div class="vl"></div>
+        <div class="container">
+            <div class="col-md-9 profile-block">
+                @*-------------- Profile Image ------------*@
+                <div class="profile-container">
+                    <img src="@path" alt="Profile Image" class="profile-img" height="150" />
+                </div>
+                <h4 class="profile-name">@Name.first_name @Name.last_name</h4>
+                <h5><strong>@Name.role Contact Information</strong></h5>
+                <label>Email:</label>     @Name.email
                 <br />
-                <a href="@Name.link2" target="_blank">
-                    @Name.linkTitle2
-                </a>
+                <label>Phone Number:</label>     @Name.phoneNum
                 <br />
-                <a href="@Name.link3" target="_blank">
-                    @Name.linkTitle3
-                </a>
-            </p>
-            <div class="editProfileBlock">
-                @Html.ActionLink("Edit Profile", "Edit", "Profile", new { @class = "editProfileBtn" })
-                @*@Html.ActionLink("Edit Profile", "Edit", "Profile")*@
-                @*<button class="btn btn-primary editProfileBtn">@Html.ActionLink("Edit Profile", "Edit", "EditProfilePage")</button>*@
+                <label>Address: </label>     @Name.streetAddress
+                <h5><strong>Biography</strong></h5>
+                <p>
+                    @Name.bio
+                </p>
+                <h5><strong>Links</strong></h5>
+                <p>
+                    <a href="@Name.link1" target="_blank">
+                        @Name.linkTitle1
+                    </a>
+                    <br />
+                    <a href="@Name.link2" target="_blank">
+                        @Name.linkTitle2
+                    </a>
+                    <br />
+                    <a href="@Name.link3" target="_blank">
+                        @Name.linkTitle3
+                    </a>
+                </p>
+                <div class="editProfileBlock">
+                    @Html.ActionLink("Edit Profile", "Edit", "Profile", new { @class = "editProfileBtn" })
+                    @*@Html.ActionLink("Edit Profile", "Edit", "Profile")*@
+                    @*<button class="btn btn-primary editProfileBtn">@Html.ActionLink("Edit Profile", "Edit", "EditProfilePage")</button>*@
+                </div>
             </div>
         </div>
     </div>
 </div>
-

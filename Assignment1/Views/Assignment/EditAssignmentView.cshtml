@@ -10,81 +10,82 @@
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
     </nav>
 </div>
-<div class="row">
-    <aside class="col-2 left-nav float-left">
-        <p>
-            <ul class="dashboard-nav">
-                <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
+<div class="dashboard col-md-12">
+    <div class="row">
+        <aside class="col-md-2 left-nav float-left">
+            <p>
+                <ul class="dashboard-nav">
+                    <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
-                <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
 
-                <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
-                <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
-                <li><h5 class="nav_title">@Html.ActionLink("Assignments", "InstructorAssignment", "Assignment")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "InstructorAssignment", "Assignment")</h5></li>
 
-                <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
+                    <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
 
-                <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
+                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
 
-                <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
-            </ul>
-        </p>
-    </aside>
-    <div class="vl"></div>
-    <div class="container">
-        <form action="@Url.Action("UpdateAssignment", "Assignment", new { id = ViewBag.selectedAssignment.assignment_id })" method="post" @*enctype="multipart/form-data"*@>
-            <div class="course-form">
-                <h2><strong>@ViewBag.CourseNum @ViewBag.CourseName - Edit Assignment</strong></h2>
-                <hr />
-                @*Assignment Information*@
-                @*@Html.Hidden("CourseId", (object)ViewBag.CourseId)*@
-                @*@Html.Hidden("CourseNum", (object)ViewBag.CourseNum)*@
-                @*@Html.Hidden("CourseName", (object)ViewBag.CourseName)*@
-                @*@Html.Hidden("AssignmentId", (object)ViewBag.selectedAssignment.assignment_id)*@
-                @*<div hidden class="form-group">
-                    <label for="course-num"><strong>Course Number:</strong></label>
-                    <h1 name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
-                    <h1 name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
-                    <h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>
-                </div>*@
-                <div class="form-group">
-                    <label for="assignment-name"><strong>Assignment Name: </strong></label>
-                    <input id="assignment-name" name="assignmentName" type="text" value="@ViewBag.selectedAssignment.assignment_name" />
+                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
+                </ul>
+            </p>
+        </aside>
+        <div class="vl"></div>
+        <div class="container">
+            <form action="@Url.Action("UpdateAssignment", "Assignment", new { id = ViewBag.selectedAssignment.assignment_id })" method="post" @*enctype="multipart/form-data"*@>
+                <div class="course-form">
+                    <h2><strong>@ViewBag.CourseNum @ViewBag.CourseName - Edit Assignment</strong></h2>
+                    <hr />
+                    @*Assignment Information*@
+                    @*@Html.Hidden("CourseId", (object)ViewBag.CourseId)*@
+                    @*@Html.Hidden("CourseNum", (object)ViewBag.CourseNum)*@
+                    @*@Html.Hidden("CourseName", (object)ViewBag.CourseName)*@
+                    @*@Html.Hidden("AssignmentId", (object)ViewBag.selectedAssignment.assignment_id)*@
+                    @*<div hidden class="form-group">
+                            <label for="course-num"><strong>Course Number:</strong></label>
+                            <h1 name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
+                            <h1 name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
+                            <h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>
+                        </div>*@
+                    <div class="form-group">
+                        <label for="assignment-name"><strong>Assignment Name: </strong></label>
+                        <input id="assignment-name" name="assignmentName" type="text" value="@ViewBag.selectedAssignment.assignment_name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="assignment-desc"><strong>Assignment Description:</strong></label>
+                        <textarea id="assignment-desc" name="assignmentDesc" rows="3" cols="50" class="form-control">@ViewBag.selectedAssignment.assignment_desc</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="max-points"><strong>Maximum Points:</strong></label>
+                        <input id="max-points" name="maxPoints" type="number" min="0" max="100" value="@ViewBag.selectedAssignment.max_points" />
+                    </div>
+                    <div class="form-group">
+                        @* TODO: Fix default value for due date *@
+                        <label for="due-date"><strong>Due Date:</strong></label>
+                        <input id="due-date" value="@Convert.ToDateTime(ViewBag.DueDate)" name="dueDate" type="datetime-local" />
+                    </div>
+                    <div class="form-group">
+                        @*Assignment Type*@
+                        <label for="assignment-type"><strong>Assignment Type:</strong></label>
+                        <select name="assignmentType" id="assignment-type">
+                            <option value="Quiz" selected="@ViewBag.assignmentType[0]">Quiz</option>
+                            <option value="Test" selected="@ViewBag.assignmentType[1]">Test</option>
+                            <option value="Project" selected="@ViewBag.assignmentType[2]">Project</option>
+                            <option value="Homework" selected="@ViewBag.assignmentType[3]">Homework</option>
+                            <option value="Participation" selected="@ViewBag.assignmentType[4]">Participation</option>
+                            <option value="Presentation" selected="@ViewBag.assignmentType[5]">Presentation</option>
+                            <option value="Discussion" selected="@ViewBag.assignmentType[6]">Discussion</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="saveAssignmentBtn" id="save-button" value="Update Assignment">Update Assignment</button>
+                        @Html.ActionLink("Cancel", "InstructorAssignment", "Assignment", new { id = ViewBag.CourseId }, new { @class = "addCourseBtn" })
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="assignment-desc"><strong>Assignment Description:</strong></label>
-                    <textarea id="assignment-desc" name="assignmentDesc" rows="3" cols="50" class="form-control">@ViewBag.selectedAssignment.assignment_desc</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="max-points"><strong>Maximum Points:</strong></label>
-                    <input id="max-points" name="maxPoints" type="number" min="0" max="100" value="@ViewBag.selectedAssignment.max_points" />
-                </div>
-                <div class="form-group">
-                    @* TODO: Fix default value for due date *@
-                    <label for="due-date"><strong>Due Date:</strong></label>
-                    <input id="due-date" value="@Convert.ToDateTime(ViewBag.DueDate)" name="dueDate" type="datetime-local" />
-                </div>
-                <div class="form-group">
-                    @*Assignment Type*@
-                    <label for="assignment-type"><strong>Assignment Type:</strong></label>
-                    <select name="assignmentType" id="assignment-type">
-                        <option value="Quiz" selected="@ViewBag.assignmentType[0]">Quiz</option>
-                        <option value="Test" selected="@ViewBag.assignmentType[1]">Test</option>
-                        <option value="Project" selected="@ViewBag.assignmentType[2]">Project</option>
-                        <option value="Homework" selected="@ViewBag.assignmentType[3]">Homework</option>
-                        <option value="Participation" selected="@ViewBag.assignmentType[4]">Participation</option>
-                        <option value="Presentation" selected="@ViewBag.assignmentType[5]">Presentation</option>
-                        <option value="Discussion" selected="@ViewBag.assignmentType[6]">Discussion</option>
-                    </select>
-                </div>
-                <div>
-                    <button type="submit" class="saveAssignmentBtn" id="save-button" value="Update Assignment">Update Assignment</button>
-                    @Html.ActionLink("Cancel", "InstructorAssignment", "Assignment", new { id = ViewBag.CourseId }, new { @class = "addCourseBtn" })
-
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
