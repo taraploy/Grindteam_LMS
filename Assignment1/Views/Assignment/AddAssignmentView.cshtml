@@ -81,6 +81,14 @@
                             <option value="Discussion">Discussion</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        @* Submission Type *@
+                        <label for="submissionType"><strong>Submission Type:</strong></label>
+                        <select name="submissionType" id="submission-type">
+                            <option value="File">File</option>
+                            <option value="Text">Text Entry</option>
+                        </select>
+                    </div>
                     <div>
                         <button type="submit" class="saveAssignmentBtn" id="save-button" value="Add Assignment">Add Assignment</button>
                         <div class="cancelAssignmentBtn">@Html.ActionLink(" Cancel", "InstructorAssignment" , "Assignment" , new { @class="addCourseBtn" }, null)</div>

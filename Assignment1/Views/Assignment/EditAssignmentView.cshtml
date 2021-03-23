@@ -45,11 +45,11 @@
                     @*@Html.Hidden("CourseName", (object)ViewBag.CourseName)*@
                     @*@Html.Hidden("AssignmentId", (object)ViewBag.selectedAssignment.assignment_id)*@
                     @*<div hidden class="form-group">
-                            <label for="course-num"><strong>Course Number:</strong></label>
-                            <h1 name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
-                            <h1 name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
-                            <h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>
-                        </div>*@
+            <label for="course-num"><strong>Course Number:</strong></label>
+            <h1 name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
+            <h1 name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
+            <h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>
+        </div>*@
                     <div class="form-group">
                         <label for="assignment-name"><strong>Assignment Name: </strong></label>
                         <input id="assignment-name" name="assignmentName" type="text" value="@ViewBag.selectedAssignment.assignment_name" />
@@ -78,6 +78,14 @@
                             <option value="Participation" selected="@ViewBag.assignmentType[4]">Participation</option>
                             <option value="Presentation" selected="@ViewBag.assignmentType[5]">Presentation</option>
                             <option value="Discussion" selected="@ViewBag.assignmentType[6]">Discussion</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        @* Submission Type *@
+                        <label for="submissionType"><strong>Submission Type:</strong></label>
+                        <select name="submissionType" id="submission-type">
+                            <option value="File" selected="@ViewBag.submissionType[0]">File</option>
+                            <option value="Text" selected="@ViewBag.submissionType[1]">Text Entry</option>
                         </select>
                     </div>
                     <div>

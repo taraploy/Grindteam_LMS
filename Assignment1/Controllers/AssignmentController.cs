@@ -54,7 +54,7 @@ namespace Assignment1.Controllers
 
         [HttpPost]
         public ActionResult SaveAssignment(string assignmentName,
-            string assignmentDesc, int maxPoints, DateTime dueDate, string assignmentType)
+            string assignmentDesc, int maxPoints, DateTime dueDate, string assignmentType, string submissionType)
         {
             var courseId = int.Parse(Request.Form["CourseId"]);
             var courseNum = Request.Form["CourseNum"];
@@ -83,6 +83,7 @@ namespace Assignment1.Controllers
             newAssignment.max_points = maxPoints;
             newAssignment.due_date = dueDate;
             newAssignment.assignment_type = assignmentType;
+            newAssignment.submission_type = submissionType;
             gds.Assignments.Add(newAssignment);
             gds.SaveChanges();
 
@@ -175,7 +176,7 @@ namespace Assignment1.Controllers
 
         [HttpPost]
         public ActionResult UpdateAssignment(int id, string assignmentName, string assignmentDesc, int maxPoints, 
-            DateTime dueDate, string assignmentType)
+            DateTime dueDate, string assignmentType, string submissionType)
         {
             gds = new LMS_GRINDEntities1();
 
@@ -189,6 +190,7 @@ namespace Assignment1.Controllers
                 assignment.max_points = maxPoints;
                 assignment.due_date = dueDate;
                 assignment.assignment_type = assignmentType;
+                assignment.submission_type = submissionType;
                 gds.SaveChanges();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
@@ -224,6 +226,8 @@ namespace Assignment1.Controllers
             ViewBag.selectedAssignment = assignment;
 
             bool[] assignmentType = new bool[8];
+            bool[] submissionType = new bool[2];
+
             for (int i = 0; i < 8; i++)
             {
                 switch (assignment.assignment_type)
@@ -255,6 +259,23 @@ namespace Assignment1.Controllers
                 }
             }
 
+            for (int i = 0; i < 3; i++)
+            {
+                switch (assignment.submission_type)
+                {
+                    case "File":
+                        submissionType[0] = true;
+                        break;
+                    case "Text":
+                        submissionType[1] = true;
+                        break;
+                    default:
+                        submissionType[2] = false;
+                        break;
+                }
+            }
+
+            ViewBag.submissionType = submissionType;
             ViewBag.assignmentType = assignmentType;
             ViewBag.CourseNum = courseNum;
             ViewBag.CourseName = courseName;
