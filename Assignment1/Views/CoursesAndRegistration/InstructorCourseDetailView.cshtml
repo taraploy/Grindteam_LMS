@@ -48,45 +48,47 @@
                 <div class="centerHeader col-md-12">
                     <h1>@ViewBag.selectedCourse.course_num @ViewBag.selectedCourse.course_name</h1>
                 </div>
-                <div class="col-md-8">
-                    <h3>Assignments</h3>                    
-                    <div class="card assignment-list">
-                        @*for loop*@
-                        @{
-                            foreach (var item in AssignmentList.AssignmentItemList)
-                            {
-                                <div class="assignment-list-item">
-                                    <div class="float-left">
-                                        <h6><strong>@item.AssignmentName</strong> - @item.AssignmentType</h6>
-                                        <p>Due date: @item.DueDate</p>
+                <div class="container">
+                    <div class="col-md-8 float-md-left">
+                        <h3>Assignments</h3>                    
+                        <div class="card assignment-list">
+                            @*for loop*@
+                            @{
+                                foreach (var item in AssignmentList.AssignmentItemList)
+                                {
+                                    <div class="assignment-list-item">
+                                        <div class="float-left">
+                                            <h6><strong>@item.AssignmentName</strong> - @item.AssignmentType</h6>
+                                            <p>Due date: @item.DueDate</p>
+                                        </div>
+                                        <div class="float-right">
+                                            @Html.Hidden("CourseId", item.CourseId)
+                                            @Html.Hidden("CourseNum", item.CourseNum)
+                                            @Html.Hidden("CourseName", item.CourseName)
+                                            @Html.ActionLink("Edit", "EditAssignment", "Assignment", new { id = item.AssignmentId }, null) |
+                                            @Html.ActionLink("Delete", "DeleteAssignment", "Assignment", new { id = item.AssignmentId }, null)
+                                        </div>
                                     </div>
-                                    <div class="float-right">
-                                        @Html.Hidden("CourseId", item.CourseId)
-                                        @Html.Hidden("CourseNum", item.CourseNum)
-                                        @Html.Hidden("CourseName", item.CourseName)
-                                        @Html.ActionLink("Edit", "EditAssignment", "Assignment", new { id = item.AssignmentId }, null) |
-                                        @Html.ActionLink("Delete", "DeleteAssignment", "Assignment", new { id = item.AssignmentId }, null)
-                                    </div>
-                                </div>
-                                <hr class="hr-assignment-list" />
+                                    <hr class="hr-assignment-list" />
+                                }
                             }
-                        }
-                        @*end for loop*@
+                            @*end for loop*@
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 float-md-right">
-                    @*<div class="container">*@
-                    <h3>Course Details</h3>     
-                    <div>
-                        <p>
-                            <strong>Instructor</strong>: @Name.first_name @Name.last_name
-                            <br />    
-                            <strong>Location</strong>: @ViewBag.selectedCourse.building : Room @ViewBag.selectedCourse.room_no
-                            <br />
-                            <strong>Meeting Time</strong>: @ViewBag.selectedCourse.start_time - @ViewBag.selectedCourse.end_time | @ViewBag.selectedCourse.days_of_week
-                        </p>
+                    <div class="col-md-4 float-md-right">
+                        @*<div class="container">*@
+                        <h3>Course Details</h3>   
+                        <div>
+                            <p>
+                                <strong>Instructor</strong>: @Name.first_name @Name.last_name
+                                <br />    
+                                <strong>Location</strong>: @ViewBag.selectedCourse.building : Room @ViewBag.selectedCourse.room_no
+                                <br />
+                                <strong>Meeting Time</strong>: @ViewBag.selectedCourse.start_time - @ViewBag.selectedCourse.end_time | @ViewBag.selectedCourse.days_of_week
+                            </p>
+                        </div>
+                        @*</div>*@
                     </div>
-                    @*</div>*@
                 </div>
             </div>
             @*<div class="btnFields">
