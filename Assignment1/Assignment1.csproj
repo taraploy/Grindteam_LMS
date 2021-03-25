@@ -271,6 +271,7 @@
     <Compile Include="Models\Name.cs" />
     <Compile Include="Models\SecurityQuestion.cs" />
     <Compile Include="Models\StudentAssignmentItem.cs" />
+    <Compile Include="Models\StudentAssignmentSubmissionItem.cs" />
     <Compile Include="Models\StudentCourseContext.cs" />
     <Compile Include="Models\TodoList.cs" />
     <Compile Include="Models\User.cs" />
@@ -337,6 +338,8 @@
     <Content Include="Views\Assignment\InstructorAssignmentView.cshtml" />
     <Content Include="Views\Assignment\InstructorCourseAssignmentView.cshtml" />
     <Content Include="Views\Assignment\EditAssignmentView.cshtml" />
+    <Content Include="Views\CoursesAndRegistration\StudentCourseDetailView.cshtml" />
+    <Content Include="Views\Assignment\StudentAssignmentView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

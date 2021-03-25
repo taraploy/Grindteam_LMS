@@ -49,7 +49,29 @@ namespace Assignment1.Controllers
             return View("AddCourseView");
         }
 
-        
+        /// <summary>
+        /// Display course details for student
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Display details of the selected course</returns>
+        public ActionResult StudentCourseDetail(int id)
+        {
+            gds = new LMS_GRINDEntities1();
+            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
+            int ic_id = gds.InstructorCourses.Where(x => x.course_id == id).Select(x => x.instructor_course_id).FirstOrDefault();
+            Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
+            int instructorId = gds.InstructorCourses.Where(x => x.instructor_course_id == ic_id).Select(x => x.instructor_id).FirstOrDefault();
+            String instructorFirstName = gds.ulUsers.Where(x => x.ulUser_id == instructorId).Select(x => x.first_name).FirstOrDefault();
+            String instructorLastName = gds.ulUsers.Where(x => x.ulUser_id == instructorId).Select(x => x.last_name).FirstOrDefault();
+
+            CourseCardList.GenerateStudentCourseList();
+            AssignmentList.GenerateStudentAssignmentList(id);
+
+            ViewBag.selectedCourse = course;
+            ViewBag.courseDepartment = department;
+            ViewBag.InstructorName = instructorFirstName + " " + instructorLastName;
+            return View("StudentCourseDetailView");
+        }
 
         /// <summary>
         /// Display course details for instructor

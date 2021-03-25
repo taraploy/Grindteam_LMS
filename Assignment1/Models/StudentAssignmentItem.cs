@@ -10,10 +10,14 @@ namespace Assignment1.Models
         public int AssignmentGradeId;
         public int AssignmentId;
         public int StudentId;
-        public Nullable<int> Grade;
-        public DateTime SubmissionDate;
-        public string TextSubmission;
-        public string FileSubmission;
-
+        public string AssignmentDesc;
+        public int InstructorCourseId;
+        public string AssignmentName;
+        public string AssignmentType;
+        public int? MaxPoints;
+        public System.DateTime? DueDate;
+        public int CourseId;
+        public string CourseNum;
+        public string CourseName;
     }
 }

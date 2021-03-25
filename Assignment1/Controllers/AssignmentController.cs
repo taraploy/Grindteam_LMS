@@ -31,10 +31,15 @@ namespace Assignment1.Controllers
             return View("InstructorAssignmentView");
         }
 
-        public ActionResult StudentAssignment()
+
+        /// <summary>
+        /// Display assignment List for student course view based on particular course selected
+        /// </summary>
+        /// <returns>StudentAssignmentView</returns>    
+        public ActionResult StudentAssignment(int? assignmentId)
         {
-            AssignmentList.GenerateStudentAssignmentList();
-            return View();
+            AssignmentList.GenerateStudentSubmissionAssignmentList(assignmentId);
+            return View("StudentAssignmentView");
         }
         
         public ActionResult AddAssignment(int id)

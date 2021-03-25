@@ -86,9 +86,10 @@
         <div class="vl"></div>
         <div class="col-7">
             <div class="row justify-content-center">
-                @foreach (var item in CourseCardList.CourseList)
+                @if (CourseCardList.CourseList.Any())
                 {
-                    <a href="#">
+                    foreach (var item in CourseCardList.CourseList)
+                    {
                         <div class="card course-list">
                             <div class="card-body">
                                 <h5 class="card-title">@item.CourseNum</h5>
@@ -97,8 +98,11 @@
                                 <h6 class="card-subtitle mb-2 text-muted">@item.Building Room @item.RoomNumber</h6>
                                 <h6 class="card-subtitle mb-2 text-muted">@item.StartTime - @item.EndTime @item.Days</h6>
                             </div>
+                            <div class="detailCardBtn">
+                                @Html.ActionLink("Details", "StudentCourseDetail", "CoursesAndRegistration", new { id = @item.CourseId }, new { @class = "detailCourseBtn" })
+                            </div>
                         </div>
-                    </a>
+                    }
                 }
             </div>
         </div>
