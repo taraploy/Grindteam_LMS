@@ -41,7 +41,6 @@
         var notifShow = 0;
 
         function myFunction() {
-            // var popup = document.getElementById("popUp");
             if (notifShow == 0) {
                 document.getElementById("notifications").hidden = false;
                 notifShow = 1;
@@ -92,15 +91,15 @@
                     {
                         <div class="card course-list">
                             <div class="card-body">
-                                <h5 class="card-title">@item.CourseNum</h5>
+                                <h5 class="card-title">@Html.ActionLink(item.CourseNum, "StudentCourseDetail", "CoursesAndRegistration", new { @id = item.CourseId }, null)</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">@item.CourseName</h6>
                                 <h6 class="card-subtitle mb-2 text-muted">@item.InstructorFirstName @item.InstructorLastName</h6>
                                 <h6 class="card-subtitle mb-2 text-muted">@item.Building Room @item.RoomNumber</h6>
                                 <h6 class="card-subtitle mb-2 text-muted">@item.StartTime - @item.EndTime @item.Days</h6>
                             </div>
-                            <div class="detailCardBtn">
+                            @*<div class="detailCardBtn">
                                 @Html.ActionLink("Details", "StudentCourseDetail", "CoursesAndRegistration", new { id = @item.CourseId }, new { @class = "detailCourseBtn" })
-                            </div>
+                            </div>*@
                         </div>
                     }
                 }
@@ -108,25 +107,19 @@
         </div>
         <div class="vl"></div>
         <aside class="col-2 float-right">
-            <h3>To-do List</h3>
-            <p>
-                <a href="#">
+            <h4>To-do list:</h4>
+            <hr/>
+            @foreach (var item in ToDoList.StudentToDoList)
+            {
+                <p>
                     <div class="list-group-item">
-                        <h5>CS 3750</h5>
-                        <h6 class="todo-subtitle text-muted">Assignment 1</h6>
-                        <h6 class="todo-due-date text-muted">February 12, 11:59 PM</h6>
+                        <h5>@Html.ActionLink(item.AssignmentName, "StudentAssignment", "Assignment", new { @id = item.AssignmentID }, null)</h5>
+                        <h6 class="todo-subtitle text-muted">@item.CourseNum</h6>
+                        <h6 class="todo-due-date text-muted">@item.DueDate</h6>
                     </div>
-                </a>
-            </p>
-            <p>
-                <a href="#">
-                    <div class="list-group-item">
-                        <h5>CS 3100</h5>
-                        <h6 class="todo-subtitle text-muted">Assignment 3</h6>
-                        <h6 class="todo-due-date text-muted">February 17, 11:59 PM</h6>
-                    </div>
-                </a>
-            </p>
+                </p>
+            }
+
         </aside>
     </div>
 </div>

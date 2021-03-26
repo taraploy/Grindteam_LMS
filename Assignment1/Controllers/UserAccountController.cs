@@ -74,12 +74,14 @@ namespace Assignment1.Controllers
                 if (Name.role == "Student")
                 {
                     ViewBag.ErrorMessage = "";
+                    ToDoList.GenerateStudentToDoList();
                     CourseCardList.GenerateStudentCourseList();
                     return View("StudentView");
                 }
                 else
                 {
                     ViewBag.ErrorMessage = "";
+                    ToDoList.GenerateInstructorToDoList();
                     CourseCardList.GenerateInstructorCourseList();
                     return View("InstructorView");
                 }

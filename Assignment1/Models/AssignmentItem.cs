@@ -12,6 +12,7 @@ namespace Assignment1.Models
         public string AssignmentName;
         public string AssignmentDesc;
         public string AssignmentType;
+        public string SubmissionType;
         public Nullable<int> MaxPoints;
         public Nullable<System.DateTime> DueDate;
         public int CourseId;

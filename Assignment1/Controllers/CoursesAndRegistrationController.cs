@@ -133,6 +133,7 @@ namespace Assignment1.Controllers
             gds.StudentCourses.Add(sc);
             gds.SaveChanges();
             CourseCardList.GenerateStudentCourseList();
+            ToDoList.GenerateStudentToDoList();
 
             return RedirectToAction("ReturnToView", "UserAccount", null);
         }
@@ -178,6 +179,7 @@ namespace Assignment1.Controllers
 
                 // update list and return to StudentView
                 CourseCardList.GenerateStudentCourseList();
+                ToDoList.GenerateStudentToDoList();
                 return RedirectToAction("ReturnToView", "UserAccount", null);
             }
             catch
@@ -290,7 +292,7 @@ namespace Assignment1.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return View("EditCourseView");
             }

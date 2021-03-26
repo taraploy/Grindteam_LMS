@@ -273,6 +273,7 @@
     <Compile Include="Models\StudentAssignmentItem.cs" />
     <Compile Include="Models\StudentAssignmentSubmissionItem.cs" />
     <Compile Include="Models\StudentCourseContext.cs" />
+    <Compile Include="Models\ToDo.cs" />
     <Compile Include="Models\TodoList.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserSecurityQuestion.cs" />
@@ -349,6 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="AssignmentSubmissions\" />
     <Folder Include="ProfileImages\" />
     <Folder Include="Views\PopUp\" />
   </ItemGroup>

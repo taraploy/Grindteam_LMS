@@ -2,6 +2,7 @@
 using Assignment1.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -36,12 +37,106 @@ namespace Assignment1.Controllers
         /// Display assignment List for student course view based on particular course selected
         /// </summary>
         /// <returns>StudentAssignmentView</returns>    
-        public ActionResult StudentAssignment(int? assignmentId)
+        public ActionResult StudentAssignment(int? id)
         {
-            AssignmentList.GenerateStudentSubmissionAssignmentList(assignmentId);
+            AssignmentList.GenerateStudentSubmissionAssignmenItem(id);
+            AssignmentList.GenerateAssignmentItem(id);
+
+            if (AssignmentList.StudentAssignmentSubmission.FileSubmission == null &&
+                AssignmentList.StudentAssignmentSubmission.TextSubmission == null)
+            {
+                ViewBag.IsSubmitted = false;
+            }
+            else
+            {
+                ViewBag.IsSubmitted = true;
+            }
+
             return View("StudentAssignmentView");
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SubmitAssignment(string text_submission, HttpPostedFileBase assignment_file)
+        {
+            gds = new LMS_GRINDEntities1();
+            StudentAssignment sa = new StudentAssignment();
+
+            if (AssignmentList.AssignmentItem.SubmissionType == "File")
+            {
+                if (assignment_file != null)
+                {
+
+                    var instructor = (from ic in gds.InstructorCourses
+                                        where ic.instructor_course_id == AssignmentList.AssignmentItem.InstructorCourseId
+                                        select ic).First();
+
+                    var instructor_l_name = (from i in gds.ulUsers
+                                             where i.ulUser_id == instructor.instructor_id
+                                             select i).First();
+
+                    string course_directory = instructor_l_name.last_name + "_" + AssignmentList.AssignmentItem.CourseNum;
+                    string student_directory = Name.first_name + Name.last_name;
+                    string file_name = Path.GetFileNameWithoutExtension(assignment_file.FileName) +
+                    DateTime.Now.ToString("yymmssfff") +
+                    Path.GetExtension(assignment_file.FileName);
+
+                    // Set file path to the course directory within the Assignment Submissions folder
+                    string file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/"), course_directory);
+
+                    // Create the course directory if it doesn't exist
+                    if (!Directory.Exists(file_path))
+                    {
+                        Directory.CreateDirectory(file_path);
+                    }
+
+                    // Set file path to the student directory within the course folder
+                    file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/" + course_directory + "/"), student_directory);
+
+                    // Create student directory if it doesn't exist
+                    if (!Directory.Exists(file_path))
+                    {
+                        Directory.CreateDirectory(file_path);
+                    }
+
+                    // append filename to file path
+                    file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/" + course_directory + "/" + student_directory + "/"), file_name);
+
+                    sa.file_submission = file_path;
+                    sa.assignment_id = AssignmentList.AssignmentItem.AssignmentId;
+                    sa.student_id = Name.user_id;
+                    sa.submission_date = DateTime.Now;
+                    assignment_file.SaveAs(file_path);
+
+                    gds.StudentAssignments.Add(sa);
+                    gds.SaveChanges();
+
+                    ViewBag.IsSubmitted = true;
+                }
+                else
+                {
+                    ViewBag.IsSubmitted = false;
+                }
+            }
+            else // TEXT SUBMISSION
+            {
+                sa.text_submission = text_submission;
+                sa.assignment_id = AssignmentList.AssignmentItem.AssignmentId;
+                sa.student_id = Name.user_id;
+                sa.submission_date = DateTime.Now;
+
+                gds.StudentAssignments.Add(sa);
+                gds.SaveChanges();
+                ViewBag.IsSubmitted = true;
+            }
+
+            ToDoList.GenerateStudentToDoList();
+            return View("StudentAssignmentView");
+        }
+
         public ActionResult AddAssignment(int id)
         {
             List<Cours> displayCourseList = GetCourseList();   // Display instructor's course list
@@ -53,6 +148,7 @@ namespace Assignment1.Controllers
             @ViewBag.CourseNum = courseNum;
             @ViewBag.CourseName = courseName;
             @ViewBag.CourseId = courseId;
+            ToDoList.GenerateInstructorToDoList();
 
             return View("AddAssignmentView");
         }
@@ -100,6 +196,9 @@ namespace Assignment1.Controllers
             @ViewBag.CourseNum = courseNum;
             @ViewBag.CourseName = courseName;
             @ViewBag.CourseId = courseId;
+
+            ToDoList.GenerateInstructorToDoList();
+
             return View("InstructorAssignmentView");
         }
 
@@ -111,7 +210,6 @@ namespace Assignment1.Controllers
         {
             List<Cours> displayCourseList = new List<Cours>();
             gds = new LMS_GRINDEntities1();
-            //var courseList = gds.InstructorCourses.Join(gds.Courses, insCourse => insCourse.course_id, course => course.course_id).ToList();
             List<InstructorCours> instructorCourses = gds.InstructorCourses.Where(x => x.instructor_id == Name.user_id).ToList();
 
             foreach (var course in instructorCourses)
@@ -119,17 +217,6 @@ namespace Assignment1.Controllers
                 Cours insCourse = gds.Courses.Where(x => x.course_id == course.course_id).FirstOrDefault();
                 displayCourseList.Add(insCourse);
             }
-
-            //List<Cours> courseList = from i in gds.InstructorCourses.Where(x => x.course_id.Contains(instructorCourses)).ToList();
-            //displayCourseList = courseList;
-            //foreach (var course in courseList)
-            //{
-            //    if (course.courseNum != null)
-            //    {
-            //        //displayCourseList.Add(course.courseNum.ToString() + " " + course.courseName);
-            //        displayCourseList.Add(course);
-            //    }
-            //}
 
             return displayCourseList;
         }

@@ -18,13 +18,13 @@
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Registration", "ViewRegistration", "CoursesAndRegistration")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Balance", "Balance", "Payment")</h5></li>
 
                     <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
 
@@ -55,7 +55,7 @@
                                             @Html.Hidden("CourseId", item.CourseId)
                                             @Html.Hidden("CourseNum", item.CourseNum)
                                             @Html.Hidden("CourseName", item.CourseName)
-                                            @Html.ActionLink("Submit", "StudentAssignment", "Assignment", new { id = item.AssignmentId }, null)
+                                            @Html.ActionLink("Submit", "StudentAssignment", "Assignment", new { @id = item.AssignmentId }, null)
                                         </div>
                                     </div>
                                     <hr class="hr-assignment-list" />
