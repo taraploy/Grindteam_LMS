@@ -37,49 +37,9 @@
             <div class="justify-content-center">
                 <div class="centerHeader">
                     <h1>Courses</h1>
-                </div>                
-                @*<form>
-                    <div class="row">*@
-                        @* Search Bar *@
-                        @*<div class="col-10">
-                            @Html.TextBox("search", null, new { placeholder = "Search by keyword", @class = "form-control rounded" })
-                        </div>*@
-
-                        @* Search Button *@
-                        @*<div class="col-1">
-                            <button type="submit"
-                                    formaction="InstructorCview"
-                                    formmethod="get"
-                                    class="btn btn-primary">
-                                Search
-                            </button>
-                        </div>*@
-                    @*</div>*@
-                    <hr />
-
-                    @*<label for="departments">Filter by Department:</label>
-        <select name="departments" id="departments" onselect="deptFilter()">
-            @foreach (var item in Model)
-            {
-                <option value="@i">@item.dept_name</option>
-                i++;
-            }
-        </select>
-                    *@
-
-
-                    @*<option value="1">Comptuer Science</option>
-        <option value="2">Business and Economics</option>
-        <option value="3">Education</option>
-        <option value="4">Dental</option>
-        <option value="5">Mathematics</option>
-        <option value="6">Chemistry</option>
-        <option value="7">Physics</option>
-        <option value="8">Criminal Justice</option>*@
-
-                @*</form>*@
+                </div>                              
+                <hr />
                 @Html.ActionLink("Add Course", "AddCourse", "CoursesAndRegistration", new { @class = "addCourseBtn" })
-
             </div>
             <div class="row">
                 @{
@@ -95,7 +55,6 @@
                                     <h6 class="card-subtitle mb-2 text-muted">@item.StartTime - @item.EndTime @item.Days</h6>
                                 </div>
                                 <div class="detailCardBtn">
-                                    @*@Html.ActionLink("Details", "InstructorCourseDetail", "CoursesAndRegistration", new { id = @item.CourseId, @class = "detailCourseBtn" })*@
                                     @Html.ActionLink("Details", "InstructorCourseDetail", new { id = @item.CourseId }, new { @class = "detailCourseBtn" })
                                 </div>
                             </div>

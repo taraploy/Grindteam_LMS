@@ -46,26 +46,40 @@
                             @{ if (AssignmentList.StudentAssignments.Any()) {
                                     foreach (var item in AssignmentList.StudentAssignments)
                                     {
-                                    <div class="assignment-list-item">
-                                        <div class="float-left">
-                                            <h6><strong>@item.AssignmentName</strong> - @item.AssignmentType</h6>
-                                            <p>Due date: @item.DueDate</p>
+                                        int i = 0;
+                                        <div class="assignment-list-item">
+                                            <div class="float-left">
+                                                <h6><strong>@item.AssignmentName</strong> - @item.AssignmentType</h6>
+                                                <p>Due date: @item.DueDate</p>
+                                            </div>
+
+                                            <div class="float-end">
+                                                @{ if (AssignmentList.ThisStudentsSubmissions[i].isGraded)
+                                                    {
+                                                        <p>@AssignmentList.ThisStudentsSubmissions[i].Grade</p>
+                                                    }
+                                                    else {
+                                                    <p>Not yet graded</p>
+                                                    }
+                                                }
+                                            </div>
+                                            <div class="float-right">
+                                                @Html.Hidden("CourseId", item.CourseId)
+                                                @Html.Hidden("CourseNum", item.CourseNum)
+                                                @Html.Hidden("CourseName", item.CourseName)
+
+                                                @Html.ActionLink("Submit", "StudentAssignment", "Assignment", new { @id = item.AssignmentId }, null)
+                                            </div>
                                         </div>
-                                        <div class="float-right">
-                                            @Html.Hidden("CourseId", item.CourseId)
-                                            @Html.Hidden("CourseNum", item.CourseNum)
-                                            @Html.Hidden("CourseName", item.CourseName)
-                                            @Html.ActionLink("Submit", "StudentAssignment", "Assignment", new { @id = item.AssignmentId }, null)
-                                        </div>
-                                    </div>
-                                    <hr class="hr-assignment-list" />
+                                <hr class="hr-assignment-list" />
+                                    i++;
                                     }
-                                }
+                               }
                             }
                             @*end for loop*@
                         </div>
                     </div>
-                    <div class="col-md-4 float-md-right">
+                    <div>@*class="col-md-4 float-md-right"*@
                         @*<div class="container">*@
                         <h3>Course Details</h3>
                         <div>

@@ -10,9 +10,14 @@ namespace Assignment1.Models
         public int AssignmentGradeId;
         public int AssignmentId;
         public int StudentId;
+        public string FirstName;
+        public string LastName;
         public Nullable<int> Grade;
         public DateTime SubmissionDate;
         public string TextSubmission;
         public string FileSubmission;
+        public bool isGraded;
+        public int MaxPoints;
+        public DateTime DueDate;
     }
 }

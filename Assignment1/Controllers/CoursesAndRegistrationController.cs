@@ -66,6 +66,8 @@ namespace Assignment1.Controllers
 
             CourseCardList.GenerateStudentCourseList();
             AssignmentList.GenerateStudentAssignmentList(id);
+            AssignmentList.GenerateThisStudentsSubmissions(Name.user_id); 
+
 
             ViewBag.selectedCourse = course;
             ViewBag.courseDepartment = department;
@@ -428,7 +430,6 @@ namespace Assignment1.Controllers
 
             return index;
         }
-
 
     }
 
