@@ -4,7 +4,6 @@
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
-<h2>InstructorGradingView</h2>
 
 @using Assignment1.Models
 
@@ -49,8 +48,7 @@
                         <div class="col-sm-6">
                             <h5><strong>Maximum Points:</strong> @ViewBag.MaxPoints</h5>
                             <h5><strong>Submission Type:</strong> @ViewBag.SubmissionType</h5>
-                        </div>
-                    
+                        </div>                    
                     </div>
                     <hr />
                     <div class="justify-content-center row">
@@ -62,10 +60,20 @@
                                     {
                                         <div class="assignment-list-item">
                                             <div class="float-md-right">
-                                                @Html.ActionLink("Grade assignment", "Grading", "GradeAssignment", new { assignmentId = @ViewBag.AssignmentId }, new { studentId = item.StudentId })
+                                                @Html.ActionLink("Grade assignment", "GradeAssignment", "Grading", new { assignmentGradeId = @item.AssignmentGradeId }, null)
+                                                @{
+                                                    if (@item.Grade == null) {
+                                                        <h6>- out of @ViewBag.MaxPoints</h6>
+                                                    }
+                                                    else {
+                                                        <h6>@item.Grade out of @ViewBag.MaxPoints</h6>
+                                                    }
+                                                }
                                             </div>                                     
                                             <h6><strong>@item.LastName, @item.FirstName - W#@item.StudentId</strong></h6>
                                             <h6>Submitted: @item.SubmissionDate</h6>
+                                            @*<div class="float-md-right">
+                                            </di*@
                                         </div>
                                         <br/>
                                         <hr class="hr-assignment-list" />                                        

@@ -345,8 +345,8 @@
     <Content Include="Views\Assignment\EditAssignmentView.cshtml" />
     <Content Include="Views\CoursesAndRegistration\StudentCourseDetailView.cshtml" />
     <Content Include="Views\Assignment\StudentAssignmentView.cshtml" />
-    <Content Include="Views\Grading\GradeAssignmentView.cshtml" />
     <Content Include="Views\Grading\InstructorGradingView.cshtml" />
+    <Content Include="Views\Grading\GradeAssignmentView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

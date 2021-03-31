@@ -25,7 +25,7 @@ namespace Assignment1.Controllers
         {
             gds = new LMS_GRINDEntities1();
             String assignmentName = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.assignment_name).FirstOrDefault();
-            DateTime dueDate = (DateTime)gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.due_date).FirstOrDefault();
+            DateTime? dueDate = (DateTime)gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.due_date).FirstOrDefault();
             int? MaxPoints = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.max_points).FirstOrDefault();
             string submissionType = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.submission_type).FirstOrDefault();
             int instructorCourseId = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.instructor_course_id).FirstOrDefault();
@@ -37,6 +37,7 @@ namespace Assignment1.Controllers
             int instructorId = gds.InstructorCourses.Where(x => x.instructor_course_id == ic_id).Select(x => x.instructor_id).FirstOrDefault();
             String instructorLastName = gds.ulUsers.Where(x => x.ulUser_id == instructorId).Select(x => x.last_name).FirstOrDefault();
             ViewBag.AssignmentName = assignmentName;
+            ViewBag.AssignmentId = assignmentId;
             ViewBag.CourseNum = courseNum;
             ViewBag.CourseName = courseName;
             ViewBag.AssignmentDueDate = dueDate;
@@ -51,11 +52,58 @@ namespace Assignment1.Controllers
         /// </summary>
         /// <param name="assignmentId"></param>
         /// <returns></returns>
-        public ActionResult GradeAssignment(int assignmentId, int studentId)
+        public ActionResult GradeAssignment(int assignmentGradeId)
+        {
+            gds = new LMS_GRINDEntities1();
+            //Populate the page with individual assignment information
+            StudentAssignment stuAssignment = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).FirstOrDefault(); 
+            int student_id = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).Select(x => x.student_id).FirstOrDefault(); 
+            int assignmentId = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).Select(x => x.assignment_id).FirstOrDefault();
+            Assignment thisAssignment = gds.Assignments.Where(x => x.assignment_id == assignmentId).FirstOrDefault();
+            String assignmentName = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.assignment_name).FirstOrDefault();
+            String firstName = gds.ulUsers.Where(x => x.ulUser_id == student_id).Select(x => x.first_name).FirstOrDefault();
+            String lastName = gds.ulUsers.Where(x => x.ulUser_id == student_id).Select(x => x.last_name).FirstOrDefault();
+            ViewBag.AssignmentName = assignmentName;
+            ViewBag.StudentName = firstName + " " + lastName;
+            ViewBag.StudentId = stuAssignment.student_id;
+            ViewBag.SubmissionDate = stuAssignment.submission_date;
+            ViewBag.TextSubmission = stuAssignment.text_submission;
+            ViewBag.FileSubmission = stuAssignment.file_submission;
+            ViewBag.DueDate = thisAssignment.due_date;
+            ViewBag.MaxPoints = thisAssignment.max_points;
+            ViewBag.AssignmentGradeId = stuAssignment.assignment_grade_id;
+            ViewBag.CurrentGrade = stuAssignment.grade;
+             return View("GradeAssignmentView");
+        }
+
+        [HttpPost]
+        public ActionResult SubmitGradeAssignment(int assignmentGradeId, int grade)
         {
             gds = new LMS_GRINDEntities1();
             //Save grade to database
-            return View("GradeAssignmentView");
+            StudentAssignment stuAssignment = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).FirstOrDefault();
+            int? id = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).Select(x => x.assignment_id).FirstOrDefault();
+            try
+            {
+                stuAssignment.grade = grade;
+                gds.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        System.Console.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+            }
+            catch
+            {
+                return View("GradeAssignmentView");
+            }
+            return RedirectToAction("InstructorGrading", new { assignmentId = id });
+
         }
     }
 }

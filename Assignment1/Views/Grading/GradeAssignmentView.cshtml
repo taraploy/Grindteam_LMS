@@ -4,8 +4,6 @@
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
-<h2>GradeAssignmentView</h2>
-
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -18,13 +16,13 @@
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Registration", "ViewRegistration", "CoursesAndRegistration")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Balance", "Balance", "Payment")</h5></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
 
                     <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
 
@@ -35,12 +33,50 @@
         <div class="vl"></div>
         <div class="container col-md-8">
             <div class="row align-items-center">
+                <div class="col-md-12 centerHeader">
+                    <h1>W#@ViewBag.StudentId - @ViewBag.StudentName</h1>
+                    @*<p hidden name="assignmentGradeId"value ="ViewBag.AssignmentGradeId"></p>*@
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5><strong>Assignment:</strong> @ViewBag.AssignmentName</h5>
+                            <h5><strong>Due Date:</strong> @ViewBag.DueDate</h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5><strong>Maximum Points:</strong> @ViewBag.MaxPoints</h5>
+                            <h5><strong>Submission Date:</strong> @ViewBag.SubmissionDate</h5>
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        @{
+                            if (ViewBag.TextSubmission == null)
+                            {
 
+                                <p>@ViewBag.FileSubmission</p>
+                            }
+                            else
+                            {
 
+                                <p>@ViewBag.TextSubmission</p>
+                            }
+                        }
+                    </div>
+                    <form action="@Url.Action("SubmitGradeAssignment", "Grading", new { assignmentGradeId = ViewBag.AssignmentGradeId })" method="post">
+                        <div class="col-md-12">
+                            <div class="form-group mb-3">
+                                <label class="col-form-label" for="grade"><strong>Points</strong></label>
+                                <input class="col-md-2 grade-box" type="number" name="grade" min="0" max="@ViewBag.MaxPoints" value="@ViewBag.CurrentGrade" /> out of @ViewBag.MaxPoints
+                            </div>
+                            <div>
+                            <button type="submit" class="saveCourseBtn" id="save-button" value="Grade Assignment">Grade Assignment</button>
+                            @*@Html.ActionLink("Cancel", "InstructorGrading", "Grading", new { assignmentId = @ViewBag.AssignmentId }, new { @class = "addCourseBtn" })*@
 
-                CREATE A NEW VIEW - AS THIS ONE MAY NOT WORK
-
-
+                        </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
