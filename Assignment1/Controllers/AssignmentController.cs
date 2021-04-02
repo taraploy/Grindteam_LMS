@@ -38,8 +38,8 @@ namespace Assignment1.Controllers
         /// <returns>StudentAssignmentView</returns>    
         public ActionResult StudentAssignment(int? id)
         {
-            //AssignmentList.GenerateStudentSubmissionAssignmenItem(id);
-            AssignmentList.GenerateAssignmentItem(id);
+            AssignmentList.GenerateStudentSubmissionAssignmentItem(id);
+            AssignmentList.GenerateSingleAssignmentItem(id);
 
             if (AssignmentList.StudentAssignmentSubmission.FileSubmission == null &&
                 AssignmentList.StudentAssignmentSubmission.TextSubmission == null)

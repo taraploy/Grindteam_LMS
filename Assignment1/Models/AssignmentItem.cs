@@ -18,5 +18,6 @@ namespace Assignment1.Models
         public int CourseId;
         public string CourseName;
         public string CourseNum;
+
     }
 }

@@ -110,7 +110,7 @@
                 <p>
                     <div class="list-group-item">
                         @*<h5>@Html.ActionLink(item.AssignmentName, "", "Assignment", new { @id = item.AssignmentID }, null)</h5>*@
-                        <h5><a href="#">@item.AssignmentName</a></h5>
+                        <h5 class="card-title">@Html.ActionLink(item.AssignmentName, "InstructorGrading", "Grading", new { id = item.AssignmentID }, null)</h5>
                         <h6 class="todo-subtitle text-muted">@item.CourseNum</h6>
                         <h6 class="todo-due-date text-muted">@item.DueDate</h6>
                     </div>

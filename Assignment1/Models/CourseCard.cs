@@ -17,5 +17,7 @@ namespace Assignment1.Models
         public string Days;
         public string StartTime;
         public string EndTime;
+        public TimeSpan Start;
+        public TimeSpan End;
     }
 }

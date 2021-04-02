@@ -18,7 +18,8 @@
     <div>
         @RenderBody()
     </div>
-
+    @Scripts.Render("~/Scripts/jquery-3.6.0.js")
+    @Scripts.Render("~/Scripts/moment.min.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -3,6 +3,7 @@
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 @using Assignment1.Models
+
 @section scripts{
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
@@ -10,19 +11,63 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth'
             });
-            var date = new Date('2021-02-28' + 'T00:00:00');
-            calendar.addEvent({
-                title: 'Textbook Participation 1',
-                start: date,
-                allDay: true
-            });
-            var date2 = new Date('2021-03-05' + 'T11:59:00');
-            calendar.addEvent({
-                title: 'Assignment 3',
-                start: date2,
-                allDay: true,
-                url: '@Url.Action("GoToEvent", "UserAccount", null)'
-            });
+
+            //retrieve json object and set events
+            $(document).ready(function () {
+                // get json 'assignments' object from GetAssignmentEvents()
+                $.ajax({
+                    type: "GET",
+                    dataType: 'json',
+                    url: "calendar/GetAssignmentEvents",
+                    success: function (data) {
+                        // add one event to calendar per json object
+                        $.each(data, function (i, v) {
+                            var date = new Date(moment(v.start));
+                            calendar.addEvent({
+                                title: v.title,
+                                start: date,
+                                allDay: true,
+                                color: "#1687a7",
+                                url: v.url
+                            });
+                        })
+                    }
+                    //error: function (error) {
+                    //    alert('failed');
+                    //}
+                })// end json
+
+                // get json 'meetings' object from GetMeetingEvents()
+                $.ajax({
+                    type: "GET",
+                    dataType: 'json',
+                    url: "calendar/GetMeetingEvents",
+                    success: function (data) {
+                        // add one event to calendar per json object
+                        $.each(data, function (i, v) {
+
+                            var start = new Date('2021-01-11' + 'T00:11:59');
+                            var end = new Date('2021-05-08' + 'T00:11:59');
+
+                            calendar.addEvent({
+                                title: v.title,
+                                description: v.description,
+                                start: start,
+                                startRecur: start,
+                                endRecur: end,
+                                daysOfWeek: v.days,
+                                allDay: true,
+                                color: "#C8C8C8"
+                            });
+                        })
+                    },
+                    error: function (error) {
+                        alert('failed');
+                    }
+                })// end json
+            })
+
+            // render the calendar
             calendar.render();
         });
     </script>

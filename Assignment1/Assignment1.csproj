@@ -120,15 +120,15 @@
     <Content Include="FullCalendar\main.js" />
     <Content Include="Global.asax" />
     <Content Include="Images\bell.png" />
-    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\gcal.js" />
     <Content Include="Scripts\gcal.min.js" />
-    <Content Include="Scripts\jquery-3.2.1.js" />
-    <Content Include="Scripts\jquery-3.2.1.min.js" />
-    <Content Include="Scripts\jquery-3.2.1.slim.js" />
-    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
     <Content Include="Scripts\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
     <Content Include="Scripts\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
     <Content Include="Scripts\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
@@ -272,6 +272,7 @@
     <Compile Include="Models\CourseCardList.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\InstructorCourseContext.cs" />
+    <Compile Include="Models\Meeting.cs" />
     <Compile Include="Models\Name.cs" />
     <Compile Include="Models\SecurityQuestion.cs" />
     <Compile Include="Models\StudentAssignmentItem.cs" />
@@ -328,8 +329,6 @@
     <Content Include="ulUsers.edmx.diagram">
       <DependentUpon>ulUsers.edmx</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
     <Content Include="Views\CoursesAndRegistration\AddCourseView.cshtml" />
@@ -347,6 +346,8 @@
     <Content Include="Views\Assignment\StudentAssignmentView.cshtml" />
     <Content Include="Views\Grading\InstructorGradingView.cshtml" />
     <Content Include="Views\Grading\GradeAssignmentView.cshtml" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

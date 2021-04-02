@@ -233,7 +233,7 @@ namespace Assignment1.Models
         }
 
         /// <summary>
-        /// Gets a single Assgnment Item by assingment_id
+        /// Gets a list Assgnment Item by assingment_id
         /// </summary>
         /// <param name="id"></param>
         public static void GenerateAssignmentItem(int? AssignmentId)
@@ -278,6 +278,53 @@ namespace Assignment1.Models
                 AssignmentItemList[i].CourseName = item.CourseName;
                 AssignmentItemList[i].SubmissionType = item.SubmissionType;
                 i++;
+            }
+        }
+
+        /// <summary>
+        /// Gets a single Assgnment Item by assingment_id
+        /// </summary>
+        /// <param name="id"></param>
+        public static void GenerateSingleAssignmentItem(int? id)
+        {
+            AssignmentItem = new AssignmentItem();
+            LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
+
+            var query = (from a in gds.Assignments
+                         join ic in gds.InstructorCourses on a.instructor_course_id equals ic.instructor_course_id
+                         join sc in gds.StudentCourses on ic.course_id equals sc.course_id
+                         join c in gds.Courses on ic.course_id equals c.course_id
+                         where a.assignment_id == id
+                         where sc.student_id == Name.user_id
+                         select new
+                         {
+                             AssignmentId = a.assignment_id,
+                             InstructorCourseId = a.instructor_course_id,
+                             AssignmentName = a.assignment_name,
+                             AssignmentDesc = a.assignment_desc,
+                             AssignmentType = a.assignment_type,
+                             SubmissionType = a.submission_type,
+                             MaxPoints = a.max_points,
+                             DueDate = a.due_date,
+                             CourseId = c.course_id,
+                             CourseNum = c.course_num,
+                             CourseName = c.course_name,
+                             StudentId = sc.student_id
+                         }).ToList();
+
+            foreach (var item in query)
+            {
+                AssignmentItem.AssignmentId = item.AssignmentId;
+                AssignmentItem.AssignmentDesc = item.AssignmentDesc;
+                AssignmentItem.InstructorCourseId = item.InstructorCourseId;
+                AssignmentItem.AssignmentName = item.AssignmentName;
+                AssignmentItem.AssignmentType = item.AssignmentType;
+                AssignmentItem.MaxPoints = item.MaxPoints;
+                AssignmentItem.DueDate = item.DueDate;
+                AssignmentItem.CourseId = item.CourseId;
+                AssignmentItem.CourseNum = item.CourseNum;
+                AssignmentItem.CourseName = item.CourseName;
+                AssignmentItem.SubmissionType = item.SubmissionType;
             }
         }
     }
