@@ -43,7 +43,8 @@
                         <h3>Assignments</h3>
                         <div class="card assignment-list">
                             @*for loop*@
-                            @{ if (AssignmentList.StudentAssignments.Any()) {
+                            @{ if (AssignmentList.StudentAssignments.Any())
+                                {
                                     foreach (var item in AssignmentList.StudentAssignments)
                                     {
                                         int i = 0;
@@ -54,12 +55,14 @@
                                             </div>
 
                                             <div class="float-end">
-                                                @{ if (AssignmentList.ThisStudentsSubmissions[i].isGraded)
+                                                @{ AssignmentList.GenerateThisStudentsSubmissionForAssignment(Name.user_id, item.AssignmentId);
+                                                    if (AssignmentList.StudentAssignmentSubmission.isGraded)
                                                     {
-                                                        <p>@AssignmentList.ThisStudentsSubmissions[i].Grade</p>
+                                                        <p>Grade: @AssignmentList.StudentAssignmentSubmission.Grade / @item.MaxPoints</p>
                                                     }
-                                                    else {
-                                                    <p>Not yet graded</p>
+                                                    else
+                                                    {
+                                                        <p>Not yet graded</p>
                                                     }
                                                 }
                                             </div>
@@ -71,31 +74,32 @@
                                                 @Html.ActionLink("Submit", "StudentAssignment", "Assignment", new { @id = item.AssignmentId }, null)
                                             </div>
                                         </div>
-                                <hr class="hr-assignment-list" />
-                                    i++;
+                                        <hr class="hr-assignment-list" />
+                                        i++;
                                     }
-                               }
+                                }
                             }
                             @*end for loop*@
                         </div>
                     </div>
-                    <div>@*class="col-md-4 float-md-right"*@
-                        @*<div class="container">*@
-                        <h3>Course Details</h3>
-                        <div>
-                            <p>
-                                <strong>Instructor</strong>: @ViewBag.InstructorName
-                                <br />
-                                <strong>Location</strong>: @ViewBag.selectedCourse.building : Room @ViewBag.selectedCourse.room_no
-                                <br />
-                                <strong>Meeting Time</strong>: @ViewBag.selectedCourse.start_time - @ViewBag.selectedCourse.end_time | @ViewBag.selectedCourse.days_of_week
-                            </p>
-                        </div>
-                        @*</div>*@
+                    <div>
+                        @*class="col-md-4 float-md-right"*@
+                    @*<div class="container">*@
+                    <h3>Course Details</h3>
+                    <div>
+                        <p>
+                            <strong>Instructor</strong>: @ViewBag.InstructorName
+                            <br />
+                            <strong>Location</strong>: @ViewBag.selectedCourse.building : Room @ViewBag.selectedCourse.room_no
+                            <br />
+                            <strong>Meeting Time</strong>: @ViewBag.selectedCourse.start_time - @ViewBag.selectedCourse.end_time | @ViewBag.selectedCourse.days_of_week
+                        </p>
                     </div>
+                    @*</div>*@
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 

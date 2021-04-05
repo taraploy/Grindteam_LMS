@@ -70,10 +70,10 @@
                                 <input class="col-md-2 grade-box" type="number" name="grade" min="0" max="@ViewBag.MaxPoints" value="@ViewBag.CurrentGrade" /> out of @ViewBag.MaxPoints
                             </div>
                             <div>
-                            <button type="submit" class="saveCourseBtn" id="save-button" value="Grade Assignment">Grade Assignment</button>
-                            @*@Html.ActionLink("Cancel", "InstructorGrading", "Grading", new { assignmentId = @ViewBag.AssignmentId }, new { @class = "addCourseBtn" })*@
+                                <button type="submit" class="saveCourseBtn" id="save-button" value="Grade Assignment">Grade Assignment</button>
+                                @Html.ActionLink("Cancel", "InstructorGrading", "Grading", new { assignmentId = ViewBag.AssignmentId }, new { @class = "addCourseBtn" })
 
-                        </div>
+                            </div>
                         </div>
                     </form>
                 </div>

@@ -33,14 +33,19 @@ namespace Assignment1.Controllers
         }
 
         /// <summary>
-        /// Display assignment List for student course view based on particular course selected
+        /// Display assignment List for student course view based on particular assignment selected
         /// </summary>
+        /// Parameter = assignmentId
         /// <returns>StudentAssignmentView</returns>    
-        public ActionResult StudentAssignment(int? id)
+        public ActionResult StudentAssignment(int? id, int? studentId)
         {
-            AssignmentList.GenerateStudentSubmissionAssignmentItem(id);
+            //AssignmentList.GenerateStudentAssignmentList(id);
+            //AssignmentList.GenerateSingleAssignmentItem(id);
+            AssignmentList.GenerateThisStudentsSubmissionForAssignment(studentId, id);
+            //AssignmentList.GenerateStudentSubmissionAssignmentItem(id);
             AssignmentList.GenerateSingleAssignmentItem(id);
 
+            //check StudentAssignmentSubmissionItem attribute (filesubmission & textsubmission)
             if (AssignmentList.StudentAssignmentSubmission.FileSubmission == null &&
                 AssignmentList.StudentAssignmentSubmission.TextSubmission == null)
             {
@@ -70,8 +75,8 @@ namespace Assignment1.Controllers
                 {
 
                     var instructor = (from ic in gds.InstructorCourses
-                                        where ic.instructor_course_id == AssignmentList.AssignmentItem.InstructorCourseId
-                                        select ic).First();
+                                      where ic.instructor_course_id == AssignmentList.AssignmentItem.InstructorCourseId
+                                      select ic).First();
 
                     var instructor_l_name = (from i in gds.ulUsers
                                              where i.ulUser_id == instructor.instructor_id
@@ -160,7 +165,7 @@ namespace Assignment1.Controllers
             var courseNum = Request.Form["CourseNum"];
             var courseName = Request.Form["CourseName"];
 
-           
+
             gds = new LMS_GRINDEntities1();
             Assignment newAssignment = new Assignment();
 
@@ -242,8 +247,8 @@ namespace Assignment1.Controllers
 
             return index;
         }
-        
-        
+
+
         public ActionResult DeleteAssignment(int id)
         {
             gds = new LMS_GRINDEntities1();
@@ -266,7 +271,7 @@ namespace Assignment1.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateAssignment(int id, string assignmentName, string assignmentDesc, int maxPoints, 
+        public ActionResult UpdateAssignment(int id, string assignmentName, string assignmentDesc, int maxPoints,
             DateTime dueDate, string assignmentType, string submissionType)
         {
             gds = new LMS_GRINDEntities1();
@@ -309,7 +314,7 @@ namespace Assignment1.Controllers
             //var courseNum = Request.Form["CourseNum"];
             //var courseName = Request.Form["CourseName"];
             gds = new LMS_GRINDEntities1();
-            Assignment assignment = gds.Assignments.Where(x => x.assignment_id == id).FirstOrDefault(); 
+            Assignment assignment = gds.Assignments.Where(x => x.assignment_id == id).FirstOrDefault();
             int insCourse = gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.instructor_course_id).FirstOrDefault();
             int courseId = gds.InstructorCourses.Where(x => x.instructor_course_id == insCourse).Select(x => x.course_id).FirstOrDefault();
             var courseNum = gds.Courses.Where(x => x.course_id == courseId).Select(x => x.course_num).FirstOrDefault();

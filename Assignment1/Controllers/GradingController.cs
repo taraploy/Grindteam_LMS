@@ -21,14 +21,15 @@ namespace Assignment1.Controllers
 
         LMS_GRINDEntities1 gds;
 
-        public ActionResult InstructorGrading(int? id)
+        public ActionResult InstructorGrading(int? assignmentId)
         {
             gds = new LMS_GRINDEntities1();
-            String assignmentName = gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.assignment_name).FirstOrDefault();
-            DateTime? dueDate = (DateTime)gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.due_date).FirstOrDefault();
-            int? MaxPoints = gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.max_points).FirstOrDefault();
-            string submissionType = gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.submission_type).FirstOrDefault();
-            int instructorCourseId = gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.instructor_course_id).FirstOrDefault();
+            String assignmentName = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.assignment_name).FirstOrDefault();
+            int assignId = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.assignment_id).FirstOrDefault();
+            //DateTime dueDate = (DateTime)gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.due_date).FirstOrDefault();
+            int? MaxPoints = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.max_points).FirstOrDefault();
+            string submissionType = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.submission_type).FirstOrDefault();
+            int instructorCourseId = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.instructor_course_id).FirstOrDefault();
             int courseId = gds.InstructorCourses.Where(x => x.instructor_course_id == instructorCourseId).Select(x => x.course_id).FirstOrDefault();
             string courseNum = gds.Courses.Where(x => x.course_id == courseId).Select(x => x.course_num).FirstOrDefault();
             string courseName = gds.Courses.Where(x => x.course_id == courseId).Select(x => x.course_name).FirstOrDefault();
@@ -37,13 +38,14 @@ namespace Assignment1.Controllers
             int instructorId = gds.InstructorCourses.Where(x => x.instructor_course_id == ic_id).Select(x => x.instructor_id).FirstOrDefault();
             String instructorLastName = gds.ulUsers.Where(x => x.ulUser_id == instructorId).Select(x => x.last_name).FirstOrDefault();
             ViewBag.AssignmentName = assignmentName;
-            ViewBag.id = id;
+            ViewBag.AssignmentId = assignId;
+            ViewBag.id = assignmentId;
             ViewBag.CourseNum = courseNum;
             ViewBag.CourseName = courseName;
-            ViewBag.AssignmentDueDate = dueDate;
+            //ViewBag.AssignmentDueDate = dueDate;
             ViewBag.MaxPoints = MaxPoints;
             ViewBag.SubmissionType = submissionType;
-            AssignmentList.GenerateAllSubmissions(id);
+            AssignmentList.GenerateAllSubmissions(assignmentId);
             return View("InstructorGradingView");
         }
 
@@ -56,8 +58,8 @@ namespace Assignment1.Controllers
         {
             gds = new LMS_GRINDEntities1();
             //Populate the page with individual assignment information
-            StudentAssignment stuAssignment = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).FirstOrDefault(); 
-            int student_id = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).Select(x => x.student_id).FirstOrDefault(); 
+            StudentAssignment stuAssignment = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).FirstOrDefault();
+            int student_id = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).Select(x => x.student_id).FirstOrDefault();
             int assignmentId = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).Select(x => x.assignment_id).FirstOrDefault();
             Assignment thisAssignment = gds.Assignments.Where(x => x.assignment_id == assignmentId).FirstOrDefault();
             String assignmentName = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.assignment_name).FirstOrDefault();
@@ -72,8 +74,9 @@ namespace Assignment1.Controllers
             ViewBag.DueDate = thisAssignment.due_date;
             ViewBag.MaxPoints = thisAssignment.max_points;
             ViewBag.AssignmentGradeId = stuAssignment.assignment_grade_id;
+            ViewBag.AssignmentId = assignmentId;
             ViewBag.CurrentGrade = stuAssignment.grade;
-             return View("GradeAssignmentView");
+            return View("GradeAssignmentView");
         }
 
         [HttpPost]

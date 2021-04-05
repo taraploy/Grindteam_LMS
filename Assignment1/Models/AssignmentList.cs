@@ -21,27 +21,29 @@ namespace Assignment1.Models
         public static AssignmentItem AssignmentItem;
 
 
+        //this method generates all of the assignments by a particular instructor
+        //Generates a list of assignmentItems (targeted for instructor views)
         public static void GenerateInstructorAssignmentList(int id)
         {
             AssignmentItemList = new List<AssignmentItem>();
             LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
             var query = (from a in gds.Assignments
-                        join ic in gds.InstructorCourses on a.instructor_course_id equals ic.instructor_course_id
-                        join c in gds.Courses on ic.course_id equals c.course_id
-                        where ic.instructor_id == Name.user_id && ic.course_id == id
-                        select new
-                        {
-                            AssignmentId = a.assignment_id,
-                            InstructorCourseId = a.instructor_course_id,
-                            AssignmentName = a.assignment_name,
-                            AssignmentDesc = a.assignment_desc,
-                            AssignmentType = a.assignment_type,
-                            MaxPoints = a.max_points,
-                            DueDate = a.due_date,
-                            CourseId = c.course_id,
-                            CourseNum = c.course_num,
-                            CourseName = c.course_name
-                        }).ToList();
+                         join ic in gds.InstructorCourses on a.instructor_course_id equals ic.instructor_course_id
+                         join c in gds.Courses on ic.course_id equals c.course_id
+                         where ic.instructor_id == Name.user_id && ic.course_id == id
+                         select new
+                         {
+                             AssignmentId = a.assignment_id,
+                             InstructorCourseId = a.instructor_course_id,
+                             AssignmentName = a.assignment_name,
+                             AssignmentDesc = a.assignment_desc,
+                             AssignmentType = a.assignment_type,
+                             MaxPoints = a.max_points,
+                             DueDate = a.due_date,
+                             CourseId = c.course_id,
+                             CourseNum = c.course_num,
+                             CourseName = c.course_name
+                         }).ToList();
 
             int i = 0;
             foreach (var item in query)
@@ -60,15 +62,18 @@ namespace Assignment1.Models
                 i++;
             }
         }
-        public static void GenerateStudentAssignmentList(int id)
+
+        //This method generates all of the student assignments for a particular course
+        //Generates a list of StudentAssignmentItems (targeted for student views)
+        public static void GenerateStudentAssignmentList(int? id)
         {
             StudentAssignments = new List<StudentAssignmentItem>();
             LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
             var query = (from a in gds.Assignments
                          join ic in gds.InstructorCourses on a.instructor_course_id equals ic.instructor_course_id
-                         join sc in gds.StudentCourses on ic.course_id equals sc.course_id 
+                         join sc in gds.StudentCourses on ic.course_id equals sc.course_id
                          join c in gds.Courses on ic.course_id equals c.course_id
-                         where ic.course_id == id && sc.student_id == Name.user_id      //Name.user_id is the student, so find matching student_id
+                         where c.course_id == id && sc.student_id == Name.user_id      //Name.user_id is the student, so find matching student_id
                          select new
                          {
                              AssignmentId = a.assignment_id,
@@ -103,53 +108,53 @@ namespace Assignment1.Models
             }
         }
 
-        /// <summary>
-        /// Generates a signle StudentSubmissionAssignmentItem
-        /// </summary>
-        /// <param name="assignmentId"></param>
-        public static void GenerateStudentSubmissionAssignmentItem(int? assignmentId)
-        {
-            StudentAssignmentSubmission = new StudentAssignmentSubmissionItem();
-            LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
+        //This method generates all of the submissions by students for a particular assignment
+        //Generates an individual StudentAssignmentSubmissionItem.
+        //public static void GenerateStudentSubmissionAssignmentItem(int? assignmentId)
+        //{
+        //    StudentAssignmentSubmission = new StudentAssignmentSubmissionItem();
+        //    LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
 
-            var query = (from a in gds.Assignments
-                         join s in gds.StudentAssignments
-                         on a.assignment_id equals s.assignment_id
-                         where s.student_id == Name.user_id
-                         && s.assignment_id == assignmentId
-                         select new
-                         {
-                            AssignmentGradeId = s.assignment_grade_id,
-                            AssignmentId = a.assignment_id,
-                            StudentId = s.student_id,
-                            Grade = s.grade,
-                            SubmissionDate = s.submission_date,
-                            TextSubmission = s.text_submission,
-                            FileSubmission = s.file_submission
-                         }).ToList();
+        //    var query = (from a in gds.Assignments
+        //                 join s in gds.StudentAssignments
+        //                 on a.assignment_id equals s.assignment_id
+        //                 where s.student_id == Name.user_id
+        //                 && s.assignment_id == assignmentId
+        //                 select new
+        //                 {
+        //                    AssignmentGradeId = s.assignment_grade_id,
+        //                    AssignmentId = a.assignment_id,
+        //                    StudentId = s.student_id,
+        //                    Grade = s.grade,
+        //                    SubmissionDate = s.submission_date,
+        //                    TextSubmission = s.text_submission,
+        //                    FileSubmission = s.file_submission 
+        //                 }).ToList();
 
-            foreach (var item in query)
-            {
-                StudentAssignmentSubmission.AssignmentGradeId = item.AssignmentGradeId;
-                StudentAssignmentSubmission.AssignmentId = item.AssignmentId;
-                StudentAssignmentSubmission.StudentId = item.StudentId;
-                StudentAssignmentSubmission.Grade = item.Grade;
-                StudentAssignmentSubmission.SubmissionDate = (DateTime)item.SubmissionDate;
-                StudentAssignmentSubmission.FileSubmission = item.FileSubmission;
-                StudentAssignmentSubmission.TextSubmission = item.TextSubmission;
+        //    foreach (var item in query)
+        //    {
+        //        StudentAssignmentSubmission.AssignmentGradeId = item.AssignmentGradeId;
+        //        StudentAssignmentSubmission.AssignmentId = item.AssignmentId;
+        //        StudentAssignmentSubmission.StudentId = item.StudentId;
+        //        StudentAssignmentSubmission.Grade = item.Grade;
+        //        StudentAssignmentSubmission.SubmissionDate = (DateTime)item.SubmissionDate;
+        //        StudentAssignmentSubmission.FileSubmission = item.FileSubmission;
+        //        StudentAssignmentSubmission.TextSubmission = item.TextSubmission;
 
-                if (item.Grade != null)
-                {
-                    StudentAssignmentSubmission.isGraded = true;
-                }
-                else
-                {
-                    StudentAssignmentSubmission.isGraded = false;
-                }
+        //        if (item.Grade != null)
+        //        {
+        //            StudentAssignmentSubmission.isGraded = true;
+        //        }
+        //        else
+        //        {
+        //            StudentAssignmentSubmission.isGraded = false;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
+        //This method returns all of the submissions by a particular student with the parameter id 
+        //Generates a list of StudentAssignmentSubmissionItems
         public static void GenerateThisStudentsSubmissions(int? studentId)
         {
             ThisStudentsSubmissions = new List<StudentAssignmentSubmissionItem>();
@@ -191,6 +196,50 @@ namespace Assignment1.Models
             }
         }
 
+
+        //This method returns a single submission by student with studentId and assignment with assignmentId 
+        //Generates a list of StudentAssignmentSubmissionItems
+        public static void GenerateThisStudentsSubmissionForAssignment(int? studentId, int? assignmentId)
+        {
+            StudentAssignmentSubmission = new StudentAssignmentSubmissionItem();
+            LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
+
+            var query = (from a in gds.StudentAssignments
+                         where a.student_id == studentId
+                         where a.assignment_id == assignmentId
+                         select new
+                         {
+                             AssignmentGradeId = a.assignment_grade_id,
+                             AssignmentId = a.assignment_id,
+                             StudentId = a.student_id,
+                             Grade = a.grade,
+                             SubmissionDate = a.submission_date,
+                             TextSubmission = a.text_submission,
+                             FileSubmission = a.file_submission
+                         }).ToList();
+
+            foreach (var item in query)
+            {
+                StudentAssignmentSubmission.AssignmentGradeId = item.AssignmentGradeId;
+                StudentAssignmentSubmission.AssignmentId = item.AssignmentId;
+                StudentAssignmentSubmission.StudentId = item.StudentId;
+                StudentAssignmentSubmission.Grade = item.Grade;
+                StudentAssignmentSubmission.SubmissionDate = (DateTime)item.SubmissionDate;
+                StudentAssignmentSubmission.TextSubmission = item.TextSubmission;
+                StudentAssignmentSubmission.FileSubmission = item.FileSubmission;
+                if (item.Grade != null)
+                {
+                    StudentAssignmentSubmission.isGraded = true;
+                }
+                else
+                {
+                    StudentAssignmentSubmission.isGraded = false;
+                }
+            }
+        }
+
+        //This method generates all of the submissions for a particular assignment with the parameter id
+        //Generates a list of StudentAssignmentSubmissionItems
         public static void GenerateAllSubmissions(int? assignmentId)
         {
             AllStudentSubmissions = new List<StudentAssignmentSubmissionItem>();
@@ -232,15 +281,16 @@ namespace Assignment1.Models
             }
         }
 
+        //This method generates the information of a specific assignment with the parameter assignmentId
+        //Generates a list assignmentItem
         /// <summary>
         /// Gets a list Assgnment Item by assingment_id
         /// </summary>
         /// <param name="id"></param>
         public static void GenerateAssignmentItem(int? AssignmentId)
         {
-            AssignmentItem = new AssignmentItem();
             AssignmentItemList = new List<AssignmentItem>();
-        LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
+            LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
 
             var query = (from a in gds.Assignments
                          join ic in gds.InstructorCourses on a.instructor_course_id equals ic.instructor_course_id
@@ -311,7 +361,6 @@ namespace Assignment1.Models
                              CourseName = c.course_name,
                              StudentId = sc.student_id
                          }).ToList();
-
             foreach (var item in query)
             {
                 AssignmentItem.AssignmentId = item.AssignmentId;

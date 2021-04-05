@@ -20,7 +20,7 @@ namespace Assignment1.Controllers
 
     {
         LMS_GRINDEntities1 gds;
-       // List<Cours> allCourses = new List<Cours>();
+        // List<Cours> allCourses = new List<Cours>();
         // GET: CoursesAndRegistration
         //public ActionResult Index()
         //{
@@ -41,7 +41,7 @@ namespace Assignment1.Controllers
 
             CourseCardList.GenerateInstructorCourseList();
 
-            return View("InstructorCview", departments.ToList().OrderBy(x=>x.dept_name));
+            return View("InstructorCview", departments.ToList().OrderBy(x => x.dept_name));
         }
 
         public ActionResult AddCourse()
@@ -66,8 +66,7 @@ namespace Assignment1.Controllers
 
             CourseCardList.GenerateStudentCourseList();
             AssignmentList.GenerateStudentAssignmentList(id);
-            AssignmentList.GenerateThisStudentsSubmissions(Name.user_id); 
-
+            AssignmentList.GenerateThisStudentsSubmissions(Name.user_id);
 
             ViewBag.selectedCourse = course;
             ViewBag.courseDepartment = department;
@@ -104,7 +103,7 @@ namespace Assignment1.Controllers
             gds = new LMS_GRINDEntities1();
 
             var courses = (from c in gds.Courses
-                          select c);
+                           select c);
 
             if (!String.IsNullOrEmpty(search))
             {
@@ -204,10 +203,10 @@ namespace Assignment1.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveCourse(string courseNum, string courseName, string courseDesc, 
-            int courseCredits, int maxCapacity, string courseLocation, 
-            int courseRoom, int departments,  string monday, string tuesday, string wednesday, 
-            string thursday,  string friday, TimeSpan startTime, TimeSpan endTime)
+        public ActionResult SaveCourse(string courseNum, string courseName, string courseDesc,
+            int courseCredits, int maxCapacity, string courseLocation,
+            int courseRoom, int departments, string monday, string tuesday, string wednesday,
+            string thursday, string friday, TimeSpan startTime, TimeSpan endTime)
         {
             gds = new LMS_GRINDEntities1();
             Cours course = new Cours();
@@ -356,7 +355,7 @@ namespace Assignment1.Controllers
         public ActionResult DeleteCourse(int id)
         {
             gds = new LMS_GRINDEntities1();
-            
+
             Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
             InstructorCours insCourse = gds.InstructorCourses.Where(x => x.course_id == id).FirstOrDefault();
             //StudentCours[] enrolledStudents = new StudentCours[32];
