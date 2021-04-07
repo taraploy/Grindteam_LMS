@@ -60,9 +60,10 @@
           <Property Name="student_course_id" Type="int" />
           <Property Name="student_id" Type="int" Nullable="false" />
           <Property Name="grade" Type="int" />
-          <Property Name="submission_date" Type="date" />
+          <Property Name="submission_date" Type="datetime" />
           <Property Name="text_submission" Type="varchar" MaxLength="500" />
           <Property Name="file_submission" Type="nvarchar" MaxLength="500" />
+          <Property Name="instructor_feedback" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="StudentCourses">
           <Key>
@@ -327,9 +328,10 @@
           <Property Name="student_course_id" Type="Int32" />
           <Property Name="student_id" Type="Int32" Nullable="false" />
           <Property Name="grade" Type="Int32" />
-          <Property Name="submission_date" Type="DateTime" Precision="0" />
+          <Property Name="submission_date" Type="DateTime" Precision="3" />
           <Property Name="text_submission" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="file_submission" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="instructor_feedback" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -423,6 +425,7 @@
           <EntitySetMapping Name="StudentAssignments">
             <EntityTypeMapping TypeName="LMS_GRINDModel.StudentAssignment">
               <MappingFragment StoreEntitySet="StudentAssignments">
+                <ScalarProperty Name="instructor_feedback" ColumnName="instructor_feedback" />
                 <ScalarProperty Name="file_submission" ColumnName="file_submission" />
                 <ScalarProperty Name="text_submission" ColumnName="text_submission" />
                 <ScalarProperty Name="submission_date" ColumnName="submission_date" />

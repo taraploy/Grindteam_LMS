@@ -168,6 +168,7 @@ namespace Assignment1.Models
                              AssignmentId = a.assignment_id,
                              StudentId = a.student_id,
                              Grade = a.grade,
+                             InstructorFeedback = a.instructor_feedback,
                              SubmissionDate = a.submission_date,
                              TextSubmission = a.text_submission,
                              FileSubmission = a.file_submission
@@ -184,6 +185,7 @@ namespace Assignment1.Models
                 ThisStudentsSubmissions[i].SubmissionDate = (DateTime)item.SubmissionDate;
                 ThisStudentsSubmissions[i].TextSubmission = item.TextSubmission;
                 ThisStudentsSubmissions[i].FileSubmission = item.FileSubmission;
+                ThisStudentsSubmissions[i].InstructorFeedback = item.InstructorFeedback;
                 if (item.Grade != null)
                 {
                     ThisStudentsSubmissions[i].isGraded = true;
@@ -213,6 +215,7 @@ namespace Assignment1.Models
                              AssignmentId = a.assignment_id,
                              StudentId = a.student_id,
                              Grade = a.grade,
+                             InstructorFeedback = a.instructor_feedback,
                              SubmissionDate = a.submission_date,
                              TextSubmission = a.text_submission,
                              FileSubmission = a.file_submission
@@ -227,6 +230,7 @@ namespace Assignment1.Models
                 StudentAssignmentSubmission.SubmissionDate = (DateTime)item.SubmissionDate;
                 StudentAssignmentSubmission.TextSubmission = item.TextSubmission;
                 StudentAssignmentSubmission.FileSubmission = item.FileSubmission;
+                StudentAssignmentSubmission.InstructorFeedback = item.InstructorFeedback;
                 if (item.Grade != null)
                 {
                     StudentAssignmentSubmission.isGraded = true;
@@ -259,6 +263,7 @@ namespace Assignment1.Models
                              FirstName = u.first_name,
                              LastName = u.last_name,
                              Grade = sa.grade,
+                             InstructorFeedback = sa.instructor_feedback,
                              SubmissionDate = sa.submission_date,
                              TextSubmission = sa.text_submission,
                              FileSubmission = sa.file_submission
@@ -277,6 +282,7 @@ namespace Assignment1.Models
                 AllStudentSubmissions[i].FileSubmission = item.FileSubmission;
                 AllStudentSubmissions[i].FirstName = item.FirstName;
                 AllStudentSubmissions[i].LastName = item.LastName;
+                AllStudentSubmissions[i].InstructorFeedback = item.InstructorFeedback;
                 i++;
             }
         }

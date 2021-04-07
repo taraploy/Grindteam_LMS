@@ -167,13 +167,15 @@ namespace Assignment1.Controllers
 
                 if (Name.role == "Instructor")
                 {
-                    return View("InstructorView");
-                    //return View(from c in gds.Courses join i in gds.InstructorCourses on c.course_id equals i.course_id where @Name.user_id == i.instructor_id select new { c.course_num, c.course_name, c.course_desc, i.instructor_id, c.num_credits, c.days_of_week, c.start_time, c.end_time, c.building, c.room_no, c.max_capacity });
-
+                    // Redirect back to login page promting to sign in again
+                    return Redirect("Login");
+                    //return View("InstructorView");
                 }
                 else
                 {
-                    return View("StudentView");
+                    // Redirect back to login page promting to sign in again
+                    return Redirect("Login");
+                    //return View("StudentView");
                 }
             }
         }

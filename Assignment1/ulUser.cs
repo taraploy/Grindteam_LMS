@@ -10,9 +10,9 @@
 namespace Assignment1
 {
     using System;
-    using System.Collections.Generic;
     using System.Web;
-
+    using System.Collections.Generic;
+    
     public partial class ulUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -39,6 +39,7 @@ namespace Assignment1
         public string linkTitle1 { get; set; }
         public string linkTitle2 { get; set; }
         public string linkTitle3 { get; set; }
+
         public HttpPostedFileBase File { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

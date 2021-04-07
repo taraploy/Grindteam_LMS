@@ -24,11 +24,8 @@ namespace Assignment1.Controllers
         public ActionResult InstructorGrading(int? assignmentId)
         {
             gds = new LMS_GRINDEntities1();
-            String assignmentName = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.assignment_name).FirstOrDefault();
+            Assignment thisAssignment = gds.Assignments.Where(x => x.assignment_id == assignmentId).FirstOrDefault();
             int assignId = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.assignment_id).FirstOrDefault();
-            //DateTime dueDate = (DateTime)gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.due_date).FirstOrDefault();
-            int? MaxPoints = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.max_points).FirstOrDefault();
-            string submissionType = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.submission_type).FirstOrDefault();
             int instructorCourseId = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.instructor_course_id).FirstOrDefault();
             int courseId = gds.InstructorCourses.Where(x => x.instructor_course_id == instructorCourseId).Select(x => x.course_id).FirstOrDefault();
             string courseNum = gds.Courses.Where(x => x.course_id == courseId).Select(x => x.course_num).FirstOrDefault();
@@ -37,14 +34,13 @@ namespace Assignment1.Controllers
             int ic_id = gds.InstructorCourses.Where(x => x.course_id == courseId).Select(x => x.instructor_course_id).FirstOrDefault();
             int instructorId = gds.InstructorCourses.Where(x => x.instructor_course_id == ic_id).Select(x => x.instructor_id).FirstOrDefault();
             String instructorLastName = gds.ulUsers.Where(x => x.ulUser_id == instructorId).Select(x => x.last_name).FirstOrDefault();
-            ViewBag.AssignmentName = assignmentName;
-            ViewBag.AssignmentId = assignId;
-            ViewBag.id = assignmentId;
+            ViewBag.AssignmentName = thisAssignment.assignment_name;
+            ViewBag.AssignmentId = thisAssignment.assignment_id;
             ViewBag.CourseNum = courseNum;
             ViewBag.CourseName = courseName;
-            //ViewBag.AssignmentDueDate = dueDate;
-            ViewBag.MaxPoints = MaxPoints;
-            ViewBag.SubmissionType = submissionType;
+            ViewBag.AssignmentDueDate = thisAssignment.due_date;
+            ViewBag.MaxPoints = thisAssignment.max_points;
+            ViewBag.SubmissionType = thisAssignment.submission_type;
             AssignmentList.GenerateAllSubmissions(assignmentId);
             return View("InstructorGradingView");
         }
@@ -76,11 +72,12 @@ namespace Assignment1.Controllers
             ViewBag.AssignmentGradeId = stuAssignment.assignment_grade_id;
             ViewBag.AssignmentId = assignmentId;
             ViewBag.CurrentGrade = stuAssignment.grade;
+            ViewBag.Feedback = stuAssignment.instructor_feedback;
             return View("GradeAssignmentView");
         }
 
         [HttpPost]
-        public ActionResult SubmitGradeAssignment(int assignmentGradeId, int grade)
+        public ActionResult SubmitGradeAssignment(int assignmentGradeId, int grade, string instructorFeedback)
         {
             gds = new LMS_GRINDEntities1();
             //Save grade to database
@@ -89,6 +86,7 @@ namespace Assignment1.Controllers
             try
             {
                 stuAssignment.grade = grade;
+                stuAssignment.instructor_feedback = instructorFeedback;
                 gds.SaveChanges();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
@@ -106,7 +104,6 @@ namespace Assignment1.Controllers
                 return View("GradeAssignmentView");
             }
             return RedirectToAction("InstructorGrading", new { assignmentId = id });
-
         }
     }
 }

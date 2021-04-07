@@ -22,5 +22,6 @@ namespace Assignment1
         public Nullable<System.DateTime> submission_date { get; set; }
         public string text_submission { get; set; }
         public string file_submission { get; set; }
+        public string instructor_feedback { get; set; }
     }
 }

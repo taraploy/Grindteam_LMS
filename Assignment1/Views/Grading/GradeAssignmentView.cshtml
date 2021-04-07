@@ -3,6 +3,10 @@
     ViewBag.Title = "GradeAssignmentView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
+@using System.Net;
+@{
+    string path = Url.Content(ViewBag.FileSubmission);
+}
 
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
@@ -52,9 +56,10 @@
                     <div>
                         @{
                             if (ViewBag.TextSubmission == null)
-                            {
-
-                                <p>@ViewBag.FileSubmission</p>
+                            {      
+                                <a href="@path" download>
+                                    <p>@path</p>
+                                </a>
                             }
                             else
                             {
@@ -68,6 +73,10 @@
                             <div class="form-group mb-3">
                                 <label class="col-form-label" for="grade"><strong>Points</strong></label>
                                 <input class="col-md-2 grade-box" type="number" name="grade" min="0" max="@ViewBag.MaxPoints" value="@ViewBag.CurrentGrade" /> out of @ViewBag.MaxPoints
+                            </div>
+                            <div>
+                                <h5><strong>Grading Notes:</strong></h5>
+                                <textarea name="instructorFeedback">@ViewBag.Feedback</textarea>
                             </div>
                             <div>
                                 <button type="submit" class="saveCourseBtn" id="save-button" value="Grade Assignment">Grade Assignment</button>

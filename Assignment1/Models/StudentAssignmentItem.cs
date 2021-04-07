@@ -19,5 +19,6 @@ namespace Assignment1.Models
         public int CourseId;
         public string CourseNum;
         public string CourseName;
+        public string InstructorFeedback;
     }
 }

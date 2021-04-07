@@ -19,5 +19,6 @@ namespace Assignment1.Models
         public bool isGraded;
         public int MaxPoints;
         public DateTime DueDate;
+        public string InstructorFeedback;
     }
 }

@@ -4,11 +4,11 @@
 }
 @using Assignment1.Models
 @model IEnumerable<Assignment1.Cours>
-@{ 
+@{
     double dSemesterTotal = 0;
     double dAmountPaid = 0;
     double dSemesterBalance;
-    foreach(var course in Model)
+    foreach (var course in Model)
     {
         dSemesterTotal += ((double)course.num_credits * 100);
     }
@@ -82,14 +82,14 @@
         </aside>
         <div class="vl"></div>
         <div class="col-9 text-center">
-            <h1>Student Balance</h1>
-            <hr/>
-            <div class="ml-auto mr-auto w-75 border rounded-lg">
+            <h1>Student Account</h1>
+            <hr />
+            <div class="card ml-auto mr-auto w-75 border rounded-lg">
                 <table class="w-100">
                     <thead>
                         <tr>
                             <th class="text-left p-2">
-                                <h4>Semester Bill</h4>
+                                <h4>W#@Name.user_id</h4>
                             </th>
                             <th class="text-right p-2">
                                 <h4>@Name.last_name, @Name.first_name</h4>
@@ -111,9 +111,9 @@
                         </tr>
                         <tr>
                             <td class="text-left p-2 font-weight-bold">Balance Due</td>
-                            <td class="text-right p-2">@dSemesterBalance.ToString("C")</td>
+                            <td class="text-right p-2 font-weight-bold">@dSemesterBalance.ToString("C")</td>
                         </tr>
-                        <tr class="border-top">
+                        <tr class="">
                             <td colspan="100" class="text-right pt-0">
                                 @Html.ActionLink("Make Payment", "PaymentInfo", "Payment", new { @class = "paymentBtn mr-3" })
                             </td>
@@ -121,7 +121,47 @@
                     </tbody>
                 </table>
             </div>
-
+            <br />
+            <h3>Payment Activities</h3>
+            <div class="card ml-auto mr-auto w-75">
+                <table class="w-100">
+                    <thead>                        
+                        <tr class="border-bottom">
+                            <th class="text-left p-2">Description</th>
+                            <th class="text-right p-2">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-left p-2">paid 1</td>
+                            <td class="text-right p-2">$15.25</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left p-2">paid 2</td>
+                            <td class="text-right p-2">$10.00</td>
+                        </tr>                        
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+@*<ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                <div class="card ml-auto mr-auto">
+                    <div class="card-body">
+                        <h5 class="card-title">Payment Activity</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                    </div>
+    </div>*@
+

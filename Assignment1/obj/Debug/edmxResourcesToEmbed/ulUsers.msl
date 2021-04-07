@@ -87,6 +87,7 @@
     <EntitySetMapping Name="StudentAssignments">
       <EntityTypeMapping TypeName="LMS_GRINDModel.StudentAssignment">
         <MappingFragment StoreEntitySet="StudentAssignments">
+          <ScalarProperty Name="instructor_feedback" ColumnName="instructor_feedback" />
           <ScalarProperty Name="file_submission" ColumnName="file_submission" />
           <ScalarProperty Name="text_submission" ColumnName="text_submission" />
           <ScalarProperty Name="submission_date" ColumnName="submission_date" />

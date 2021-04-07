@@ -58,5 +58,10 @@ namespace Assignment1.Controllers
         {
             return View("PaymentInfoView");
         }
+
+        public ActionResult PaymentActivity(int studentId)
+        {
+            return View("BalanceView");
+        }
     }
 }

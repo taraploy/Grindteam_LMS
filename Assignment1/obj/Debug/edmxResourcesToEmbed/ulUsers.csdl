@@ -185,8 +185,9 @@
     <Property Name="student_course_id" Type="Int32" />
     <Property Name="student_id" Type="Int32" Nullable="false" />
     <Property Name="grade" Type="Int32" />
-    <Property Name="submission_date" Type="DateTime" Precision="0" />
+    <Property Name="submission_date" Type="DateTime" Precision="3" />
     <Property Name="text_submission" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="file_submission" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="instructor_feedback" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

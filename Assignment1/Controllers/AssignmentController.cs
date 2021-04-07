@@ -39,11 +39,11 @@ namespace Assignment1.Controllers
         /// <returns>StudentAssignmentView</returns>    
         public ActionResult StudentAssignment(int? id, int? studentId)
         {
-            //AssignmentList.GenerateStudentAssignmentList(id);
-            //AssignmentList.GenerateSingleAssignmentItem(id);
+            gds = new LMS_GRINDEntities1();
+            
             AssignmentList.GenerateThisStudentsSubmissionForAssignment(studentId, id);
-            //AssignmentList.GenerateStudentSubmissionAssignmentItem(id);
             AssignmentList.GenerateSingleAssignmentItem(id);
+
 
             //check StudentAssignmentSubmissionItem attribute (filesubmission & textsubmission)
             if (AssignmentList.StudentAssignmentSubmission.FileSubmission == null &&
@@ -89,7 +89,8 @@ namespace Assignment1.Controllers
                     Path.GetExtension(assignment_file.FileName);
 
                     // Set file path to the course directory within the Assignment Submissions folder
-                    string file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/"), course_directory);
+                    string file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/"), file_name);
+                   /*string file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/"), course_directory);
 
                     // Create the course directory if it doesn't exist
                     if (!Directory.Exists(file_path))
@@ -107,12 +108,14 @@ namespace Assignment1.Controllers
                     }
 
                     // append filename to file path
-                    file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/" + course_directory + "/" + student_directory + "/"), file_name);
+                    file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/" + course_directory + "/" + student_directory + "/"), file_name);*/
 
-                    sa.file_submission = file_path;
+                    //sa.file_submission = file_path;
+                    sa.file_submission = "~/AssignmentSubmissions/" + file_name;
                     sa.assignment_id = AssignmentList.AssignmentItem.AssignmentId;
                     sa.student_id = Name.user_id;
                     sa.submission_date = DateTime.Now;
+                    //sa.student_course_id = 
                     assignment_file.SaveAs(file_path);
 
                     gds.StudentAssignments.Add(sa);

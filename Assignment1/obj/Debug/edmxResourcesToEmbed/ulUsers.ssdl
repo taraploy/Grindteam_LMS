@@ -55,9 +55,10 @@
     <Property Name="student_course_id" Type="int" />
     <Property Name="student_id" Type="int" Nullable="false" />
     <Property Name="grade" Type="int" />
-    <Property Name="submission_date" Type="date" />
+    <Property Name="submission_date" Type="datetime" />
     <Property Name="text_submission" Type="varchar" MaxLength="500" />
     <Property Name="file_submission" Type="nvarchar" MaxLength="500" />
+    <Property Name="instructor_feedback" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="StudentCourses">
     <Key>
