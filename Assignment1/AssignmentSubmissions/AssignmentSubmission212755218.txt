@@ -1,19 +1,24 @@
-﻿
+
 @{
-    ViewBag.Title = "StudentAssignmentView";
+    ViewBag.Title = "AssignmentSubmission";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 
 @using Assignment1.Models
 @{ 
-    string buttonText = (ViewBag.IsSubmitted == true) ? "Re-submit Assignment" : "Submit Assignment";
-    bool IsSubmitted = ViewBag.IsSubmitted;
+    //bool fileSubmission = true;
+    //bool textEntry = false;
 }
 <script>
     function toggleSubmissionArea() {
 
         var btnShowSubmissionArea = document.getElementById("btnSubToggle");
         var submissionSection = document.getElementById("submissionSection");
+        var textDiv = document.getElementById("textDiv");
+        var fileDiv = document.getElementById("fileDiv");
+        
+        textDiv.hidden = false;
+        fileDiv.hidden = true;
 
         if (submissionSection.hidden) {
             // show submission area
@@ -29,7 +34,6 @@
         }
     }
 </script>
-
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -52,6 +56,7 @@
     </nav>
     <script>
         function myFunction() {
+            // var popup = document.getElementById("popUp");
             var popup = document.querySelector("#popUp");
             popup.classList.toggle("show");
         }
@@ -62,9 +67,9 @@
         }
     </script>
 </div>
-<div class="dashboard col-md-12">
+<div class="dashboard">
     <div class="row">
-        <aside class="col-md-2 left-nav float-left">
+        <aside class="col-2 left-nav float-left">
             <p>
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
@@ -75,7 +80,7 @@
 
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Balance", "Balance", "Payment")</h5></li>
+                    <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
 
                     <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
 
@@ -83,13 +88,14 @@
                 </ul>
             </p>
         </aside>
-        <div class="vl"></div>
-        <div class="col-md-7">
+        <div class="vl" style="border: 1px solid #276678; height: auto"></div>
+        <div class="col-7">
             @* Page content starts here ---------------------------------------------------------| *@
-            <div class="row p-2">
             <hr />
+
+            <div class="row p-2">
                 @* Assignment Title *@
-                <div class="col-md-9 text-left"><h3>@AssignmentList.AssignmentItem.AssignmentName</h3></div>
+                <div class="col-md-9 text-left"><h3>Assignment Title</h3></div>
                 <div class="col-md-3 text-right">
                     @* Submit Assignment Button *@
                     <button type="button"
@@ -97,34 +103,30 @@
                             class="btn btn-primary p-2"
                             id="btnSubToggle"
                             onclick="toggleSubmissionArea()">
-                        @buttonText
+                        Submit Assignment
                     </button>
                 </div>
             </div>
 
             <hr />
             @* Due date, points, submission type, assignment type,  *@
-        <div class="row">
-            <div class="col-md-3"><p><strong>Due:</strong> @AssignmentList.AssignmentItem.DueDate</p></div>
-            <div class="col-md-2"><p><strong>Points:</strong> @AssignmentList.AssignmentItem.MaxPoints</p></div>
-            @if (AssignmentList.AssignmentItem.SubmissionType == "File")
-            {
-
-                <div class="col-md-4"><p><strong>Submitting:</strong> a file upload</p></div>
-            }
-            else
-            {
-                <div class="col-md-4"><p><strong>Submitting:</strong> a text entry</p></div>
-            }
-        </div>
             <div class="row">
-                <div class="col-md-5"><p><strong>Assignment Type: </strong> @AssignmentList.AssignmentItem.AssignmentType</p></div>
+                <div class="col-md-3"><p><strong>Due:</strong> Monday by 11:59pm</p></div>
+                <div class="col-md-2"><p><strong>Points:</strong> 10</p></div>
+                <div class="col-md-4"><p><strong>Submitting:</strong> a file upload</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-5"><p><strong>Assignment Type: </strong> homework</p></div>
             </div>
             <hr />
             @* Assingment Description goes here *@
             <section>
                 <p>
-                    @AssignmentList.AssignmentItem.AssignmentDesc
+                    Write a 1000 word essay on a subject of your choosing <br />
+                    1. Make it good <br />
+                    2. Make it great <br />
+                    3. 12 pt font<br />
+                    4. Times new roman<br />
                 </p>
             </section>
 
@@ -132,35 +134,31 @@
             <section class="mb-4 mt-5" id="submissionSection" hidden>
                 <hr />
                 <div class="ml-auto mr-auto w-75 border rounded-lg">
-                    <form class="w-100" enctype="multipart/form-data">
+                    <form class="w-100">
 
-                        @if (AssignmentList.AssignmentItem.SubmissionType == "File")
-                        {
-                            @* File Upload *@
-                            <div class="row m-2" id="fileDiv">
-                                <label for="uploadFile">Upload a file.</label>
-                                <input type="file"
-                                       class="form-control-file"
-                                       id="assignentFile"
-                                       name="assignment_file" />
-                            </div>                            
-                        }
-                        else
-                        {
-                            @* Text Entry *@
-                            <div class="row mt-3 m-2" id="textDiv">
-                                <label for="textSubmission">Copy and pase or type your submission here.</label>
-                                <textarea rows="15"
-                                          cols="75"
-                                          class="p-2 ml-auto mr-auto form-control"
-                                          id="textSubmission"
-                                          name="text_submission"></textarea>
-                            </div>
-                        }
+                        @* File Upload *@
+                        <div class="row m-2" id="fileDiv">
+                            <label for="uploadFile">Upload a file.</label>
+                            <input type="file"
+                                   name="upload_file"
+                                   id="fileUpload"
+                                   class="form-control-file" />
+                        </div>
 
-                        <div class="ml-2 mt-3">
+                        @* Text Entry *@
+                        <div class="row mt-3 m-2" id="textDiv">
+                            <label for="textSubmission">Copy and pase or type your submission here.</label>
+                            <textarea rows="15"
+                                      cols="75"
+                                      class="p-2 ml-auto mr-auto form-control"
+                                      id="textSubmission"
+                                      name="text_submission"></textarea>
+                        </div>
+
+                        <div class="ml-1 mt-3">
                             @* Cancel Button *@
                             <button type="button"
+                                    name=""
                                     class="btn btn-light bg-light border-secondary mr-2"
                                     id="btnCancelSubmission"
                                     onclick="toggleSubmissionArea()">
@@ -168,34 +166,42 @@
                             </button>
 
                             @* Submit Assignment Button *@
-                            <button type="submit"
+                            <button type="button"
+                                    name=""
                                     class="btn btn-primary"
-                                    id="btnSubmitAssignment"
-                                    formaction="@Url.Action("SubmitAssignment")"
-                                    formmethod="post">
+                                    id="btnSubmitAssignment">
                                 Submit Assignment
                             </button>
                         </div>
+
                     </form>
                 </div>
             </section>
             <br />
-        </div>
-        @if (IsSubmitted)
-        {
-        <aside class="col-2 float-right mt-3">
-            <p><strong>Submission</strong></p>
-            <hr/>
-            <h4>&check; Submitted!</h4>
-            @if (AssignmentList.StudentAssignmentSubmission.Grade == null)
-            {
-                <p>Grade: not yet graded</p>
-            }
-            else
-            {
-                <p>Grade: @AssignmentList.StudentAssignmentSubmission.Grade / @AssignmentList.AssignmentItem.MaxPoints </p>
-            }
+        </div> @*End Page Content ---------------------------------------------|*@
+
+        <div class="vl" style="border: 1px solid #276678; height: auto"></div>
+
+        <aside class="col-2 float-right">
+            <h3>To-do List</h3>
+            <p>
+                <a href="#">
+                    <div class="list-group-item">
+                        <h5>CS 3750</h5>
+                        <h6 class="todo-subtitle text-muted">Assignment 1</h6>
+                        <h6 class="todo-due-date text-muted">February 12, 11:59 PM</h6>
+                    </div>
+                </a>
+            </p>
+            <p>
+                <a href="#">
+                    <div class="list-group-item">
+                        <h5>CS 3100</h5>
+                        <h6 class="todo-subtitle text-muted">Assignment 3</h6>
+                        <h6 class="todo-due-date text-muted">February 17, 11:59 PM</h6>
+                    </div>
+                </a>
+            </p>
         </aside>
-        }
     </div>
 </div>

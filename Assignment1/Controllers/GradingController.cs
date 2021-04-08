@@ -21,6 +21,11 @@ namespace Assignment1.Controllers
 
         LMS_GRINDEntities1 gds;
 
+        public ActionResult GoToInstructorGrading(int id)
+        {
+            return InstructorGrading(id);
+        }
+
         public ActionResult InstructorGrading(int? assignmentId)
         {
             gds = new LMS_GRINDEntities1();

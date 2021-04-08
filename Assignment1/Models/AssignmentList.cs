@@ -201,13 +201,13 @@ namespace Assignment1.Models
 
         //This method returns a single submission by student with studentId and assignment with assignmentId 
         //Generates a list of StudentAssignmentSubmissionItems
-        public static void GenerateThisStudentsSubmissionForAssignment(int? studentId, int? assignmentId)
+        public static void GenerateThisStudentsSubmissionForAssignment(int? assignmentId)
         {
             StudentAssignmentSubmission = new StudentAssignmentSubmissionItem();
             LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
 
             var query = (from a in gds.StudentAssignments
-                         where a.student_id == studentId
+                         where a.student_id == Name.user_id
                          where a.assignment_id == assignmentId
                          select new
                          {

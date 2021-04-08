@@ -38,7 +38,7 @@ namespace Assignment1.Controllers
                                       description = c.course_num,
                                       start = a.due_date,
                                       assign_id = a.assignment_id,
-                                      url = "Grading/InstructorGrading/" + a.assignment_id.ToString()
+                                      url = "Grading/GoToInstructorGrading/" + a.assignment_id.ToString()
                                   }).ToList();
 
                     jResult = new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

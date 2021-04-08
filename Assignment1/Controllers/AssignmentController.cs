@@ -37,11 +37,11 @@ namespace Assignment1.Controllers
         /// </summary>
         /// Parameter = assignmentId
         /// <returns>StudentAssignmentView</returns>    
-        public ActionResult StudentAssignment(int? id, int? studentId)
+        public ActionResult StudentAssignment(int? id)
         {
             gds = new LMS_GRINDEntities1();
             
-            AssignmentList.GenerateThisStudentsSubmissionForAssignment(studentId, id);
+            AssignmentList.GenerateThisStudentsSubmissionForAssignment(id);
             AssignmentList.GenerateSingleAssignmentItem(id);
 
 

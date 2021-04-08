@@ -55,7 +55,7 @@
                                             </div>
 
                                             <div class="float-end">
-                                                @{ AssignmentList.GenerateThisStudentsSubmissionForAssignment(Name.user_id, item.AssignmentId);
+                                                @{ AssignmentList.GenerateThisStudentsSubmissionForAssignment(item.AssignmentId);
                                                     if (AssignmentList.StudentAssignmentSubmission.isGraded)
                                                     {
                                                         <p>Grade: @AssignmentList.StudentAssignmentSubmission.Grade / @item.MaxPoints</p>

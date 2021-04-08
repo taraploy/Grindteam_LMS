@@ -5,7 +5,7 @@
 }
 @using System.Net;
 @{
-    string path = Url.Content(ViewBag.FileSubmission);
+    string path = (ViewBag.TextSubmission == null) ? Url.Content(ViewBag.FileSubmission) : "";
 }
 
 <div class="nav-pageview">
