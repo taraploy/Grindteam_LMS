@@ -66,9 +66,9 @@
         }
     </script>
 </div>
-<div class="dashboard">
+<div class="dashboard col-md-12">
     <div class="row">
-        <aside class="col-2 left-nav float-left">
+        <aside class="col-md-2 left-nav float-left">
             <p>
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
@@ -88,76 +88,78 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="col-9 text-center">
-            <h1>Student Account</h1>
-            <hr />
-            <div class="card ml-auto mr-auto w-75 border rounded-lg">
-                @* Payment information/history table *@
-                <table class="w-100">
-                    <thead>
-                        <tr>
-                            <th class="text-left p-2">
-                                <h4>W#@Name.user_id</h4>
-                            </th>
-                            <th class="text-right p-2">
-                                <h4>@Name.last_name, @Name.first_name</h4>
-                            </th>
-                        </tr>
-                        <tr class="border-top">
-                            <th class="text-left p-2">Description</th>
-                            <th class="text-right p-2">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-left p-2">Semester Total</td>
-                            <td class="text-right p-2">@dSemesterTotal.ToString("C")</td>
-                        </tr>
-
-                        @* Add payment history *@
-                        @foreach (var payment in ViewBag.Payments)
-                        {
+        <div class="col-md-9 text-center">
+            <div class="container">
+                <h1>Student Account</h1>
+                <br />
+                <div class="card ml-auto mr-auto w-75 border rounded-lg">
+                    @* Payment information/history table *@
+                    <table class="w-100">
+                        <thead>
                             <tr>
-                                <td class="text-left p-2">Payment @i.ToString()</td>
-                                <td class="text-right p-2">@payment.payment_amount.ToString("C")</td>
+                                <th class="text-left p-2">
+                                    <h4>W#@Name.user_id</h4>
+                                </th>
+                                <th class="text-right p-2">
+                                    <h4>@Name.last_name, @Name.first_name</h4>
+                                </th>
                             </tr>
-                            i++;
-                        }
+                            <tr class="border-top">
+                                <th class="text-left p-2">Description</th>
+                                <th class="text-right p-2">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left p-2">Semester Total</td>
+                                <td class="text-right p-2">@dSemesterTotal.ToString("C")</td>
+                            </tr>
 
-                        <tr>
-                            <td class="text-left p-2 font-weight-bold">Balance Due</td>
-                            <td class="text-right p-2 font-weight-bold">@dSemesterBalance.ToString("C")</td>
-                        </tr>
-                        <tr class="">
-                            <td colspan="100" class="text-right pt-0">
-                                @Html.ActionLink("Make Payment", "PaymentInfo", "Payment", new { @class = "paymentBtn mr-3" })
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            @* Add payment history *@
+                            @foreach (var payment in ViewBag.Payments)
+                            {
+                                <tr>
+                                    <td class="text-left p-2">Payment @i.ToString()</td>
+                                    <td class="text-right p-2">@payment.payment_amount.ToString("C")</td>
+                                </tr>
+                                i++;
+                            }
+
+                            <tr>
+                                <td class="text-left p-2 font-weight-bold">Balance Due</td>
+                                <td class="text-right p-2 font-weight-bold">@dSemesterBalance.ToString("C")</td>
+                            </tr>
+                            <tr class="">
+                                <td colspan="100" class="text-right pt-0">
+                                    @Html.ActionLink("Make Payment", "PaymentInfo", "Payment", new { @class = "paymentBtn mr-3" })
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+                @*<h3>Payment Activities</h3>
+                <div class="card ml-auto mr-auto w-75">
+                    <table class="w-100">
+                        <thead>                        
+                            <tr class="border-bottom">
+                                <th class="text-left p-2">Description</th>
+                                <th class="text-right p-2">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left p-2">paid 1</td>
+                                <td class="text-right p-2">$15.25</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left p-2">paid 2</td>
+                                <td class="text-right p-2">$10.00</td>
+                            </tr>                        
+                        </tbody>
+                    </table>
+                </div>*@
             </div>
-            <br />
-            @*<h3>Payment Activities</h3>
-            <div class="card ml-auto mr-auto w-75">
-                <table class="w-100">
-                    <thead>                        
-                        <tr class="border-bottom">
-                            <th class="text-left p-2">Description</th>
-                            <th class="text-right p-2">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-left p-2">paid 1</td>
-                            <td class="text-right p-2">$15.25</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left p-2">paid 2</td>
-                            <td class="text-right p-2">$10.00</td>
-                        </tr>                        
-                    </tbody>
-                </table>
-            </div>*@
         </div>
     </div>
 </div>

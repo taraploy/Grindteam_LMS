@@ -35,7 +35,7 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="container col-md-8">
+        <div class="container col-md-9">
             <div class="row align-items-center">
                 <div class="col-md-12 centerHeader">
                     <h1>W#@ViewBag.StudentId - @ViewBag.StudentName</h1>
@@ -71,12 +71,12 @@
                     <form action="@Url.Action("SubmitGradeAssignment", "Grading", new { assignmentGradeId = ViewBag.AssignmentGradeId })" method="post">
                         <div class="col-md-12">
                             <div class="form-group mb-3">
-                                <label class="col-form-label" for="grade"><strong>Points</strong></label>
-                                <input class="col-md-2 grade-box" type="number" name="grade" min="0" max="@ViewBag.MaxPoints" value="@ViewBag.CurrentGrade" /> out of @ViewBag.MaxPoints
+                                <p><strong>Points</strong></p>
+                                <input class="grade-box text-center" type="number" name="grade" min="0" max="@ViewBag.MaxPoints" value="@ViewBag.CurrentGrade" /> out of @ViewBag.MaxPoints
                             </div>
                             <div>
-                                <h5><strong>Grading Notes:</strong></h5>
-                                <textarea name="instructorFeedback">@ViewBag.Feedback</textarea>
+                                <p><strong>Grading Notes</strong></p>
+                                <textarea name="instructorFeedback" rows="5" cols="50">@ViewBag.Feedback</textarea>
                             </div>
                             <div>
                                 <button type="submit" class="saveCourseBtn" id="save-button" value="Grade Assignment">Grade Assignment</button>

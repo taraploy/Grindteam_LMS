@@ -111,6 +111,10 @@ li a {
     text-decoration: none;
 }
 
+.calendar_ {
+    margin: 25px;
+}
+
 /*Error message styles*/
 .errorMessage {
     color: #ff0000;
@@ -366,7 +370,9 @@ li a {
 }
 
 .grade-box {
-    width: 100px;
+    width: 50px;
+    text-align: center;
+    align-items: center;
 }
 
 @media (max-width: 767.98px) {

@@ -15,9 +15,9 @@
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
     </nav>
 </div>
-<div class="dashboard">
+<div class="dashboard col-md-12">
     <div class="row">
-        <aside class="col-2 left-nav float-left">
+        <aside class="col-md-2 left-nav float-left">
             <p>
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
@@ -44,74 +44,73 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="col-9">
-            <div class="justify-content-center">
-                <h1>Registration</h1>
-                <hr />
-                <br />
-                <form method="post">
-                    <div class="row">
-                        @* Search Bar *@
-                        <div class="col-10">
-                            @Html.TextBox("search", null, new { placeholder = "Search by keyword", @class = "form-control rounded" })
-                        </div>
-
-                        @* Search Button *@
-                        <div class="col-2">
-                            <button type="submit"
-                                    formaction="ViewRegistration"
-                                    formmethod="get"
-                                    class="btn btn-primary">
-                                Search
-                            </button>
-                        </div>
-                    </div>
-                    @*<hr />*@
-                    <div class="col-6 text-left pl-0">
-
-                        @*Dropdown of courses*@
-                        <div class="row mb-3 mt-1">
-                            <select name="ddCourses" class="form-control rounded m-3">
-                                @foreach (var item in Model)
-                                {
-                                    dtStartTime = DateTime.Today.Add((TimeSpan)item.start_time);
-                                    sStart = dtStartTime.ToString("hh:mm tt");
-                                    dtEndTime = DateTime.Today.Add((TimeSpan)item.end_time);
-                                    sEnd = dtEndTime.ToString("hh:mm tt");
-
-                                    <option class="">@Html.DisplayFor(modelItem => item.course_num) @Html.DisplayFor(modelItem => item.course_name) @sStart - @sEnd @Html.DisplayFor(modelItem => item.days_of_week)</option>
-                                }
-                            </select>
-                        </div>
-
+        <div class="col-md-9">
+            <div class="container">
+                <div class="justify-content-center">
+                    <h1 class="centerHeader">Registration</h1>
+                    <hr />
+                    <br />
+                    <form method="post">
                         <div class="row">
-                            @* Unregister Button *@
-                            <div class="ml-3 mr-4">
-                                <button type="submit"
-                                        name="unregister"
-                                        value="Unregister"
-                                        class="btn btn-primary danger"
-                                        formaction="@Url.Action("Unregister")"
-                                        formmethod="post">
-                                    Unregister
-                                </button>
+                            @* Search Bar *@
+                            <div class="col-10">
+                                @Html.TextBox("search", null, new { placeholder = "Search by keyword", @class = "form-control rounded" })
                             </div>
 
-                            @* Register Button *@
-                            <div class="ml">
+                            @* Search Button *@
+                            <div class="col-2">
                                 <button type="submit"
-                                        name="register"
-                                        value="Register"
-                                        class="btn btn-group btn-primary"
-                                        formaction="@Url.Action("AddRegistration")"
-                                        formmethod="post">
-                                    Register
+                                        formaction="ViewRegistration"
+                                        formmethod="get"
+                                        class="btn btn-primary">
+                                    Search
                                 </button>
                             </div>
-
                         </div>
-                    </div>
-                </form>
+                        @*<hr />*@
+                        <div class="col-6 text-left pl-0">
+
+                            @*Dropdown of courses*@
+                            <div class="row mb-3 mt-1">
+                                <select name="ddCourses" class="form-control rounded m-3">
+                                    @foreach (var item in Model)
+                                    {
+                                        dtStartTime = DateTime.Today.Add((TimeSpan)item.start_time);
+                                        sStart = dtStartTime.ToString("hh:mm tt");
+                                        dtEndTime = DateTime.Today.Add((TimeSpan)item.end_time);
+                                        sEnd = dtEndTime.ToString("hh:mm tt");
+
+                                        <option class="">@Html.DisplayFor(modelItem => item.course_num) @Html.DisplayFor(modelItem => item.course_name) @sStart - @sEnd @Html.DisplayFor(modelItem => item.days_of_week)</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="row">
+                                @* Register Button *@
+                                <div class="ml-3 mr-4">
+                                    <button type="submit"
+                                            name="register"
+                                            value="Register"
+                                            class="btn btn-group btn-primary"
+                                            formaction="@Url.Action("AddRegistration")"
+                                            formmethod="post">
+                                        Register
+                                    </button>
+                                </div>
+                                @* Unregister Button *@
+                                <div class="ml">
+                                    <button type="submit"
+                                            name="unregister"
+                                            value="Unregister"
+                                            class="btn btn-primary danger"
+                                            formaction="@Url.Action("Unregister")"
+                                            formmethod="post">
+                                        Unregister
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

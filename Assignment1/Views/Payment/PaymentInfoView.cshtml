@@ -49,9 +49,9 @@
         }
     </script>
 </div>
-<div class="dashboard">
+<div class="dashboard col-md-12">
     <div class="row">
-        <aside class="col-2 left-nav float-left">
+        <aside class="col-md-2 left-nav float-left">
             <p>
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
@@ -71,97 +71,95 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="col-md-7">
+        <div class="col-md-9">
             <div class="container">
-                <main>
-                    <h2 class="text-center">Payment</h2>
-                    <div class="row">
-                        <div class="col-md-5 col-lg-4 order-md-last">
-                            <h6 class="mb-3"><strong>Payment Summary</strong></h6>
-                            <div class="card balance-card">
-                                <div>
-                                    <h6>
-                                        <strong>Balance Due</strong>
-                                        <span class="text-muted float-right">@ViewBag.Balance</span>
-                                    </h6>
-                                </div>
+                <h2 class="text-center">Payment</h2>
+                <div class="row">
+                    <div class="col-md-5 col-lg-4 order-md-last">
+                        <h6 class="mb-3"><strong>Payment Summary</strong></h6>
+                        <div class="card balance-card">
+                            <div>
+                                <h6>
+                                    <strong>Balance Due</strong>
+                                    <span class="text-muted float-right"><strong>@ViewBag.Balance</strong></span>
+                                </h6>
                             </div>
                         </div>
-                        <div class="col-md-7 col-lg-8">
-                            <form id="payment-form" action="MakePayment" method="post">
-                                <div class="row">
-                                    <div class="col-sm-6 p-info">
-                                        <label for="amount"><strong>Amount to pay</strong></label>
-                                        <input type="number" class="form-control" id="amount" name="payment_amount" value="" required/>
-                                    </div>
-                                </div>
-                                <hr />
-                                <h6 class="mb-3"><strong>Card Information</strong></h6>
-                                <div class="row">
-                                    <div class="col-sm-6 p-info">
-                                        <label for="nameOnCard" class="form-label">Name on card</label>
-                                        <input type="text" class="form-control" id="nameOnCard" name="name_on_card" value="" />
-                                    </div>
-                                    <div class="col-sm-6 p-info">
-                                        <label for="cardNumber">Credit card number</label>
-                                        <input type="tel"
-                                               inputmode="numeric"
-                                               class="form-control"
-                                               id="cardNumber"
-                                               pattern="[0-9]{16}"
-                                               name="card_number"
-                                               placeholder="xxxx xxxx xxxx xxxx"
-                                               autocomplete="cc-number"
-                                               maxlength="16" />
-                                    </div>
-                                    <div class="col-sm-3 p-info">
-                                        <label for="cardExp">Expiration</label>
-                                        <input type="month" class="form-control" id="cardExp" name="expiration" value="" />
-                                    </div>
-                                    <div class="col-md-3 p-info">
-                                        <label for="cardCVV">CVV</label>
-                                        <input type="text" class="form-control" min="000" max="999" id="cardCVV" name="cvv" value="" />
-                                    </div>
-                                </div>
-                                @*<hr />
-                                <h6 class="mb-3"><strong>Billing Address</strong></h6>
-                                <div class="row">
-                                    <div class="col-sm-6 p-info">
-                                        <label for="firstname" class="form-label">First name</label>
-                                        <input type="text" class="form-control" id="firstname" name="first_name" value="" />
-                                    </div>
-                                    <div class="col-sm-6 p-info">
-                                        <label for="lastname" class="form-label">Last name</label>
-                                        <input type="text" class="form-control" id="lastname" name="last_name" value="" />
-                                    </div>
-                                    <div class="col-12 p-info">
-                                        <label for="address1" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="address1" name="address" value="" />
-                                    </div>
-                                    <div class="col-12 p-info">
-                                        <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="address2" name="address_2" value="" />
-                                    </div>
-                                    <div class="col-md-5 p-info">
-                                        <label for="country" class="form-label">Country</label>
-                                        <input type="text" class="form-control" id="country" name="country" value="" />
-                                    </div>
-                                    <div class="col-md-4 p-info">
-                                        <label for="state" class="form-label">State</label>
-                                        <input type="text" class="form-control" id="state" name="state" value="" />
-                                    </div>
-                                    <div class="col-md-3 p-info">
-                                        <label for="zipcode" class="form-label">Zipcode</label>
-                                        <input type="number" class="form-control" id="zipcode" name="zip" value="" />
-                                    </div>
-                                </div>*@
-                                <hr />
-                                <button type="submit" class="makePaymentBtn" formaction="MakePayment">Make a payment</button>
-                                @Html.ActionLink("Cancel", "Balance", "Payment", new { @class = "cancelPaymentBtn" })
-                            </form>
-                        </div>
                     </div>
-                </main>
+                    <div class="col-md-7 col-lg-8">
+                        <form id="payment-form" action="MakePayment" method="post">
+                            <div class="row">
+                                <div class="col-md-6 p-info">
+                                    <label for="amount"><strong>Amount to pay</strong></label>
+                                    <input type="number" class="form-control" id="amount" name="payment_amount" value="" required/>
+                                </div>
+                            </div>
+                            <hr />
+                            <h6 class="mb-3"><strong>Card Information</strong></h6>
+                            <div class="row">
+                                <div class="col-md-6 p-info">
+                                    <label for="nameOnCard" class="form-label">Name on card</label>
+                                    <input type="text" class="form-control" id="nameOnCard" name="name_on_card" value="" />
+                                </div>
+                                <div class="col-md-6 p-info">
+                                    <label for="cardNumber">Credit card number</label>
+                                    <input type="tel"
+                                            inputmode="numeric"
+                                            class="form-control"
+                                            id="cardNumber"
+                                            pattern="[0-9]{16}"
+                                            name="card_number"
+                                            placeholder="XXXX XXXX XXXX XXXX"
+                                            autocomplete="cc-number"
+                                            maxlength="16" />
+                                </div>
+                                <div class="col-md-3 p-info">
+                                    <label for="cardExp">Expiration</label>
+                                    <input type="month" class="form-control" id="cardExp" name="expiration" value="" />
+                                </div>
+                                <div class="col-md-3 p-info">
+                                    <label for="cardCVV">CVV</label>
+                                    <input type="text" class="form-control" min="000" max="999" id="cardCVV" name="cvv" value="" />
+                                </div>
+                            </div>
+                            @*<hr />
+                            <h6 class="mb-3"><strong>Billing Address</strong></h6>
+                            <div class="row">
+                                <div class="col-sm-6 p-info">
+                                    <label for="firstname" class="form-label">First name</label>
+                                    <input type="text" class="form-control" id="firstname" name="first_name" value="" />
+                                </div>
+                                <div class="col-sm-6 p-info">
+                                    <label for="lastname" class="form-label">Last name</label>
+                                    <input type="text" class="form-control" id="lastname" name="last_name" value="" />
+                                </div>
+                                <div class="col-12 p-info">
+                                    <label for="address1" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="address1" name="address" value="" />
+                                </div>
+                                <div class="col-12 p-info">
+                                    <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
+                                    <input type="text" class="form-control" id="address2" name="address_2" value="" />
+                                </div>
+                                <div class="col-md-5 p-info">
+                                    <label for="country" class="form-label">Country</label>
+                                    <input type="text" class="form-control" id="country" name="country" value="" />
+                                </div>
+                                <div class="col-md-4 p-info">
+                                    <label for="state" class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state" name="state" value="" />
+                                </div>
+                                <div class="col-md-3 p-info">
+                                    <label for="zipcode" class="form-label">Zipcode</label>
+                                    <input type="number" class="form-control" id="zipcode" name="zip" value="" />
+                                </div>
+                            </div>*@
+                            <hr />
+                            <button type="submit" class="makePaymentBtn" formaction="MakePayment">Make a payment</button>
+                            @Html.ActionLink("Cancel", "Balance", "Payment", new { @class = "cancelPaymentBtn" })
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

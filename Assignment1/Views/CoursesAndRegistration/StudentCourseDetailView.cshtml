@@ -33,7 +33,7 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="container col-md-8">
+        <div class="container col-md-9">
             <div class="row align-items-center">
                 <div class="centerHeader col-md-12">
                     <h1>@ViewBag.selectedCourse.course_num @ViewBag.selectedCourse.course_name</h1>
@@ -82,24 +82,19 @@
                             @*end for loop*@
                         </div>
                     </div>
-                    <div>
-                        @*class="col-md-4 float-md-right"*@
-                    @*<div class="container">*@
-                    <h3>Course Details</h3>
-                    <div>
+                    <div class="c-detail">                       
+                        <h3>Course Details</h3>                            
                         <p>
                             <strong>Instructor</strong>: @ViewBag.InstructorName
                             <br />
                             <strong>Location</strong>: @ViewBag.selectedCourse.building : Room @ViewBag.selectedCourse.room_no
                             <br />
                             <strong>Meeting Time</strong>: @ViewBag.selectedCourse.start_time - @ViewBag.selectedCourse.end_time | @ViewBag.selectedCourse.days_of_week
-                        </p>
+                        </p>                    
                     </div>
-                    @*</div>*@
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 

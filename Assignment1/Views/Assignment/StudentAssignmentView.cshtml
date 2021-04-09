@@ -5,7 +5,7 @@
 }
 
 @using Assignment1.Models
-@{ 
+@{
     string buttonText = (ViewBag.IsSubmitted == true) ? "Re-submit Assignment" : "Submit Assignment";
     bool IsSubmitted = ViewBag.IsSubmitted;
 }
@@ -69,7 +69,7 @@
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
-                    <li><a href="#"><h5 class="nav_title">Courses</h5></a></li>
+                    <li><h5 class="nav_title">@Html.ActionLink("Registration", "ViewRegistration", "CoursesAndRegistration")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
@@ -84,118 +84,126 @@
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="col-md-7">
-            @* Page content starts here ---------------------------------------------------------| *@
-            <div class="row p-2">
-            <hr />
-                @* Assignment Title *@
-                <div class="col-md-9 text-left"><h3>@AssignmentList.AssignmentItem.AssignmentName</h3></div>
-                <div class="col-md-3 text-right">
-                    @* Submit Assignment Button *@
-                    <button type="button"
-                            name=""
-                            class="btn btn-primary p-2"
-                            id="btnSubToggle"
-                            onclick="toggleSubmissionArea()">
-                        @buttonText
-                    </button>
-                </div>
-            </div>
-
-            <hr />
-            @* Due date, points, submission type, assignment type,  *@
-        <div class="row">
-            <div class="col-md-3"><p><strong>Due:</strong> @AssignmentList.AssignmentItem.DueDate</p></div>
-            <div class="col-md-2"><p><strong>Points:</strong> @AssignmentList.AssignmentItem.MaxPoints</p></div>
-            @if (AssignmentList.AssignmentItem.SubmissionType == "File")
-            {
-
-                <div class="col-md-4"><p><strong>Submitting:</strong> a file upload</p></div>
-            }
-            else
-            {
-                <div class="col-md-4"><p><strong>Submitting:</strong> a text entry</p></div>
-            }
-        </div>
-            <div class="row">
-                <div class="col-md-5"><p><strong>Assignment Type: </strong> @AssignmentList.AssignmentItem.AssignmentType</p></div>
-            </div>
-            <hr />
-            @* Assingment Description goes here *@
-            <section>
-                <p>
-                    @AssignmentList.AssignmentItem.AssignmentDesc
-                </p>
-            </section>
-
-            @* SUBMISSION AREA - File upload or text entry *@
-            <section class="mb-4 mt-5" id="submissionSection" hidden>
-                <hr />
-                <div class="ml-auto mr-auto w-75 border rounded-lg">
-                    <form class="w-100" enctype="multipart/form-data">
-
-                        @if (AssignmentList.AssignmentItem.SubmissionType == "File")
+        <div class="col-md-9">
+            <div class="container">
+                @if (IsSubmitted)
+                {
+                    <aside class="col-md-2 float-right mt-3 p-4">
+                        <p><strong>Submission</strong></p>                        
+                        <hr />
+                        <h4>&check; Submitted!</h4>
+                        @if (AssignmentList.StudentAssignmentSubmission.Grade == null)
                         {
-                            @* File Upload *@
-                            <div class="row m-2" id="fileDiv">
-                                <label for="uploadFile">Upload a file.</label>
-                                <input type="file"
-                                       class="form-control-file"
-                                       id="assignentFile"
-                                       name="assignment_file" />
-                            </div>                            
+                            <p>Grade: not yet graded</p>
                         }
                         else
                         {
-                            @* Text Entry *@
-                            <div class="row mt-3 m-2" id="textDiv">
-                                <label for="textSubmission">Copy and pase or type your submission here.</label>
-                                <textarea rows="15"
-                                          cols="75"
-                                          class="p-2 ml-auto mr-auto form-control"
-                                          id="textSubmission"
-                                          name="text_submission"></textarea>
-                            </div>
+                            <p>Grade: @AssignmentList.StudentAssignmentSubmission.Grade / @AssignmentList.AssignmentItem.MaxPoints </p>
                         }
-
-                        <div class="ml-2 mt-3">
-                            @* Cancel Button *@
-                            <button type="button"
-                                    class="btn btn-light bg-light border-secondary mr-2"
-                                    id="btnCancelSubmission"
-                                    onclick="toggleSubmissionArea()">
-                                Cancel
-                            </button>
-
+                    </aside>
+                }
+                <div class="col-md-10">
+                    @* Page content starts here ---------------------------------------------------------| *@
+                    <div class="row p-2">
+                        <hr />
+                        @* Assignment Title *@
+                        <div class="col-md-9 text-left"><h2>@AssignmentList.AssignmentItem.AssignmentName</h2></div>
+                        <div class="col-md-3 text-right">
                             @* Submit Assignment Button *@
-                            <button type="submit"
-                                    class="btn btn-primary"
-                                    id="btnSubmitAssignment"
-                                    formaction="@Url.Action("SubmitAssignment")"
-                                    formmethod="post">
-                                Submit Assignment
+                            <button type="button"
+                                    name=""
+                                    class="btn btn-primary p-2"
+                                    id="btnSubToggle"
+                                    onclick="toggleSubmissionArea()">
+                                @buttonText
                             </button>
                         </div>
-                    </form>
-                </div>
-            </section>
-            <br />
+                    </div>
+
+                    <hr />
+                    @* Due date, points, submission type, assignment type,  *@
+                    <div class="row">
+                        <div class="col-md-4"><p><strong>Due:</strong> @AssignmentList.AssignmentItem.DueDate</p></div>
+                        <div class="col-md-4"><p><strong>Points:</strong> @AssignmentList.AssignmentItem.MaxPoints</p></div>
+                        @if (AssignmentList.AssignmentItem.SubmissionType == "File")
+                        {
+
+                            <div class="col-md-4"><p><strong>Submitting:</strong> a file upload</p></div>
+                        }
+                        else
+                        {
+                            <div class="col-md-4"><p><strong>Submitting:</strong> a text entry</p></div>
+                        }
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5"><p><strong>Assignment Type: </strong> @AssignmentList.AssignmentItem.AssignmentType</p></div>
+                    </div>
+                    <hr />
+                    @* Assingment Description goes here *@
+                    <section>
+                        <p style="font-size: 20px;"><strong>Description</strong></p>
+                        <p>
+                            @AssignmentList.AssignmentItem.AssignmentDesc
+                        </p>
+                    </section>
+
+                    @* SUBMISSION AREA - File upload or text entry *@
+                    <section class="mb-4 mt-5" id="submissionSection" hidden>
+                        <hr />
+                        <div class="ml-auto mr-auto w-75 border rounded-lg">
+                            <form class="w-100" enctype="multipart/form-data">
+
+                                @if (AssignmentList.AssignmentItem.SubmissionType == "File")
+                                {
+                                    @* File Upload *@
+                                    <div class="row m-2" id="fileDiv">
+                                        <label for="uploadFile">Upload a file.</label>
+                                        <input type="file"
+                                               class="form-control-file"
+                                               id="assignentFile"
+                                               name="assignment_file" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    @* Text Entry *@
+                                    <div class="row mt-3 m-2" id="textDiv">
+                                        <label for="textSubmission">Copy and pase or type your submission here.</label>
+                                        <textarea rows="15"
+                                                  cols="75"
+                                                  class="p-2 ml-auto mr-auto form-control"
+                                                  id="textSubmission"
+                                                  name="text_submission"></textarea>
+                                    </div>
+                                }
+
+                                <div class="ml-2 mt-3">
+                                    @* Cancel Button *@
+                                    <button type="button"
+                                            class="btn border-secondary mr-2 cancelAssignmentBtn"
+                                            id="btnCancelSubmission"
+                                            onclick="toggleSubmissionArea()">
+                                        Cancel
+                                    </button>
+
+                                    @* Submit Assignment Button *@
+                                    <button type="submit"
+                                            class="btn cancelAssignmentBtn"
+                                            id="btnSubmitAssignment"
+                                            formaction="@Url.Action("SubmitAssignment")"
+                                            formmethod="post">
+                                        Submit Assignment
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <br />
+                </div>  
+            </div>
         </div>
-        @if (IsSubmitted)
-        {
-        <aside class="col-2 float-right mt-3">
-            <p><strong>Submission</strong></p>
-            <hr/>
-            <h4>&check; Submitted!</h4>
-            @if (AssignmentList.StudentAssignmentSubmission.Grade == null)
-            {
-                <p>Grade: not yet graded</p>
-            }
-            else
-            {
-                <p>Grade: @AssignmentList.StudentAssignmentSubmission.Grade / @AssignmentList.AssignmentItem.MaxPoints </p>
-            }
-        </aside>
-        }
     </div>
 </div>
+
+
+
