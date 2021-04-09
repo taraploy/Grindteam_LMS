@@ -5,14 +5,21 @@
 @using Assignment1.Models
 @model IEnumerable<Assignment1.Cours>
 @{
-    double dSemesterTotal = 0;
-    double dAmountPaid = 0;
-    double dSemesterBalance;
+    int i = 1;
+    decimal dSemesterTotal = 0;
+    decimal dAmountPaid = 0;
+    decimal dSemesterBalance;
     foreach (var course in Model)
     {
-        dSemesterTotal += ((double)course.num_credits * 100);
+        dSemesterTotal += ((decimal)course.num_credits * 100);
+    }
+
+    foreach (var payment in ViewBag.Payments)
+    {
+        dAmountPaid += payment.payment_amount;
     }
     dSemesterBalance = dSemesterTotal - dAmountPaid;
+
 }
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
@@ -85,6 +92,7 @@
             <h1>Student Account</h1>
             <hr />
             <div class="card ml-auto mr-auto w-75 border rounded-lg">
+                @* Payment information/history table *@
                 <table class="w-100">
                     <thead>
                         <tr>
@@ -105,10 +113,17 @@
                             <td class="text-left p-2">Semester Total</td>
                             <td class="text-right p-2">@dSemesterTotal.ToString("C")</td>
                         </tr>
-                        <tr>
-                            <td class="text-left p-2">Amount Paid</td>
-                            <td class="text-right p-2">@dAmountPaid.ToString("C")</td>
-                        </tr>
+
+                        @* Add payment history *@
+                        @foreach (var payment in ViewBag.Payments)
+                        {
+                            <tr>
+                                <td class="text-left p-2">Payment @i.ToString()</td>
+                                <td class="text-right p-2">@payment.payment_amount.ToString("C")</td>
+                            </tr>
+                            i++;
+                        }
+
                         <tr>
                             <td class="text-left p-2 font-weight-bold">Balance Due</td>
                             <td class="text-right p-2 font-weight-bold">@dSemesterBalance.ToString("C")</td>
@@ -122,7 +137,7 @@
                 </table>
             </div>
             <br />
-            <h3>Payment Activities</h3>
+            @*<h3>Payment Activities</h3>
             <div class="card ml-auto mr-auto w-75">
                 <table class="w-100">
                     <thead>                        
@@ -142,7 +157,7 @@
                         </tr>                        
                     </tbody>
                 </table>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>

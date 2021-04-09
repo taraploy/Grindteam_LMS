@@ -32,5 +32,6 @@ namespace Assignment1
         public virtual DbSet<StudentCours> StudentCourses { get; set; }
         public virtual DbSet<Assignment> Assignments { get; set; }
         public virtual DbSet<StudentAssignment> StudentAssignments { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
     }
 }

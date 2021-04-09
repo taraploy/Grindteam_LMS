@@ -17,6 +17,8 @@
         <AssociationConnector Association="LMS_GRINDModel.FK_Courses_Departments" />
         <EntityTypeShape EntityType="LMS_GRINDModel.Assignment" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="LMS_GRINDModel.StudentAssignment" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="LMS_GRINDModel.Payment" Width="1.5" PointX="3" PointY="7.25" />
+        <AssociationConnector Association="LMS_GRINDModel.FK_Payment_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

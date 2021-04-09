@@ -82,18 +82,17 @@
                                 <div>
                                     <h6>
                                         <strong>Balance Due</strong>
-                                        <span class="text-muted float-right">$2000</span>
+                                        <span class="text-muted float-right">@ViewBag.Balance</span>
                                     </h6>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-7 col-lg-8">
-                            <form action="/" method="post">
-                                @*<h6><strong>Amount to pay</strong></h6>*@
+                            <form id="payment-form" action="MakePayment" method="post">
                                 <div class="row">
                                     <div class="col-sm-6 p-info">
                                         <label for="amount"><strong>Amount to pay</strong></label>
-                                        <input type="number" class="form-control" id="amount" name="" value="" />
+                                        <input type="number" class="form-control" id="amount" name="payment_amount" value="" required/>
                                     </div>
                                 </div>
                                 <hr />
@@ -101,56 +100,64 @@
                                 <div class="row">
                                     <div class="col-sm-6 p-info">
                                         <label for="nameOnCard" class="form-label">Name on card</label>
-                                        <input type="text" class="form-control" id="nameOnCard" name="" value="" />
+                                        <input type="text" class="form-control" id="nameOnCard" name="name_on_card" value="" />
                                     </div>
                                     <div class="col-sm-6 p-info">
                                         <label for="cardNumber">Credit card number</label>
-                                        <input type="text" class="form-control" id="cardNumber" pattern="[0-9]{16}" name="" value=""/>
+                                        <input type="tel"
+                                               inputmode="numeric"
+                                               class="form-control"
+                                               id="cardNumber"
+                                               pattern="[0-9]{16}"
+                                               name="card_number"
+                                               placeholder="xxxx xxxx xxxx xxxx"
+                                               autocomplete="cc-number"
+                                               maxlength="16" />
                                     </div>
                                     <div class="col-sm-3 p-info">
                                         <label for="cardExp">Expiration</label>
-                                        <input type="text" class="form-control" id="cardExp" name="" value="" />
+                                        <input type="month" class="form-control" id="cardExp" name="expiration" value="" />
                                     </div>
                                     <div class="col-md-3 p-info">
                                         <label for="cardCVV">CVV</label>
-                                        <input type="number" class="form-control" min="000" max="999" id="cardCVV" name="" value="" />
+                                        <input type="text" class="form-control" min="000" max="999" id="cardCVV" name="cvv" value="" />
                                     </div>
                                 </div>
-                                <hr />
+                                @*<hr />
                                 <h6 class="mb-3"><strong>Billing Address</strong></h6>
                                 <div class="row">
                                     <div class="col-sm-6 p-info">
                                         <label for="firstname" class="form-label">First name</label>
-                                        <input type="text" class="form-control" id="firstname" name="" value="" />
+                                        <input type="text" class="form-control" id="firstname" name="first_name" value="" />
                                     </div>
                                     <div class="col-sm-6 p-info">
                                         <label for="lastname" class="form-label">Last name</label>
-                                        <input type="text" class="form-control" id="lastname" name="" value="" />
+                                        <input type="text" class="form-control" id="lastname" name="last_name" value="" />
                                     </div>
                                     <div class="col-12 p-info">
                                         <label for="address1" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="address1" name="" value="" />
+                                        <input type="text" class="form-control" id="address1" name="address" value="" />
                                     </div>
                                     <div class="col-12 p-info">
                                         <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="address2" name="" value="" />
+                                        <input type="text" class="form-control" id="address2" name="address_2" value="" />
                                     </div>
                                     <div class="col-md-5 p-info">
                                         <label for="country" class="form-label">Country</label>
-                                        <input type="text" class="form-control" id="country" name="" value="" />
+                                        <input type="text" class="form-control" id="country" name="country" value="" />
                                     </div>
                                     <div class="col-md-4 p-info">
                                         <label for="state" class="form-label">State</label>
-                                        <input type="text" class="form-control" id="state" name="" value="" />
+                                        <input type="text" class="form-control" id="state" name="state" value="" />
                                     </div>
                                     <div class="col-md-3 p-info">
                                         <label for="zipcode" class="form-label">Zipcode</label>
-                                        <input type="number" class="form-control" id="zipcode" name="" value="" />
+                                        <input type="number" class="form-control" id="zipcode" name="zip" value="" />
                                     </div>
-                                </div>
+                                </div>*@
                                 <hr />
-                                <button type="submit" class="makePaymentBtn">Make a payment</button>
-                                @Html.ActionLink("Cancel", "Balance", "Payment", new { @class= "cancelPaymentBtn"})
+                                <button type="submit" class="makePaymentBtn" formaction="MakePayment">Make a payment</button>
+                                @Html.ActionLink("Cancel", "Balance", "Payment", new { @class = "cancelPaymentBtn" })
                             </form>
                         </div>
                     </div>

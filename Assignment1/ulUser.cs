@@ -10,8 +10,8 @@
 namespace Assignment1
 {
     using System;
-    using System.Web;
     using System.Collections.Generic;
+    using System.Web;
     
     public partial class ulUser
     {
@@ -20,6 +20,7 @@ namespace Assignment1
         {
             this.InstructorCourses = new HashSet<InstructorCours>();
             this.StudentCourses = new HashSet<StudentCours>();
+            this.Payments = new HashSet<Payment>();
         }
     
         public int ulUser_id { get; set; }
@@ -39,12 +40,12 @@ namespace Assignment1
         public string linkTitle1 { get; set; }
         public string linkTitle2 { get; set; }
         public string linkTitle3 { get; set; }
-
         public HttpPostedFileBase File { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InstructorCours> InstructorCourses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCours> StudentCourses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

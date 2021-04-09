@@ -17,10 +17,14 @@ namespace Assignment1.Controllers
 {
     public class GradingController : Controller
     {
-        // GET: Grading
 
         LMS_GRINDEntities1 gds;
 
+        /// <summary>
+        /// for instructor calendar links
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult GoToInstructorGrading(int id)
         {
             return InstructorGrading(id);

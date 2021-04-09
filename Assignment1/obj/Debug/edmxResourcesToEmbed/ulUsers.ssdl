@@ -46,6 +46,15 @@
     <Property Name="course_id" Type="int" Nullable="false" />
     <Property Name="instructor_id" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="payment_id" />
+    </Key>
+    <Property Name="payment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="payment_amount" Type="money" />
+    <Property Name="payment_date" Type="date" Nullable="false" />
+  </EntityType>
   <EntityType Name="StudentAssignments">
     <Key>
       <PropertyRef Name="assignment_grade_id" />
@@ -105,6 +114,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Payment_User">
+    <End Role="ulUser" Type="Self.ulUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ulUser">
+        <PropertyRef Name="ulUser_id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentCourses_ulUser">
     <End Role="ulUser" Type="Self.ulUser" Multiplicity="1" />
     <End Role="StudentCourses" Type="Self.StudentCourses" Multiplicity="*" />
@@ -122,12 +145,17 @@
     <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InstructorCourses" EntityType="Self.InstructorCourses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentAssignments" EntityType="Self.StudentAssignments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentCourses" EntityType="Self.StudentCourses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ulUser" EntityType="Self.ulUser" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Courses_Departments" Association="Self.FK_Courses_Departments">
       <End Role="Departments" EntitySet="Departments" />
       <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_User" Association="Self.FK_Payment_User">
+      <End Role="ulUser" EntitySet="ulUser" />
+      <End Role="Payment" EntitySet="Payment" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentCourses_ulUser" Association="Self.FK_StudentCourses_ulUser">
       <End Role="ulUser" EntitySet="ulUser" />
