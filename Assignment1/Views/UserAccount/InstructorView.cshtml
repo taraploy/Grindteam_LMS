@@ -3,16 +3,7 @@
     ViewBag.Title = "InstructorView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
-@*<style>
-        #notifications {
-            position: absolute;
-            right: 5em;
-            background-color: white;
-            z-index: 1;
-            width: 200px;
-            padding: 10px;
-        }
-    </style>*@
+
 @using Assignment1.Models
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
@@ -73,10 +64,6 @@
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
                 </ul>
             </p>
         </aside>

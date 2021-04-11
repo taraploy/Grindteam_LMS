@@ -338,7 +338,6 @@
     <Content Include="Views\UserAccount\SignUp.cshtml" />
     <Content Include="Views\UserAccount\InstructorView.cshtml" />
     <Content Include="Views\UserAccount\StudentView.cshtml" />
-    <Content Include="Views\UserAccount\dummyView.cshtml" />
     <Content Include="Views\Profile\EditProfilePage.cshtml" />
     <Content Include="Views\Profile\ProfilePage.cshtml" />
     <Content Include="Views\Calendar\Calendar.cshtml" />
