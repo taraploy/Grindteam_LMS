@@ -7,6 +7,35 @@
 
 @using Assignment1.Models
 
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Range', 'Grade'],
+                ['90 - 100%', @ViewBag.percentA],
+                ['80 - 89%', @ViewBag.percentB],
+                ['70 - 79%', @ViewBag.percentC],
+                ['60 - 69%', @ViewBag.percentD],
+                ['< 60%', @ViewBag.percentF],
+                ['Ungraded', @ViewBag.percentUngraded]
+            ]);
+
+            var options = {
+                title: 'Grade Breakdown for @ViewBag.AssignmentName'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -26,20 +55,16 @@
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
                 </ul>
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="container col-md-8">
+        <div class="container col-md-9">
             <div class="row align-items-center">
                 <div class="col-md-12 centerHeader">
-                    <h1>@ViewBag.CourseNum @ViewBag.CourseName Submissions</h1>
+                    <h1>@ViewBag.CourseNum @ViewBag.CourseName</h1>
                 </div>
-                <div class="container">
+                <div class="container col-md-12">
                     <div class="row">
                         <div class="col-sm-6">
                             <h5><strong>Assignment:</strong> @ViewBag.AssignmentName</h5>
@@ -49,11 +74,14 @@
                             <h5><strong>Maximum Points:</strong> @ViewBag.MaxPoints</h5>
                             <h5><strong>Submission Type:</strong> @ViewBag.SubmissionType</h5>
                         </div>
+                        <div>
+                            @Html.ActionLink("Back", "InstructorCourseDetail", "CoursesAndRegistration", new { id = @ViewBag.CourseId }, new { @class = "addCourseBtn" })
+                        </div>
                     </div>
                     <hr />
                     <div class="justify-content-center row">
                         @* Submitted Assignments *@
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="assignment-list">
                                 @{
                                     foreach (var item in AssignmentList.AllStudentSubmissions)
@@ -82,6 +110,9 @@
                                     }
                                 }
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="piechart" style="width: 900px; height: 500px;"></div>
                         </div>
                     </div>
                 </div>

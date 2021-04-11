@@ -6,6 +6,7 @@
 }
 @using Assignment1.Models
 
+
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -25,10 +26,6 @@
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Balance", "Balance", "Payment")</h5></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
                 </ul>
             </p>
         </aside>
@@ -37,7 +34,7 @@
             <div class="row align-items-center">
                 <div class="centerHeader col-md-12">
                     <h1>@ViewBag.selectedCourse.course_num @ViewBag.selectedCourse.course_name</h1>
-                </div>
+                </div>               
                 <div class="container">
                     <div class="col-md-8 float-md-left">
                         <h3>Assignments</h3>
@@ -71,7 +68,7 @@
                                                 @Html.Hidden("CourseNum", item.CourseNum)
                                                 @Html.Hidden("CourseName", item.CourseName)
 
-                                                @Html.ActionLink("Submit", "StudentAssignment", "Assignment", new { @id = item.AssignmentId }, null)
+                                                @Html.ActionLink("View Assignment", "StudentAssignment", "Assignment", new { @id = item.AssignmentId }, null)
                                             </div>
                                         </div>
                                         <hr class="hr-assignment-list" />
@@ -82,15 +79,15 @@
                             @*end for loop*@
                         </div>
                     </div>
-                    <div class="c-detail">                       
-                        <h3>Course Details</h3>                            
+                    <div class="c-detail">
+                        <h3>Course Details</h3>
                         <p>
                             <strong>Instructor</strong>: @ViewBag.InstructorName
                             <br />
                             <strong>Location</strong>: @ViewBag.selectedCourse.building : Room @ViewBag.selectedCourse.room_no
                             <br />
                             <strong>Meeting Time</strong>: @ViewBag.selectedCourse.start_time - @ViewBag.selectedCourse.end_time | @ViewBag.selectedCourse.days_of_week
-                        </p>                    
+                        </p>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@
 }
 
 @using Assignment1.Models
+
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -27,12 +28,6 @@
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Assignments", "InstructorAssignment", "Assignment")</h5></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 1</h5></a></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
                 </ul>
             </p>
         </aside>
@@ -91,7 +86,7 @@
                     </div>
                     <div>
                         <button type="submit" class="saveAssignmentBtn" id="save-button" value="Add Assignment">Add Assignment</button>
-                        <div class="cancelAssignmentBtn">@Html.ActionLink(" Cancel", "InstructorAssignment" , "Assignment" , new { @class="addCourseBtn" }, null)</div>
+                        <div>@Html.ActionLink("Cancel", "InstructorCourseDetail" , "CoursesAndRegistration" , new { id = @ViewBag.CourseId }, new { @class="addCourseBtn" })</div>
                     </div>
                 </div>
             </form>

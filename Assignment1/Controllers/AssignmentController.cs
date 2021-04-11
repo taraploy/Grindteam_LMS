@@ -56,6 +56,61 @@ namespace Assignment1.Controllers
                 ViewBag.IsSubmitted = true;
             }
 
+            //Calculate grade stats
+            //AssignmentList.GenerateAllSubmissions(assignmentId);
+
+            //double numA = 0.0;
+            //double numB = 0.0;
+            //double numC = 0.0;
+            //double numD = 0.0;
+            //double numF = 0.0;
+            //double ungraded = 0.0;
+            //double totalSubmissions = 0.0;
+            //double thisPercent = 0.0;
+            //for (int i = 0; i < AssignmentList.AllStudentSubmissions.Count; i++)
+            //{
+            //    double maxPoints = (double)gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.max_points).FirstOrDefault();
+            //    if (AssignmentList.AllStudentSubmissions[i].Grade != null)
+            //    {
+            //        thisPercent = (double)AssignmentList.AllStudentSubmissions[i].Grade / maxPoints * 100.0;
+            //        if (thisPercent >= 90.0)
+            //        {
+            //            numA++;
+            //        }
+            //        else if (thisPercent >= 80.0 && thisPercent < 90.0)
+            //        {
+            //            numB++;
+            //        }
+            //        else if (thisPercent >= 70.0 && thisPercent < 80.0)
+            //        {
+            //            numC++;
+            //        }
+            //        else if (thisPercent >= 60.0 && thisPercent < 70.0)
+            //        {
+            //            numD++;
+            //        }
+            //        else if (thisPercent < 60.0)
+            //        {
+            //            numF++;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        ungraded++;
+            //    }
+            //    totalSubmissions++;
+            //}
+            //if (totalSubmissions != 0)
+            //{
+            //    ViewBag.percentA = numA;
+            //    ViewBag.percentB = numB;
+            //    ViewBag.percentC = numC;
+            //    ViewBag.percentD = numD;
+            //    ViewBag.percentF = numF;
+            //    ViewBag.percentUngraded = ungraded;
+            //}
+
+
             return View("StudentAssignmentView");
         }
 
@@ -206,7 +261,7 @@ namespace Assignment1.Controllers
 
             ToDoList.GenerateInstructorToDoList();
 
-            return View("InstructorAssignmentView");
+            return RedirectToAction("InstructorCourseDetail", "CoursesAndRegistration", new { id = courseId });
         }
 
         /// <summary>
@@ -270,7 +325,7 @@ namespace Assignment1.Controllers
             ViewBag.CourseId = courseId;
             AssignmentList.GenerateInstructorAssignmentList(courseId);
             CourseCardList.GenerateInstructorCourseList();
-            return View("InstructorAssignmentView");
+            return RedirectToAction("InstructorCourseDetail", "CoursesAndRegistration", new { id = courseId });
         }
 
         [HttpPost]
@@ -308,7 +363,7 @@ namespace Assignment1.Controllers
             }
 
             AssignmentList.GenerateInstructorAssignmentList(courseId);
-            return View("InstructorAssignmentView");
+            return RedirectToAction("InstructorCourseDetail", "CoursesAndRegistration", new { id = courseId });
         }
 
         public ActionResult EditAssignment(int id)

@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "InstructorCourseInformationView";
+    Layout = "~/Views/Layout_MainLogin.cshtml";
+}
+
+<div class="nav-pageview">
+    <nav class="navbar navbar-dark">
+        <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
+    </nav>
+</div>
+<div class="dashboard col-md-12">
+    <div class="row">
+        <aside class="col-md-2 left-nav float-left">
+            <p>
+                <ul class="dashboard-nav">
+                    <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
+
+                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
+                </ul>
+            </p>
+        </aside>
+        <div class="vl"></div>
+        <div class="col-md-8 course-view">
+            <div class="justify-content-center">
+                <div class="centerHeader">
+                    <h1>Courses</h1>
+                </div>
+                <hr />
+            </div>
+            <div class="row">
+               @*Information goes here*@
+
+                <div class="">
+        <h1 name="courseNumD">
+            @ViewBag.selectedCourse.course_num
+        </h1>
+        <p class="courseDetail-list">
+            <strong>Course name</strong>
+            <br />
+            @ViewBag.selectedCourse.course_name
+        </p>
+        <p class="courseDetail-list">
+            <strong>Description</strong>
+            <br />
+            @ViewBag.selectedCourse.course_desc
+        </p>
+        <p class="courseDetail-list">
+            <strong>Instructor Name</strong>
+            <br />
+            @ViewBag.InstructorName
+        </p>
+        <p class="courseDetail-list">
+            <strong>Location</strong>
+            <br />
+            @ViewBag.selectedCourse.building : Room @ViewBag.selectedCourse.room_no
+        </p>
+        <p class="courseDetail-list">
+            <strong>Meeting Times</strong>
+            <br />
+            @ViewBag.selectedCourse.start_time - @ViewBag.selectedCourse.end_time | @ViewBag.selectedCourse.days_of_week
+        </p>
+        <p class="courseDetail-list">
+            <strong>Department</strong>
+            <br />
+            @ViewBag.courseDepartment.dept_name
+        </p>
+        <p class="courseDetail-list">
+            <strong>Number of Credits</strong>
+            <br />
+            @ViewBag.selectedCourse.num_credits
+        </p>
+        <p class="courseDetail-list">
+            <strong>Capacity</strong>
+            <br />
+            @ViewBag.selectedCourse.max_capacity
+        </p>
+        </div>
+
+
+
+
+
+                @* Buttons *@
+                <div class="btnFields">
+                    <div class="detailBtnfield">
+                        @Html.ActionLink("Cancel", "InstructorCview", "CoursesAndRegistration", new { @class = "addCourseBtn" })
+                    </div>
+                    <div class="detailBtnfield">
+                        @Html.ActionLink("Edit Course", "EditCourse", "CoursesAndRegistration", new { id = @ViewBag.selectedCourse.course_id }, new { @class = "editCourseBtn" })
+                    </div>
+                    <div class="deleteCourseBtn">
+                        @Html.ActionLink("Delete", "DeleteCourse", "CoursesAndRegistration", new { id = @ViewBag.selectedCourse.course_id }, new { onclick = "return confirm('Are you sure you want to delete this course?');" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

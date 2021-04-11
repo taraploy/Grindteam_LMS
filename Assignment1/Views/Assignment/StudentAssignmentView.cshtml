@@ -9,26 +9,53 @@
     string buttonText = (ViewBag.IsSubmitted == true) ? "Re-submit Assignment" : "Submit Assignment";
     bool IsSubmitted = ViewBag.IsSubmitted;
 }
-<script>
-    function toggleSubmissionArea() {
 
-        var btnShowSubmissionArea = document.getElementById("btnSubToggle");
-        var submissionSection = document.getElementById("submissionSection");
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
 
-        if (submissionSection.hidden) {
-            // show submission area
-            submissionSection.hidden = false;
-            // hide submission button
-            btnShowSubmissionArea.hidden = true;
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Mon', 20, 28, 32, 40],               
+                // Treat first row as data as well.
+            ], true);
 
-        } else {
-            // hide submission area
-            submissionSection.hidden = true;
-            // show submission buttom
-            btnShowSubmissionArea.hidden = false;
+            var options = {
+                legend: 'none',
+                vAxis: {
+                    minValue: 0,
+                    maxValue: 100
+                }                
+            };
+            
+            var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options); 
         }
-    }
-</script>
+    </script>
+    <script>
+        function toggleSubmissionArea() {
+
+            var btnShowSubmissionArea = document.getElementById("btnSubToggle");
+            var submissionSection = document.getElementById("submissionSection");
+
+            if (submissionSection.hidden) {
+                // show submission area
+                submissionSection.hidden = false;
+                // hide submission button
+                btnShowSubmissionArea.hidden = true;
+
+            } else {
+                // hide submission area
+                submissionSection.hidden = true;
+                // show submission buttom
+                btnShowSubmissionArea.hidden = false;
+            }
+        }
+    </script>
+</head>
 
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
@@ -76,10 +103,6 @@
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Balance", "Balance", "Payment")</h5></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 2</h5></a></li>
-
-                    <li><a href="#"><h5 class="nav_title">Dummy 3</h5></a></li>
                 </ul>
             </p>
         </aside>
@@ -88,19 +111,20 @@
             <div class="container">
                 @if (IsSubmitted)
                 {
-                    <aside class="col-md-2 float-right mt-3 p-4">
-                        <p><strong>Submission</strong></p>                        
-                        <hr />
-                        <h4>&check; Submitted!</h4>
-                        @if (AssignmentList.StudentAssignmentSubmission.Grade == null)
-                        {
-                            <p>Grade: not yet graded</p>
-                        }
-                        else
-                        {
-                            <p>Grade: @AssignmentList.StudentAssignmentSubmission.Grade / @AssignmentList.AssignmentItem.MaxPoints </p>
-                        }
-                    </aside>
+                <aside class="col-md-2 float-right mt-3 p-4">
+                    <p><strong>Submission</strong></p>
+                    <hr />
+                    <h4>&check; Submitted!</h4>
+                    @if (AssignmentList.StudentAssignmentSubmission.Grade == null)
+                    {
+                        <p>Grade: not yet graded</p>
+                    }
+                    else
+                    {
+                        <p>Grade: @AssignmentList.StudentAssignmentSubmission.Grade / @AssignmentList.AssignmentItem.MaxPoints </p>
+                    }
+                    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+                </aside>
                 }
                 <div class="col-md-10">
                     @* Page content starts here ---------------------------------------------------------| *@

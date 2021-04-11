@@ -1,3 +1,7 @@
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.csprojAssemblyReference.cache
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.AssemblyInfoInputs.cache
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.AssemblyInfo.cs
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.csproj.CoreCompileInputs.cache
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
@@ -84,14 +88,6 @@ C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\n
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.csprojAssemblyReference.cache
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.AssemblyInfoInputs.cache
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.AssemblyInfo.cs
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.csproj.CoreCompileInputs.cache
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.csproj.CopyComplete
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.dll
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.pdb
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.genruntimeconfig.cache
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Assignment1.dll
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\EntityFramework.dll
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.Mvc.dll
@@ -113,3 +109,7 @@ C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\n
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.Razor.xml
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.xml
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.csproj.CopyComplete
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.dll
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.pdb
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.genruntimeconfig.cache

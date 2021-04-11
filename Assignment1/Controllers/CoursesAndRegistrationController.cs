@@ -44,6 +44,22 @@ namespace Assignment1.Controllers
             return View("InstructorCview", departments.ToList().OrderBy(x => x.dept_name));
         }
 
+        public ActionResult InstructorCourseInformation(int id)
+        {
+            gds = new LMS_GRINDEntities1();
+            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
+            int ic_id = gds.InstructorCourses.Where(x => x.course_id == id).Select(x => x.instructor_course_id).FirstOrDefault();
+            Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
+            int instructorId = gds.InstructorCourses.Where(x => x.instructor_course_id == ic_id).Select(x => x.instructor_id).FirstOrDefault();
+            String instructorFirstName = gds.ulUsers.Where(x => x.ulUser_id == instructorId).Select(x => x.first_name).FirstOrDefault();
+            String instructorLastName = gds.ulUsers.Where(x => x.ulUser_id == instructorId).Select(x => x.last_name).FirstOrDefault();
+
+            ViewBag.selectedCourse = course;
+            ViewBag.courseDepartment = department;
+            ViewBag.InstructorName = instructorFirstName + " " + instructorLastName;
+            return View("InstructorCourseInformationView");
+        }
+
         public ActionResult AddCourse()
         {
             return View("AddCourseView");
@@ -71,6 +87,7 @@ namespace Assignment1.Controllers
             ViewBag.selectedCourse = course;
             ViewBag.courseDepartment = department;
             ViewBag.InstructorName = instructorFirstName + " " + instructorLastName;
+
             return View("StudentCourseDetailView");
         }
 
@@ -208,50 +225,50 @@ namespace Assignment1.Controllers
             int courseRoom, int departments, string monday, string tuesday, string wednesday,
             string thursday, string friday, TimeSpan startTime, TimeSpan endTime)
         {
-            //gds = new LMS_GRINDEntities1();
-            //Cours course = new Cours();
+            gds = new LMS_GRINDEntities1();
+            Cours course = new Cours();
 
-            //course.course_name = courseName;
-            //Course.courseName = courseName;
-            //course.course_desc = courseDesc;
-            //Course.courseDesc = courseDesc;
-            //course.course_num = courseNum;
-            //Course.courseNum = courseNum;
-            //course.max_capacity = maxCapacity;
-            //Course.maxCapacity = maxCapacity;
-            //course.dept_id = departments;
-            ////Course.department = Department.dept_name;
-            //course.num_credits = courseCredits;
-            //Course.numCredits = courseCredits;
-            //course.days_of_week = monday + tuesday + wednesday + thursday + friday;
-            //Course.meetingDays = monday + tuesday + wednesday + thursday + friday;
-            //course.start_time = startTime;
-            //Course.startTime = startTime;
-            //course.end_time = endTime;
-            //Course.endTime = endTime;
-            //course.building = courseLocation;
-            //Course.location = courseLocation;
-            //course.room_no = courseRoom;
-            //Course.roomNum = courseRoom;
+            course.course_name = courseName;
+            Course.courseName = courseName;
+            course.course_desc = courseDesc;
+            Course.courseDesc = courseDesc;
+            course.course_num = courseNum;
+            Course.courseNum = courseNum;
+            course.max_capacity = maxCapacity;
+            Course.maxCapacity = maxCapacity;
+            course.dept_id = departments;
+            //Course.department = Department.dept_name;
+            course.num_credits = courseCredits;
+            Course.numCredits = courseCredits;
+            course.days_of_week = monday + tuesday + wednesday + thursday + friday;
+            Course.meetingDays = monday + tuesday + wednesday + thursday + friday;
+            course.start_time = startTime;
+            Course.startTime = startTime;
+            course.end_time = endTime;
+            Course.endTime = endTime;
+            course.building = courseLocation;
+            Course.location = courseLocation;
+            course.room_no = courseRoom;
+            Course.roomNum = courseRoom;
 
-            //gds.Courses.Add(course);
-            //gds.SaveChanges();
+            gds.Courses.Add(course);
+            gds.SaveChanges();
 
-            //Course.courseId = course.course_id;
+            Course.courseId = course.course_id;
 
-            //InstructorCours insCourse = new InstructorCours();
-            //InstructorCourseContext.courseId = course.course_id;
-            //insCourse.course_id = course.course_id;
-            //InstructorCourseContext.instructorId = Name.user_id;
-            //insCourse.instructor_id = Name.user_id;
-            //Course.instructorFullName = Name.first_name + " " + Name.last_name;
-            //Course.instructorLastName = Name.last_name;
-            //Course.instructorFirstName = Name.first_name;
+            InstructorCours insCourse = new InstructorCours();
+            InstructorCourseContext.courseId = course.course_id;
+            insCourse.course_id = course.course_id;
+            InstructorCourseContext.instructorId = Name.user_id;
+            insCourse.instructor_id = Name.user_id;
+            Course.instructorFullName = Name.first_name + " " + Name.last_name;
+            Course.instructorLastName = Name.last_name;
+            Course.instructorFirstName = Name.first_name;
 
-            //gds.InstructorCourses.Add(insCourse);
-            //gds.SaveChanges();
+            gds.InstructorCourses.Add(insCourse);
+            gds.SaveChanges();
 
-            //CourseCardList.GenerateInstructorCourseList();
+            CourseCardList.GenerateInstructorCourseList();
             return View("InstructorCView");
         }
 
@@ -298,7 +315,7 @@ namespace Assignment1.Controllers
                 return View("EditCourseView");
             }
 
-            return View("InstructorCourseDetailView");
+            return View("InstructorCview");
         }
 
         /// <summary>
