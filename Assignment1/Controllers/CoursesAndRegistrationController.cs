@@ -297,6 +297,7 @@ namespace Assignment1.Controllers
                 ViewBag.selectedCourse = course;
                 Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
                 ViewBag.courseDepartment = department;
+                
                 gds.SaveChanges();
                 CourseCardList.GenerateInstructorCourseList();
             }
@@ -314,8 +315,8 @@ namespace Assignment1.Controllers
             {
                 return View("EditCourseView");
             }
-
-            return View("InstructorCview");
+            return View("InstructorCourseInformationView");
+            //return View("InstructorCview");
         }
 
         /// <summary>

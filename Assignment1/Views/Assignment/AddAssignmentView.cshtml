@@ -84,9 +84,9 @@
                             <option value="Text">Text Entry</option>
                         </select>
                     </div>
-                    <div>
-                        <button type="submit" class="saveAssignmentBtn" id="save-button" value="Add Assignment">Add Assignment</button>
-                        <div>@Html.ActionLink("Cancel", "InstructorCourseDetail" , "CoursesAndRegistration" , new { id = @ViewBag.CourseId }, new { @class="addCourseBtn" })</div>
+                    <div class="align-items-center">                        
+                        <button type="submit" class="saveAssignmentBtn" id="save-button" value="Add Assignment">Add Assignment</button>                                         
+                        @Html.ActionLink("Cancel", "InstructorCourseDetail" , "CoursesAndRegistration" , new { id = @ViewBag.CourseId }, new { @class="addCourseBtn" })
                     </div>
                 </div>
             </form>

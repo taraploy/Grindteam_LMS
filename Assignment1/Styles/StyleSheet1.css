@@ -206,6 +206,7 @@ li a {
     display: block;
     text-align: center;
 }
+
 .editProfileBtn, .saveProfileBtn, .cancelSaveProfileBtn,
 .addCourseBtn, .detailCourseBtn, .saveCourseBtn, .editCourseBtn, .cancelEditCoursebtn,
 .paymentBtn, .addAssignmentBtn, .assignmentBtn, .deleteAssignmentBtn, .saveAssignmentBtn,
@@ -224,17 +225,18 @@ li a {
     transition: 300ms ease-in-out;
     cursor: pointer;
 }
-    .editProfileBtn:hover, .saveProfileBtn:hover,
-    .cancelSaveProfileBtn:hover, .addCourseBtn:hover,
-    .detailCourseBtn:hover, .saveCourseBtn:hover, .editCourseBtn:hover, .cancelEditCoursebtn:hover,
-    .paymentBtn:hover, .addAssignmentBtn:hover, .assignmentBtn:hover, .deleteAssignmentBtn:hover,
-    .saveAssignmentBtn:hover, .cancelPaymentBtn:hover, .makePaymentBtn:hover, .cancelAssignmentBtn:hover {
-        color: white;
-        background-color: #276678;
-        border: solid 1px #276678;
-    }
+.editProfileBtn:hover, .saveProfileBtn:hover,
+.cancelSaveProfileBtn:hover, .addCourseBtn:hover,
+.detailCourseBtn:hover, .saveCourseBtn:hover, .editCourseBtn:hover, .cancelEditCoursebtn:hover,
+.paymentBtn:hover, .addAssignmentBtn:hover, .assignmentBtn:hover, .deleteAssignmentBtn:hover,
+.saveAssignmentBtn:hover, .cancelPaymentBtn:hover, .makePaymentBtn:hover, .cancelAssignmentBtn:hover {
+    color: white;
+    background-color: #276678;
+    border: solid 1px #276678;
+}
 
-/*      Edit Profile Page       */
+
+    /*      Edit Profile Page       */
 .chooseFileBtn {
     margin: 15px 0;
 }
@@ -329,6 +331,7 @@ li a {
 
 .assignment-list {
     padding: 0 8px;
+
 }
 
 .assignment-list-item {
@@ -341,7 +344,6 @@ li a {
 }
 
 .courselist {
-    
     /*display: block;
     margin-top: auto;
     margin-bottom: auto;*/
@@ -370,9 +372,15 @@ li a {
 }
 
 .grade-box {
-    width: 50px;
+    width: 60px;
     text-align: center;
     align-items: center;
+}
+
+.grade-box::-webkit-outer-spin-button,
+.grade-box::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 @media (max-width: 767.98px) {

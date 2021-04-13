@@ -51,6 +51,7 @@ namespace Assignment1.Controllers
             ViewBag.AssignmentDueDate = thisAssignment.due_date;
             ViewBag.MaxPoints = thisAssignment.max_points;
             ViewBag.SubmissionType = thisAssignment.submission_type;
+            ViewBag.Description = thisAssignment.assignment_desc;
 
             //Calculate grade stats
             AssignmentList.GenerateAllSubmissions(assignmentId);

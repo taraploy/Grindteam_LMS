@@ -44,14 +44,16 @@
                 <div class="centerHeader col-md-12">
                     <h1>@ViewBag.selectedCourse.course_num @ViewBag.selectedCourse.course_name</h1>
                 </div>
-                <div class="container">
+                <div class="row container">
                     <div class="col-md-8 float-md-left">
-                        <h3>Assignments</h3>    
-                        
-                        <div>
-                            @Html.ActionLink("Add Assignment", "AddAssignment", "Assignment", new { id = @ViewBag.selectedCourse.course_id }, new { @class = "addCourseBtn" })
+                        <div class="row align-items-center">
+                            <div class="col-md-9">
+                                <h3 class="">Assignments</h3>
+                            </div>
+                            <div class="float-md-right">
+                                @Html.ActionLink("Add Assignment", "AddAssignment", "Assignment", new { id = @ViewBag.selectedCourse.course_id }, new { @class = "addAssignmentBtn" })
+                            </div>
                         </div>
-
                         <div class="card assignment-list">
                             @*for loop*@
                             @{
@@ -67,9 +69,9 @@
                                             @Html.Hidden("CourseNum", item.CourseNum)
                                             @Html.Hidden("CourseName", item.CourseName)
                                             @Html.ActionLink("View Submissions", "InstructorGrading", "Grading", new { assignmentId = item.AssignmentId }, null) |
-                                            
+
                                             @Html.ActionLink("Edit", "EditAssignment", "Assignment", new { id = item.AssignmentId }, null) |
-                                            @Html.ActionLink("Delete", "DeleteAssignment", "Assignment", new { id = item.AssignmentId },  new { onclick = "return confirm('Are you sure you want to delete this assignment?');" })
+                                            @Html.ActionLink("Delete", "DeleteAssignment", "Assignment", new { id = item.AssignmentId }, new { onclick = "return confirm('Are you sure you want to delete this assignment?');" })
                                         </div>
                                     </div>
                                     <hr class="hr-assignment-list" />
@@ -80,7 +82,7 @@
                     </div>
                     <div class="col-md-4 float-md-right">
                         @*<div class="container">*@
-                        <h3>Course Details</h3>   
+                        <h3 class="align-items-center">Course Details</h3>   
                         <div>
                             <p>
                                 <strong>Instructor</strong>: @Name.first_name @Name.last_name

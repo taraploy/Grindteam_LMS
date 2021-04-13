@@ -32,16 +32,16 @@
         <div class="col-md-7">
             <div class="container">
                 <div class="justify-content-center row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 align-items-center">
                         <h2 class="text-center">Course List</h2>
-                        <div class="card assignment-list">
+                        <div class="card assignment-list">                           
                             @*for loop*@
                             @{
                                 foreach (var item in CourseCardList.CourseList)
                                 {
-                                    <div class="assignment-list-item">
+                                    <div class="assignment-list-item align-items-center">
                                         <div class="float-left courselist">
-                                            <h6>@item.CourseNum @item.CourseName</h6>
+                                            <h5>@item.CourseNum @item.CourseName</h5>
                                         </div>
                                         <div class="float-right">
                                             @Html.ActionLink("Assignments", "InstructorCourseDetail", "CoursesAndRegistration", new { id = @item.CourseId }, new { @class = "assignmentBtn" })
