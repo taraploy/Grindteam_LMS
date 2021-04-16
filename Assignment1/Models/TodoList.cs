@@ -23,13 +23,9 @@ namespace Assignment1.Models
                          join c in gds.Courses on ic.course_id equals c.course_id
                          where sc.student_id == Name.user_id
                          where a.due_date > DateTime.Now
-                         where !(from a in gds.Assignments
-                                 join ic in gds.InstructorCourses on a.instructor_course_id equals ic.instructor_course_id
-                                 join sc in gds.StudentCourses on ic.course_id equals sc.course_id
-                                 join c in gds.Courses on ic.course_id equals c.course_id
-                                 join sa in gds.StudentAssignments on a.assignment_id equals sa.assignment_id
-                                 where sc.student_id == Name.user_id
-                                 select a.assignment_id).Contains(a.assignment_id)
+                         where !(from sa in gds.StudentAssignments
+                                 where sa.student_id == Name.user_id
+                                 select sa.assignment_id).Contains(a.assignment_id)
                          orderby a.due_date ascending
                          select new
                          {

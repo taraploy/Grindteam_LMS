@@ -5670,28 +5670,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\China\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\gabri\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\China\\OneDrive\\Documents\\CS3750\\Grindteam_LMS\\Assignment1Test\\Assignment1Test.csproj",
+      "projectUniqueName": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1Test\\Assignment1Test.csproj",
       "projectName": "Assignment1Test",
-      "projectPath": "C:\\Users\\China\\OneDrive\\Documents\\CS3750\\Grindteam_LMS\\Assignment1Test\\Assignment1Test.csproj",
-      "packagesPath": "C:\\Users\\China\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\China\\OneDrive\\Documents\\CS3750\\Grindteam_LMS\\Assignment1Test\\obj\\",
+      "projectPath": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1Test\\Assignment1Test.csproj",
+      "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1Test\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\China\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -5704,8 +5696,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\China\\OneDrive\\Documents\\CS3750\\Grindteam_LMS\\Assignment1\\Assignment1.csproj": {
-              "projectPath": "C:\\Users\\China\\OneDrive\\Documents\\CS3750\\Grindteam_LMS\\Assignment1\\Assignment1.csproj"
+            "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1\\Assignment1.csproj": {
+              "projectPath": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1\\Assignment1.csproj"
             }
           }
         }
@@ -5752,7 +5744,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
       }
     }
   }
