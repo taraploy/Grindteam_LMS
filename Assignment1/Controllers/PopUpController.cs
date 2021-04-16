@@ -26,5 +26,16 @@ namespace Assignment1.Controllers
             return PartialView("Details", gds.Assignments.Find(due_date)); //Assignments might throw an error //it does on my editor
             //return PartialView("Details", entities.Customers.Find(customerId));
         }
+
+        [HttpPost]
+        public ActionResult PopUpItem(DateTime due_date)
+        {
+            gds = new LMS_GRINDEntities1();
+
+            return PartialView("Details", gds.Assignments.Find(due_date)); //Assignments might throw an error //it does on my editor
+            //return PartialView("Details", entities.Customers.Find(customerId));
+        }
+
+
     }
 }

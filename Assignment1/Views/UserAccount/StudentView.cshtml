@@ -9,22 +9,41 @@
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
-        <div class="btnNotification ">
+        <div class="btnNotification ">2
             <img src="~/Images/bell.png" class="bell" onclick="myFunction()" />
             <div id="notifications" hidden="hidden">
-                <div class="task">
-                    <h4>Task 1</h4>
-                    <button onclick="closeX(count - 2)" class="btn btn-danger" style="float:right;">X</button>
-                    <p>Due on a date</p>
 
-                </div>
+                @*@foreach (var item in ToDoList.StudentToDoList)
+                {
+                    <div class="task">
+                        <div class="list-group-item">
+                            <h5>@Html.ActionLink(item.AssignmentName, "StudentAssignment", "Assignment", new { @id = item.AssignmentID }, null)</h5>
+                            <h6 class="todo-subtitle text-muted">@item.CourseNum</h6>
+                            <h6 class="todo-due-date text-muted">@item.DueDate</h6>
+                        </div>
+                        <button onclick="closeX(count - 1)" class="btn btn-danger" style="float:right;">X</button>
+                        <p>Due on a date</p>
+                    </div>
+                }*@
+
+                @if (CourseCardList.CourseList.Any())
+                {
+                    foreach (var item in CourseCardList.CourseList)
+                    {
+                        
                 <div class="task">
-                    <h4>Task 2</h4>
+                    <h5 class="card-title">@Html.ActionLink(item.CourseNum, "StudentCourseDetail", "CoursesAndRegistration", new { @id = item.CourseId }, null)</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@item.CourseName</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">@item.InstructorFirstName @item.InstructorLastName</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">@item.Building Room @item.RoomNumber</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">@item.StartTime - @item.EndTime @item.Days</h6>
                     <button onclick="closeX(count - 1)" class="btn btn-danger" style="float:right;">X</button>
                     <p>Due on a date</p>
                 </div>
+            }
+        }
             </div>
-        </div>
+            </div>
     </nav>
     <script>
         var count = 2;
