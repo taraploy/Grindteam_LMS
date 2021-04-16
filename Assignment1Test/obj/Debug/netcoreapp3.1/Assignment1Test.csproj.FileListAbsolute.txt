@@ -100,15 +100,9 @@ C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\n
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.dll
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Assignment1.pdb
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Assignment1.dll.config
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\EntityFramework.xml
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.Mvc.xml
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Stripe.net.pdb
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Stripe.net.xml
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.WebPages.xml
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.xml
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.Razor.xml
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.xml
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.csproj.CopyComplete
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.dll
 C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.pdb
@@ -224,3 +218,5 @@ C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assi
 C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.dll
 C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.pdb
 C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test\obj\Debug\netcoreapp3.1\Assignment1Test.genruntimeconfig.cache
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
+C:\Users\MOSHI\OneDrive\Desktop\CS3750\Grindteam_LMS\Assignment1Test\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll

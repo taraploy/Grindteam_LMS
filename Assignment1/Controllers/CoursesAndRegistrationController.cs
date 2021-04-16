@@ -84,11 +84,51 @@ namespace Assignment1.Controllers
             AssignmentList.GenerateStudentAssignmentList(id);
             AssignmentList.GenerateThisStudentsSubmissions(Name.user_id);
 
+            // Calculate overall points
+            int totalPoints = 0;
+            int points = 0;
+            double gradePoints = 0;
+            if(AssignmentList.StudentAssignments.Any())
+            {
+                foreach(var assignment in AssignmentList.StudentAssignments)
+                {
+                    AssignmentList.GenerateThisStudentsSubmissionForAssignment(assignment.AssignmentId);
+                    if(AssignmentList.StudentAssignmentSubmission.isGraded)
+                    {
+                        points += (int)AssignmentList.StudentAssignmentSubmission.Grade;
+                        totalPoints += (int)assignment.MaxPoints;
+                    }
+                }
+                ViewBag.points = points;
+                ViewBag.totalPoints = totalPoints;
+                // Get letter grade 
+                gradePoints = ((double)points / totalPoints) * 100;
+                // Display 2 decimal places
+                gradePoints = Math.Truncate(100 * gradePoints) / 100;
+                getLetterGrade(gradePoints);
+                ViewBag.gradePoints = gradePoints;
+            }
+
             ViewBag.selectedCourse = course;
             ViewBag.courseDepartment = department;
             ViewBag.InstructorName = instructorFirstName + " " + instructorLastName;
 
             return View("StudentCourseDetailView");
+        }
+
+        /// <summary>
+        /// Function to get letter grade
+        /// </summary>
+        /// <param name="gradePoints"></param>
+        /// <returns></returns>
+        public String getLetterGrade(double gradePoints)
+        {
+            if (gradePoints >= 90.0)                              ViewBag.letterGrade = "A";           
+            else if (gradePoints >= 80.0 && gradePoints < 90.0)   ViewBag.letterGrade = "B";            
+            else if (gradePoints >= 70.0 && gradePoints < 80.0)   ViewBag.letterGrade = "C";
+            else if (gradePoints >= 60.0 && gradePoints < 70.0)   ViewBag.letterGrade = "D";            
+            else if (gradePoints < 60.0)                          ViewBag.letterGrade = "F";           
+            return ViewBag.letterGrade;
         }
 
         /// <summary>

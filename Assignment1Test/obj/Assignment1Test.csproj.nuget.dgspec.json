@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1Test\\Assignment1Test.csproj": {}
+    "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1Test\\Assignment1Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1Test\\Assignment1Test.csproj": {
+    "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1Test\\Assignment1Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1Test\\Assignment1Test.csproj",
+        "projectUniqueName": "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1Test\\Assignment1Test.csproj",
         "projectName": "Assignment1Test",
-        "projectPath": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1Test\\Assignment1Test.csproj",
-        "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1Test\\obj\\",
+        "projectPath": "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1Test\\Assignment1Test.csproj",
+        "packagesPath": "C:\\Users\\MOSHI\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1Test\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MOSHI\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +31,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1\\Assignment1.csproj": {
-                "projectPath": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1\\Assignment1.csproj"
+              "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1\\Assignment1.csproj": {
+                "projectPath": "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1\\Assignment1.csproj"
               }
             }
           }
@@ -88,11 +91,11 @@
         }
       }
     },
-    "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1\\Assignment1.csproj": {
+    "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1\\Assignment1.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1\\Assignment1.csproj",
+        "projectUniqueName": "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1\\Assignment1.csproj",
         "projectName": "Assignment1",
-        "projectPath": "C:\\Users\\gabri\\Desktop\\CS 3750\\LMS_GRIND_TEAM_OFFICIAL\\GDS_CLASSROOM\\LATEST\\Assignment1\\Assignment1.csproj"
+        "projectPath": "C:\\Users\\MOSHI\\OneDrive\\Desktop\\CS3750\\Grindteam_LMS\\Assignment1\\Assignment1.csproj"
       },
       "frameworks": {
         "net472": {}

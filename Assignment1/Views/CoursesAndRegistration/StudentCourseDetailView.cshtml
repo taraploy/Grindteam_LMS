@@ -72,14 +72,14 @@
                                             </div>
                                         </div>
                                         <hr class="hr-assignment-list" />
-                                        i++;
-                                    }
-                                }
+                                                            i++;
+                                                        }
+                                                    }
                             }
                             @*end for loop*@
                         </div>
                     </div>
-                    <div class="c-detail">
+                    <div class="c-detail col-md-4 float-md-right">
                         <h3>Course Details</h3>
                         <p>
                             <strong>Instructor</strong>: @ViewBag.InstructorName
@@ -88,6 +88,13 @@
                             <br />
                             <strong>Meeting Time</strong>: @ViewBag.selectedCourse.start_time - @ViewBag.selectedCourse.end_time | @ViewBag.selectedCourse.days_of_week
                         </p>
+                        <hr />
+                        @* Displaying Total score and letter grade with percentage (2 decimal places) *@
+                        <p>
+                            <strong>Total</strong>: @ViewBag.gradePoints% (@ViewBag.letterGrade)
+                            <br />
+                            <strong>Points</strong>: @ViewBag.Points out of @ViewBag.totalPoints
+                        </p>                        
                     </div>
                 </div>
             </div>
