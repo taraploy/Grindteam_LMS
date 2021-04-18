@@ -57,7 +57,22 @@ namespace Assignment1.Controllers
             }
 
             //Calculate grade stats
-            //AssignmentList.GenerateAllSubmissions(assignmentId);
+            int studentScore = 0;
+            LetterGradeList.GenerateStudentAssignmentGradePerformance((int)id);
+            if (gds.StudentAssignments.Where(x => (x.student_id == Name.user_id) && (x.assignment_id == id)).Select(x => x.grade).FirstOrDefault() == null)
+            {
+                studentScore = 0;
+            }
+            else
+            {
+                studentScore = (int)gds.StudentAssignments.Where(x => (x.student_id == Name.user_id) && (x.assignment_id == id)).Select(x => x.grade).FirstOrDefault();
+            }
+            int maxPoints = (int)gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.max_points).FirstOrDefault();
+            ViewBag.HighScore = LetterGradeList.HighScore;
+            ViewBag.LowScore = LetterGradeList.LowScore;
+            ViewBag.StudentScore = studentScore;
+            ViewBag.MaxPoints = maxPoints;
+
 
             //double numA = 0.0;
             //double numB = 0.0;

@@ -289,6 +289,8 @@
     <Compile Include="Models\CourseCardList.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\InstructorCourseContext.cs" />
+    <Compile Include="Models\LetterGradeItem.cs" />
+    <Compile Include="Models\LetterGradeList.cs" />
     <Compile Include="Models\Meeting.cs" />
     <Compile Include="Models\Name.cs" />
     <Compile Include="Models\SecurityQuestion.cs" />

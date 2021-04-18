@@ -20,6 +20,9 @@ namespace Assignment1.Models
 
         public static AssignmentItem AssignmentItem;
 
+        public static int IndividualStudentTotalPoints;
+        public static int IndividualStudentMaxPoints;
+
 
         //this method generates all of the assignments by a particular instructor
         //Generates a list of assignmentItems (targeted for instructor views)
@@ -159,8 +162,11 @@ namespace Assignment1.Models
         {
             ThisStudentsSubmissions = new List<StudentAssignmentSubmissionItem>();
             LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
+           // IndividualStudentTotalPoints = new int();
+            //IndividualStudentMaxPoints = new int();
 
             var query = (from a in gds.StudentAssignments
+                         join assign in gds.Assignments on a.assignment_id equals assign.assignment_id
                          where a.student_id == studentId
                          select new
                          {
@@ -171,7 +177,8 @@ namespace Assignment1.Models
                              InstructorFeedback = a.instructor_feedback,
                              SubmissionDate = a.submission_date,
                              TextSubmission = a.text_submission,
-                             FileSubmission = a.file_submission
+                             FileSubmission = a.file_submission,
+                             MaxPoints = assign.max_points
                          }).ToList();
 
             int i = 0;
@@ -182,13 +189,17 @@ namespace Assignment1.Models
                 ThisStudentsSubmissions[i].AssignmentId = item.AssignmentId;
                 ThisStudentsSubmissions[i].StudentId = item.StudentId;
                 ThisStudentsSubmissions[i].Grade = item.Grade;
+                ThisStudentsSubmissions[i].MaxPoints = (int)item.MaxPoints;
                 ThisStudentsSubmissions[i].SubmissionDate = (DateTime)item.SubmissionDate;
                 ThisStudentsSubmissions[i].TextSubmission = item.TextSubmission;
                 ThisStudentsSubmissions[i].FileSubmission = item.FileSubmission;
                 ThisStudentsSubmissions[i].InstructorFeedback = item.InstructorFeedback;
+
                 if (item.Grade != null)
                 {
-                    ThisStudentsSubmissions[i].isGraded = true;
+                    ThisStudentsSubmissions[i].isGraded = true; 
+                    //IndividualStudentTotalPoints += (int)item.Grade;    // Total points for all graded assignements
+                    //IndividualStudentMaxPoints += (int)item.Grade;      // Max points for all graded assignments
                 }
                 else
                 {
@@ -196,8 +207,96 @@ namespace Assignment1.Models
                 }
                 i++;
             }
+            //Calculate letter grade and save it to database
+            //StudentCours studentCours = gds.StudentCourses.Where(x => x.student_id == studentId).FirstOrDefault();
+            //double gradePoints = ((double)IndividualStudentTotalPoints / IndividualStudentMaxPoints) * 100;
+            //gradePoints = Math.Truncate(100 * gradePoints) / 100;
+            //String letterGrade = getLetterGrade(gradePoints);
+            //studentCours.letter_grade = letterGrade;
+            //gds.SaveChanges();
         }
 
+        //This method returns all of the submissions by a particular student with the parameter id 
+        //Generates a list of StudentAssignmentSubmissionItems
+        public static void GenerateThisStudentsSubmissionsForCourse(int? studentId, int instructorCourseId)
+        {
+            ThisStudentsSubmissions = new List<StudentAssignmentSubmissionItem>();
+            LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
+            //IndividualStudentTotalPoints = new int();
+            //IndividualStudentMaxPoints = new int();
+            int totalPoints = 0;
+            int maxPoints = 0;
+
+            var query = (from a in gds.Assignments
+                         //join ic in gds.InstructorCourses on a.instructor_course_id equals ic.instructor_course_id
+                         join sa in gds.StudentAssignments on a.assignment_id equals sa.assignment_id
+                         join sc in gds.StudentCourses on sa.student_id equals sc.student_id
+                         where sa.student_id == studentId
+                         where a.instructor_course_id == instructorCourseId
+                         select new
+                         {
+                             AssignmentGradeId = sa.assignment_grade_id,
+                             //AssignmentId = sa.assignment_id,
+                             StudentId = sa.student_id,
+                             Grade = sa.grade,
+                             /*InstructorFeedback = sa.instructor_feedback,
+                             SubmissionDate = sa.submission_date,
+                             TextSubmission = sa.text_submission,
+                             FileSubmission = sa.file_submission,*/
+                             MaxPoints = a.max_points
+                         }).ToList();
+
+            int i = 0;
+            foreach (var item in query)
+            {
+                ThisStudentsSubmissions.Add(new StudentAssignmentSubmissionItem());
+                ThisStudentsSubmissions[i].AssignmentGradeId = item.AssignmentGradeId;
+                //ThisStudentsSubmissions[i].AssignmentId = item.AssignmentId;
+                ThisStudentsSubmissions[i].StudentId = item.StudentId;
+                ThisStudentsSubmissions[i].Grade = item.Grade;
+                
+                //ThisStudentsSubmissions[i].MaxPoints = (int)item.MaxPoints;
+
+                /*ThisStudentsSubmissions[i].SubmissionDate = (DateTime)item.SubmissionDate;
+                ThisStudentsSubmissions[i].TextSubmission = item.TextSubmission;
+                ThisStudentsSubmissions[i].FileSubmission = item.FileSubmission;
+                ThisStudentsSubmissions[i].InstructorFeedback = item.InstructorFeedback;*/
+
+                if (item.Grade != null)
+                {
+                    ThisStudentsSubmissions[i].isGraded = true;
+                    totalPoints += (int)item.Grade;    // Total points for all graded assignements
+                    maxPoints += (int)item.MaxPoints;      // Max points for all graded assignments
+                }
+                else
+                {
+                    ThisStudentsSubmissions[i].isGraded = false;
+                }
+                i++;
+            }
+            //Calculate letter grade and save it to database
+            int courseId = gds.InstructorCourses.Where(x => x.instructor_course_id == instructorCourseId).Select(x => x.course_id).FirstOrDefault();
+            StudentCours studentCours = gds.StudentCourses.Where(x => (x.student_id == studentId) && (x.course_id == courseId)).FirstOrDefault();
+            double gradePoints = ((double)totalPoints / maxPoints) * 100;
+            gradePoints = Math.Truncate(100 * gradePoints) / 100;
+            String letterGrade = getLetterGrade(gradePoints);
+            studentCours.letter_grade = letterGrade;
+            gds.SaveChanges();
+        }
+
+        public static String getLetterGrade(double percentage)
+        {
+            String letterGrade = "";
+
+            if (percentage >= 90.0) letterGrade = "A";
+            else if (percentage >= 80.0 && percentage < 90.0) letterGrade = "B";
+            else if (percentage >= 70.0 && percentage < 80.0) letterGrade = "C";
+            else if (percentage >= 60.0 && percentage < 70.0) letterGrade = "D";
+            else if (percentage < 60.0) letterGrade = "F";
+            else letterGrade = "N/A";
+
+            return letterGrade;
+        }
 
         //This method returns a single submission by student with studentId and assignment with assignmentId 
         //Generates a list of StudentAssignmentSubmissionItems

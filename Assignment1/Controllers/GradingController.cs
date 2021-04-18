@@ -53,6 +53,7 @@ namespace Assignment1.Controllers
             ViewBag.SubmissionType = thisAssignment.submission_type;
             ViewBag.Description = thisAssignment.assignment_desc;
 
+
             //StudentCours studentCours = gds.StudentCourses.Where(x => x.student_id == stuAssignment.student_id).FirstOrDefault();
 
 
@@ -162,6 +163,10 @@ namespace Assignment1.Controllers
             String assignmentName = gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.assignment_name).FirstOrDefault();
             String firstName = gds.ulUsers.Where(x => x.ulUser_id == student_id).Select(x => x.first_name).FirstOrDefault();
             String lastName = gds.ulUsers.Where(x => x.ulUser_id == student_id).Select(x => x.last_name).FirstOrDefault();
+            int courseId = gds.StudentCourses.Where(x => x.student_id == student_id).Select(x => x.course_id).FirstOrDefault();
+            int ic_id = gds.InstructorCourses.Where(x => x.course_id == courseId).Select(x => x.instructor_course_id).FirstOrDefault();
+
+            AssignmentList.GenerateThisStudentsSubmissionsForCourse(student_id, ic_id);
             ViewBag.AssignmentName = assignmentName;
             ViewBag.StudentName = firstName + " " + lastName;
             ViewBag.StudentId = stuAssignment.student_id;
@@ -208,18 +213,18 @@ namespace Assignment1.Controllers
             return RedirectToAction("InstructorGrading", new { assignmentId = id });
         }
 
-        protected String getLetterGrade(double percentage)
-        {
-            String letterGrade = "";
+        //public String getLetterGrade(double percentage)
+        //{
+        //    String letterGrade = "";
 
-            if (percentage >= 90.0) letterGrade = "A";
-            else if (percentage >= 80.0 && percentage < 90.0) letterGrade = "B";
-            else if (percentage >= 70.0 && percentage < 80.0) letterGrade = "A";
-            else if (percentage >= 60.0 && percentage < 70.0) letterGrade = "A";
-            else if (percentage < 60.0) letterGrade = "A";
+        //    if (percentage >= 90.0) letterGrade = "A";
+        //    else if (percentage >= 80.0 && percentage < 90.0) letterGrade = "B";
+        //    else if (percentage >= 70.0 && percentage < 80.0) letterGrade = "C";
+        //    else if (percentage >= 60.0 && percentage < 70.0) letterGrade = "D";
+        //    else if (percentage < 60.0) letterGrade = "F";
 
-            return letterGrade;
-        }
+        //    return letterGrade;
+        //}
 
     }
 }

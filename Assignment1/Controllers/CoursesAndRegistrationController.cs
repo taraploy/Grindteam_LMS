@@ -83,13 +83,14 @@ namespace Assignment1.Controllers
             CourseCardList.GenerateStudentCourseList();
             AssignmentList.GenerateStudentAssignmentList(id);
             AssignmentList.GenerateThisStudentsSubmissions(Name.user_id);
+            AssignmentList.GenerateThisStudentsSubmissionsForCourse(Name.user_id, ic_id);
 
-            StudentCours studentCours = gds.StudentCourses.Where(x => x.course_id == course.course_id).FirstOrDefault();
+            StudentCours studentCours = gds.StudentCourses.Where(x => (x.course_id == course.course_id) && (x.student_id == Name.user_id)).FirstOrDefault();
 
             // Calculate overall points
-            int totalPoints = 0;
+            int maxPoints = 0;
             int points = 0;
-            double gradePoints = 0;
+            double? gradePoints = 0;
             if (AssignmentList.StudentAssignments.Any())
             {
                 foreach (var assignment in AssignmentList.StudentAssignments)
@@ -98,22 +99,32 @@ namespace Assignment1.Controllers
                     if (AssignmentList.StudentAssignmentSubmission.isGraded)
                     {
                         points += (int)AssignmentList.StudentAssignmentSubmission.Grade;
-                        totalPoints += (int)assignment.MaxPoints;
+                        maxPoints += (int)assignment.MaxPoints;
                     }
                 }
+
                 ViewBag.points = points;
-                ViewBag.totalPoints = totalPoints;
+                ViewBag.maxPoints = maxPoints;
                 // Get letter grade 
-                gradePoints = ((double)points / totalPoints) * 100;
+                gradePoints = ((double)points / maxPoints) * 100;
                 // Display 2 decimal places
-                gradePoints = Math.Truncate(100 * gradePoints) / 100;
-                String letterGrade = getLetterGrade(gradePoints);
-                studentCours.letter_grade = letterGrade;    // Update student's letter grade for the course
-                gds.SaveChanges();  // Save it in database
-                ViewBag.letterGrade = letterGrade;
-                ViewBag.gradePoints = gradePoints;
+                gradePoints = Math.Truncate(100 * (double)gradePoints) / 100;
+                //String letterGrade = getLetterGrade(gradePoints);
+                //studentCours.letter_grade = letterGrade;    // Update student's letter grade for the course
+                //gds.SaveChanges();  // Save letter grade (update) in database
+                //ViewBag.letterGrade = letterGrade;  // Display letter grade
+                if (gradePoints >= 0)
+                {
+                    ViewBag.gradePercentage = gradePoints + "%";  // Display percentage
+                }
+                else
+                {
+                    ViewBag.gradePercentage = " ";
+                }
             }
 
+            AssignmentList.GenerateThisStudentsSubmissionsForCourse(Name.user_id, ic_id);
+            ViewBag.letterGrade =  studentCours.letter_grade;  // Display letter grade
             ViewBag.selectedCourse = course;
             ViewBag.courseDepartment = department;
             ViewBag.InstructorName = instructorFirstName + " " + instructorLastName;
@@ -131,48 +142,20 @@ namespace Assignment1.Controllers
             gds = new LMS_GRINDEntities1();
             Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
             Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
+            int ic_id = gds.InstructorCourses.Where(x => x.course_id == id).Select(x => x.instructor_course_id).FirstOrDefault();
             CourseCardList.GenerateInstructorCourseList();
             AssignmentList.GenerateInstructorAssignmentList(id);
-            
-            ////////
-            
+
             //StudentCours studentCours = gds.StudentCourses.Where(x => x.course_id == course.course_id).FirstOrDefault();
 
-            //// Calculate overall points
-            //int totalPoints = 0;
-            //int points = 0;
-            //double gradePoints = 0;
-            //String letterGrade = "";
-
-            //if (AssignmentList.StudentAssignments.Any())
-            //{
-            //    foreach (var assignment in AssignmentList.StudentAssignments)
-            //    {
-            //        AssignmentList.GenerateThisStudentsSubmissionForAssignment(assignment.AssignmentId);
-            //        if (AssignmentList.StudentAssignmentSubmission.isGraded)
-            //        {
-            //            points += (int)AssignmentList.StudentAssignmentSubmission.Grade;
-            //            totalPoints += (int)assignment.MaxPoints;
-            //        }
-            //    }
-            //    ViewBag.points = points;
-            //    ViewBag.totalPoints = totalPoints;
-            //    // Get letter grade 
-            //    gradePoints = ((double)points / totalPoints) * 100;
-            //    // Display 2 decimal places
-            //    gradePoints = Math.Truncate(100 * gradePoints) / 100;
-
-            //    letterGrade = getLetterGrade(gradePoints);
-            //    //String letterGrade = getLetterGrade(gradePoints);
-            //    //studentCours.letter_grade = letterGrade;
-            //    //gds.SaveChanges();
-            //    //ViewBag.letterGrade = letterGrade;
-            //    //ViewBag.gradePoints = gradePoints;
-            //}
-            //studentCours.letter_grade = letterGrade;
-            //gds.SaveChanges();
-
-            ///////
+            // Calculate overall spread of letter grades for students in course
+            LetterGradeList.GenerateCourseLetterGrades(id);
+            ViewBag.percentA = LetterGradeList.PercentA;
+            ViewBag.percentB = LetterGradeList.PercentB;
+            ViewBag.percentC = LetterGradeList.PercentC;
+            ViewBag.percentD = LetterGradeList.PercentD;
+            ViewBag.percentF = LetterGradeList.PercentF;
+            ViewBag.percentUngraded = LetterGradeList.PercentUngraded;
             ViewBag.selectedCourse = course;
             ViewBag.courseDepartment = department;
             return View("InstructorCourseDetailView");
@@ -525,13 +508,13 @@ namespace Assignment1.Controllers
         /// <returns></returns>
         public String getLetterGrade(double gradePoints)
         {
-            String grade = "";
-            if (gradePoints >= 90.0) grade = "A"; //ViewBag.letterGrade = "A";           
-            else if (gradePoints >= 80.0 && gradePoints < 90.0) grade = "B"; // ViewBag.letterGrade = "B";
-            else if (gradePoints >= 70.0 && gradePoints < 80.0) grade = "C"; // ViewBag.letterGrade = "C";
-            else if (gradePoints >= 60.0 && gradePoints < 70.0) grade = "D"; // ViewBag.letterGrade = "D";
-            else if (gradePoints < 60.0) grade = "F"; // ViewBag.letterGrade = "F";
-            return grade;
+            String letterGrade = "";
+            if (gradePoints >= 90.0) letterGrade = "A"; //ViewBag.letterGrade = "A";           
+            else if (gradePoints >= 80.0 && gradePoints < 90.0) letterGrade = "B"; // ViewBag.letterGrade = "B";
+            else if (gradePoints >= 70.0 && gradePoints < 80.0) letterGrade = "C"; // ViewBag.letterGrade = "C";
+            else if (gradePoints >= 60.0 && gradePoints < 70.0) letterGrade = "D"; // ViewBag.letterGrade = "D";
+            else if (gradePoints < 60.0) letterGrade = "F"; // ViewBag.letterGrade = "F";
+            return letterGrade;
             //return ViewBag.letterGrade;
         }
 

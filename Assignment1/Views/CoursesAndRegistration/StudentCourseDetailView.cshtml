@@ -19,11 +19,11 @@
                 <ul class="dashboard-nav">
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
-                    <li><h5 class="nav_title">@Html.ActionLink("Registration", "ViewRegistration", "CoursesAndRegistration")</h5></li>
-
                     <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
+                    
+                    <li><h5 class="nav_title">@Html.ActionLink("Registration", "ViewRegistration", "CoursesAndRegistration")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Balance", "Balance", "Payment")</h5></li>
                 </ul>
@@ -91,9 +91,9 @@
                         <hr />
                         @* Displaying Total score and letter grade with percentage (2 decimal places) *@
                         <p>
-                            <strong>Total</strong>: @ViewBag.gradePoints% (@ViewBag.letterGrade)
+                            <strong>Total</strong>: @ViewBag.gradePercentage (@ViewBag.letterGrade)
                             <br />
-                            <strong>Points</strong>: @ViewBag.Points out of @ViewBag.totalPoints
+                            <strong>Points</strong>: @ViewBag.Points out of @ViewBag.maxPoints
                         </p>                        
                     </div>
                 </div>

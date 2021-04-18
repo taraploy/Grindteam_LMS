@@ -16,16 +16,16 @@
 
             var data = google.visualization.arrayToDataTable([
                 ['Range', 'Grade'],
-                ['90 - 100%', @ViewBag.percentA],
-                ['80 - 89%', @ViewBag.percentB],
-                ['70 - 79%', @ViewBag.percentC],
-                ['60 - 69%', @ViewBag.percentD],
-                ['< 60%', @ViewBag.percentF],
+                ['90 - 100% (A)', @ViewBag.percentA],
+                ['80 - 89% (B)', @ViewBag.percentB],
+                ['70 - 79% (C)', @ViewBag.percentC],
+                ['60 - 69% (D)', @ViewBag.percentD],
+                ['< 60% (F)', @ViewBag.percentF],
                 ['Ungraded', @ViewBag.percentUngraded]
             ]);
 
             var options = {
-                title: 'Grade Breakdown for @ViewBag.AssignmentName'
+                title: 'Overall student performance'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -59,20 +59,21 @@
 
                     <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
 
+                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
+
                     <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
-
-                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
                 </ul>
             </p>
         </aside>
         <div class="vl"></div>
-        <div class="container col-md-8">
+        <div class="col-md-9">
             <div class="row align-items-center">
                 <div class="centerHeader col-md-12">
                     <h1>@ViewBag.selectedCourse.course_num @ViewBag.selectedCourse.course_name</h1>
                 </div>
+                <div class="col-md-12">
                 <div class="row container">
                     <div class="col-md-8 float-md-left">
                         <div class="row align-items-center">
@@ -122,10 +123,11 @@
                             </p>
                         </div>
                         @*</div>*@
-                        <div class="col-md-6">
-                            <div id="piechart" style="width: 900px; height: 500px;"></div>
+                        <div class="">
+                            <div id="piechart" style="width: 550px; height: 400px;"></div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
             @*<div class="btnFields">

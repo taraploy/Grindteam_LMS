@@ -49,12 +49,12 @@
                     <li><h5 class="nav_title">@Html.ActionLink("Home", "ReturnToView", "UserAccount")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Courses", "InstructorCview", "CoursesAndRegistration")</h5></li>
+                    
+                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Calendar", "Index", "Calendar")</h5></li>
 
                     <li><h5 class="nav_title">@Html.ActionLink("Profile", "Index", "Profile")</h5></li>
-
-                    <li><h5 class="nav_title">@Html.ActionLink("Assignments", "CourseAssignmentList", "Assignment")</h5></li>
                 </ul>
             </p>
         </aside>
@@ -62,12 +62,13 @@
         <div class="container col-md-9">
             <div class="row align-items-center">
                 <div class="flex-row">
-                    @Html.ActionLink("Back to assignments", "InstructorCourseDetail", "CoursesAndRegistration", new { id = @ViewBag.CourseId }, new { @class = "addCourseBtn" })
+                    @Html.ActionLink("Back to assignments", "InstructorCourseDetail", "CoursesAndRegistration", new { id = @ViewBag.CourseId }, new { @class = "addCourseBtn" })                   
                 </div>
                 <div class="col-md-12 centerHeader">
                     <h1>@ViewBag.CourseNum @ViewBag.CourseName</h1>
+                    <br />
                 </div>
-                <div class="container col-md-12">
+                <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-6">
                             <h5><strong>Assignment:</strong> @ViewBag.AssignmentName</h5>
@@ -79,7 +80,8 @@
                         </div>
                     </div>
                     <div>
-                        <h5><strong>Description:</strong><br /> @ViewBag.Description</h5>
+                        <h5><strong>Description:</strong></h5>
+                        <p>@ViewBag.Description</p>
                     </div>
                     <hr />
                     <div class="justify-content-center row">
@@ -115,7 +117,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div id="piechart" style="width: 900px; height: 500px;"></div>
+                            <div id="piechart" style="width: 550px; height: 400px;"></div>
                         </div>
                     </div>
                 </div>
