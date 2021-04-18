@@ -53,6 +53,44 @@ namespace Assignment1.Controllers
             ViewBag.SubmissionType = thisAssignment.submission_type;
             ViewBag.Description = thisAssignment.assignment_desc;
 
+            //StudentCours studentCours = gds.StudentCourses.Where(x => x.student_id == stuAssignment.student_id).FirstOrDefault();
+
+
+            //// Calculate overall points
+            //int totalPoints = 0;
+            //int points = 0;
+            //double gradePoints = 0;
+            //String letterGrade = "";
+
+            //if (AssignmentList.StudentAssignments.Any())
+            //{
+            //    foreach (var assignment in AssignmentList.StudentAssignments)
+            //    {
+            //        AssignmentList.GenerateThisStudentsSubmissionForAssignment(assignment.AssignmentId);
+            //        if (AssignmentList.StudentAssignmentSubmission.isGraded)
+            //        {
+            //            points += (int)AssignmentList.StudentAssignmentSubmission.Grade;
+            //            totalPoints += (int)assignment.MaxPoints;
+            //        }
+            //    }
+            //    //ViewBag.points = points;
+            //    //ViewBag.totalPoints = totalPoints;
+            //    // Get letter grade 
+            //    gradePoints = ((double)points / totalPoints) * 100;
+            //    // Display 2 decimal places
+            //    gradePoints = Math.Truncate(100 * gradePoints) / 100;
+
+            //    letterGrade = getLetterGrade(gradePoints);
+            //    //String letterGrade = getLetterGrade(gradePoints);
+            //    //studentCours.letter_grade = letterGrade;
+            //    //gds.SaveChanges();
+            //    //ViewBag.letterGrade = letterGrade;
+            //    //ViewBag.gradePoints = gradePoints;
+            //}
+            //studentCours.letter_grade = letterGrade;
+
+
+
             //Calculate grade stats
             AssignmentList.GenerateAllSubmissions(assignmentId);
             double numA = 0.0;
@@ -85,7 +123,7 @@ namespace Assignment1.Controllers
                         numD++;
                     }
                     else if (thisPercent < 60.0)
-                    {
+                    { 
                         numF++;
                     }
                 }  
@@ -145,9 +183,10 @@ namespace Assignment1.Controllers
             gds = new LMS_GRINDEntities1();
             //Save grade to database
             StudentAssignment stuAssignment = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).FirstOrDefault();
-            int? id = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).Select(x => x.assignment_id).FirstOrDefault();
+            int? id = gds.StudentAssignments.Where(x => x.assignment_grade_id == assignmentGradeId).Select(x => x.assignment_id).FirstOrDefault();            
+
             try
-            {
+            { 
                 stuAssignment.grade = grade;
                 stuAssignment.instructor_feedback = instructorFeedback;
                 gds.SaveChanges();
@@ -168,5 +207,19 @@ namespace Assignment1.Controllers
             }
             return RedirectToAction("InstructorGrading", new { assignmentId = id });
         }
+
+        protected String getLetterGrade(double percentage)
+        {
+            String letterGrade = "";
+
+            if (percentage >= 90.0) letterGrade = "A";
+            else if (percentage >= 80.0 && percentage < 90.0) letterGrade = "B";
+            else if (percentage >= 70.0 && percentage < 80.0) letterGrade = "A";
+            else if (percentage >= 60.0 && percentage < 70.0) letterGrade = "A";
+            else if (percentage < 60.0) letterGrade = "A";
+
+            return letterGrade;
+        }
+
     }
 }

@@ -6,6 +6,35 @@
 
 @using Assignment1.Models
 
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Range', 'Grade'],
+                ['90 - 100%', @ViewBag.percentA],
+                ['80 - 89%', @ViewBag.percentB],
+                ['70 - 79%', @ViewBag.percentC],
+                ['60 - 69%', @ViewBag.percentD],
+                ['< 60%', @ViewBag.percentF],
+                ['Ungraded', @ViewBag.percentUngraded]
+            ]);
+
+            var options = {
+                title: 'Grade Breakdown for @ViewBag.AssignmentName'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
 @*<script>
     function Submit() {
         if (confirm("Are you sure you want to delete this assignment?")) {
@@ -82,17 +111,20 @@
                     </div>
                     <div class="col-md-4 float-md-right">
                         @*<div class="container">*@
-                        <h3 class="align-items-center">Course Details</h3>   
+                        <h3 class="align-items-center">Course Details</h3>
                         <div>
                             <p>
                                 <strong>Instructor</strong>: @Name.first_name @Name.last_name
-                                <br />    
+                                <br />
                                 <strong>Location</strong>: @ViewBag.selectedCourse.building : Room @ViewBag.selectedCourse.room_no
                                 <br />
                                 <strong>Meeting Time</strong>: @ViewBag.selectedCourse.start_time - @ViewBag.selectedCourse.end_time | @ViewBag.selectedCourse.days_of_week
                             </p>
                         </div>
                         @*</div>*@
+                        <div class="col-md-6">
+                            <div id="piechart" style="width: 900px; height: 500px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>

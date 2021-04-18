@@ -84,16 +84,18 @@ namespace Assignment1.Controllers
             AssignmentList.GenerateStudentAssignmentList(id);
             AssignmentList.GenerateThisStudentsSubmissions(Name.user_id);
 
+            StudentCours studentCours = gds.StudentCourses.Where(x => x.course_id == course.course_id).FirstOrDefault();
+
             // Calculate overall points
             int totalPoints = 0;
             int points = 0;
             double gradePoints = 0;
-            if(AssignmentList.StudentAssignments.Any())
+            if (AssignmentList.StudentAssignments.Any())
             {
-                foreach(var assignment in AssignmentList.StudentAssignments)
+                foreach (var assignment in AssignmentList.StudentAssignments)
                 {
                     AssignmentList.GenerateThisStudentsSubmissionForAssignment(assignment.AssignmentId);
-                    if(AssignmentList.StudentAssignmentSubmission.isGraded)
+                    if (AssignmentList.StudentAssignmentSubmission.isGraded)
                     {
                         points += (int)AssignmentList.StudentAssignmentSubmission.Grade;
                         totalPoints += (int)assignment.MaxPoints;
@@ -105,7 +107,10 @@ namespace Assignment1.Controllers
                 gradePoints = ((double)points / totalPoints) * 100;
                 // Display 2 decimal places
                 gradePoints = Math.Truncate(100 * gradePoints) / 100;
-                getLetterGrade(gradePoints);
+                String letterGrade = getLetterGrade(gradePoints);
+                studentCours.letter_grade = letterGrade;    // Update student's letter grade for the course
+                gds.SaveChanges();  // Save it in database
+                ViewBag.letterGrade = letterGrade;
                 ViewBag.gradePoints = gradePoints;
             }
 
@@ -114,22 +119,7 @@ namespace Assignment1.Controllers
             ViewBag.InstructorName = instructorFirstName + " " + instructorLastName;
 
             return View("StudentCourseDetailView");
-        }
-
-        /// <summary>
-        /// Function to get letter grade
-        /// </summary>
-        /// <param name="gradePoints"></param>
-        /// <returns></returns>
-        public String getLetterGrade(double gradePoints)
-        {
-            if (gradePoints >= 90.0)                              ViewBag.letterGrade = "A";           
-            else if (gradePoints >= 80.0 && gradePoints < 90.0)   ViewBag.letterGrade = "B";            
-            else if (gradePoints >= 70.0 && gradePoints < 80.0)   ViewBag.letterGrade = "C";
-            else if (gradePoints >= 60.0 && gradePoints < 70.0)   ViewBag.letterGrade = "D";            
-            else if (gradePoints < 60.0)                          ViewBag.letterGrade = "F";           
-            return ViewBag.letterGrade;
-        }
+        }          
 
         /// <summary>
         /// Display course details for instructor
@@ -143,6 +133,46 @@ namespace Assignment1.Controllers
             Department department = gds.Departments.Where(x => x.dept_id == course.dept_id).FirstOrDefault();
             CourseCardList.GenerateInstructorCourseList();
             AssignmentList.GenerateInstructorAssignmentList(id);
+            
+            ////////
+            
+            //StudentCours studentCours = gds.StudentCourses.Where(x => x.course_id == course.course_id).FirstOrDefault();
+
+            //// Calculate overall points
+            //int totalPoints = 0;
+            //int points = 0;
+            //double gradePoints = 0;
+            //String letterGrade = "";
+
+            //if (AssignmentList.StudentAssignments.Any())
+            //{
+            //    foreach (var assignment in AssignmentList.StudentAssignments)
+            //    {
+            //        AssignmentList.GenerateThisStudentsSubmissionForAssignment(assignment.AssignmentId);
+            //        if (AssignmentList.StudentAssignmentSubmission.isGraded)
+            //        {
+            //            points += (int)AssignmentList.StudentAssignmentSubmission.Grade;
+            //            totalPoints += (int)assignment.MaxPoints;
+            //        }
+            //    }
+            //    ViewBag.points = points;
+            //    ViewBag.totalPoints = totalPoints;
+            //    // Get letter grade 
+            //    gradePoints = ((double)points / totalPoints) * 100;
+            //    // Display 2 decimal places
+            //    gradePoints = Math.Truncate(100 * gradePoints) / 100;
+
+            //    letterGrade = getLetterGrade(gradePoints);
+            //    //String letterGrade = getLetterGrade(gradePoints);
+            //    //studentCours.letter_grade = letterGrade;
+            //    //gds.SaveChanges();
+            //    //ViewBag.letterGrade = letterGrade;
+            //    //ViewBag.gradePoints = gradePoints;
+            //}
+            //studentCours.letter_grade = letterGrade;
+            //gds.SaveChanges();
+
+            ///////
             ViewBag.selectedCourse = course;
             ViewBag.courseDepartment = department;
             return View("InstructorCourseDetailView");
@@ -486,6 +516,23 @@ namespace Assignment1.Controllers
             }
 
             return index;
+        }
+
+        /// <summary>
+        /// Function to get letter grade
+        /// </summary>
+        /// <param name="gradePoints"></param>
+        /// <returns></returns>
+        public String getLetterGrade(double gradePoints)
+        {
+            String grade = "";
+            if (gradePoints >= 90.0) grade = "A"; //ViewBag.letterGrade = "A";           
+            else if (gradePoints >= 80.0 && gradePoints < 90.0) grade = "B"; // ViewBag.letterGrade = "B";
+            else if (gradePoints >= 70.0 && gradePoints < 80.0) grade = "C"; // ViewBag.letterGrade = "C";
+            else if (gradePoints >= 60.0 && gradePoints < 70.0) grade = "D"; // ViewBag.letterGrade = "D";
+            else if (gradePoints < 60.0) grade = "F"; // ViewBag.letterGrade = "F";
+            return grade;
+            //return ViewBag.letterGrade;
         }
 
     }
