@@ -35,7 +35,6 @@ namespace Assignment1
             course.max_capacity = maxCapacity;
             Course.maxCapacity = maxCapacity;
             course.dept_id = departments;
-            //Course.department = Department.dept_name;
             course.num_credits = courseCredits;
             Course.numCredits = courseCredits;
             course.days_of_week = monday + tuesday + wednesday + thursday + friday;
