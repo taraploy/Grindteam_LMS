@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LMS_GRINDModelStoreContainer" CdmEntityContainer="LMS_GRINDEntities">
+    <EntitySetMapping Name="Assignments">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.Assignment">
+        <MappingFragment StoreEntitySet="Assignments">
+          <ScalarProperty Name="assignment_id" ColumnName="assignment_id" />
+          <ScalarProperty Name="instructor_course_id" ColumnName="instructor_course_id" />
+          <ScalarProperty Name="assignment_name" ColumnName="assignment_name" />
+          <ScalarProperty Name="assignment_desc" ColumnName="assignment_desc" />
+          <ScalarProperty Name="assignment_type" ColumnName="assignment_type" />
+          <ScalarProperty Name="max_points" ColumnName="max_points" />
+          <ScalarProperty Name="due_date" ColumnName="due_date" />
+          <ScalarProperty Name="submission_type" ColumnName="submission_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.Cours">
+        <MappingFragment StoreEntitySet="Courses">
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+          <ScalarProperty Name="course_name" ColumnName="course_name" />
+          <ScalarProperty Name="course_desc" ColumnName="course_desc" />
+          <ScalarProperty Name="num_credits" ColumnName="num_credits" />
+          <ScalarProperty Name="max_capacity" ColumnName="max_capacity" />
+          <ScalarProperty Name="days_of_week" ColumnName="days_of_week" />
+          <ScalarProperty Name="start_time" ColumnName="start_time" />
+          <ScalarProperty Name="end_time" ColumnName="end_time" />
+          <ScalarProperty Name="building" ColumnName="building" />
+          <ScalarProperty Name="room_no" ColumnName="room_no" />
+          <ScalarProperty Name="course_num" ColumnName="course_num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.Department">
+        <MappingFragment StoreEntitySet="Departments">
+          <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+          <ScalarProperty Name="location" ColumnName="location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InstructorCourses">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.InstructorCours">
+        <MappingFragment StoreEntitySet="InstructorCourses">
+          <ScalarProperty Name="instructor_course_id" ColumnName="instructor_course_id" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="instructor_id" ColumnName="instructor_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="payment_amount" ColumnName="payment_amount" />
+          <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentAssignments">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.StudentAssignment">
+        <MappingFragment StoreEntitySet="StudentAssignments">
+          <ScalarProperty Name="assignment_grade_id" ColumnName="assignment_grade_id" />
+          <ScalarProperty Name="assignment_id" ColumnName="assignment_id" />
+          <ScalarProperty Name="student_course_id" ColumnName="student_course_id" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="grade" ColumnName="grade" />
+          <ScalarProperty Name="submission_date" ColumnName="submission_date" />
+          <ScalarProperty Name="text_submission" ColumnName="text_submission" />
+          <ScalarProperty Name="file_submission" ColumnName="file_submission" />
+          <ScalarProperty Name="instructor_feedback" ColumnName="instructor_feedback" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentCourses">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.StudentCours">
+        <MappingFragment StoreEntitySet="StudentCourses">
+          <ScalarProperty Name="student_course_id" ColumnName="student_course_id" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="letter_grade" ColumnName="letter_grade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ulUsers">
+      <EntityTypeMapping TypeName="LMS_GRINDModel.ulUser">
+        <MappingFragment StoreEntitySet="ulUser">
+          <ScalarProperty Name="ulUser_id" ColumnName="ulUser_id" />
+          <ScalarProperty Name="user_password" ColumnName="user_password" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="email_address" ColumnName="email_address" />
+          <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="street_address" ColumnName="street_address" />
+          <ScalarProperty Name="phone_num" ColumnName="phone_num" />
+          <ScalarProperty Name="bio" ColumnName="bio" />
+          <ScalarProperty Name="link1" ColumnName="link1" />
+          <ScalarProperty Name="link2" ColumnName="link2" />
+          <ScalarProperty Name="link3" ColumnName="link3" />
+          <ScalarProperty Name="profileImage" ColumnName="profileImage" />
+          <ScalarProperty Name="linkTitle1" ColumnName="linkTitle1" />
+          <ScalarProperty Name="linkTitle2" ColumnName="linkTitle2" />
+          <ScalarProperty Name="linkTitle3" ColumnName="linkTitle3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

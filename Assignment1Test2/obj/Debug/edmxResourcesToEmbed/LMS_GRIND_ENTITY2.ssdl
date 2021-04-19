@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LMS_GRINDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Assignments">
+    <Key>
+      <PropertyRef Name="assignment_id" />
+    </Key>
+    <Property Name="assignment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="instructor_course_id" Type="int" Nullable="false" />
+    <Property Name="assignment_name" Type="varchar" MaxLength="50" />
+    <Property Name="assignment_desc" Type="varchar" MaxLength="200" />
+    <Property Name="assignment_type" Type="varchar" MaxLength="50" />
+    <Property Name="max_points" Type="int" />
+    <Property Name="due_date" Type="datetime" />
+    <Property Name="submission_type" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="course_id" />
+    </Key>
+    <Property Name="course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dept_id" Type="int" Nullable="false" />
+    <Property Name="course_name" Type="varchar" MaxLength="50" />
+    <Property Name="course_desc" Type="varchar" MaxLength="500" />
+    <Property Name="num_credits" Type="int" />
+    <Property Name="max_capacity" Type="int" />
+    <Property Name="days_of_week" Type="varchar" MaxLength="50" />
+    <Property Name="start_time" Type="time" Precision="7" />
+    <Property Name="end_time" Type="time" Precision="7" />
+    <Property Name="building" Type="varchar" MaxLength="50" />
+    <Property Name="room_no" Type="int" />
+    <Property Name="course_num" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="dept_id" />
+    </Key>
+    <Property Name="dept_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dept_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="location" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="InstructorCourses">
+    <Key>
+      <PropertyRef Name="instructor_course_id" />
+    </Key>
+    <Property Name="instructor_course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="course_id" Type="int" Nullable="false" />
+    <Property Name="instructor_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="payment_id" />
+    </Key>
+    <Property Name="payment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="payment_amount" Type="money" />
+    <Property Name="payment_date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentAssignments">
+    <Key>
+      <PropertyRef Name="assignment_grade_id" />
+    </Key>
+    <Property Name="assignment_grade_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="assignment_id" Type="int" Nullable="false" />
+    <Property Name="student_course_id" Type="int" />
+    <Property Name="student_id" Type="int" Nullable="false" />
+    <Property Name="grade" Type="int" />
+    <Property Name="submission_date" Type="datetime" />
+    <Property Name="text_submission" Type="varchar" MaxLength="500" />
+    <Property Name="file_submission" Type="nvarchar" MaxLength="500" />
+    <Property Name="instructor_feedback" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="StudentCourses">
+    <Key>
+      <PropertyRef Name="student_course_id" />
+    </Key>
+    <Property Name="student_course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="course_id" Type="int" Nullable="false" />
+    <Property Name="student_id" Type="int" Nullable="false" />
+    <Property Name="letter_grade" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="ulUser">
+    <Key>
+      <PropertyRef Name="ulUser_id" />
+    </Key>
+    <Property Name="ulUser_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_password" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="email_address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="birthdate" Type="date" Nullable="false" />
+    <Property Name="role" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="street_address" Type="nvarchar" MaxLength="50" />
+    <Property Name="phone_num" Type="nvarchar" MaxLength="50" />
+    <Property Name="bio" Type="nvarchar" MaxLength="500" />
+    <Property Name="link1" Type="nvarchar" MaxLength="50" />
+    <Property Name="link2" Type="nvarchar" MaxLength="50" />
+    <Property Name="link3" Type="nvarchar" MaxLength="50" />
+    <Property Name="profileImage" Type="nvarchar" MaxLength="500" />
+    <Property Name="linkTitle1" Type="nvarchar" MaxLength="200" />
+    <Property Name="linkTitle2" Type="nvarchar" MaxLength="200" />
+    <Property Name="linkTitle3" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <Association Name="FK_Courses_Departments">
+    <End Role="Departments" Type="Self.Departments" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="dept_id" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="dept_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_User">
+    <End Role="ulUser" Type="Self.ulUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ulUser">
+        <PropertyRef Name="ulUser_id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourses_ulUser">
+    <End Role="ulUser" Type="Self.ulUser" Multiplicity="1" />
+    <End Role="StudentCourses" Type="Self.StudentCourses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ulUser">
+        <PropertyRef Name="ulUser_id" />
+      </Principal>
+      <Dependent Role="StudentCourses">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LMS_GRINDModelStoreContainer">
+    <EntitySet Name="Assignments" EntityType="Self.Assignments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InstructorCourses" EntityType="Self.InstructorCourses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentAssignments" EntityType="Self.StudentAssignments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentCourses" EntityType="Self.StudentCourses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ulUser" EntityType="Self.ulUser" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Courses_Departments" Association="Self.FK_Courses_Departments">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_User" Association="Self.FK_Payment_User">
+      <End Role="ulUser" EntitySet="ulUser" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourses_ulUser" Association="Self.FK_StudentCourses_ulUser">
+      <End Role="ulUser" EntitySet="ulUser" />
+      <End Role="StudentCourses" EntitySet="StudentCourses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

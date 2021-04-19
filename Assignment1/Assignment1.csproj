@@ -273,6 +273,7 @@
     <Compile Include="Cours.cs">
       <DependentUpon>ulUsers.tt</DependentUpon>
     </Compile>
+    <Compile Include="CourseRegistration.cs" />
     <Compile Include="Department.cs">
       <DependentUpon>ulUsers.tt</DependentUpon>
     </Compile>
