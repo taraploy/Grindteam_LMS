@@ -14,8 +14,8 @@ namespace Assignment1.Models
         public static int PercentD;
         public static int PercentF;
         public static int PercentUngraded;
-        public static double HighScore;
-        public static double LowScore;
+        public static double? HighScore;
+        public static double? LowScore;
 
 
         public static void GenerateCourseLetterGrades(int courseId)
@@ -83,6 +83,13 @@ namespace Assignment1.Models
             }
 
             //Calculate chart values
+            if (query.Count() == 0)
+            {
+                HighScore = null;
+                LowScore = null;
+                return;
+            }
+
             HighScore = PointList[0];
             LowScore = PointList[0];
             for (int j = 0; j < PointList.Count; j++)
@@ -102,34 +109,6 @@ namespace Assignment1.Models
             Median = Percentile(pointArray, 50);
             Q1 = Percentile(pointArray, 25);*/
 
-        }
-
-        /*public static double Percentile(double[] sortedData, double p)
-        {
-            // algo derived from Aczel pg 15 bottom
-            if (p >= 100.0d) return sortedData[sortedData.Length - 1];
-
-            double position = (sortedData.Length + 1) * p / 100.0;
-            double leftNumber = 0.0d, rightNumber = 0.0d;
-
-            double n = p / 100.0d * (sortedData.Length - 1) + 1.0d;
-
-            if (position >= 1)
-            {
-                leftNumber = sortedData[(int)Math.Floor(n) - 1];
-                rightNumber = sortedData[(int)Math.Floor(n)];
-            }
-            else
-            {
-                leftNumber = sortedData[0]; // first data
-                rightNumber = sortedData[1]; // first data
-            }
-
-            //if (leftNumber == rightNumber)
-            if (Equals(leftNumber, rightNumber))
-                return leftNumber;
-            double part = n - Math.Floor(n);
-            return leftNumber + part * (rightNumber - leftNumber);
-        } // end of internal function percentile*/
+        }        
     }
 }

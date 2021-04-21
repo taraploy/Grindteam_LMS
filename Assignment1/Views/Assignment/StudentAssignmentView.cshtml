@@ -14,8 +14,10 @@
 <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.charts.load('current', { 'packages': ['bar'] });
-        google.charts.setOnLoadCallback(drawChart);
+        if (@ViewBag.HighScore != null) {
+            google.charts.load('current', { 'packages': ['bar'] });
+            google.charts.setOnLoadCallback(drawChart);
+        }
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
@@ -30,9 +32,11 @@
                 bars: 'vertical' // Required for Material Bar Charts.
             };
 
-            var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+            if (@ViewBag.HighScore != null) {
+                var chart = new google.charts.Bar(document.getElementById('barchart_material'));
 
-            chart.draw(data, google.charts.Bar.convertOptions(options));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
         }
     </script>
     <script>
@@ -150,11 +154,11 @@
                     @if (AssignmentList.AssignmentItem.SubmissionType == "File")
                     {
 
-                        <div class="col-md-4"><p><strong>Submitting:</strong> a file upload</p></div>
+                    <div class="col-md-4"><p><strong>Submitting:</strong> a file upload</p></div>
                     }
                     else
                     {
-                        <div class="col-md-4"><p><strong>Submitting:</strong> a text entry</p></div>
+                    <div class="col-md-4"><p><strong>Submitting:</strong> a text entry</p></div>
                     }
                 </div>
                 <div class="row">
@@ -177,26 +181,26 @@
 
                             @if (AssignmentList.AssignmentItem.SubmissionType == "File")
                             {
-                                @* File Upload *@
-                                <div class="row m-2" id="fileDiv">
-                                    <label for="uploadFile">Upload a file.</label>
-                                    <input type="file"
-                                           class="form-control-file"
-                                           id="assignentFile"
-                                           name="assignment_file" />
-                                </div>
+                            @* File Upload *@
+                            <div class="row m-2" id="fileDiv">
+                                <label for="uploadFile">Upload a file.</label>
+                                <input type="file"
+                                       class="form-control-file"
+                                       id="assignentFile"
+                                       name="assignment_file" />
+                            </div>
                             }
                             else
                             {
-                                @* Text Entry *@
-                                <div class="row mt-3 m-2" id="textDiv">
-                                    <label for="textSubmission">Copy and pase or type your submission here.</label>
-                                    <textarea rows="15"
-                                              cols="75"
-                                              class="p-2 ml-auto mr-auto form-control"
-                                              id="textSubmission"
-                                              name="text_submission"></textarea>
-                                </div>
+                            @* Text Entry *@
+                            <div class="row mt-3 m-2" id="textDiv">
+                                <label for="textSubmission">Copy and pase or type your submission here.</label>
+                                <textarea rows="15"
+                                          cols="75"
+                                          class="p-2 ml-auto mr-auto form-control"
+                                          id="textSubmission"
+                                          name="text_submission"></textarea>
+                            </div>
                             }
 
                             <div class="ml-2 mt-3">
@@ -222,7 +226,11 @@
                 </section>
                 <br />
                 @* Chart *@
-                <div id="barchart_material" style="width: 700px; height: 450px;"></div>
+                @{
+                    if (ViewBag.HighScore != null) {
+                        <div id="barchart_material" style="width: 700px; height: 450px;"></div>
+                    }
+                }
 
             </div>  
             </div>
