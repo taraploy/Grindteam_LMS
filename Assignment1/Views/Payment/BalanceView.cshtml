@@ -43,6 +43,11 @@
         </div>
     </nav>
     <script>
+            // alert for paid balance
+            function PaidMessage() {
+                alert("Your balance is paid.");
+            }
+
         var count = 2;
         var notifShow = 0;
 
@@ -126,9 +131,18 @@
                                 <td class="text-right p-2 font-weight-bold">@dSemesterBalance.ToString("C")</td>
                             </tr>
                             <tr class="">
-                                <td colspan="100" class="text-right pt-0">
-                                    @Html.ActionLink("Make Payment", "PaymentInfo", "Payment", new { @class = "paymentBtn mr-3" })
-                                </td>
+                                @if (dSemesterBalance > 0)
+                                {
+                                    <td colspan="100" class="text-right pt-0">
+                                        @Html.ActionLink("Make Payment", "PaymentInfo", "Payment", new { @class = "paymentBtn mr-3" })
+                                    </td>
+                                }
+                                else
+                                { 
+                                    <td colspan="100" class="text-right pt-0">
+                                        <button class="paymentBtn mr-3" id="paidBtn" onclick="PaidMessage()">Make Payment</button>
+                                    </td>
+                                }
                             </tr>
                         </tbody>
                     </table>

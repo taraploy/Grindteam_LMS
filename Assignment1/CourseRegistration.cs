@@ -68,5 +68,26 @@ namespace Assignment1
             CourseCardList.GenerateInstructorCourseList();
 
         }
+
+        public void DeleteCourse2(int id)
+        {
+            LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
+
+            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
+            InstructorCours insCourse = gds.InstructorCourses.Where(x => x.course_id == id).FirstOrDefault();
+            //StudentCours[] enrolledStudents = new StudentCours[32];
+            var count = gds.StudentCourses.Where(x => x.course_id == id).Count();
+            for (int i = 0; i < count; i++)
+            {
+                //remove existing enrollments to the class
+                StudentCours stdCourse = gds.StudentCourses.Where(x => x.course_id == id).FirstOrDefault();
+                gds.StudentCourses.Remove(stdCourse);
+                gds.SaveChanges();
+            }
+
+            gds.InstructorCourses.Remove(insCourse);
+            gds.Courses.Remove(course);
+            gds.SaveChanges();
+        }
     }
 }

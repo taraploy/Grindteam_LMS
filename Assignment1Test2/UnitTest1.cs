@@ -39,8 +39,8 @@ namespace Assignment1Test2
             c.max_capacity = 30;
             c.room_no = 112;
 
-            CourseRegistration controller = new CourseRegistration();
-            controller.SaveCourse2(c.course_num, c.course_name, c.course_desc, (int)c.num_credits,
+            CourseRegistration cr = new CourseRegistration();
+            cr.SaveCourse2(c.course_num, c.course_name, c.course_desc, (int)c.num_credits,
                 (int)c.max_capacity, c.building, (int)c.room_no, c.dept_id, "M", "T", "W", "", "F",
                 (TimeSpan)c.start_time, (TimeSpan)c.end_time, 1012);
 
@@ -51,6 +51,17 @@ namespace Assignment1Test2
                             select x).Count();
 
             int expected = N + 1;
+
+            // get id of newly created course
+            var id = (from x in gds.Courses
+                      join ic in gds.InstructorCourses 
+                      on x.course_id equals ic.course_id
+                      where ic.instructor_id == 1012
+                      where x.course_desc == "Prepare to be enlightened"
+                      select x).First();
+
+            // delete newly created course
+            cr.DeleteCourse2(id.course_id);
 
             // Expecting N + 1
             // (Started with N courses and added 1 course)

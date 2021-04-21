@@ -72,7 +72,7 @@ namespace Assignment1.Controllers
                 {
                     Amount = amt,
                     Currency = "usd",
-                    Description = "test",
+                    Description = "Payment from " + Name.last_name + ", " + Name.first_name,
                     Source = stripetoken.Id
                 };
 
@@ -129,7 +129,7 @@ namespace Assignment1.Controllers
                 semesterTotal -= (decimal)p.payment_amount;
             }
 
-            ViewBag.Balance = semesterTotal.ToString("C");
+            ViewBag.Balance = semesterTotal;
 
             return View("PaymentInfoView");
         }

@@ -3,7 +3,10 @@
     ViewBag.Title = "PaymentInfoView";
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
-
+@{ 
+    decimal balance = ViewBag.Balance;
+    //decimal balanceDue = decimal.Parse(balance);
+}
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -77,7 +80,7 @@
                             <div>
                                 <h6>
                                     <strong>Balance Due</strong>
-                                    <span class="text-muted float-right"><strong>@ViewBag.Balance</strong></span>
+                                    <span class="text-muted float-right"><strong>@balance.ToString("C")</strong></span>
                                 </h6>
                             </div>
                         </div>
@@ -87,7 +90,7 @@
                             <div class="row">
                                 <div class="col-md-6 p-info">
                                     <label for="amount"><strong>Amount to pay</strong></label>
-                                    <input type="number" class="form-control" id="amount" name="payment_amount" value="" required/>
+                                    <input type="number" class="form-control" id="amount" name="payment_amount" max="@balance" value="" required/>
                                 </div>
                             </div>
                             <hr />

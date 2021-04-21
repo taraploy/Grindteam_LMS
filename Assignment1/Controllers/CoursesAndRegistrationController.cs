@@ -20,6 +20,7 @@ namespace Assignment1.Controllers
 
     {
         LMS_GRINDEntities1 gds;
+        CourseRegistration cs;
 
         public ActionResult InstructorCview(string search)
         {
@@ -202,7 +203,7 @@ namespace Assignment1.Controllers
 
             if (ret > 0)
             {
-                ViewBag.Message = "Could not register for course. You are already registered for that course.";
+                ViewBag.Message = "Could not register for course. You are already registered.";
                 return ViewRegistration("");
             }
             else
@@ -275,14 +276,17 @@ namespace Assignment1.Controllers
         }
 
 
-
+        /// <summary>
+        /// Save new course to database
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SaveCourse(string courseNum, string courseName, string courseDesc,
             int courseCredits, int maxCapacity, string courseLocation,
             int courseRoom, int departments, string monday, string tuesday, string wednesday,
             string thursday, string friday, TimeSpan startTime, TimeSpan endTime)
         {
-            CourseRegistration cs = new CourseRegistration();
+            cs = new CourseRegistration();
             cs.SaveCourse2(courseNum, courseName, courseDesc, courseCredits, maxCapacity, courseLocation,
                 courseRoom, departments, monday, tuesday, wednesday, thursday, friday, startTime, endTime, Name.user_id);
 
@@ -389,23 +393,8 @@ namespace Assignment1.Controllers
 
         public ActionResult DeleteCourse(int id)
         {
-            gds = new LMS_GRINDEntities1();
-
-            Cours course = gds.Courses.Where(x => x.course_id == id).FirstOrDefault();
-            InstructorCours insCourse = gds.InstructorCourses.Where(x => x.course_id == id).FirstOrDefault();
-            //StudentCours[] enrolledStudents = new StudentCours[32];
-            var count = gds.StudentCourses.Where(x => x.course_id == id).Count();
-            for (int i = 0; i < count; i++)
-            {
-                //remove existing enrollments to the class
-                StudentCours stdCourse = gds.StudentCourses.Where(x => x.course_id == id).FirstOrDefault();
-                gds.StudentCourses.Remove(stdCourse);
-                gds.SaveChanges();
-            }
-
-            gds.InstructorCourses.Remove(insCourse);
-            gds.Courses.Remove(course);
-            gds.SaveChanges();
+            cs = new CourseRegistration();
+            cs.DeleteCourse2(id);
             CourseCardList.GenerateInstructorCourseList();
             return RedirectToAction("InstructorCView");
         }
