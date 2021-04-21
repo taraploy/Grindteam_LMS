@@ -10,6 +10,16 @@
     DateTime dtEndTime;
 }
 @using Assignment1.Models
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+
+}
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>

@@ -19,13 +19,11 @@ namespace Assignment1Test2
 
             // Preparation
             // Start with the known instructor id then find out how many courses this instructor is teaching right now
-            var courses = (from x in gds.Courses
+            // Call it N
+            int N = (from x in gds.Courses
                            join ic in gds.InstructorCourses on x.course_id equals ic.course_id
                            where ic.instructor_id == 1012
-                           select x).ToList();
-
-            // Call that course number N
-            int N = courses.Count();
+                           select x).Count();
 
             // Create a new course for this instructor using the application code from test
             Cours c = new Cours();
@@ -47,12 +45,11 @@ namespace Assignment1Test2
                 (TimeSpan)c.start_time, (TimeSpan)c.end_time, 1012);
 
             // Again, Find out how many courses this instructor is teaching now
-            var courses2 = (from x in gds.Courses
+            int N2 = (from x in gds.Courses
                             join ic in gds.InstructorCourses on x.course_id equals ic.course_id
                             where ic.instructor_id == 1012
-                            select x).ToList();
+                            select x).Count();
 
-            int N2 = courses2.Count();
             int expected = N + 1;
 
             // Expecting N + 1

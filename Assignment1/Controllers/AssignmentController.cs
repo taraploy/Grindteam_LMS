@@ -340,6 +340,7 @@ namespace Assignment1.Controllers
             ViewBag.CourseId = courseId;
             AssignmentList.GenerateInstructorAssignmentList(courseId);
             CourseCardList.GenerateInstructorCourseList();
+            ToDoList.GenerateInstructorToDoList();
             return RedirectToAction("InstructorCourseDetail", "CoursesAndRegistration", new { id = courseId });
         }
 

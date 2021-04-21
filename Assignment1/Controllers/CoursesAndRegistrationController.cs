@@ -20,13 +20,6 @@ namespace Assignment1.Controllers
 
     {
         LMS_GRINDEntities1 gds;
-        // List<Cours> allCourses = new List<Cours>();
-        // GET: CoursesAndRegistration
-        //public ActionResult Index()
-        //{
-        //    gds = new LMS_GRINDEntities1();
-        //    return View(from course in gds.Courses.Take(10) select course);
-        //}
 
         public ActionResult InstructorCview(string search)
         {
@@ -189,7 +182,7 @@ namespace Assignment1.Controllers
         /// </summary>
         /// <returns>StudentView</returns>
         [HttpPost]
-        public ActionResult AddRegistration(FormCollection form) // TODO: Prevent user from registering for the same course twice
+        public ActionResult AddRegistration(FormCollection form)
         {
             StudentCours sc = new StudentCours();
             List<string> displayList = GetDisplayList();
@@ -201,12 +194,28 @@ namespace Assignment1.Controllers
             sc.course_id = courseList[index].course_id;
             sc.student_id = Name.user_id;
 
-            gds.StudentCourses.Add(sc);
-            gds.SaveChanges();
-            CourseCardList.GenerateStudentCourseList();
-            ToDoList.GenerateStudentToDoList();
+            // check database for specified course id and student id
+            var ret = (from s in gds.StudentCourses
+                             where s.student_id == Name.user_id
+                             where s.course_id == sc.course_id
+                             select s).Count();
 
-            return RedirectToAction("ReturnToView", "UserAccount", null);
+            if (ret > 0)
+            {
+                ViewBag.Message = "Could not register for course. You are already registered for that course.";
+                return ViewRegistration("");
+            }
+            else
+            {
+
+                gds.StudentCourses.Add(sc);
+                gds.SaveChanges();
+                CourseCardList.GenerateStudentCourseList();
+                ToDoList.GenerateStudentToDoList();
+
+                return RedirectToAction("ReturnToView", "UserAccount", null);
+            }
+            
         }
 
 
@@ -226,6 +235,7 @@ namespace Assignment1.Controllers
 
             try
             {
+
                 // determine index of selected item
                 index = GetSelectedIndex(displayList, selectedItem);
 
@@ -233,17 +243,9 @@ namespace Assignment1.Controllers
                 var sc = gds.StudentCourses.ToList();
 
                 // query sc for the course to be unregistered and store in id
-                var id = sc.First(x => x.student_id == Name.user_id && x.course_id == courseList[index].course_id);
+                var course = sc.First(x => x.student_id == Name.user_id && x.course_id == courseList[index].course_id);
 
-                // loop through sc to find the StudentCourse to be deleted
-                foreach (var item in sc)
-                {
-                    if (item.student_course_id == id.student_course_id)
-                    {
-                        // delete ("unregister") course
-                        gds.StudentCourses.Remove(item);
-                    }
-                }
+                gds.StudentCourses.Remove(course);
 
                 //Save the changes
                 gds.SaveChanges();
@@ -255,8 +257,8 @@ namespace Assignment1.Controllers
             }
             catch
             {
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                return View("RegistrationView");
+                ViewBag.Message = "Could not unregister from course because no registration exists";
+                return ViewRegistration("");
             }
         }
 

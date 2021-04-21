@@ -3,7 +3,6 @@ C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assi
 C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test2\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test2\bin\Debug\Assignment1Test2.dll
 C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test2\bin\Debug\Assignment1Test2.pdb
-C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test2\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test2\obj\Debug\Assignment1Test2.csprojAssemblyReference.cache
 C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test2\obj\Debug\Assignment1Test2.csproj.CoreCompileInputs.cache
 C:\Users\gabri\Desktop\CS 3750\LMS_GRIND_TEAM_OFFICIAL\GDS_CLASSROOM\LATEST\Assignment1Test2\obj\Debug\Assignment1Test2.csproj.CopyComplete
