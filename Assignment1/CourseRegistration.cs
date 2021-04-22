@@ -148,5 +148,13 @@ namespace Assignment1
             gds.Assignments.Remove(assignment);
             gds.SaveChanges();
         }
+
+        public void DeleteSubmission2(string text_submission)
+        {
+            LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
+            StudentAssignment sa = gds.StudentAssignments.Where(x => x.text_submission == text_submission).FirstOrDefault();
+            gds.StudentAssignments.Remove(sa);
+            gds.SaveChanges();
+        }
     }
 }

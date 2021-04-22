@@ -145,5 +145,54 @@ namespace Assignment1Test2
             Assert.AreEqual(assignmentsCount2, expected);
 
         }
+
+        [TestMethod]
+        public void InstructorGradeAssignmentTest()         //Steven's Unit Test
+        {
+
+            LMS_GRINDEntities gds = new LMS_GRINDEntities();
+
+            // Chosen assingment ID
+            int assignmentID = 14;
+
+            // Count assignment submissions for id: 7
+            int assignmentSubmission = (from x in gds.StudentAssignments
+                                        where x.assignment_id == assignmentID
+                                        select x).Count();
+
+            // Submit an assignment
+            StudentAssignment sa = new StudentAssignment();
+            sa.text_submission = "I submitted something";
+           
+
+            CourseRegistration cr = new CourseRegistration();
+
+            sa.text_submission = "I submitted an assignment";
+            sa.assignment_id = assignmentID;
+            sa.submission_date = DateTime.Now;
+
+
+            gds.StudentAssignments.Add(sa);
+            gds.SaveChanges();
+
+            // Count assignment submissions for id: 7 after student already submitted an assignment
+            int assignmentSubmission2 = (from x in gds.StudentAssignments
+                                         where x.assignment_id == assignmentID
+                                         select x).Count();
+            // Expecting result
+            int expected = assignmentSubmission + 1;
+
+            // Delete test submission from database
+            var submit = (from x in gds.StudentAssignments
+                          where x.assignment_id == assignmentID
+                          where x.text_submission == "I submitted an assignment"
+                          select x).First();
+            cr.DeleteSubmission2(submit.text_submission);
+
+
+            Assert.AreEqual(assignmentSubmission2, expected);
+        }
+
+
     }
 }
