@@ -45,7 +45,8 @@ namespace Assignment1.Models
                              DueDate = a.due_date,
                              CourseId = c.course_id,
                              CourseNum = c.course_num,
-                             CourseName = c.course_name
+                             CourseName = c.course_name,
+                             SubmissionType = a.submission_type
                          }).ToList();
 
             int i = 0;
@@ -62,6 +63,7 @@ namespace Assignment1.Models
                 AssignmentItemList[i].CourseId = item.CourseId;
                 AssignmentItemList[i].CourseNum = item.CourseNum;
                 AssignmentItemList[i].CourseName = item.CourseName;
+                AssignmentItemList[i].SubmissionType = item.SubmissionType;
                 i++;
             }
         }

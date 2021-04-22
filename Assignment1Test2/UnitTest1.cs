@@ -13,7 +13,7 @@ namespace Assignment1Test2
     public class UnitTest1
     {
         [TestMethod]
-        public void InstructorCanCreateCourseTest()
+        public void InstructorCanCreateCourseTest()         //Gabby's Unit Test
         {
             LMS_GRINDEntities gds = new LMS_GRINDEntities();
 
@@ -67,6 +67,82 @@ namespace Assignment1Test2
             // (Started with N courses and added 1 course)
             Assert.AreEqual(N2, expected);
 
+
+        }
+
+        [TestMethod]
+        public void StudentCanRegisterTest()            //Delaney's Unit Test
+        {
+            LMS_GRINDEntities gds = new LMS_GRINDEntities();
+
+            //Find all the registered courses the student currently has (ulUser_id = 2017)
+            int registeredCourseCount = (from sc in gds.StudentCourses where sc.student_id == 2017 select sc.course_id).Count();
+
+            //Register for a course
+            int studentId = 2017;
+            int courseId = 2026;
+
+            CourseRegistration cr = new CourseRegistration();
+
+            //Register for the course
+            cr.RegisterForCourse2(studentId, courseId);
+
+            //Count of registered courses for student should have increased by one
+            int x = (from sc in gds.StudentCourses where sc.student_id == 2017 select sc.course_id).Count();
+            int expected = registeredCourseCount + 1;
+
+            //Delete the registration
+            cr.DeleteRegistration2(studentId, courseId);
+                        
+            Assert.AreEqual(expected, x);
+        }
+
+        [TestMethod]
+        public void InstructorCanCreateAssignmentTest()         //Ploy's Unit Test
+        {
+            LMS_GRINDEntities gds = new LMS_GRINDEntities();
+
+            int instructor_course_id = 2026;
+            int course_id = 2029;
+
+            // Count how many assignments instructor already has
+            int assignmentsCount1 = (from x in gds.Assignments
+                                    where x.instructor_course_id == instructor_course_id
+                                    select x).Count();
+
+            // Create new assignment
+            DateTime dueDateTime = new DateTime(2021, 4, 30);
+            Assignment a = new Assignment();
+            a.assignment_name = "Final Exam";
+            a.assignment_desc = "Comprehensive Final";
+            a.max_points = 300;
+            a.due_date = dueDateTime;
+            a.assignment_type = "Test";
+            a.submission_type = "Text";
+
+            CourseRegistration cr = new CourseRegistration();
+            
+            // Save assignment
+            cr.SaveAssignment2(course_id, a.assignment_name, a.assignment_desc, (int)a.max_points, (DateTime)a.due_date, a.assignment_type, a.submission_type);
+
+            // Count how many assignments instructor has after adding an assignment
+            int assignmentsCount2 = (from x in gds.Assignments
+                                    where x.instructor_course_id == instructor_course_id
+                                     select x).Count();
+
+            // Expecting result
+            int expected = assignmentsCount1 + 1;
+
+            // Deleting unit testing assignment
+            var assignmentID = (from x in gds.Assignments
+                                where x.instructor_course_id == instructor_course_id
+                                where x.assignment_name == "Final Exam"
+                                select x).First();
+
+            cr.DeleteAssignment2(assignmentID.assignment_name);
+
+            // Test
+            Assert.AreEqual(assignmentsCount2, expected);
 
         }
     }
