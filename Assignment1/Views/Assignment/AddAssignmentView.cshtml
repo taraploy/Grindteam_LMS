@@ -33,7 +33,7 @@
         </aside>
         <div class="vl"></div>
         <div class="container">
-            <form action="@Url.Action("SaveAssignment", "Assignment")" method="post" @*enctype="multipart/form-data"*@>
+            <form action="@Url.Action("SaveAssignment", "Assignment")" method="post"
                 <div class="course-form">
                     <h2><strong>@ViewBag.CourseNum @ViewBag.CourseName - Add Assignment</strong></h2>
                     <hr />
@@ -45,7 +45,6 @@
                         @Html.Hidden("CourseName", (object)ViewBag.CourseName)
                         <h1 name="courseNum" value="@ViewBag.CourseNum">@ViewBag.CourseNum</h1>
                         <h1 name="courseName" value="@ViewBag.CourseName">@ViewBag.CourseName</h1>
-                        @*<h1 name="courseId" value="@ViewBag.CourseId">@ViewBag.CourseId</h1>*@
                     </div>
                     <div class="form-group">
                         <label for="assignment-name"><strong>Assignment Name:</strong></label>

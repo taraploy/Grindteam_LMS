@@ -29,6 +29,7 @@ namespace Assignment1.Models
                          orderby a.due_date ascending
                          select new
                          {
+                             CourseId = c.course_id,
                              CourseNum = c.course_num,
                              AssignmentName = a.assignment_name,
                              DueDate = a.due_date,
@@ -43,8 +44,10 @@ namespace Assignment1.Models
                 StudentToDoList[i].CourseNum = item.CourseNum;
                 StudentToDoList[i].DueDate = item.DueDate;
                 StudentToDoList[i].AssignmentID = item.AssignmentID;
+                //LetterGradeList.GenerateCourseLetterGrades(item.CourseId);
                 i++;
             }
+
         }
 
         public static void GenerateInstructorToDoList()
@@ -61,6 +64,7 @@ namespace Assignment1.Models
                          orderby a.due_date ascending
                          select new
                          {
+                             CourseId = c.course_id,
                              CourseNum = c.course_num,
                              AssignmentName = a.assignment_name,
                              DueDate = a.due_date,
@@ -75,6 +79,7 @@ namespace Assignment1.Models
                 InstructorToDoList[i].CourseNum = item.CourseNum;
                 InstructorToDoList[i].DueDate = item.DueDate;
                 InstructorToDoList[i].AssignmentID = item.AssignmentID;
+                //LetterGradeList.GenerateCourseLetterGrades(item.CourseId);
                 i++;
             }
         }

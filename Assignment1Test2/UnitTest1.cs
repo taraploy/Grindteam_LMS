@@ -13,7 +13,7 @@ namespace Assignment1Test2
     public class UnitTest1
     {
         [TestMethod]
-        public void InstructorCanCreateCourseTest()         //Gabby's Unit Test
+        public void InstructorCanCreateCourseTest()         // Gabby's Unit Test
         {
             LMS_GRINDEntities gds = new LMS_GRINDEntities();
 
@@ -71,7 +71,7 @@ namespace Assignment1Test2
         }
 
         [TestMethod]
-        public void StudentCanRegisterTest()            //Delaney's Unit Test
+        public void StudentCanRegisterTest()            // Delaney's Unit Test
         {
             LMS_GRINDEntities gds = new LMS_GRINDEntities();
 
@@ -98,8 +98,8 @@ namespace Assignment1Test2
         }
 
         [TestMethod]
-        public void InstructorCanCreateAssignmentTest()         //Ploy's Unit Test
-        {
+        public void InstructorCanCreateAssignmentTest()         // Ploy's Unit Test
+        {            
             LMS_GRINDEntities gds = new LMS_GRINDEntities();
 
             int instructor_course_id = 2026;
@@ -130,7 +130,7 @@ namespace Assignment1Test2
                                     where x.instructor_course_id == instructor_course_id
                                      select x).Count();
 
-            // Expecting result
+            // Expecting result (Expecting to be 1 more)
             int expected = assignmentsCount1 + 1;
 
             // Deleting unit testing assignment
@@ -142,12 +142,12 @@ namespace Assignment1Test2
             cr.DeleteAssignment2(assignmentID.assignment_name);
 
             // Test
-            Assert.AreEqual(assignmentsCount2, expected);
+            Assert.AreEqual(expected, assignmentsCount2);
 
         }
 
         [TestMethod]
-        public void InstructorGradeAssignmentTest()         //Steven's Unit Test
+        public void StudentSubmissionTest()         // Steven's Unit Test
         {
 
             LMS_GRINDEntities gds = new LMS_GRINDEntities();
@@ -190,7 +190,7 @@ namespace Assignment1Test2
             cr.DeleteSubmission2(submit.text_submission);
 
 
-            Assert.AreEqual(assignmentSubmission2, expected);
+            Assert.AreEqual(expected, assignmentSubmission2);
         }
 
 

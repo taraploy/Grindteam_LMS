@@ -9,24 +9,7 @@
 }
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
-        <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
-        <div class="btnNotification ">
-            <img src="~/Images/bell.png" class="bell" onclick="myFunction()" />
-            <div id="notifications" hidden="hidden">
-                <div class="task">
-                    <h4>Task 1</h4>
-                    <button onclick="closeX(count - 2)" class="btn btn-danger" style="float:right;">X</button>
-                    <p>Due on a date</p>
-
-                </div>
-                <div class="task">
-                    <h4>Task 2</h4>
-                    <button onclick="closeX(count - 1)" class="btn btn-danger" style="float:right;">X</button>
-                    <p>Due on a date</p>
-
-                </div>
-            </div>
-        </div>
+        <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>        
     </nav>
     <script>
         var count = 2;
@@ -120,39 +103,7 @@
                                     <label for="cardCVV">CVV</label>
                                     <input type="text" class="form-control" min="000" max="999" id="cardCVV" name="cvv" value="" />
                                 </div>
-                            </div>
-                            @*<hr />
-                            <h6 class="mb-3"><strong>Billing Address</strong></h6>
-                            <div class="row">
-                                <div class="col-sm-6 p-info">
-                                    <label for="firstname" class="form-label">First name</label>
-                                    <input type="text" class="form-control" id="firstname" name="first_name" value="" />
-                                </div>
-                                <div class="col-sm-6 p-info">
-                                    <label for="lastname" class="form-label">Last name</label>
-                                    <input type="text" class="form-control" id="lastname" name="last_name" value="" />
-                                </div>
-                                <div class="col-12 p-info">
-                                    <label for="address1" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="address1" name="address" value="" />
-                                </div>
-                                <div class="col-12 p-info">
-                                    <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                                    <input type="text" class="form-control" id="address2" name="address_2" value="" />
-                                </div>
-                                <div class="col-md-5 p-info">
-                                    <label for="country" class="form-label">Country</label>
-                                    <input type="text" class="form-control" id="country" name="country" value="" />
-                                </div>
-                                <div class="col-md-4 p-info">
-                                    <label for="state" class="form-label">State</label>
-                                    <input type="text" class="form-control" id="state" name="state" value="" />
-                                </div>
-                                <div class="col-md-3 p-info">
-                                    <label for="zipcode" class="form-label">Zipcode</label>
-                                    <input type="number" class="form-control" id="zipcode" name="zip" value="" />
-                                </div>
-                            </div>*@
+                            </div>                           
                             <hr />
                             <button type="submit" class="makePaymentBtn" formaction="MakePayment">Make a payment</button>
                             @Html.ActionLink("Cancel", "Balance", "Payment", new { @class = "cancelPaymentBtn" })

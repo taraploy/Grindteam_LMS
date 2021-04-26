@@ -113,51 +113,6 @@ namespace Assignment1.Models
             }
         }
 
-        //This method generates all of the submissions by students for a particular assignment
-        //Generates an individual StudentAssignmentSubmissionItem.
-        //public static void GenerateStudentSubmissionAssignmentItem(int? assignmentId)
-        //{
-        //    StudentAssignmentSubmission = new StudentAssignmentSubmissionItem();
-        //    LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
-
-        //    var query = (from a in gds.Assignments
-        //                 join s in gds.StudentAssignments
-        //                 on a.assignment_id equals s.assignment_id
-        //                 where s.student_id == Name.user_id
-        //                 && s.assignment_id == assignmentId
-        //                 select new
-        //                 {
-        //                    AssignmentGradeId = s.assignment_grade_id,
-        //                    AssignmentId = a.assignment_id,
-        //                    StudentId = s.student_id,
-        //                    Grade = s.grade,
-        //                    SubmissionDate = s.submission_date,
-        //                    TextSubmission = s.text_submission,
-        //                    FileSubmission = s.file_submission 
-        //                 }).ToList();
-
-        //    foreach (var item in query)
-        //    {
-        //        StudentAssignmentSubmission.AssignmentGradeId = item.AssignmentGradeId;
-        //        StudentAssignmentSubmission.AssignmentId = item.AssignmentId;
-        //        StudentAssignmentSubmission.StudentId = item.StudentId;
-        //        StudentAssignmentSubmission.Grade = item.Grade;
-        //        StudentAssignmentSubmission.SubmissionDate = (DateTime)item.SubmissionDate;
-        //        StudentAssignmentSubmission.FileSubmission = item.FileSubmission;
-        //        StudentAssignmentSubmission.TextSubmission = item.TextSubmission;
-
-        //        if (item.Grade != null)
-        //        {
-        //            StudentAssignmentSubmission.isGraded = true;
-        //        }
-        //        else
-        //        {
-        //            StudentAssignmentSubmission.isGraded = false;
-        //        }
-
-        //    }
-        //}
-
         //This method returns all of the submissions by a particular student with the parameter id 
         //Generates a list of StudentAssignmentSubmissionItems
         public static void GenerateThisStudentsSubmissions(int? studentId)
@@ -199,9 +154,7 @@ namespace Assignment1.Models
 
                 if (item.Grade != null)
                 {
-                    ThisStudentsSubmissions[i].isGraded = true; 
-                    //IndividualStudentTotalPoints += (int)item.Grade;    // Total points for all graded assignements
-                    //IndividualStudentMaxPoints += (int)item.Grade;      // Max points for all graded assignments
+                    ThisStudentsSubmissions[i].isGraded = true;                    
                 }
                 else
                 {
@@ -209,13 +162,7 @@ namespace Assignment1.Models
                 }
                 i++;
             }
-            //Calculate letter grade and save it to database
-            //StudentCours studentCours = gds.StudentCourses.Where(x => x.student_id == studentId).FirstOrDefault();
-            //double gradePoints = ((double)IndividualStudentTotalPoints / IndividualStudentMaxPoints) * 100;
-            //gradePoints = Math.Truncate(100 * gradePoints) / 100;
-            //String letterGrade = getLetterGrade(gradePoints);
-            //studentCours.letter_grade = letterGrade;
-            //gds.SaveChanges();
+           
         }
 
         //This method returns all of the submissions by a particular student with the parameter id 
@@ -224,8 +171,7 @@ namespace Assignment1.Models
         {
             ThisStudentsSubmissions = new List<StudentAssignmentSubmissionItem>();
             LMS_GRINDEntities1 gds = new LMS_GRINDEntities1();
-            //IndividualStudentTotalPoints = new int();
-            //IndividualStudentMaxPoints = new int();
+            
             int totalPoints = 0;
             int maxPoints = 0;
 

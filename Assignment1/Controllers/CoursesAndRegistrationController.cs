@@ -102,11 +102,7 @@ namespace Assignment1.Controllers
                 // Get letter grade 
                 gradePoints = ((double)points / maxPoints) * 100;
                 // Display 2 decimal places
-                gradePoints = Math.Truncate(100 * (double)gradePoints) / 100;
-                //String letterGrade = getLetterGrade(gradePoints);
-                //studentCours.letter_grade = letterGrade;    // Update student's letter grade for the course
-                //gds.SaveChanges();  // Save letter grade (update) in database
-                //ViewBag.letterGrade = letterGrade;  // Display letter grade
+                gradePoints = Math.Truncate(100 * (double)gradePoints) / 100;               
                 if (gradePoints >= 0)
                 {
                     ViewBag.gradePercentage = gradePoints + "%";  // Display percentage
@@ -139,8 +135,6 @@ namespace Assignment1.Controllers
             int ic_id = gds.InstructorCourses.Where(x => x.course_id == id).Select(x => x.instructor_course_id).FirstOrDefault();
             CourseCardList.GenerateInstructorCourseList();
             AssignmentList.GenerateInstructorAssignmentList(id);
-
-            //StudentCours studentCours = gds.StudentCourses.Where(x => x.course_id == course.course_id).FirstOrDefault();
 
             // Calculate overall spread of letter grades for students in course
             LetterGradeList.GenerateCourseLetterGrades(id);
@@ -462,97 +456,13 @@ namespace Assignment1.Controllers
         public String getLetterGrade(double gradePoints)
         {
             String letterGrade = "";
-            if (gradePoints >= 90.0) letterGrade = "A"; //ViewBag.letterGrade = "A";           
-            else if (gradePoints >= 80.0 && gradePoints < 90.0) letterGrade = "B"; // ViewBag.letterGrade = "B";
-            else if (gradePoints >= 70.0 && gradePoints < 80.0) letterGrade = "C"; // ViewBag.letterGrade = "C";
-            else if (gradePoints >= 60.0 && gradePoints < 70.0) letterGrade = "D"; // ViewBag.letterGrade = "D";
-            else if (gradePoints < 60.0) letterGrade = "F"; // ViewBag.letterGrade = "F";
+            if (gradePoints >= 90.0) letterGrade = "A";        
+            else if (gradePoints >= 80.0 && gradePoints < 90.0) letterGrade = "B"; 
+            else if (gradePoints >= 70.0 && gradePoints < 80.0) letterGrade = "C"; 
+            else if (gradePoints >= 60.0 && gradePoints < 70.0) letterGrade = "D"; 
+            else if (gradePoints < 60.0) letterGrade = "F"; 
             return letterGrade;
-            //return ViewBag.letterGrade;
         }
 
     }
-
-
-
-    //public JsonResult InsertCourses(List<Cours> courses)
-    //{
-    //    using (LMS_GRINDEntities1 gds = new LMS_GRINDEntities1())
-    //    {
-    //        gds.Database.ExecuteSqlCommand("TRUNCATE TABLE [Courses]");
-    //        if (courses == null)
-    //        {
-    //            courses = new List<Cours>();
-    //        }
-
-    //        foreach (Cours course in courses)
-    //        {
-    //            gds.Courses.Add(course);
-    //        }
-    //        int insertedRecords = gds.SaveChanges();
-    //        return Json(insertedRecords);
-    //    }
-    //}
 }
-//public class dropdownModel
-//{
-//    var dbValues = db.EntityList.ToList();
-
-//    var DropDownList = new new SelectListS(dbValues.Select(item => new SelectListItem
-//{
-//     Text = item.SelectedDbText,
-//      Value = item.SelectedDbValue
-//}).ToList(), "Value", "Text");
-//     var viewModel = nwe YourViewModel()
-//{
-//  DropDownList = DownList
-//};
-// return View(viewModel);
-//}
-
-
-//try
-//{
-//    return View(from course in gds.Courses.Take(100) where searchDepartment == course.dept_id && searchKeyword == course.course_name select course);
-//}
-//catch (Exception e)
-//{
-//    //Console.WriteLine("Error");
-//}
-
-//if (searchDepartment.ToString() != "" && searchKeyword != "")
-//{
-//    return View(from course in gds.Courses.Take(100) where searchDepartment == course.dept_id && searchKeyword == course.course_name select course);
-//}
-//else if (searchKeyword == "")
-//{
-//    return View(from course in gds.Courses.Take(100) where searchDepartment == course.dept_id select course);
-
-//}
-//else if (searchDepartment.ToString() == "")
-//{
-//    return View(from course in gds.Courses.Take(100) where searchKeyword == course.course_name select course);
-//}
-//else
-//{
-//    
-//}
-//return View((from course in gds.Courses.Take(100) select course, (from user in gds.ulUsers.Take(100) select user)));
-//return View(from Course, Departments, InstructorCourses, ulUser  in gds.Courses.Take(25) select course);
-
-
-//using (gds)
-//{
-//    var query = (from c in Courses join d in Departments on c.dept_id equals d.dept_id join i in InstructorCourses on c.instructor_id equals i.instructor_id join u in ulUser on i.instructor_id equals u.ulUser_id select new { c.course_num, c.course_name, c.course_desc, u.first_name, u.last_name, d.department });
-//}
-
-
-//public ActionResult Register()
-//{
-//    return View("RegistrationView");
-//}
-
-/// <summary>
-/// Generates list for dropdown and returns RegistrationView
-/// </summary>
-/// <returns></returns>

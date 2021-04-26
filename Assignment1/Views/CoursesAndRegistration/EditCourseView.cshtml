@@ -4,12 +4,7 @@
     Layout = "~/Views/Layout_MainLogin.cshtml";
 }
 @using Assignment1.Models
-<script>
-    //function selectIndex(s, i) {
-    //    s.options[i].selected = true;
-    //    return;
-    //}
-</script>
+
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
         <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
@@ -39,7 +34,6 @@
                     <div class="course-form">
                         <h1>Edit Course</h1>
                         @*Course Information*@
-
                         <div class="fields">
                             <label for="course-num"><strong>Course number</strong></label>
                             <input id="course-num" name="courseNum" type="text" value="@ViewBag.selectedCourse.course_num" />
@@ -75,7 +69,6 @@
                                 <label for="departments"><strong>Department</strong></label>
                                 <br />
                                 <select name="departments" id="departments" class="dropDownDepartment">
-                                    @*onload="selectIndex("departments", @ViewBag.deptID)*@
                                     <option value="1" selected="@ViewBag.deptArray[1]">Comptuer Science</option>
                                     <option value="2" selected="@ViewBag.deptArray[2]">Business and Economics</option>
                                     <option value="3" selected="@ViewBag.deptArray[3]">Education</option>
@@ -122,7 +115,7 @@
 
                         <div>
                             <button type="submit" class="saveCourseBtn" id="save-button" value="Save Course">Save Course</button>
-                            @Html.ActionLink("Cancel", "InstructorCview", "CoursesAndRegistration", new { @class = "cancelEditCoursebtn" })
+                            @Html.ActionLink("Cancel", "InstructorCview", "CoursesAndRegistration", new { @class = "cancelEditCoursebtn" })                 
                         </div>
                     </div>
                 </form>

@@ -58,7 +58,7 @@ namespace Assignment1.Models
                 else if (item.LetterGrade == "C") PercentC++;
                 else if (item.LetterGrade == "D") PercentD++;
                 else if (item.LetterGrade == "F") PercentF++;
-                else PercentUngraded++; totalStudents++;
+                else { PercentUngraded++; totalStudents++; }
             }
         }
 
@@ -79,7 +79,14 @@ namespace Assignment1.Models
                          }).ToList();
             foreach (var item in query)
             {
-                PointList.Add((int)item.Grade);
+                if (item.Grade != null)
+                {
+                    PointList.Add((int)item.Grade);
+                }
+                else
+                {
+                    return;
+                }
             }
 
             //Calculate chart values
@@ -103,12 +110,6 @@ namespace Assignment1.Models
                     LowScore = PointList[j];
                 }
             }
-
-            /*double[] pointArray = PointList.ToArray();
-            Q3 = Percentile(pointArray, 75);
-            Median = Percentile(pointArray, 50);
-            Q1 = Percentile(pointArray, 25);*/
-
         }        
     }
 }

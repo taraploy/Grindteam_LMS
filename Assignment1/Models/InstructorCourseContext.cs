@@ -15,7 +15,5 @@ namespace Assignment1.Models
 
         public virtual Cours Course { get; set; }
         public virtual ulUser User { get; set; }
-        //public virtual InstructorCours Instructor { get; set; }
-
     }
 }

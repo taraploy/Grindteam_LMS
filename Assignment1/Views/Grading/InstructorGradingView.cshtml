@@ -106,9 +106,7 @@
                                                 }
                                             </div>
                                             <h6><strong>@item.LastName, @item.FirstName - W#@item.StudentId</strong></h6>
-                                            <h6>Submitted: @item.SubmissionDate</h6>
-                                            @*<div class="float-md-right">
-                                </div>*@
+                                            <h6>Submitted: @item.SubmissionDate</h6>                                           
                                         </div>
                                         <br />
                                         <hr class="hr-assignment-list" />
@@ -120,24 +118,7 @@
                             <div id="piechart" style="width: 550px; height: 400px;"></div>
                         </div>
                     </div>
-                </div>
-                @*<div class="container">
-                        @{
-                            foreach (var item in AssignmentList.AllStudentSubmissions) {
-                            <div class="assignment-list-item">
-                                <div class="float-left">
-                                    <h6><strong>@item.StudentName</strong> - W# @item.StudentId</h6>
-                                    <h6>Submitted: @item.SubmissionDate</h6>
-                                </div>
-                                <div class="float-right">
-                                    @Html.ActionLink("Grade Submission", "Grading", "GradeAssignment", new { assignmentId = @ViewBag.AssignmentId }, new { studentId = item.StudentId })
-                                </div>
-                            </div>
-                            <hr class="hr-assignment-list" />
-                            }
-                        }
-
-                    </div>*@
+                </div>               
             </div>
         </div>
     </div>

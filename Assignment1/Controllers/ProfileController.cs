@@ -35,7 +35,6 @@ namespace Assignment1.Controllers
         {
             gds = new LMS_GRINDEntities1();
             var user = gds.ulUsers.First(x => x.email_address == Name.email);
-            //ulUser user = new ulUser();
             
             try
             {
@@ -90,8 +89,8 @@ namespace Assignment1.Controllers
             catch (Exception ex)
             {
 
-                return Content(ex.Message);
                 //Error
+                return Content(ex.Message);
             }
 
 

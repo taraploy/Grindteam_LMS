@@ -23,24 +23,7 @@
 }
 <div class="nav-pageview">
     <nav class="navbar navbar-dark">
-        <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>
-        <div class="btnNotification ">
-            <img src="~/Images/bell.png" class="bell" onclick="myFunction()" />
-            <div id="notifications" hidden="hidden">
-                <div class="task">
-                    <h4>Task 1</h4>
-                    <button onclick="closeX(count - 2)" class="btn btn-danger" style="float:right;">X</button>
-                    <p>Due on a date</p>
-
-                </div>
-                <div class="task">
-                    <h4>Task 2</h4>
-                    <button onclick="closeX(count - 1)" class="btn btn-danger" style="float:right;">X</button>
-                    <p>Due on a date</p>
-
-                </div>
-            </div>
-        </div>
+        <span class="navbar-brand mb-0 h1"><img src="~/Images/GDS_LOGO.png" id="gds_title" /></span>        
     </nav>
     <script>
             // alert for paid balance
@@ -52,7 +35,6 @@
         var notifShow = 0;
 
         function myFunction() {
-            // var popup = document.getElementById("popUp");
             if (notifShow == 0) {
                 document.getElementById("notifications").hidden = false;
                 notifShow = 1;

@@ -73,59 +73,6 @@ namespace Assignment1.Controllers
             ViewBag.StudentScore = studentScore;
             ViewBag.MaxPoints = maxPoints;
 
-
-            //double numA = 0.0;
-            //double numB = 0.0;
-            //double numC = 0.0;
-            //double numD = 0.0;
-            //double numF = 0.0;
-            //double ungraded = 0.0;
-            //double totalSubmissions = 0.0;
-            //double thisPercent = 0.0;
-            //for (int i = 0; i < AssignmentList.AllStudentSubmissions.Count; i++)
-            //{
-            //    double maxPoints = (double)gds.Assignments.Where(x => x.assignment_id == assignmentId).Select(x => x.max_points).FirstOrDefault();
-            //    if (AssignmentList.AllStudentSubmissions[i].Grade != null)
-            //    {
-            //        thisPercent = (double)AssignmentList.AllStudentSubmissions[i].Grade / maxPoints * 100.0;
-            //        if (thisPercent >= 90.0)
-            //        {
-            //            numA++;
-            //        }
-            //        else if (thisPercent >= 80.0 && thisPercent < 90.0)
-            //        {
-            //            numB++;
-            //        }
-            //        else if (thisPercent >= 70.0 && thisPercent < 80.0)
-            //        {
-            //            numC++;
-            //        }
-            //        else if (thisPercent >= 60.0 && thisPercent < 70.0)
-            //        {
-            //            numD++;
-            //        }
-            //        else if (thisPercent < 60.0)
-            //        {
-            //            numF++;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        ungraded++;
-            //    }
-            //    totalSubmissions++;
-            //}
-            //if (totalSubmissions != 0)
-            //{
-            //    ViewBag.percentA = numA;
-            //    ViewBag.percentB = numB;
-            //    ViewBag.percentC = numC;
-            //    ViewBag.percentD = numD;
-            //    ViewBag.percentF = numF;
-            //    ViewBag.percentUngraded = ungraded;
-            //}
-
-
             return View("StudentAssignmentView");
         }
 
@@ -160,32 +107,11 @@ namespace Assignment1.Controllers
 
                     // Set file path to the course directory within the Assignment Submissions folder
                     string file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/"), file_name);
-                   /*string file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/"), course_directory);
-
-                    // Create the course directory if it doesn't exist
-                    if (!Directory.Exists(file_path))
-                    {
-                        Directory.CreateDirectory(file_path);
-                    }
-
-                    // Set file path to the student directory within the course folder
-                    file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/" + course_directory + "/"), student_directory);
-
-                    // Create student directory if it doesn't exist
-                    if (!Directory.Exists(file_path))
-                    {
-                        Directory.CreateDirectory(file_path);
-                    }
-
-                    // append filename to file path
-                    file_path = Path.Combine(Server.MapPath("~/AssignmentSubmissions/" + course_directory + "/" + student_directory + "/"), file_name);*/
-
-                    //sa.file_submission = file_path;
+                  
                     sa.file_submission = "~/AssignmentSubmissions/" + file_name;
                     sa.assignment_id = AssignmentList.AssignmentItem.AssignmentId;
                     sa.student_id = Name.user_id;
                     sa.submission_date = DateTime.Now;
-                    //sa.student_course_id = 
                     assignment_file.SaveAs(file_path);
 
                     gds.StudentAssignments.Add(sa);
@@ -268,8 +194,7 @@ namespace Assignment1.Controllers
 
             AssignmentList.GenerateInstructorAssignmentList(courseId);
             CourseCardList.GenerateInstructorCourseList();
-            //List<Cours> displayCourseList = GetCourseList();   // Display instructor's course list
-            //@ViewBag.courseList = displayCourseList;
+            
             @ViewBag.CourseNum = courseNum;
             @ViewBag.CourseName = courseName;
             @ViewBag.CourseId = courseId;
@@ -384,9 +309,7 @@ namespace Assignment1.Controllers
 
         public ActionResult EditAssignment(int id)
         {
-            //var id = int.Parse(Request.Form["CourseId"]);
-            //var courseNum = Request.Form["CourseNum"];
-            //var courseName = Request.Form["CourseName"];
+
             gds = new LMS_GRINDEntities1();
             Assignment assignment = gds.Assignments.Where(x => x.assignment_id == id).FirstOrDefault();
             int insCourse = gds.Assignments.Where(x => x.assignment_id == id).Select(x => x.instructor_course_id).FirstOrDefault();
@@ -450,7 +373,6 @@ namespace Assignment1.Controllers
             ViewBag.CourseNum = courseNum;
             ViewBag.CourseName = courseName;
             ViewBag.CourseId = courseId;
-            //DateTime dueDate = DateTime.Parse(assignment.due_date);
             ViewBag.DueDate = assignment.due_date;
             AssignmentList.GenerateInstructorAssignmentList(id);
             return View("EditAssignmentView");

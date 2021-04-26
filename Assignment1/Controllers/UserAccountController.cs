@@ -24,12 +24,7 @@ namespace Assignment1.Controllers
         {
             return View();
         }
-
-        //void connectionString()
-        //{
-        //    conn.ConnectionString = "Data Source=titan.cs.weber.edu,10433;Initial Catalog=LMS_GRIND;User ID=LMS_GRIND;Password=Dontstop21";
-        //}
-
+        
         /// <summary>
         /// Connect to database and verify that the user exists
         /// If the user exists, then return to Success View
